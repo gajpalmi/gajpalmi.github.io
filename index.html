@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>GAMEZONE ARENA - Play. Compete. Rise.</title>
+  <meta name="description" content="GAMEZONE ARENA - Play exciting games, compete with friends and rise through the leaderboard.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b1020;
+      color: #ffffff;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: auto;
+    }
+
+    header {
+      background: #11182d;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: #7dd3fc;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: #7dd3fc;
+    }
+
+    .hero {
+      padding: 80px 0;
+      text-align: center;
+      background:
+        radial-gradient(circle at top, rgba(59,130,246,0.25), transparent 45%),
+        #0b1020;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(59,130,246,0.15);
+      color: #93c5fd;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(38px, 7vw, 70px);
+      line-height: 1.05;
+    }
+
+    .hero h1 span {
+      color: #38bdf8;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: 22px auto;
+      color: #cbd5e1;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+    }
+
+    .btn-secondary {
+      border: 1px solid #334155;
+      background: #111827;
+      color: white;
+    }
+
+    section {
+      padding: 60px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-title h2 {
+      margin: 0 0 10px;
+      font-size: 32px;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: #94a3b8;
+    }
+
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+    }
+
+    .game-card {
+      background: #11182d;
+      border: 1px solid #26324d;
+      border-radius: 16px;
+      padding: 25px;
+      text-align: center;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .game-card:hover {
+      transform: translateY(-4px);
+      border-color: #38bdf8;
+    }
+
+    .game-icon {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .game-card h3 {
+      margin: 8px 0;
+    }
+
+    .game-card p {
+      color: #94a3b8;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .feature {
+      background: #11182d;
+      padding: 24px;
+      border-radius: 14px;
+      border: 1px solid #26324d;
+    }
+
+    .feature h3 {
+      margin-top: 0;
+    }
+
+    .feature p {
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    .ad-box {
+      min-height: 100px;
+      border: 1px dashed #475569;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #64748b;
+      margin: 20px 0;
+    }
+
+    .legal {
+      background: #080c18;
+    }
+
+    .legal-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: #93c5fd;
+    }
+
+    .legal-links a:hover {
+      color: #38bdf8;
+    }
+
+    footer {
+      padding: 30px 0;
+      background: #050811;
+      text-align: center;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    @media (max-width: 650px) {
+      .nav {
+        flex-direction: column;
+        padding: 16px 0;
+      }
+
+      .hero {
+        padding: 60px 0;
+      }
+
+      section {
+        padding: 45px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">🎮 GAMEZONE ARENA</div>
+
+    <nav class="nav-links">
+      <a href="#games">Games</a>
+      <a href="#features">Features</a>
+      <a href="#download">Download</a>
+      <a href="#legal">Legal</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="container">
+
+      <div class="badge">PLAY • COMPETE • RISE</div>
+
+      <h1>
+        Welcome to <span>GAMEZONE ARENA</span>
+      </h1>
+
+      <p>
+        Play exciting games, compete with friends,
+        collect virtual rewards and climb the leaderboard.
+      </p>
+
+      <div class="buttons">
+        <a class="btn btn-primary" href="#download">
+          📱 Download App
+        </a>
+
+        <a class="btn btn-secondary" href="#games">
+          🎮 Explore Games
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="ad-box">
+        Advertisement
+      </div>
+    </div>
+  </section>
+
+  <section id="games">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>🎮 Games</h2>
+        <p>More games and challenges coming to the arena.</p>
+      </div>
+
+      <div class="games">
+
+        <div class="game-card">
+          <div class="game-icon">🎲</div>
+          <h3>Ludo</h3>
+          <p>Classic multiplayer Ludo with exciting gameplay.</p>
+        </div>
+
+        <div class="game-card">
+          <div class="game-icon">🏏</div>
+          <h3>Cricket</h3>
+          <p>Enjoy quick cricket challenges and competitions.</p>
+        </div>
+
+        <div class="game-card">
+          <div class="game-icon">🎯</div>
+          <h3>Carrom</h3>
+          <p>Test your skills in fast and fun Carrom matches.</p>
+        </div>
+
+        <div class="game-card">
+          <div class="game-icon">🎡</div>
+          <h3>Spin Wheel</h3>
+          <p>Spin, play and collect virtual rewards.</p>
+        </div>
+
+        <div class="game-card">
+          <div class="game-icon">🏎️</div>
+          <h3>Racing</h3>
+          <p>Race against challenges and rise through the ranks.</p>
+        </div>
+
+        <div class="game-card">
+          <div class="game-icon">🧠</div>
+          <h3>Quiz & Puzzle</h3>
+          <p>Challenge your brain with quick games.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>⭐ Arena Features</h2>
+        <p>Built for fun, competition and progression.</p>
+      </div>
+
+      <div class="features">
+
+        <div class="feature">
+          <h3>🏆 Leaderboards</h3>
+          <p>
+            Compete with other players and track your progress.
+          </p>
+        </div>
+
+        <div class="feature">
+          <h3>🪙 Virtual Coins</h3>
+          <p>
+            Earn virtual coins through gameplay and rewards.
+            Virtual coins have no monetary value and cannot be withdrawn.
+          </p>
+        </div>
+
+        <div class="feature">
+          <h3>👥 Friends</h3>
+          <p>
+            Connect with friends and enjoy competitive gameplay.
+          </p>
+        </div>
+
+        <div class="feature">
+          <h3>🎁 Rewards</h3>
+          <p>
+            Watch eligible rewarded ads and receive in-game rewards.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>📱 Get GAMEZONE ARENA</h2>
+        <p>
+          Download the official GAMEZONE ARENA app when available.
+        </p>
+      </div>
+
+      <div class="buttons">
+        <a class="btn btn-primary" href="#">
+          Google Play
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="legal" class="legal">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>🔐 Legal & Support</h2>
+        <p>Important information about GAMEZONE ARENA.</p>
+      </div>
+
+      <div class="legal-links">
+
+        <a href="privacy-policy.html">
+          Privacy Policy
+        </a>
+
+        <a href="account-deletion.html">
+          Account Deletion
+        </a>
+
+        <a href="mailto:support@gamezonearena.app">
+          Contact Support
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 GAMEZONE ARENA. All rights reserved.
+</footer>
+
+</body>
+</html>
