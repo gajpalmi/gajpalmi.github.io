@@ -99,23 +99,23 @@ jobs:
                 }
               ],
               generationConfig: {
-                responseMimeType: "application/json",
-                responseSchema: {
-                  type: "ARRAY",
+                response_mime_type: "application/json",
+                response_schema: {
+                  type: "array",
                   items: {
-                    type: "OBJECT",
+                    type: "object",
                     properties: {
                       type: {
-                        type: "STRING"
+                        type: "string"
                       },
                       title: {
-                        type: "STRING"
+                        type: "string"
                       },
                       category: {
-                        type: "STRING"
+                        type: "string"
                       },
                       content: {
-                        type: "STRING"
+                        type: "string"
                       }
                     },
                     required: [
