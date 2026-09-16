@@ -1,0 +1,86 @@
+[
+  {
+    "type": "jokes",
+    "title": "Exam Hall Panic",
+    "category": "Funny",
+    "content": "Teacher: Why are you looking at the ceiling during the exam? Student: The question paper said the answers are floating in the air!",
+    "generatedAt": "2026-09-16T17:48:05.054Z"
+  },
+  {
+    "type": "jokes",
+    "title": "Chai Pe Charcha",
+    "category": "Desi",
+    "content": "Sharmaji: My son can solve any math problem in seconds. Vermaji: Really? Ask him to divide a single cup of cutting chai among ten relatives!",
+    "generatedAt": "2026-09-16T17:48:05.157Z"
+  },
+  {
+    "type": "jokes",
+    "title": "Best Friends Forever",
+    "category": "Friendship",
+    "content": "Friend 1: I am going to buy a new car today. Friend 2: Awesome! Can I have your old bicycle? Friend 1: I was talking about a toy car!",
+    "generatedAt": "2026-09-16T17:48:05.157Z"
+  },
+  {
+    "type": "jokes",
+    "title": "Dinner Time Debate",
+    "category": "Family",
+    "content": "Son: Dad, what is the difference between confidence and confusion? Father: Confidence is when you think you cooked dinner; confusion is when the whole family orders pizza.",
+    "generatedAt": "2026-09-16T17:48:05.157Z"
+  },
+  {
+    "type": "shayari",
+    "title": "Safar-e-Ishq",
+    "category": "Love",
+    "content": "Tere chehre ki muskaan se roshan hai yeh jahan, tujhse hi shuru aur tujhpe hi khatam hai mera yeh armaan.",
+    "generatedAt": "2026-09-16T17:48:05.157Z"
+  },
+  {
+    "type": "shayari",
+    "title": "Yaadon Ka Karvan",
+    "category": "Friendship",
+    "content": "Waqt badal jata hai rishtey badal jaate hain, par sachhe doston ke dil ke raste kabhi nahi badal paate hain.",
+    "generatedAt": "2026-09-16T17:48:05.157Z"
+  },
+  {
+    "type": "shayari",
+    "title": "Manzil ki Ore",
+    "category": "Motivational",
+    "content": "Raaste kitne bhi kathin kyun na hon, hausla rakh buland toh asmaan bhi jhuk jayega tere samne.",
+    "generatedAt": "2026-09-16T17:48:05.157Z"
+  },
+  {
+    "type": "shayari",
+    "title": "Zindagi Ka Safar",
+    "category": "Life",
+    "content": "Har mod par ek naya imtihan milta hai, gir kar sambhalne wale ko hi asli gyan milta hai.",
+    "generatedAt": "2026-09-16T17:48:05.157Z"
+  },
+  {
+    "type": "knowledge",
+    "title": "Mysteries of the Deep Sea",
+    "category": "Science",
+    "content": "Over eighty percent of the ocean remains unmapped and unexplored by human science, hiding countless undiscovered species.",
+    "generatedAt": "2026-09-16T17:48:05.157Z"
+  },
+  {
+    "type": "knowledge",
+    "title": "The Evolution of Processors",
+    "category": "Technology",
+    "content": "Modern microprocessors contain billions of microscopic transistors that switch electrical signals at unimaginable speeds.",
+    "generatedAt": "2026-09-16T17:48:05.157Z"
+  },
+  {
+    "type": "knowledge",
+    "title": "Vibrant Indian Heritage",
+    "category": "India",
+    "content": "India is home to dozens of classical dance forms and hundreds of folk dances, each representing unique regional histories.",
+    "generatedAt": "2026-09-16T17:48:05.157Z"
+  },
+  {
+    "type": "knowledge",
+    "title": "Wonders of the Red Planet",
+    "category": "Space",
+    "content": "Mars features Olympus Mons, a colossal volcano that stands nearly three times higher than Mount Everest on Earth.",
+    "generatedAt": "2026-09-16T17:48:05.157Z"
+  }
+]
