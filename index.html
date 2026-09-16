@@ -3,15 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <!-- Google AdSense -->
   <script async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5348301935438016"
     crossorigin="anonymous"></script>
+
   <title>GAMEZONE ARENA — Gaming, Entertainment & Knowledge</title>
+
   <meta
     name="description"
     content="GAMEZONE ARENA — Games, Jokes, Shayari, Knowledge, Bhakti, Entertainment, Videos and Blogs."
   />
+
   <meta name="theme-color" content="#10151f" />
 
   <style>
@@ -602,6 +606,17 @@
       display: none !important;
     }
 
+    /* AUTOMATIC CONTENT STATUS */
+    .auto-status {
+      margin-top: 15px;
+      padding: 10px 13px;
+      border-radius: 12px;
+      background: rgba(49,233,129,.08);
+      border: 1px solid rgba(49,233,129,.16);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 950px) {
       .grid,
@@ -677,6 +692,7 @@
 
       <a href="#home" class="brand" onclick="showPage('home')">
         <div class="brand-logo">🎮</div>
+
         <div class="brand-text">
           GAMEZONE ARENA
           <small>Play sharp. Rise fast.</small>
@@ -696,9 +712,25 @@
       </nav>
 
       <div class="nav-actions">
-        <button class="icon-btn menu-btn" onclick="toggleMenu()">☰</button>
-        <button class="icon-btn" onclick="toggleTheme()" title="Theme">🌙</button>
-        <button class="icon-btn" onclick="openSearch()" title="Search">🔎</button>
+        <button
+          class="icon-btn menu-btn"
+          onclick="toggleMenu()">
+          ☰
+        </button>
+
+        <button
+          class="icon-btn"
+          onclick="toggleTheme()"
+          title="Theme">
+          🌙
+        </button>
+
+        <button
+          class="icon-btn"
+          onclick="openSearch()"
+          title="Search">
+          🔎
+        </button>
       </div>
 
     </div>
@@ -712,8 +744,12 @@
 
       <section class="hero">
         <div class="container">
+
           <div class="hero-box">
-            <div class="eyebrow">🎮 GAMING • ENTERTAINMENT • KNOWLEDGE</div>
+
+            <div class="eyebrow">
+              🎮 GAMING • ENTERTAINMENT • KNOWLEDGE
+            </div>
 
             <h1>
               Welcome to
@@ -727,39 +763,57 @@
             </p>
 
             <div class="hero-buttons">
-              <button class="btn btn-primary" onclick="showPage('games')">
+
+              <button
+                class="btn btn-primary"
+                onclick="showPage('games')">
                 🎮 Play Games
               </button>
 
-              <button class="btn btn-secondary" onclick="showPage('entertainment')">
+              <button
+                class="btn btn-secondary"
+                onclick="showPage('entertainment')">
                 🎭 Explore Entertainment
               </button>
 
-              <button class="btn btn-secondary" onclick="showPage('knowledge')">
+              <button
+                class="btn btn-secondary"
+                onclick="showPage('knowledge')">
                 💡 ज्ञान की दुनिया
               </button>
+
             </div>
+
           </div>
+
         </div>
       </section>
 
       <div class="container search-area">
+
         <div class="search-box">
+
           <input
             id="homeSearch"
             type="search"
             placeholder="Jokes, Shayari, Knowledge, Games, Blog खोजें..."
             oninput="globalSearch(this.value)"
           />
-          <button class="btn btn-primary" onclick="globalSearch(document.getElementById('homeSearch').value)">
+
+          <button
+            class="btn btn-primary"
+            onclick="globalSearch(document.getElementById('homeSearch').value)">
             Search
           </button>
+
         </div>
+
       </div>
 
       <!-- FEATURES -->
       <section>
         <div class="container">
+
           <div class="section-head">
             <div>
               <h2>सब कुछ एक जगह</h2>
@@ -772,36 +826,67 @@
             <div class="card">
               <div class="card-icon">🎮</div>
               <h3>Gaming</h3>
-              <p>GAMEZONE ARENA के games और gaming content.</p>
+              <p>
+                GAMEZONE ARENA के games और gaming content.
+              </p>
+
               <div class="card-actions">
-                <button class="small-btn" onclick="showPage('games')">Open</button>
+                <button
+                  class="small-btn"
+                  onclick="showPage('games')">
+                  Open
+                </button>
               </div>
             </div>
 
             <div class="card">
               <div class="card-icon">😂</div>
               <h3>चुटकुले</h3>
-              <p>मजेदार jokes और हल्का-फुल्का मनोरंजन.</p>
+
+              <p>
+                मजेदार jokes और हल्का-फुल्का मनोरंजन.
+              </p>
+
               <div class="card-actions">
-                <button class="small-btn" onclick="showPage('jokes')">Read</button>
+                <button
+                  class="small-btn"
+                  onclick="showPage('jokes')">
+                  Read
+                </button>
               </div>
             </div>
 
             <div class="card">
               <div class="card-icon">❤️</div>
               <h3>शायरी</h3>
-              <p>Love, friendship, life और motivational shayari.</p>
+
+              <p>
+                Love, friendship, life और motivational shayari.
+              </p>
+
               <div class="card-actions">
-                <button class="small-btn" onclick="showPage('shayari')">Read</button>
+                <button
+                  class="small-btn"
+                  onclick="showPage('shayari')">
+                  Read
+                </button>
               </div>
             </div>
 
             <div class="card">
               <div class="card-icon">💡</div>
               <h3>Knowledge</h3>
-              <p>रोचक facts, science, India और general knowledge.</p>
+
+              <p>
+                रोचक facts, science, India और general knowledge.
+              </p>
+
               <div class="card-actions">
-                <button class="small-btn" onclick="showPage('knowledge')">Learn</button>
+                <button
+                  class="small-btn"
+                  onclick="showPage('knowledge')">
+                  Learn
+                </button>
               </div>
             </div>
 
@@ -812,48 +897,80 @@
       <!-- GAME BANNER -->
       <section>
         <div class="container">
+
           <div class="app-banner">
+
             <div>
-              <span class="tag">GAMEZONE ARENA</span>
-              <h2>Gaming Zone तैयार है 🎮</h2>
+
+              <span class="tag">
+                GAMEZONE ARENA
+              </span>
+
+              <h2>
+                Gaming Zone तैयार है 🎮
+              </h2>
+
               <p style="color:var(--muted);">
                 Ludo, Cricket, Carrom, Racing, Spin, Quiz और दूसरे games.
               </p>
+
             </div>
 
-            <button class="btn btn-primary" onclick="showPage('games')">
+            <button
+              class="btn btn-primary"
+              onclick="showPage('games')">
               Games देखें
             </button>
+
           </div>
+
         </div>
       </section>
 
       <!-- LATEST CONTENT -->
       <section>
+
         <div class="container">
+
           <div class="section-head">
+
             <div>
               <h2>Latest Content</h2>
-              <p>नई और रोचक सामग्री</p>
+              <p>
+                नई और रोचक सामग्री
+              </p>
             </div>
+
           </div>
 
           <div id="homeLatest" class="grid"></div>
+
+          <div class="auto-status">
+            🤖 Automatic Content:
+            GitHub Actions से आने वाला नया content
+            यहाँ अपने-आप दिखाई देगा।
+          </div>
+
         </div>
+
       </section>
 
     </div>
 
     <!-- GAMES -->
     <div id="page-games" class="page hidden">
+
       <section>
+
         <div class="container">
 
           <div class="section-head">
+
             <div>
               <h2>🎮 GAMEZONE ARENA</h2>
               <p>Play sharp. Rise fast.</p>
             </div>
+
           </div>
 
           <div class="grid grid-4">
@@ -862,690 +979,1494 @@
               <div class="card-icon">🎲</div>
               <h3>Ludo</h3>
               <p>Multiplayer Ludo experience.</p>
-              <button class="btn btn-primary" style="margin-top:15px;" onclick="openGame('Ludo')">Play</button>
+
+              <button
+                class="btn btn-primary"
+                style="margin-top:15px;"
+                onclick="openGame('Ludo')">
+                Play
+              </button>
             </div>
 
             <div class="card">
               <div class="card-icon">🏏</div>
               <h3>Cricket</h3>
               <p>Cricket gaming challenge.</p>
-              <button class="btn btn-primary" style="margin-top:15px;" onclick="openGame('Cricket')">Play</button>
+
+              <button
+                class="btn btn-primary"
+                style="margin-top:15px;"
+                onclick="openGame('Cricket')">
+                Play
+              </button>
             </div>
 
             <div class="card">
               <div class="card-icon">🟠</div>
               <h3>Carrom</h3>
               <p>Classic carrom challenge.</p>
-              <button class="btn btn-primary" style="margin-top:15px;" onclick="openGame('Carrom')">Play</button>
+
+              <button
+                class="btn btn-primary"
+                style="margin-top:15px;"
+                onclick="openGame('Carrom')">
+                Play
+              </button>
             </div>
 
             <div class="card">
               <div class="card-icon">🏎️</div>
               <h3>Racing</h3>
               <p>Fast racing experience.</p>
-              <button class="btn btn-primary" style="margin-top:15px;" onclick="openGame('Racing')">Play</button>
+
+              <button
+                class="btn btn-primary"
+                style="margin-top:15px;"
+                onclick="openGame('Racing')">
+                Play
+              </button>
             </div>
 
             <div class="card">
               <div class="card-icon">🎡</div>
               <h3>Spin Game</h3>
               <p>Spin and collect virtual rewards.</p>
-              <button class="btn btn-primary" style="margin-top:15px;" onclick="openGame('Spin Game')">Play</button>
+
+              <button
+                class="btn btn-primary"
+                style="margin-top:15px;"
+                onclick="openGame('Spin Game')">
+                Play
+              </button>
             </div>
 
             <div class="card">
               <div class="card-icon">⚡</div>
               <h3>Plazo Challenge</h3>
               <p>Challenge mode.</p>
-              <button class="btn btn-primary" style="margin-top:15px;" onclick="openGame('Plazo Challenge')">Play</button>
+
+              <button
+                class="btn btn-primary"
+                style="margin-top:15px;"
+                onclick="openGame('Plazo Challenge')">
+                Play
+              </button>
             </div>
 
             <div class="card">
               <div class="card-icon">❓</div>
               <h3>Quick Quiz</h3>
               <p>Test your knowledge.</p>
-              <button class="btn btn-primary" style="margin-top:15px;" onclick="openGame('Quick Quiz')">Play</button>
+
+              <button
+                class="btn btn-primary"
+                style="margin-top:15px;"
+                onclick="openGame('Quick Quiz')">
+                Play
+              </button>
             </div>
 
             <div class="card">
               <div class="card-icon">🧠</div>
               <h3>Memory Match</h3>
               <p>Train your memory.</p>
-              <button class="btn btn-primary" style="margin-top:15px;" onclick="openGame('Memory Match')">Play</button>
+
+              <button
+                class="btn btn-primary"
+                style="margin-top:15px;"
+                onclick="openGame('Memory Match')">
+                Play
+              </button>
             </div>
 
           </div>
 
-          <div class="admin-note" style="margin-top:25px;">
-            ⚠️ Website के game buttons अभी demo links हैं। अपने Android app का असली Play Store link मिलने के बाद इन्हें उस link से जोड़ा जा सकता है।
+          <div
+            class="admin-note"
+            style="margin-top:25px;">
+
+            ⚠️ Website के game buttons अभी demo links हैं।
+            अपने Android app का असली Play Store link मिलने के बाद
+            इन्हें उस link से जोड़ा जा सकता है।
+
           </div>
 
         </div>
+
       </section>
+
     </div>
 
     <!-- ENTERTAINMENT -->
     <div id="page-entertainment" class="page hidden">
+
       <section>
+
         <div class="container">
 
           <div class="section-head">
+
             <div>
               <h2>🎭 Entertainment</h2>
               <p>मजेदार और रोचक सामग्री</p>
             </div>
+
           </div>
 
-          <div id="entertainmentList" class="grid"></div>
+          <div
+            id="entertainmentList"
+            class="grid">
+          </div>
 
         </div>
+
       </section>
+
     </div>
 
     <!-- JOKES -->
     <div id="page-jokes" class="page hidden">
+
       <section>
+
         <div class="container">
 
           <div class="section-head">
+
             <div>
               <h2>😂 Jokes</h2>
               <p>मुस्कुराते रहिए!</p>
             </div>
+
           </div>
 
           <div class="category-bar">
-            <button class="active" onclick="filterJokes('All', this)">All</button>
-            <button onclick="filterJokes('Funny', this)">Funny</button>
-            <button onclick="filterJokes('Desi', this)">Desi</button>
-            <button onclick="filterJokes('Friendship', this)">Friendship</button>
-            <button onclick="filterJokes('Family', this)">Family</button>
+
+            <button
+              class="active"
+              onclick="filterJokes('All', this)">
+              All
+            </button>
+
+            <button
+              onclick="filterJokes('Funny', this)">
+              Funny
+            </button>
+
+            <button
+              onclick="filterJokes('Desi', this)">
+              Desi
+            </button>
+
+            <button
+              onclick="filterJokes('Friendship', this)">
+              Friendship
+            </button>
+
+            <button
+              onclick="filterJokes('Family', this)">
+              Family
+            </button>
+
           </div>
 
-          <div id="jokesList" class="grid"></div>
+          <div
+            id="jokesList"
+            class="grid">
+          </div>
 
         </div>
+
       </section>
+
     </div>
 
     <!-- SHAYARI -->
     <div id="page-shayari" class="page hidden">
+
       <section>
+
         <div class="container">
 
           <div class="section-head">
+
             <div>
               <h2>❤️ Shayari</h2>
               <p>दिल की बातें शब्दों में</p>
             </div>
+
           </div>
 
           <div class="category-bar">
-            <button class="active" onclick="filterShayari('All', this)">All</button>
-            <button onclick="filterShayari('Love', this)">Love</button>
-            <button onclick="filterShayari('Friendship', this)">Friendship</button>
-            <button onclick="filterShayari('Motivational', this)">Motivational</button>
-            <button onclick="filterShayari('Life', this)">Life</button>
+
+            <button
+              class="active"
+              onclick="filterShayari('All', this)">
+              All
+            </button>
+
+            <button
+              onclick="filterShayari('Love', this)">
+              Love
+            </button>
+
+            <button
+              onclick="filterShayari('Friendship', this)">
+              Friendship
+            </button>
+
+            <button
+              onclick="filterShayari('Motivational', this)">
+              Motivational
+            </button>
+
+            <button
+              onclick="filterShayari('Life', this)">
+              Life
+            </button>
+
           </div>
 
-          <div id="shayariList" class="grid"></div>
+          <div
+            id="shayariList"
+            class="grid">
+          </div>
 
         </div>
+
       </section>
+
     </div>
 
     <!-- KNOWLEDGE -->
     <div id="page-knowledge" class="page hidden">
+
       <section>
+
         <div class="container">
 
           <div class="section-head">
+
             <div>
               <h2>💡 ज्ञान की दुनिया</h2>
               <p>हर दिन कुछ नया जानिए</p>
             </div>
+
           </div>
 
           <div class="category-bar">
-            <button class="active" onclick="filterKnowledge('All', this)">All</button>
-            <button onclick="filterKnowledge('Science', this)">Science</button>
-            <button onclick="filterKnowledge('Technology', this)">Technology</button>
-            <button onclick="filterKnowledge('India', this)">India</button>
-            <button onclick="filterKnowledge('Space', this)">Space</button>
-            <button onclick="filterKnowledge('Animals', this)">Animals</button>
+
+            <button
+              class="active"
+              onclick="filterKnowledge('All', this)">
+              All
+            </button>
+
+            <button
+              onclick="filterKnowledge('Science', this)">
+              Science
+            </button>
+
+            <button
+              onclick="filterKnowledge('Technology', this)">
+              Technology
+            </button>
+
+            <button
+              onclick="filterKnowledge('India', this)">
+              India
+            </button>
+
+            <button
+              onclick="filterKnowledge('Space', this)">
+              Space
+            </button>
+
+            <button
+              onclick="filterKnowledge('Animals', this)">
+              Animals
+            </button>
+
           </div>
 
-          <div id="knowledgeList" class="grid"></div>
+          <div
+            id="knowledgeList"
+            class="grid">
+          </div>
 
         </div>
+
       </section>
+
     </div>
 
     <!-- BHAKTI -->
     <div id="page-bhakti" class="page hidden">
+
       <section>
+
         <div class="container">
 
           <div class="section-head">
+
             <div>
               <h2>🙏 Bhakti & Spiritual</h2>
-              <p>भक्ति, सकारात्मक विचार और आध्यात्मिक ज्ञान</p>
+
+              <p>
+                भक्ति, सकारात्मक विचार और आध्यात्मिक ज्ञान
+              </p>
+
             </div>
+
           </div>
 
-          <div id="bhaktiList" class="grid"></div>
+          <div
+            id="bhaktiList"
+            class="grid">
+          </div>
 
         </div>
+
       </section>
+
     </div>
 
     <!-- VIDEOS -->
     <div id="page-videos" class="page hidden">
+
       <section>
+
         <div class="container">
 
           <div class="section-head">
+
             <div>
               <h2>🎬 Videos</h2>
-              <p>अपने YouTube/video content को यहाँ दिखाएँ</p>
+
+              <p>
+                अपने YouTube/video content को यहाँ दिखाएँ
+              </p>
+
             </div>
+
           </div>
 
-          <div id="videoList" class="grid"></div>
+          <div
+            id="videoList"
+            class="grid">
+          </div>
 
-          <div class="admin-note" style="margin-top:25px;">
+          <div
+            class="admin-note"
+            style="margin-top:25px;">
+
             वीडियो जोड़ने के लिए Admin Panel में YouTube URL डाल सकते हैं।
             Public website पर video दिखाने के लिए YouTube embed URL का उपयोग करें।
+
           </div>
 
         </div>
+
       </section>
+
     </div>
 
     <!-- BLOG -->
     <div id="page-blog" class="page hidden">
+
       <section>
+
         <div class="container">
 
           <div class="section-head">
+
             <div>
               <h2>📝 Blog</h2>
-              <p>ज्ञान, gaming, entertainment और दूसरे articles</p>
+
+              <p>
+                ज्ञान, gaming, entertainment और दूसरे articles
+              </p>
+
             </div>
 
-            <button class="btn btn-primary" onclick="openAdmin()">
+            <button
+              class="btn btn-primary"
+              onclick="openAdmin()">
               + नया Blog
             </button>
+
           </div>
 
-          <div id="blogList" class="grid"></div>
+          <div
+            id="blogList"
+            class="grid">
+          </div>
 
         </div>
+
       </section>
+
     </div>
 
     <!-- SEARCH -->
     <div id="page-search" class="page hidden">
+
       <section>
+
         <div class="container">
 
           <div class="section-head">
+
             <div>
               <h2>🔎 Search Results</h2>
               <p id="searchText">खोजिए...</p>
             </div>
+
           </div>
 
-          <div id="searchResults" class="grid"></div>
+          <div
+            id="searchResults"
+            class="grid">
+          </div>
 
         </div>
+
       </section>
+
     </div>
 
   </main>
 
   <!-- FOOTER -->
   <footer>
+
     <div class="container footer-grid">
 
       <div>
+
         <div class="brand">
-          <div class="brand-logo">🎮</div>
+
+          <div class="brand-logo">
+            🎮
+          </div>
+
           <div>
             GAMEZONE ARENA
-            <small>Play sharp. Rise fast.</small>
+
+            <small>
+              Play sharp. Rise fast.
+            </small>
           </div>
+
         </div>
 
-        <p style="color:var(--muted); margin-top:15px;">
-          Gaming, entertainment, knowledge और useful content का एक platform।
+        <p
+          style="color:var(--muted); margin-top:15px;">
+
+          Gaming, entertainment, knowledge और useful content
+          का एक platform।
+
         </p>
+
       </div>
 
       <div>
+
         <h3>Explore</h3>
-        <button onclick="showPage('games')">Games</button>
-        <button onclick="showPage('jokes')">Jokes</button>
-        <button onclick="showPage('shayari')">Shayari</button>
-        <button onclick="showPage('knowledge')">Knowledge</button>
+
+        <button onclick="showPage('games')">
+          Games
+        </button>
+
+        <button onclick="showPage('jokes')">
+          Jokes
+        </button>
+
+        <button onclick="showPage('shayari')">
+          Shayari
+        </button>
+
+        <button onclick="showPage('knowledge')">
+          Knowledge
+        </button>
+
       </div>
 
       <div>
+
         <h3>More</h3>
-        <button onclick="showPage('entertainment')">Entertainment</button>
-        <button onclick="showPage('bhakti')">Bhakti</button>
-        <button onclick="showPage('videos')">Videos</button>
-        <button onclick="showPage('blog')">Blog</button>
+
+        <button onclick="showPage('entertainment')">
+          Entertainment
+        </button>
+
+        <button onclick="showPage('bhakti')">
+          Bhakti
+        </button>
+
+        <button onclick="showPage('videos')">
+          Videos
+        </button>
+
+        <button onclick="showPage('blog')">
+          Blog
+        </button>
+
       </div>
 
       <div>
+
         <h3>Website</h3>
-        <button onclick="openInfo('about')">About</button>
-        <button onclick="openInfo('contact')">Contact</button>
-        <button onclick="openInfo('privacy')">Privacy</button>
-        <button onclick="openInfo('terms')">Terms</button>
-        <button onclick="openInfo('disclaimer')">Disclaimer</button>
-        <button onclick="openAdmin()">Content Admin</button>
+
+        <button onclick="openInfo('about')">
+          About
+        </button>
+
+        <button onclick="openInfo('contact')">
+          Contact
+        </button>
+
+        <button onclick="openInfo('privacy')">
+          Privacy
+        </button>
+
+        <button onclick="openInfo('terms')">
+          Terms
+        </button>
+
+        <button onclick="openInfo('disclaimer')">
+          Disclaimer
+        </button>
+
+        <button onclick="openAdmin()">
+          Content Admin
+        </button>
+
       </div>
 
     </div>
 
     <div class="copyright">
-      © <span id="year"></span> GAMEZONE ARENA. All rights reserved.
+
+      ©
+      <span id="year"></span>
+      GAMEZONE ARENA. All rights reserved.
+
     </div>
+
   </footer>
 
   <!-- CONTENT MODAL -->
-  <div id="contentModal" class="modal" onclick="closeModalOutside(event)">
+  <div
+    id="contentModal"
+    class="modal"
+    onclick="closeModalOutside(event)">
+
     <div class="modal-box">
-      <button class="modal-close" onclick="closeModal()">✕</button>
+
+      <button
+        class="modal-close"
+        onclick="closeModal()">
+        ✕
+      </button>
+
       <div id="modalContent"></div>
+
     </div>
+
   </div>
 
   <!-- ADMIN MODAL -->
-  <div id="adminModal" class="modal" onclick="closeAdminOutside(event)">
+  <div
+    id="adminModal"
+    class="modal"
+    onclick="closeAdminOutside(event)">
+
     <div class="modal-box">
 
-      <button class="modal-close" onclick="closeAdmin()">✕</button>
+      <button
+        class="modal-close"
+        onclick="closeAdmin()">
+        ✕
+      </button>
 
-      <h2>⚙️ Content Admin</h2>
+      <h2>
+        ⚙️ Content Admin
+      </h2>
 
-      <div class="admin-note" style="margin-top:15px;">
-        यह local admin panel है। यहाँ जो content जोड़ेंगे वह इसी browser में save होगा।
-        इसे public multi-user CMS समझें नहीं। सभी visitors के लिए online publishing के लिए बाद में backend जोड़ना होगा।
+      <div
+        class="admin-note"
+        style="margin-top:15px;">
+
+        यह local admin panel है।
+        यहाँ जो content जोड़ेंगे वह इसी browser में save होगा।
+        इसे public multi-user CMS समझें नहीं।
+        सभी visitors के लिए online publishing के लिए बाद में backend जोड़ना होगा।
+
       </div>
 
       <div class="form-group">
-        <label>Content Type</label>
-        <select id="adminType" class="form-control">
-          <option value="joke">Joke</option>
-          <option value="shayari">Shayari</option>
-          <option value="knowledge">Knowledge</option>
-          <option value="entertainment">Entertainment</option>
-          <option value="bhakti">Bhakti</option>
-          <option value="blog">Blog</option>
-          <option value="video">Video</option>
+
+        <label>
+          Content Type
+        </label>
+
+        <select
+          id="adminType"
+          class="form-control">
+
+          <option value="joke">
+            Joke
+          </option>
+
+          <option value="shayari">
+            Shayari
+          </option>
+
+          <option value="knowledge">
+            Knowledge
+          </option>
+
+          <option value="entertainment">
+            Entertainment
+          </option>
+
+          <option value="bhakti">
+            Bhakti
+          </option>
+
+          <option value="blog">
+            Blog
+          </option>
+
+          <option value="video">
+            Video
+          </option>
+
         </select>
+
       </div>
 
       <div class="form-group">
-        <label>Title</label>
-        <input id="adminTitle" class="form-control" placeholder="Title..." />
+
+        <label>
+          Title
+        </label>
+
+        <input
+          id="adminTitle"
+          class="form-control"
+          placeholder="Title..." />
+
       </div>
 
       <div class="form-group">
-        <label>Category</label>
-        <input id="adminCategory" class="form-control" placeholder="Category..." />
+
+        <label>
+          Category
+        </label>
+
+        <input
+          id="adminCategory"
+          class="form-control"
+          placeholder="Category..." />
+
       </div>
 
       <div class="form-group">
-        <label>Content / Text</label>
-        <textarea id="adminContent" class="form-control" placeholder="अपना content यहाँ लिखें..."></textarea>
+
+        <label>
+          Content / Text
+        </label>
+
+        <textarea
+          id="adminContent"
+          class="form-control"
+          placeholder="अपना content यहाँ लिखें..."></textarea>
+
       </div>
 
       <div class="form-group">
-        <label>Image URL (optional)</label>
-        <input id="adminImage" class="form-control" placeholder="https://..." />
+
+        <label>
+          Image URL (optional)
+        </label>
+
+        <input
+          id="adminImage"
+          class="form-control"
+          placeholder="https://..." />
+
       </div>
 
       <div class="form-group">
-        <label>Video / YouTube URL (optional)</label>
-        <input id="adminVideo" class="form-control" placeholder="https://www.youtube.com/..." />
+
+        <label>
+          Video / YouTube URL (optional)
+        </label>
+
+        <input
+          id="adminVideo"
+          class="form-control"
+          placeholder="https://www.youtube.com/..." />
+
       </div>
 
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <button class="btn btn-primary" onclick="saveAdminContent()">
+      <div
+        style="display:flex; gap:10px; flex-wrap:wrap;">
+
+        <button
+          class="btn btn-primary"
+          onclick="saveAdminContent()">
+
           Save Content
+
         </button>
 
-        <button class="btn btn-secondary" onclick="clearAdminForm()">
+        <button
+          class="btn btn-secondary"
+          onclick="clearAdminForm()">
+
           Clear
+
         </button>
+
       </div>
 
-      <div id="adminItems" class="admin-list"></div>
+      <div
+        id="adminItems"
+        class="admin-list">
+      </div>
 
     </div>
+
   </div>
 
   <!-- TOAST -->
-  <div id="toast" class="toast"></div>
+  <div
+    id="toast"
+    class="toast">
+  </div>
 
   <script>
+
     /* =========================================================
        GAMEZONE ARENA WEBSITE
-       SINGLE FILE CONTENT SYSTEM
+       AUTOMATIC + LOCAL CONTENT SYSTEM
        ========================================================= */
 
     const BASE_GAMES = [
-      { title:"Ludo", icon:"🎲", description:"Multiplayer Ludo experience." },
-      { title:"Cricket", icon:"🏏", description:"Cricket gaming challenge." },
-      { title:"Carrom", icon:"🟠", description:"Classic carrom challenge." },
-      { title:"Racing", icon:"🏎️", description:"Fast racing experience." },
-      { title:"Spin Game", icon:"🎡", description:"Spin and collect virtual rewards." },
-      { title:"Plazo Challenge", icon:"⚡", description:"Challenge mode." },
-      { title:"Quick Quiz", icon:"❓", description:"Test your knowledge." },
-      { title:"Memory Match", icon:"🧠", description:"Train your memory." }
+
+      {
+        title:"Ludo",
+        icon:"🎲",
+        description:"Multiplayer Ludo experience."
+      },
+
+      {
+        title:"Cricket",
+        icon:"🏏",
+        description:"Cricket gaming challenge."
+      },
+
+      {
+        title:"Carrom",
+        icon:"🟠",
+        description:"Classic carrom challenge."
+      },
+
+      {
+        title:"Racing",
+        icon:"🏎️",
+        description:"Fast racing experience."
+      },
+
+      {
+        title:"Spin Game",
+        icon:"🎡",
+        description:"Spin and collect virtual rewards."
+      },
+
+      {
+        title:"Plazo Challenge",
+        icon:"⚡",
+        description:"Challenge mode."
+      },
+
+      {
+        title:"Quick Quiz",
+        icon:"❓",
+        description:"Test your knowledge."
+      },
+
+      {
+        title:"Memory Match",
+        icon:"🧠",
+        description:"Train your memory."
+      }
+
     ];
 
+
     const DEFAULT_JOKES = [
+
       {
         title:"मजेदार Joke",
         category:"Funny",
-        content:"टीचर: बताओ दुनिया में सबसे ज्यादा बारिश कहाँ होती है?\nछात्र: जहाँ सबसे ज्यादा छाते बिकते हैं! 😂"
+        content:
+`टीचर: बताओ दुनिया में सबसे ज्यादा बारिश कहाँ होती है?
+छात्र: जहाँ सबसे ज्यादा छाते बिकते हैं! 😂`
       },
+
       {
         title:"दोस्तों वाला Joke",
         category:"Friendship",
-        content:"दोस्त: भाई तू इतना शांत क्यों है?\nमैं: क्योंकि मेरे मोबाइल में 1% battery बची है। 😄"
+        content:
+`दोस्त: भाई तू इतना शांत क्यों है?
+मैं: क्योंकि मेरे मोबाइल में 1% battery बची है। 😄`
       },
+
       {
         title:"Desi Joke",
         category:"Desi",
-        content:"पिताजी: पढ़ाई कैसी चल रही है?\nबेटा: बस पिताजी, चल ही रही है... दौड़ नहीं रही। 😂"
+        content:
+`पिताजी: पढ़ाई कैसी चल रही है?
+बेटा: बस पिताजी, चल ही रही है... दौड़ नहीं रही। 😂`
       }
+
     ];
 
+
     const DEFAULT_SHAYARI = [
+
       {
         title:"Motivation",
         category:"Motivational",
-        content:"रास्ते मुश्किल हों तो क्या हुआ,\nहौसले मजबूत होने चाहिए।\nमंज़िल देर से मिले,\nपर कदम रुकने नहीं चाहिए।"
+        content:
+`रास्ते मुश्किल हों तो क्या हुआ,
+हौसले मजबूत होने चाहिए।
+मंज़िल देर से मिले,
+पर कदम रुकने नहीं चाहिए।`
       },
+
       {
         title:"दोस्ती",
         category:"Friendship",
-        content:"दोस्ती वो नहीं जो हर रोज़ मिले,\nदोस्ती वो है जो दिल से कभी न मिले।"
+        content:
+`दोस्ती वो नहीं जो हर रोज़ मिले,
+दोस्ती वो है जो दिल से कभी न मिले।`
       },
+
       {
         title:"ज़िंदगी",
         category:"Life",
-        content:"ज़िंदगी छोटी सी कहानी है,\nइसे मुस्कुराकर जीना ही असली निशानी है।"
+        content:
+`ज़िंदगी छोटी सी कहानी है,
+इसे मुस्कुराकर जीना ही असली निशानी है।`
       }
+
     ];
 
+
     const DEFAULT_KNOWLEDGE = [
+
       {
         title:"अंतरिक्ष",
         category:"Space",
-        content:"हमारी पृथ्वी सूर्य की परिक्रमा करती है और सूर्य हमारे सौरमंडल का केंद्र है।"
+        content:
+`हमारी पृथ्वी सूर्य की परिक्रमा करती है और सूर्य हमारे सौरमंडल का केंद्र है।`
       },
+
       {
         title:"Technology",
         category:"Technology",
-        content:"Internet कई अलग-अलग computer networks को जोड़ने वाला विशाल network है।"
+        content:
+`Internet कई अलग-अलग computer networks को जोड़ने वाला विशाल network है।`
       },
+
       {
         title:"Science",
         category:"Science",
-        content:"पानी सामान्य परिस्थितियों में ठंडा होने पर बर्फ और गर्म होने पर भाप में बदल सकता है।"
+        content:
+`पानी सामान्य परिस्थितियों में ठंडा होने पर बर्फ और गर्म होने पर भाप में बदल सकता है।`
       },
+
       {
         title:"भारत",
         category:"India",
-        content:"भारत विविध भाषाओं, संस्कृतियों, परंपराओं और भौगोलिक क्षेत्रों वाला देश है।"
+        content:
+`भारत विविध भाषाओं, संस्कृतियों, परंपराओं और भौगोलिक क्षेत्रों वाला देश है।`
       },
+
       {
         title:"जानवर",
         category:"Animals",
-        content:"नीली व्हेल पृथ्वी पर ज्ञात सबसे बड़े जीवों में से एक है।"
+        content:
+`नीली व्हेल पृथ्वी पर ज्ञात सबसे बड़े जीवों में से एक है।`
       }
+
     ];
 
+
     const DEFAULT_ENTERTAINMENT = [
+
       {
         title:"आज की मुस्कान",
         category:"Fun",
-        content:"कभी-कभी छोटी सी हँसी भी पूरे दिन को बेहतर बना देती है। 😄"
+        content:
+`कभी-कभी छोटी सी हँसी भी पूरे दिन को बेहतर बना देती है। 😄`
       },
+
       {
         title:"मजेदार बात",
         category:"Fun",
-        content:"जब Wi-Fi slow हो तो इंसान को अपनी जिंदगी की speed भी slow लगने लगती है। 😂"
+        content:
+`जब Wi-Fi slow हो तो इंसान को अपनी जिंदगी की speed भी slow लगने लगती है। 😂`
       }
+
     ];
 
+
     const DEFAULT_BHAKTI = [
+
       {
         title:"सकारात्मक विचार",
         category:"Spiritual",
-        content:"अच्छे विचार, अच्छे कर्म और दूसरों के प्रति सम्मान जीवन को बेहतर बनाते हैं। 🙏"
+        content:
+`अच्छे विचार, अच्छे कर्म और दूसरों के प्रति सम्मान जीवन को बेहतर बनाते हैं। 🙏`
       },
+
       {
         title:"भक्ति भावना",
         category:"Bhakti",
-        content:"मन में शांति, जीवन में सेवा और व्यवहार में प्रेम — यही सुंदर जीवन की पहचान है।"
+        content:
+`मन में शांति, जीवन में सेवा और व्यवहार में प्रेम — यही सुंदर जीवन की पहचान है।`
       }
+
     ];
 
+
     const DEFAULT_VIDEOS = [
+
       {
         title:"आपका पहला Video",
         category:"Video",
-        content:"Admin Panel से अपना YouTube video जोड़ें।",
+        content:
+`Admin Panel से अपना YouTube video जोड़ें।`,
         video:""
       }
+
     ];
 
+
     const DEFAULT_BLOGS = [
+
       {
         title:"GAMEZONE ARENA में आपका स्वागत है",
         category:"Gaming",
-        content:"GAMEZONE ARENA को gaming, entertainment और knowledge platform के रूप में बनाया जा रहा है। यहाँ games के साथ jokes, shayari, knowledge, videos और blogs भी उपलब्ध होंगे।"
+        content:
+`GAMEZONE ARENA को gaming, entertainment और knowledge platform के रूप में बनाया जा रहा है। यहाँ games के साथ jokes, shayari, knowledge, videos और blogs भी उपलब्ध होंगे।`
       }
+
     ];
 
-    let customContent = JSON.parse(
-      localStorage.getItem("gamezone_custom_content") || "[]"
-    );
 
-    /* -------------------------
+    /* =========================================================
+       LOCAL CONTENT
+       ========================================================= */
+
+    let customContent = [];
+
+    try {
+
+      customContent = JSON.parse(
+        localStorage.getItem("gamezone_custom_content") || "[]"
+      );
+
+      if (!Array.isArray(customContent)) {
+        customContent = [];
+      }
+
+    } catch (error) {
+
+      console.warn(
+        "Local custom content load failed:",
+        error
+      );
+
+      customContent = [];
+
+    }
+
+
+    /* =========================================================
+       AUTOMATIC CONTENT
+       GitHub Actions creates:
+       content/auto-content.json
+       ========================================================= */
+
+    let autoContent = [];
+
+    async function loadAutoContent() {
+
+      try {
+
+        const response = await fetch(
+          "./content/auto-content.json?v=" + Date.now(),
+          {
+            cache: "no-store"
+          }
+        );
+
+        if (!response.ok) {
+
+          console.log(
+            "Automatic content file not available yet."
+          );
+
+          return;
+
+        }
+
+        const data = await response.json();
+
+        if (Array.isArray(data)) {
+
+          autoContent = data
+            .filter(item => item && typeof item === "object")
+            .map(item => ({
+
+              id: item.id || ("auto-" + Date.now() + "-" + Math.random()),
+
+              type: String(item.type || "").toLowerCase(),
+
+              title: String(item.title || "Untitled"),
+
+              category: String(item.category || item.type || "General"),
+
+              content: String(item.content || ""),
+
+              image: String(item.image || ""),
+
+              video: String(item.video || "")
+
+            }))
+            .filter(item => item.type && item.content);
+
+        } else {
+
+          autoContent = [];
+
+        }
+
+        renderHomeLatest();
+        renderJokes();
+        renderShayari();
+        renderKnowledge();
+        renderEntertainment();
+        renderBhakti();
+        renderVideos();
+        renderBlogs();
+
+        console.log(
+          "Automatic content loaded:",
+          autoContent.length
+        );
+
+      } catch (error) {
+
+        console.warn(
+          "Automatic content load failed:",
+          error
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
        UTILITIES
-       ------------------------- */
+       ========================================================= */
 
     function escapeHTML(value) {
+
       return String(value || "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+
     }
+
 
     function allContent() {
+
       return [
-        ...DEFAULT_JOKES.map(x => ({...x, type:"joke"})),
-        ...DEFAULT_SHAYARI.map(x => ({...x, type:"shayari"})),
-        ...DEFAULT_KNOWLEDGE.map(x => ({...x, type:"knowledge"})),
-        ...DEFAULT_ENTERTAINMENT.map(x => ({...x, type:"entertainment"})),
-        ...DEFAULT_BHAKTI.map(x => ({...x, type:"bhakti"})),
-        ...DEFAULT_BLOGS.map(x => ({...x, type:"blog"})),
-        ...DEFAULT_VIDEOS.map(x => ({...x, type:"video"})),
+
+        ...DEFAULT_JOKES.map(x => ({
+          ...x,
+          type:"joke"
+        })),
+
+        ...DEFAULT_SHAYARI.map(x => ({
+          ...x,
+          type:"shayari"
+        })),
+
+        ...DEFAULT_KNOWLEDGE.map(x => ({
+          ...x,
+          type:"knowledge"
+        })),
+
+        ...DEFAULT_ENTERTAINMENT.map(x => ({
+          ...x,
+          type:"entertainment"
+        })),
+
+        ...DEFAULT_BHAKTI.map(x => ({
+          ...x,
+          type:"bhakti"
+        })),
+
+        ...DEFAULT_BLOGS.map(x => ({
+          ...x,
+          type:"blog"
+        })),
+
+        ...DEFAULT_VIDEOS.map(x => ({
+          ...x,
+          type:"video"
+        })),
+
+        ...autoContent,
+
         ...customContent
+
       ];
+
     }
 
+
     function saveCustom() {
+
       localStorage.setItem(
         "gamezone_custom_content",
         JSON.stringify(customContent)
       );
+
     }
 
+
     function toast(message) {
-      const el = document.getElementById("toast");
+
+      const el =
+        document.getElementById("toast");
+
+      if (!el) return;
+
       el.textContent = message;
+
       el.classList.add("show");
 
       setTimeout(() => {
+
         el.classList.remove("show");
+
       }, 2200);
+
     }
+
 
     function copyText(text) {
-      navigator.clipboard?.writeText(text)
-        .then(() => toast("Content copied ✅"))
-        .catch(() => toast("Copy नहीं हो पाया"));
+
+      const value =
+        String(text || "");
+
+      if (
+        navigator.clipboard &&
+        navigator.clipboard.writeText
+      ) {
+
+        navigator.clipboard
+          .writeText(value)
+          .then(() => {
+            toast("Content copied ✅");
+          })
+          .catch(() => {
+            toast("Copy नहीं हो पाया");
+          });
+
+      } else {
+
+        toast("Copy सुविधा उपलब्ध नहीं है");
+
+      }
+
     }
+
 
     async function shareContent(title, text) {
+
       if (navigator.share) {
+
         try {
+
           await navigator.share({
+
             title,
             text
+
           });
+
         } catch (e) {}
+
       } else {
+
         copyText(text);
+
       }
+
     }
 
+
     function favorite(title) {
-      const favorites = JSON.parse(
-        localStorage.getItem("gamezone_favorites") || "[]"
-      );
+
+      const favorites =
+        JSON.parse(
+          localStorage.getItem(
+            "gamezone_favorites"
+          ) || "[]"
+        );
 
       if (!favorites.includes(title)) {
+
         favorites.push(title);
+
         localStorage.setItem(
           "gamezone_favorites",
           JSON.stringify(favorites)
         );
-        toast("Favorite में save हो गया ❤️");
+
+        toast(
+          "Favorite में save हो गया ❤️"
+        );
+
       } else {
-        toast("पहले से Favorite में है ❤️");
+
+        toast(
+          "पहले से Favorite में है ❤️"
+        );
+
       }
+
     }
 
-    /* -------------------------
+
+    /* =========================================================
        PAGE SYSTEM
-       ------------------------- */
+       ========================================================= */
 
     function showPage(page) {
 
-      document.querySelectorAll(".page").forEach(p => {
-        p.classList.add("hidden");
-      });
+      document
+        .querySelectorAll(".page")
+        .forEach(p => {
 
-      const target = document.getElementById("page-" + page);
+          p.classList.add("hidden");
+
+        });
+
+
+      const target =
+        document.getElementById(
+          "page-" + page
+        );
+
 
       if (target) {
+
         target.classList.remove("hidden");
+
       }
 
-      document.getElementById("navLinks")?.classList.remove("show");
+
+      document
+        .getElementById("navLinks")
+        ?.classList.remove("show");
+
 
       window.scrollTo({
+
         top:0,
         behavior:"smooth"
+
       });
 
-      if (page === "home") renderHomeLatest();
-      if (page === "jokes") renderJokes();
-      if (page === "shayari") renderShayari();
-      if (page === "knowledge") renderKnowledge();
-      if (page === "entertainment") renderEntertainment();
-      if (page === "bhakti") renderBhakti();
-      if (page === "videos") renderVideos();
-      if (page === "blog") renderBlogs();
+
+      if (page === "home") {
+        renderHomeLatest();
+      }
+
+      if (page === "jokes") {
+        renderJokes();
+      }
+
+      if (page === "shayari") {
+        renderShayari();
+      }
+
+      if (page === "knowledge") {
+        renderKnowledge();
+      }
+
+      if (page === "entertainment") {
+        renderEntertainment();
+      }
+
+      if (page === "bhakti") {
+        renderBhakti();
+      }
+
+      if (page === "videos") {
+        renderVideos();
+      }
+
+      if (page === "blog") {
+        renderBlogs();
+      }
+
     }
+
 
     function toggleMenu() {
-      document.getElementById("navLinks").classList.toggle("show");
+
+      document
+        .getElementById("navLinks")
+        .classList.toggle("show");
+
     }
 
-    /* -------------------------
+
+    /* =========================================================
        THEME
-       ------------------------- */
+       ========================================================= */
 
     function toggleTheme() {
+
       document.body.classList.toggle("light");
 
       localStorage.setItem(
+
         "gamezone_theme",
+
         document.body.classList.contains("light")
           ? "light"
           : "dark"
+
       );
+
     }
+
 
     function loadTheme() {
-      const theme = localStorage.getItem("gamezone_theme");
+
+      const theme =
+        localStorage.getItem(
+          "gamezone_theme"
+        );
+
 
       if (theme === "light") {
-        document.body.classList.add("light");
+
+        document.body.classList.add(
+          "light"
+        );
+
       }
+
     }
 
-    /* -------------------------
+
+    /* =========================================================
        CARD BUILDERS
-       ------------------------- */
+       ========================================================= */
 
     function contentCard(item, type) {
 
-      const title = escapeHTML(item.title);
-      const category = escapeHTML(item.category);
-      const content = escapeHTML(item.content);
+      const title =
+        escapeHTML(item.title);
+
+      const category =
+        escapeHTML(item.category);
+
+      const content =
+        escapeHTML(item.content);
+
 
       let imageHTML = "";
 
+
       if (item.image) {
+
         imageHTML = `
+
           <img
             class="blog-cover"
             src="${escapeHTML(item.image)}"
             alt="${title}"
             loading="lazy"
           />
+
         `;
+
       }
+
 
       let videoHTML = "";
 
+
       if (item.video) {
-        videoHTML = `
-          <iframe
-            class="media"
-            src="${escapeHTML(toEmbedURL(item.video))}"
-            title="${title}"
-            loading="lazy"
-            allowfullscreen>
-          </iframe>
-        `;
+
+        const embed =
+          toEmbedURL(item.video);
+
+
+        if (embed) {
+
+          videoHTML = `
+
+            <iframe
+              class="media"
+              src="${escapeHTML(embed)}"
+              title="${title}"
+              loading="lazy"
+              allowfullscreen>
+            </iframe>
+
+          `;
+
+        }
+
       }
 
+
       return `
+
         <article class="card">
 
           ${imageHTML}
 
           ${videoHTML}
 
-          <span class="tag">${category || type}</span>
+          <span class="tag">
+            ${category || escapeHTML(type)}
+          </span>
 
-          <h3>${title}</h3>
+          <h3>
+            ${title}
+          </h3>
 
           <p class="${type === "shayari" ? "quote" : ""}">
             ${content}
@@ -1580,346 +2501,732 @@
           </div>
 
         </article>
+
       `;
+
     }
 
-    function renderList(elementId, data, type) {
-      const el = document.getElementById(elementId);
+
+    function renderList(
+      elementId,
+      data,
+      type
+    ) {
+
+      const el =
+        document.getElementById(
+          elementId
+        );
+
 
       if (!el) return;
 
+
       if (!data.length) {
+
         el.innerHTML = `
+
           <div class="card">
-            <h3>अभी content उपलब्ध नहीं है।</h3>
+
+            <h3>
+              अभी content उपलब्ध नहीं है।
+            </h3>
+
           </div>
+
         `;
+
         return;
+
       }
 
-      el.innerHTML = data
-        .map(item => contentCard(item, type))
-        .join("");
+
+      el.innerHTML =
+        data
+          .map(item =>
+            contentCard(item, type)
+          )
+          .join("");
+
     }
 
-    /* -------------------------
+
+    /* =========================================================
        JOKES
-       ------------------------- */
+       ========================================================= */
 
     let currentJokeFilter = "All";
 
+
     function getJokes() {
+
       return [
+
         ...DEFAULT_JOKES,
-        ...customContent.filter(x => x.type === "joke")
+
+        ...autoContent.filter(
+          x => x.type === "joke"
+        ),
+
+        ...customContent.filter(
+          x => x.type === "joke"
+        )
+
       ];
+
     }
 
-    function renderJokes(filter = currentJokeFilter) {
 
-      currentJokeFilter = filter;
+    function renderJokes(
+      filter = currentJokeFilter
+    ) {
 
-      const data = getJokes().filter(
-        x => filter === "All" || x.category === filter
+      currentJokeFilter =
+        filter;
+
+
+      const data =
+        getJokes().filter(
+
+          x =>
+            filter === "All" ||
+            x.category === filter
+
+        );
+
+
+      renderList(
+        "jokesList",
+        data,
+        "joke"
       );
 
-      renderList("jokesList", data, "joke");
     }
 
-    function filterJokes(filter, btn) {
+
+    function filterJokes(
+      filter,
+      btn
+    ) {
 
       document
-        .querySelectorAll("#page-jokes .category-bar button")
-        .forEach(x => x.classList.remove("active"));
+        .querySelectorAll(
+          "#page-jokes .category-bar button"
+        )
+        .forEach(x =>
+          x.classList.remove("active")
+        );
+
 
       btn?.classList.add("active");
+
 
       renderJokes(filter);
+
     }
 
-    /* -------------------------
-       SHAYARI
-       ------------------------- */
 
-    let currentShayariFilter = "All";
+    /* =========================================================
+       SHAYARI
+       ========================================================= */
+
+    let currentShayariFilter =
+      "All";
+
 
     function getShayari() {
+
       return [
+
         ...DEFAULT_SHAYARI,
-        ...customContent.filter(x => x.type === "shayari")
+
+        ...autoContent.filter(
+          x => x.type === "shayari"
+        ),
+
+        ...customContent.filter(
+          x => x.type === "shayari"
+        )
+
       ];
+
     }
 
-    function renderShayari(filter = currentShayariFilter) {
 
-      currentShayariFilter = filter;
+    function renderShayari(
+      filter = currentShayariFilter
+    ) {
 
-      const data = getShayari().filter(
-        x => filter === "All" || x.category === filter
+      currentShayariFilter =
+        filter;
+
+
+      const data =
+        getShayari().filter(
+
+          x =>
+            filter === "All" ||
+            x.category === filter
+
+        );
+
+
+      renderList(
+        "shayariList",
+        data,
+        "shayari"
       );
 
-      renderList("shayariList", data, "shayari");
     }
 
-    function filterShayari(filter, btn) {
+
+    function filterShayari(
+      filter,
+      btn
+    ) {
 
       document
-        .querySelectorAll("#page-shayari .category-bar button")
-        .forEach(x => x.classList.remove("active"));
+        .querySelectorAll(
+          "#page-shayari .category-bar button"
+        )
+        .forEach(x =>
+          x.classList.remove("active")
+        );
+
 
       btn?.classList.add("active");
+
 
       renderShayari(filter);
+
     }
 
-    /* -------------------------
-       KNOWLEDGE
-       ------------------------- */
 
-    let currentKnowledgeFilter = "All";
+    /* =========================================================
+       KNOWLEDGE
+       ========================================================= */
+
+    let currentKnowledgeFilter =
+      "All";
+
 
     function getKnowledge() {
+
       return [
+
         ...DEFAULT_KNOWLEDGE,
-        ...customContent.filter(x => x.type === "knowledge")
+
+        ...autoContent.filter(
+          x => x.type === "knowledge"
+        ),
+
+        ...customContent.filter(
+          x => x.type === "knowledge"
+        )
+
       ];
+
     }
 
-    function renderKnowledge(filter = currentKnowledgeFilter) {
 
-      currentKnowledgeFilter = filter;
+    function renderKnowledge(
+      filter = currentKnowledgeFilter
+    ) {
 
-      const data = getKnowledge().filter(
-        x => filter === "All" || x.category === filter
+      currentKnowledgeFilter =
+        filter;
+
+
+      const data =
+        getKnowledge().filter(
+
+          x =>
+            filter === "All" ||
+            x.category === filter
+
+        );
+
+
+      renderList(
+        "knowledgeList",
+        data,
+        "knowledge"
       );
 
-      renderList("knowledgeList", data, "knowledge");
     }
 
-    function filterKnowledge(filter, btn) {
+
+    function filterKnowledge(
+      filter,
+      btn
+    ) {
 
       document
-        .querySelectorAll("#page-knowledge .category-bar button")
-        .forEach(x => x.classList.remove("active"));
+        .querySelectorAll(
+          "#page-knowledge .category-bar button"
+        )
+        .forEach(x =>
+          x.classList.remove("active")
+        );
+
 
       btn?.classList.add("active");
 
+
       renderKnowledge(filter);
+
     }
 
-    /* -------------------------
+
+    /* =========================================================
        ENTERTAINMENT
-       ------------------------- */
+       ========================================================= */
 
     function getEntertainment() {
+
       return [
+
         ...DEFAULT_ENTERTAINMENT,
-        ...customContent.filter(x => x.type === "entertainment")
+
+        ...autoContent.filter(
+          x => x.type === "entertainment"
+        ),
+
+        ...customContent.filter(
+          x => x.type === "entertainment"
+        )
+
       ];
+
     }
+
 
     function renderEntertainment() {
+
       renderList(
+
         "entertainmentList",
+
         getEntertainment(),
+
         "entertainment"
+
       );
+
     }
 
-    /* -------------------------
+
+    /* =========================================================
        BHAKTI
-       ------------------------- */
+       ========================================================= */
 
     function getBhakti() {
+
       return [
+
         ...DEFAULT_BHAKTI,
-        ...customContent.filter(x => x.type === "bhakti")
+
+        ...autoContent.filter(
+          x => x.type === "bhakti"
+        ),
+
+        ...customContent.filter(
+          x => x.type === "bhakti"
+        )
+
       ];
+
     }
+
 
     function renderBhakti() {
-      renderList("bhaktiList", getBhakti(), "bhakti");
+
+      renderList(
+
+        "bhaktiList",
+
+        getBhakti(),
+
+        "bhakti"
+
+      );
+
     }
 
-    /* -------------------------
+
+    /* =========================================================
        VIDEO
-       ------------------------- */
+       ========================================================= */
 
     function getVideos() {
+
       return [
+
         ...DEFAULT_VIDEOS,
-        ...customContent.filter(x => x.type === "video")
+
+        ...autoContent.filter(
+          x => x.type === "video"
+        ),
+
+        ...customContent.filter(
+          x => x.type === "video"
+        )
+
       ];
+
     }
+
 
     function toEmbedURL(url) {
 
       if (!url) return "";
 
+
       try {
 
-        const u = new URL(url);
+        const u =
+          new URL(url);
 
-        if (u.hostname.includes("youtube.com")) {
 
-          const id = u.searchParams.get("v");
+        if (
+          u.hostname.includes(
+            "youtube.com"
+          )
+        ) {
+
+          const id =
+            u.searchParams.get("v");
+
 
           if (id) {
-            return "https://www.youtube.com/embed/" + id;
+
+            return (
+              "https://www.youtube.com/embed/" +
+              id
+            );
+
           }
 
-          if (u.pathname.includes("/embed/")) {
+
+          if (
+            u.pathname.includes(
+              "/embed/"
+            )
+          ) {
+
             return url;
+
           }
 
-          if (u.pathname.includes("/shorts/")) {
-            const id2 = u.pathname.split("/shorts/")[1];
-            return "https://www.youtube.com/embed/" + id2;
+
+          if (
+            u.pathname.includes(
+              "/shorts/"
+            )
+          ) {
+
+            const id2 =
+              u.pathname
+                .split("/shorts/")[1]
+                .split("?")[0];
+
+
+            return (
+              "https://www.youtube.com/embed/" +
+              id2
+            );
+
           }
+
         }
 
-        if (u.hostname === "youtu.be") {
-          const id = u.pathname.replace("/", "");
-          return "https://www.youtube.com/embed/" + id;
+
+        if (
+          u.hostname ===
+          "youtu.be"
+        ) {
+
+          const id =
+            u.pathname
+              .replace("/", "")
+              .split("?")[0];
+
+
+          if (id) {
+
+            return (
+              "https://www.youtube.com/embed/" +
+              id
+            );
+
+          }
+
         }
 
       } catch(e) {}
 
+
       return url;
+
     }
+
 
     function renderVideos() {
-      renderList("videoList", getVideos(), "video");
+
+      renderList(
+
+        "videoList",
+
+        getVideos(),
+
+        "video"
+
+      );
+
     }
 
-    /* -------------------------
+
+    /* =========================================================
        BLOG
-       ------------------------- */
+       ========================================================= */
 
     function getBlogs() {
+
       return [
+
         ...DEFAULT_BLOGS,
-        ...customContent.filter(x => x.type === "blog")
+
+        ...autoContent.filter(
+          x => x.type === "blog"
+        ),
+
+        ...customContent.filter(
+          x => x.type === "blog"
+        )
+
       ];
+
     }
+
 
     function renderBlogs() {
-      renderList("blogList", getBlogs(), "blog");
+
+      renderList(
+
+        "blogList",
+
+        getBlogs(),
+
+        "blog"
+
+      );
+
     }
 
-    /* -------------------------
+
+    /* =========================================================
        HOME LATEST
-       ------------------------- */
+       ========================================================= */
 
     function renderHomeLatest() {
 
-      const data = allContent()
-        .slice(-6)
-        .reverse();
+      const data =
+        allContent()
+          .slice(-9)
+          .reverse();
 
-      renderList("homeLatest", data, "content");
+
+      renderList(
+
+        "homeLatest",
+
+        data,
+
+        "content"
+
+      );
+
     }
 
-    /* -------------------------
+
+    /* =========================================================
        SEARCH
-       ------------------------- */
+       ========================================================= */
 
     function openSearch() {
 
       showPage("search");
 
-      setTimeout(() => {
-        const input = document.getElementById("searchInput");
 
-        if (input) input.focus();
+      setTimeout(() => {
+
+        const input =
+          document.getElementById(
+            "homeSearch"
+          );
+
+
+        if (input) {
+
+          input.focus();
+
+        }
+
       }, 100);
+
     }
+
 
     function globalSearch(query) {
 
-      query = String(query || "").trim();
+      query =
+        String(query || "")
+          .trim();
+
 
       if (!query) {
+
         showPage("search");
 
-        document.getElementById("searchText").textContent =
+
+        document.getElementById(
+          "searchText"
+        ).textContent =
           "कुछ खोजने के लिए ऊपर search box में लिखें।";
 
-        document.getElementById("searchResults").innerHTML = "";
+
+        document.getElementById(
+          "searchResults"
+        ).innerHTML = "";
+
 
         return;
+
       }
 
-      const lower = query.toLowerCase();
 
-      const results = allContent().filter(item => {
+      const lower =
+        query.toLowerCase();
 
-        return [
-          item.title,
-          item.category,
-          item.content
-        ]
-        .join(" ")
-        .toLowerCase()
-        .includes(lower);
 
-      });
+      const results =
+        allContent().filter(
+          item => {
+
+            return [
+
+              item.title,
+              item.category,
+              item.content
+
+            ]
+              .join(" ")
+              .toLowerCase()
+              .includes(lower);
+
+          }
+        );
+
 
       showPage("search");
 
-      document.getElementById("searchText").textContent =
+
+      document.getElementById(
+        "searchText"
+      ).textContent =
+
         `"${query}" के लिए ${results.length} result मिले।`;
 
+
       renderList(
+
         "searchResults",
+
         results,
+
         "search"
+
       );
+
     }
 
-    /* -------------------------
-       MODAL
-       ------------------------- */
 
-    function openContent(title, content, image, video) {
+    /* =========================================================
+       MODAL
+       ========================================================= */
+
+    function openContent(
+      title,
+      content,
+      image,
+      video
+    ) {
 
       let media = "";
 
+
       if (image) {
+
         media += `
+
           <img
             class="blog-cover"
             src="${escapeHTML(image)}"
             alt="${escapeHTML(title)}"
           />
+
         `;
+
       }
+
 
       if (video) {
-        media += `
-          <iframe
-            class="media"
-            src="${escapeHTML(toEmbedURL(video))}"
-            title="${escapeHTML(title)}"
-            allowfullscreen>
-          </iframe>
-        `;
+
+        const embed =
+          toEmbedURL(video);
+
+
+        if (embed) {
+
+          media += `
+
+            <iframe
+              class="media"
+              src="${escapeHTML(embed)}"
+              title="${escapeHTML(title)}"
+              allowfullscreen>
+            </iframe>
+
+          `;
+
+        }
+
       }
 
-      document.getElementById("modalContent").innerHTML = `
+
+      document.getElementById(
+        "modalContent"
+      ).innerHTML = `
+
         ${media}
 
-        <span class="tag">GAMEZONE ARENA</span>
+        <span class="tag">
+          GAMEZONE ARENA
+        </span>
 
         <h2 style="margin-bottom:15px;">
           ${escapeHTML(title)}
         </h2>
 
-        <div style="white-space:pre-line; color:var(--muted);">
+        <div
+          style="white-space:pre-line; color:var(--muted);">
+
           ${escapeHTML(content)}
+
         </div>
 
         <div class="card-actions">
+
           <button
             class="btn btn-primary"
             onclick='copyText(${JSON.stringify(content)})'>
@@ -1931,196 +3238,340 @@
             onclick='shareContent(${JSON.stringify(title)}, ${JSON.stringify(content)})'>
             📤 Share
           </button>
+
         </div>
+
       `;
+
 
       document
         .getElementById("contentModal")
         .classList.add("show");
+
     }
 
+
     function closeModal() {
+
       document
         .getElementById("contentModal")
         .classList.remove("show");
+
     }
 
-    function closeModalOutside(event) {
-      if (event.target.id === "contentModal") {
+
+    function closeModalOutside(
+      event
+    ) {
+
+      if (
+        event.target.id ===
+        "contentModal"
+      ) {
+
         closeModal();
+
       }
+
     }
 
-    /* -------------------------
+
+    /* =========================================================
        GAME MODAL
-       ------------------------- */
+       ========================================================= */
 
     function openGame(gameName) {
 
-      document.getElementById("modalContent").innerHTML = `
-        <div class="card-icon">🎮</div>
+      document.getElementById(
+        "modalContent"
+      ).innerHTML = `
 
-        <h2>${escapeHTML(gameName)}</h2>
+        <div class="card-icon">
+          🎮
+        </div>
 
-        <p style="color:var(--muted); margin-top:10px;">
-          ${escapeHTML(gameName)} GAMEZONE ARENA app में उपलब्ध है।
+        <h2>
+          ${escapeHTML(gameName)}
+        </h2>
+
+        <p
+          style="color:var(--muted); margin-top:10px;">
+
+          ${escapeHTML(gameName)}
+          GAMEZONE ARENA app में उपलब्ध है।
+
         </p>
 
-        <div class="admin-note" style="margin-top:20px;">
-          आपका official Play Store link उपलब्ध होने के बाद यहाँ
-          सीधे “Play / Install” button लगाया जा सकता है।
+        <div
+          class="admin-note"
+          style="margin-top:20px;">
+
+          आपका official Play Store link उपलब्ध होने के बाद
+          यहाँ सीधे “Play / Install” button लगाया जा सकता है।
+
         </div>
 
         <button
           class="btn btn-primary"
           onclick="closeModal()">
+
           Close
+
         </button>
+
       `;
 
+
       document
-        .getElementById("contentModal")
+        .getElementById(
+          "contentModal"
+        )
         .classList.add("show");
+
     }
 
-    /* -------------------------
+
+    /* =========================================================
        INFO PAGES
-       ------------------------- */
+       ========================================================= */
 
     function openInfo(type) {
 
       const info = {
 
         about: {
-          title:"About GAMEZONE ARENA",
+
+          title:
+            "About GAMEZONE ARENA",
+
           content:
 `GAMEZONE ARENA एक gaming, entertainment और knowledge platform है।
 
 यहाँ users को games, jokes, shayari, knowledge, entertainment, bhakti content, videos और blogs एक ही जगह मिल सकते हैं।`
+
         },
 
+
         contact: {
-          title:"Contact",
+
+          title:
+            "Contact",
+
           content:
 `Contact details यहाँ अपनी जरूरत के अनुसार जोड़ें।
 
 आप बाद में email, WhatsApp या contact form भी जोड़ सकते हैं।`
+
         },
 
+
         privacy: {
-          title:"Privacy Policy",
+
+          title:
+            "Privacy Policy",
+
           content:
 `यह एक प्रारंभिक privacy page है।
 
 जब website पर analytics, advertising, accounts या अन्य third-party services जोड़ी जाएँगी, तब उनकी वास्तविक data practices के अनुसार इस policy को update करना आवश्यक होगा।`
+
         },
 
+
         terms: {
-          title:"Terms & Conditions",
+
+          title:
+            "Terms & Conditions",
+
           content:
 `GAMEZONE ARENA का उपयोग करते समय लागू कानूनों और website rules का पालन करना आवश्यक है।
 
 Games में दिखने वाली virtual coins या virtual rewards को वास्तविक धन न समझें।`
+
         },
 
+
         disclaimer: {
-          title:"Disclaimer",
+
+          title:
+            "Disclaimer",
+
           content:
 `Website पर प्रकाशित educational और entertainment सामग्री सामान्य जानकारी और मनोरंजन के उद्देश्य से हो सकती है।
 
 महत्वपूर्ण निर्णय लेने से पहले विश्वसनीय स्रोतों से जानकारी की पुष्टि करें।`
+
         }
 
       };
 
-      const item = info[type];
+
+      const item =
+        info[type];
+
 
       if (!item) return;
 
+
       openContent(
+
         item.title,
         item.content,
         "",
         ""
+
       );
+
     }
 
-    /* -------------------------
+
+    /* =========================================================
        ADMIN
-       ------------------------- */
+       ========================================================= */
 
     function openAdmin() {
 
       renderAdminItems();
 
+
       document
-        .getElementById("adminModal")
+        .getElementById(
+          "adminModal"
+        )
         .classList.add("show");
+
     }
+
 
     function closeAdmin() {
 
       document
-        .getElementById("adminModal")
+        .getElementById(
+          "adminModal"
+        )
         .classList.remove("show");
+
     }
 
-    function closeAdminOutside(event) {
 
-      if (event.target.id === "adminModal") {
+    function closeAdminOutside(
+      event
+    ) {
+
+      if (
+        event.target.id ===
+        "adminModal"
+      ) {
+
         closeAdmin();
+
       }
+
     }
+
 
     function clearAdminForm() {
 
-      document.getElementById("adminTitle").value = "";
-      document.getElementById("adminCategory").value = "";
-      document.getElementById("adminContent").value = "";
-      document.getElementById("adminImage").value = "";
-      document.getElementById("adminVideo").value = "";
+      document.getElementById(
+        "adminTitle"
+      ).value = "";
+
+      document.getElementById(
+        "adminCategory"
+      ).value = "";
+
+      document.getElementById(
+        "adminContent"
+      ).value = "";
+
+      document.getElementById(
+        "adminImage"
+      ).value = "";
+
+      document.getElementById(
+        "adminVideo"
+      ).value = "";
+
     }
+
 
     function saveAdminContent() {
 
       const type =
-        document.getElementById("adminType").value;
+        document.getElementById(
+          "adminType"
+        ).value;
+
 
       const title =
-        document.getElementById("adminTitle").value.trim();
+        document.getElementById(
+          "adminTitle"
+        ).value.trim();
+
 
       const category =
-        document.getElementById("adminCategory").value.trim();
+        document.getElementById(
+          "adminCategory"
+        ).value.trim();
+
 
       const content =
-        document.getElementById("adminContent").value.trim();
+        document.getElementById(
+          "adminContent"
+        ).value.trim();
+
 
       const image =
-        document.getElementById("adminImage").value.trim();
+        document.getElementById(
+          "adminImage"
+        ).value.trim();
+
 
       const video =
-        document.getElementById("adminVideo").value.trim();
+        document.getElementById(
+          "adminVideo"
+        ).value.trim();
+
 
       if (!title || !content) {
-        toast("Title और Content जरूरी है।");
+
+        toast(
+          "Title और Content जरूरी है।"
+        );
+
         return;
+
       }
 
+
       customContent.push({
+
         id: Date.now(),
+
         type,
+
         title,
-        category: category || type,
+
+        category:
+          category || type,
+
         content,
+
         image,
+
         video
+
       });
+
 
       saveCustom();
 
+
       clearAdminForm();
 
+
       renderAdminItems();
+
 
       renderHomeLatest();
       renderJokes();
@@ -2131,60 +3582,110 @@ Games में दिखने वाली virtual coins या virtual reward
       renderVideos();
       renderBlogs();
 
-      toast("Content save हो गया ✅");
+
+      toast(
+        "Content save हो गया ✅"
+      );
+
     }
+
 
     function renderAdminItems() {
 
-      const el = document.getElementById("adminItems");
+      const el =
+        document.getElementById(
+          "adminItems"
+        );
+
+
+      if (!el) return;
+
 
       if (!customContent.length) {
 
         el.innerHTML = `
-          <div style="color:var(--muted);">
+
+          <div
+            style="color:var(--muted);">
+
             अभी कोई custom content नहीं है।
+
           </div>
+
         `;
 
         return;
+
       }
 
-      el.innerHTML = customContent
-        .map((item, index) => `
-          <div class="admin-item">
 
-            <div>
-              <strong>${escapeHTML(item.title)}</strong>
+      el.innerHTML =
+        customContent
+          .map(
+            (item, index) => `
 
-              <div style="color:var(--muted); font-size:12px;">
-                ${escapeHTML(item.type)}
-                •
-                ${escapeHTML(item.category)}
+              <div class="admin-item">
+
+                <div>
+
+                  <strong>
+                    ${escapeHTML(item.title)}
+                  </strong>
+
+                  <div
+                    style="color:var(--muted); font-size:12px;">
+
+                    ${escapeHTML(item.type)}
+
+                    •
+
+                    ${escapeHTML(item.category)}
+
+                  </div>
+
+                </div>
+
+                <button
+                  class="small-btn"
+                  onclick="deleteCustom(${index})">
+
+                  Delete
+
+                </button>
+
               </div>
-            </div>
 
-            <button
-              class="small-btn"
-              onclick="deleteCustom(${index})">
-              Delete
-            </button>
+            `
+          )
+          .join("");
 
-          </div>
-        `)
-        .join("");
     }
+
 
     function deleteCustom(index) {
 
-      if (!confirm("क्या यह content delete करना है?")) {
+      if (
+        !confirm(
+          "क्या यह content delete करना है?"
+        )
+      ) {
+
         return;
+
       }
 
-      customContent.splice(index, 1);
+
+      customContent.splice(
+        index,
+        1
+      );
+
 
       saveCustom();
 
+
       renderAdminItems();
+
 
       renderHomeLatest();
       renderJokes();
@@ -2195,17 +3696,26 @@ Games में दिखने वाली virtual coins या virtual reward
       renderVideos();
       renderBlogs();
 
-      toast("Content delete हो गया।");
+
+      toast(
+        "Content delete हो गया।"
+      );
+
     }
 
-    /* -------------------------
-       INIT
-       ------------------------- */
 
-    document.getElementById("year").textContent =
+    /* =========================================================
+       INIT
+       ========================================================= */
+
+    document.getElementById(
+      "year"
+    ).textContent =
       new Date().getFullYear();
 
+
     loadTheme();
+
 
     renderHomeLatest();
     renderJokes();
@@ -2216,7 +3726,17 @@ Games में दिखने वाली virtual coins या virtual reward
     renderVideos();
     renderBlogs();
 
+
     showPage("home");
+
+
+    /*
+      IMPORTANT:
+      Automatic GitHub content is loaded after
+      the normal website content.
+    */
+
+    loadAutoContent();
 
   </script>
 
