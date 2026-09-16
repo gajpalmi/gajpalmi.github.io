@@ -1,0 +1,96 @@
+name: GAMEZONE ARENA - Auto Content
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 3 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  generate-content:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate content with Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          node <<'NODE'
+          const fs = require("fs");
+
+          const API_KEY = process.env.GEMINI_API_KEY;
+
+          if (!API_KEY) {
+            console.error("GEMINI_API_KEY secret is missing.");
+            process.exit(1);
+          }
+
+          const MODEL = "gemini-2.5-flash-lite";
+          const URL =
+            `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
+
+          const prompt = `
+          You are the automatic content writer for the GAMEZONE ARENA website.
+
+          Generate 12 fresh, original website content items in English.
+
+          IMPORTANT:
+          - Do not copy copyrighted text.
+          - Do not use quotations from famous people.
+          - Do not create misleading facts.
+          - Keep every item family-friendly and safe.
+          - Make every item different from the others.
+          - Return ONLY valid JSON matching the requested schema.
+          - Do not use Markdown.
+          - Content must be ready to display directly on a website.
+
+          Use these exact type values:
+
+          1. jokes
+             Categories: Funny, Desi, Friendship, Family
+
+          2. shayari
+             Categories: Love, Friendship, Motivational, Life
+
+          3. knowledge
+             Categories: Science, Technology, India, Space, Animals
+
+          4. entertainment
+             Categories: Movies, Music, Games, Fun
+
+          5. bhakti
+             Categories: Prayer, Devotional, Spiritual, Festival
+
+          6. blog
+             Categories: Gaming, Technology, Lifestyle, Tips
+
+          Generate a balanced mixture of these types.
+
+          Each item must contain:
+          - type
+          - title
+          - category
+          - content
+
+          The content should be useful, readable and suitable for the GAMEZONE ARENA website.
+          `;
+
+          const response = await fetch(URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-goog-api-key": API_KEY
+            },
+            body: JSON.stringify({
+              contents: [
+                {
+                  parts: [
+                    {
+                      text: prompt
