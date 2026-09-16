@@ -1,4 +1,4 @@
-name: GAMEZONE ARENA Daily Content
+name: GAMEZONE ARENA Daily Hindi Content
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Generate content with Gemini
+      - name: Generate Hindi content with Gemini
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
@@ -39,49 +39,144 @@ jobs:
               `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
             const prompt = `
-          You are the automatic content writer for the GAMEZONE ARENA website.
+          You are the automatic Hindi content editor for the GAMEZONE ARENA website.
 
-          Generate 12 fresh, original website content items in English.
+          IMPORTANT LANGUAGE RULE:
+          Generate ALL user-facing content in natural, easy-to-read Hindi using Devanagari script.
 
-          Rules:
-          - Family-friendly and safe.
-          - Do not copy copyrighted text.
-          - Do not use famous-person quotations.
-          - Do not invent misleading facts.
-          - Do not use Markdown.
-          - Return ONLY valid JSON.
-          - Make every item different.
+          English may be used only for:
+          - necessary technical product names
+          - brand names
+          - app names
+          - website names
+          - common technology terms when Hindi would be unnatural
 
-          Allowed types:
-          jokes, shayari, knowledge, entertainment, bhakti, blog
+          Do NOT generate the main content in English.
 
-          Each item must contain exactly:
+          Generate 18 fresh and original website content items.
+
+          The content must be useful, entertaining, family-friendly and suitable for a public Indian website.
+
+          IMPORTANT CURRENT-TOPIC RULE:
+          When generating news, trends, technology updates, mobile updates, AI updates,
+          internet topics, apps, games, entertainment updates or other time-sensitive topics,
+          use Google Search grounding to identify current/recent topics.
+
+          Do not invent current news.
+          Do not present old information as today's news.
+          Do not make unsupported claims.
+
+          For evergreen topics such as jokes, shayari, devotional content and general knowledge,
+          Google Search is not required unless needed for factual accuracy.
+
+          IMPORTANT:
+          Do not copy articles, jokes, poems or other copyrighted text.
+          Write original content.
+
+          Do not use Markdown inside the generated content.
+
+          Return ONLY valid JSON.
+
+          Allowed content types:
+
+          jokes
+          shayari
+          bhakti
+          knowledge
+          news
+          technology
+          mobile
+          gaming
+          entertainment
+          dialogue
+          internet
+          ai
+          tips
+          blog
+
+          Suggested categories:
+
+          jokes:
+          Funny, Desi, Family, Friendship, School, Office
+
+          shayari:
+          Love, Friendship, Life, Motivational, Emotional
+
+          bhakti:
+          Prayer, Devotional, Spiritual, Festival, Motivation
+
+          knowledge:
+          Science, India, Space, Animals, History, General Knowledge
+
+          news:
+          India, World, Technology, Sports, Entertainment, Trending
+
+          technology:
+          Technology, AI, Internet, Apps, Gadgets, Cyber Safety
+
+          mobile:
+          Android, Mobile Tips, Apps, Smartphones, Settings, Security
+
+          gaming:
+          Games, Gaming Tips, Esports, Mobile Gaming, Ludo, Cricket
+
+          entertainment:
+          Movies, Music, Web Series, Games, Fun, Celebrity News
+
+          dialogue:
+          Funny, Family, Friendship, Desi, Gaming, Motivational
+
+          internet:
+          Internet Tips, Social Media, Websites, Online Safety, Search
+
+          ai:
+          AI Tools, AI News, AI Tips, Productivity, Technology
+
+          tips:
+          Mobile Tips, Internet Tips, Gaming Tips, Daily Life, Technology
+
+          blog:
+          Gaming, Technology, Mobile, AI, Lifestyle, Internet, How-To
+
+          Generate a balanced mixture of these types.
+
+          Include current/recent topics where appropriate.
+
+          Every item must contain exactly these fields:
+
           type
           title
           category
           content
+          sourceNote
 
-          Use these categories:
+          sourceNote rules:
+          - For current/news/trending/search-grounded content, briefly mention the source/topic used.
+          - For jokes, shayari, bhakti, dialogue and evergreen original content, use:
+            "मौलिक सामग्री"
+          - Do not put URLs inside sourceNote.
 
-          jokes:
-          Funny, Desi, Friendship, Family
+          Content quality rules:
 
-          shayari:
-          Love, Friendship, Motivational, Life
+          1. Titles must be short and interesting.
+          2. Content must be easy Hindi.
+          3. Avoid unnecessary English.
+          4. Avoid fake breaking-news claims.
+          5. Avoid political persuasion.
+          6. Avoid hate, adult content and dangerous instructions.
+          7. Avoid medical misinformation.
+          8. Avoid financial promises or guaranteed earning claims.
+          9. Do not invent quotes from famous people.
+          10. Make every item substantially different.
+          11. Do not repeat the same joke or idea.
+          12. Make technology and mobile content genuinely useful.
+          13. Make blog content informative and readable.
+          14. Make knowledge content factually careful.
+          15. For current topics, clearly use recent information obtained through search grounding.
 
-          knowledge:
-          Science, Technology, India, Space, Animals
+          The website audience is primarily Indian users.
 
-          entertainment:
-          Movies, Music, Games, Fun
-
-          bhakti:
-          Prayer, Devotional, Spiritual, Festival
-
-          blog:
-          Gaming, Technology, Lifestyle, Tips
-
-          Generate exactly 12 items.
+          Generate exactly 18 items.
           `;
 
             const response = await fetch(url, {
@@ -100,27 +195,53 @@ jobs:
                     ]
                   }
                 ],
+
+                tools: [
+                  {
+                    google_search: {}
+                  }
+                ],
+
                 generationConfig: {
                   response_mime_type: "application/json",
+
                   response_schema: {
                     type: "array",
+
                     items: {
                       type: "object",
+
                       properties: {
-                        type: { type: "string" },
-                        title: { type: "string" },
-                        category: { type: "string" },
-                        content: { type: "string" }
+                        type: {
+                          type: "string"
+                        },
+
+                        title: {
+                          type: "string"
+                        },
+
+                        category: {
+                          type: "string"
+                        },
+
+                        content: {
+                          type: "string"
+                        },
+
+                        sourceNote: {
+                          type: "string"
+                        }
                       },
+
                       required: [
                         "type",
                         "title",
                         "category",
-                        "content"
+                        "content",
+                        "sourceNote"
                       ]
                     }
-                  },
-                  temperature: 0.9
+                  }
                 }
               })
             });
@@ -160,9 +281,17 @@ jobs:
             const allowedTypes = new Set([
               "jokes",
               "shayari",
-              "knowledge",
-              "entertainment",
               "bhakti",
+              "knowledge",
+              "news",
+              "technology",
+              "mobile",
+              "gaming",
+              "entertainment",
+              "dialogue",
+              "internet",
+              "ai",
+              "tips",
               "blog"
             ]);
 
@@ -172,17 +301,20 @@ jobs:
                 allowedTypes.has(item.type) &&
                 typeof item.title === "string" &&
                 typeof item.category === "string" &&
-                typeof item.content === "string"
+                typeof item.content === "string" &&
+                typeof item.sourceNote === "string"
               )
               .map(item => ({
                 type: item.type.trim(),
                 title: item.title.trim(),
                 category: item.category.trim(),
                 content: item.content.trim(),
+                sourceNote: item.sourceNote.trim(),
                 generatedAt: new Date().toISOString()
               }))
               .filter(item =>
-                item.title && item.content
+                item.title &&
+                item.content
               );
 
             if (cleanItems.length === 0) {
@@ -192,13 +324,18 @@ jobs:
 
             const file = "content/auto-content.json";
 
-            fs.mkdirSync("content", { recursive: true });
+            fs.mkdirSync("content", {
+              recursive: true
+            });
 
             let existing = [];
 
             if (fs.existsSync(file)) {
               try {
-                const raw = fs.readFileSync(file, "utf8");
+                const raw = fs.readFileSync(
+                  file,
+                  "utf8"
+                );
 
                 if (raw.trim()) {
                   const parsed = JSON.parse(raw);
@@ -208,7 +345,9 @@ jobs:
                   }
                 }
               } catch (error) {
-                console.log("Starting with empty content list.");
+                console.log(
+                  "Could not read existing content. Starting with empty list."
+                );
               }
             }
 
@@ -219,12 +358,16 @@ jobs:
 
             fs.writeFileSync(
               file,
-              JSON.stringify(finalContent, null, 2),
+              JSON.stringify(
+                finalContent,
+                null,
+                2
+              ),
               "utf8"
             );
 
             console.log(
-              `Added ${cleanItems.length} items. Total: ${finalContent.length}`
+              `Added ${cleanItems.length} Hindi items. Total: ${finalContent.length}`
             );
           }
 
@@ -247,5 +390,5 @@ jobs:
             exit 0
           fi
 
-          git commit -m "Generate daily GAMEZONE ARENA content"
+          git commit -m "Generate daily Hindi GAMEZONE ARENA content"
           git push
