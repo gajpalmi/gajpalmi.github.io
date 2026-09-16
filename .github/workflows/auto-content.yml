@@ -1,4 +1,4 @@
-name: GAMEZONE ARENA - Auto Content
+name: name: GAMEZONE ARENA - Auto Content
 
 on:
   workflow_dispatch:
