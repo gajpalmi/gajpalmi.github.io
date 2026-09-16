@@ -1,0 +1,225 @@
+name: GAMEZONE ARENA - Auto Content
+
+on:
+  workflow_dispatch:
+  schedule:
+    # रोज सुबह 9:00 बजे IST के आसपास
+    - cron: "30 3 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  generate-content:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v4
+
+      - name: Generate daily content with Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          node <<'NODE'
+          const fs = require("fs");
+
+          const API_KEY = process.env.GEMINI_API_KEY;
+
+          if (!API_KEY) {
+            throw new Error("GEMINI_API_KEY secret not found.");
+          }
+
+          const MODEL = "gemini-2.5-flash-lite";
+          const FILE = "content/auto-content.json";
+
+          fs.mkdirSync("content", { recursive: true });
+
+          let oldContent = [];
+
+          if (fs.existsSync(FILE)) {
+            try {
+              oldContent = JSON.parse(fs.readFileSync(FILE, "utf8"));
+              if (!Array.isArray(oldContent)) oldContent = [];
+            } catch {
+              oldContent = [];
+            }
+          }
+
+          const oldTitles = oldContent
+            .slice(-80)
+            .map(item => item.title)
+            .filter(Boolean);
+
+          const prompt = `
+          You are the automatic content writer for the Indian Hindi website
+          "GAMEZONE ARENA".
+
+          Generate fresh ORIGINAL Hindi content for today's website.
+
+          Create exactly:
+          2 jokes/chutkule
+          1 shayari
+          1 knowledge/suvichar item
+          1 bhakti item
+          1 original blog article
+
+          IMPORTANT:
+          - All content must be original.
+          - Do not copy poems, songs, articles, movie dialogues, or copyrighted text.
+          - Do not invent scripture quotations.
+          - Bhakti content should be an original devotional thought, prayer, or reflection.
+          - Knowledge content should avoid doubtful or unsupported claims.
+          - Blog should be useful, readable Hindi and completely original.
+          - Avoid political persuasion.
+          - Avoid adult/violent/offensive content.
+          - Make today's content different from previous titles.
+
+          Previous titles to avoid:
+          ${JSON.stringify(oldTitles)}
+
+          Return ONLY valid JSON.
+          Do not use markdown.
+          Do not put the JSON inside code fences.
+
+          Required JSON format:
+          [
+            {
+              "type": "joke",
+              "title": "title",
+              "category": "चुटकुले",
+              "content": "content"
+            },
+            {
+              "type": "shayari",
+              "title": "title",
+              "category": "शायरी",
+              "content": "content"
+            },
+            {
+              "type": "knowledge",
+              "title": "title",
+              "category": "ज्ञान",
+              "content": "content"
+            },
+            {
+              "type": "bhakti",
+              "title": "title",
+              "category": "भक्ति",
+              "content": "content"
+            },
+            {
+              "type": "blog",
+              "title": "title",
+              "category": "ब्लॉग",
+              "content": "content"
+            }
+          ]
+
+          For the blog, "content" should contain a complete useful article
+          of about 300-500 Hindi words.
+          `;
+
+          const response = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "x-goog-api-key": API_KEY
+              },
+              body: JSON.stringify({
+                contents: [
+                  {
+                    parts: [
+                      {
+                        text: prompt
+                      }
+                    ]
+                  }
+                ],
+                generationConfig: {
+                  temperature: 0.9,
+                  responseMimeType: "application/json"
+                }
+              })
+            }
+          );
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(
+              `Gemini API error ${response.status}: ${errorText}`
+            );
+          }
+
+          const data = await response.json();
+
+          const text =
+            data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+          if (!text) {
+            throw new Error("Gemini returned no content.");
+          }
+
+          let generated;
+
+          try {
+            generated = JSON.parse(text);
+          } catch {
+            const cleaned = text
+              .replace(/^```json\s*/i, "")
+              .replace(/^```\s*/i, "")
+              .replace(/\s*```$/i, "")
+              .trim();
+
+            generated = JSON.parse(cleaned);
+          }
+
+          if (!Array.isArray(generated) || generated.length === 0) {
+            throw new Error("Generated content is empty or invalid.");
+          }
+
+          const today = new Date().toISOString();
+
+          const newItems = generated.map((item, index) => ({
+            id: `auto-${Date.now()}-${index}`,
+            type: item.type,
+            title: item.title,
+            category: item.category || "",
+            content: item.content,
+            image: "",
+            video: "",
+            generatedAt: today
+          }));
+
+          const combined = [...oldContent, ...newItems];
+
+          // Keep the latest 180 items so the public JSON does not grow forever.
+          const finalContent = combined.slice(-180);
+
+          fs.writeFileSync(
+            FILE,
+            JSON.stringify(finalContent, null, 2),
+            "utf8"
+          );
+
+          console.log(
+            `Added ${newItems.length} new content items. Total: ${finalContent.length}`
+          );
+          NODE
+
+      - name: Commit new content
+        run: |
+          git config user.name "GAMEZONE ARENA Auto Content"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add content/auto-content.json
+
+          if git diff --cached --quiet; then
+            echo "No content changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Auto generate daily website content"
+          git push
