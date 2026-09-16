@@ -1,4 +1,4 @@
-name: GAMEZONE ARENA - Auto Content
+name: GAMEZONE ARENA Daily Content
 
 on:
   workflow_dispatch:
@@ -25,68 +25,66 @@ jobs:
           node <<'NODE'
           const fs = require("fs");
 
-          const API_KEY = process.env.GEMINI_API_KEY;
+          const apiKey = process.env.GEMINI_API_KEY;
 
-          if (!API_KEY) {
+          if (!apiKey) {
             console.error("GEMINI_API_KEY secret is missing.");
             process.exit(1);
           }
 
-          const MODEL = "gemini-2.5-flash-lite";
-          const URL =
-            `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
+          const model = "gemini-2.5-flash-lite";
+          const url =
+            `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
           const prompt = `
           You are the automatic content writer for the GAMEZONE ARENA website.
 
           Generate 12 fresh, original website content items in English.
 
-          IMPORTANT:
+          Rules:
+          - Family-friendly and safe.
           - Do not copy copyrighted text.
-          - Do not use quotations from famous people.
-          - Do not create misleading facts.
-          - Keep every item family-friendly and safe.
-          - Make every item different from the others.
-          - Return ONLY valid JSON matching the requested schema.
+          - Do not use famous-person quotations.
+          - Do not invent misleading facts.
           - Do not use Markdown.
-          - Content must be ready to display directly on a website.
+          - Return ONLY valid JSON.
+          - Make every item different.
 
-          Use these exact type values:
+          Allowed types:
+          jokes, shayari, knowledge, entertainment, bhakti, blog
 
-          1. jokes
-             Categories: Funny, Desi, Friendship, Family
+          Each item must contain exactly:
+          type
+          title
+          category
+          content
 
-          2. shayari
-             Categories: Love, Friendship, Motivational, Life
+          Use these categories:
 
-          3. knowledge
-             Categories: Science, Technology, India, Space, Animals
+          jokes:
+          Funny, Desi, Friendship, Family
 
-          4. entertainment
-             Categories: Movies, Music, Games, Fun
+          shayari:
+          Love, Friendship, Motivational, Life
 
-          5. bhakti
-             Categories: Prayer, Devotional, Spiritual, Festival
+          knowledge:
+          Science, Technology, India, Space, Animals
 
-          6. blog
-             Categories: Gaming, Technology, Lifestyle, Tips
+          entertainment:
+          Movies, Music, Games, Fun
 
-          Generate a balanced mixture of these types.
+          bhakti:
+          Prayer, Devotional, Spiritual, Festival
 
-          Each item must contain:
-          - type
-          - title
-          - category
-          - content
-
-          The content should be useful, readable and suitable for the GAMEZONE ARENA website.
+          blog:
+          Gaming, Technology, Lifestyle, Tips
           `;
 
-          const response = await fetch(URL, {
+          const response = await fetch(url, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "x-goog-api-key": API_KEY
+              "x-goog-api-key": apiKey
             },
             body: JSON.stringify({
               contents: [
@@ -94,3 +92,149 @@ jobs:
                   parts: [
                     {
                       text: prompt
+                    }
+                  ]
+                }
+              ],
+              generationConfig: {
+                response_mime_type: "application/json",
+                response_schema: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      type: { type: "string" },
+                      title: { type: "string" },
+                      category: { type: "string" },
+                      content: { type: "string" }
+                    },
+                    required: [
+                      "type",
+                      "title",
+                      "category",
+                      "content"
+                    ]
+                  }
+                },
+                temperature: 0.9
+              }
+            })
+          });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            console.error("Gemini API request failed:");
+            console.error(JSON.stringify(result, null, 2));
+            process.exit(1);
+          }
+
+          const text =
+            result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+          if (!text) {
+            console.error("Gemini returned no content.");
+            console.error(JSON.stringify(result, null, 2));
+            process.exit(1);
+          }
+
+          let items;
+
+          try {
+            items = JSON.parse(text);
+          } catch (error) {
+            console.error("Gemini returned invalid JSON.");
+            console.error(text);
+            process.exit(1);
+          }
+
+          if (!Array.isArray(items)) {
+            console.error("Gemini response is not an array.");
+            process.exit(1);
+          }
+
+          const allowedTypes = new Set([
+            "jokes",
+            "shayari",
+            "knowledge",
+            "entertainment",
+            "bhakti",
+            "blog"
+          ]);
+
+          const cleanItems = items
+            .filter(item =>
+              item &&
+              allowedTypes.has(item.type) &&
+              typeof item.title === "string" &&
+              typeof item.category === "string" &&
+              typeof item.content === "string"
+            )
+            .map(item => ({
+              type: item.type.trim(),
+              title: item.title.trim(),
+              category: item.category.trim(),
+              content: item.content.trim(),
+              generatedAt: new Date().toISOString()
+            }))
+            .filter(item =>
+              item.title && item.content
+            );
+
+          if (cleanItems.length === 0) {
+            console.error("No valid content was generated.");
+            process.exit(1);
+          }
+
+          const file = "content/auto-content.json";
+
+          fs.mkdirSync("content", { recursive: true });
+
+          let existing = [];
+
+          if (fs.existsSync(file)) {
+            try {
+              const raw = fs.readFileSync(file, "utf8");
+
+              if (raw.trim()) {
+                const parsed = JSON.parse(raw);
+
+                if (Array.isArray(parsed)) {
+                  existing = parsed;
+                }
+              }
+            } catch (error) {
+              console.log("Starting with empty content list.");
+            }
+          }
+
+          const finalContent = [
+            ...existing,
+            ...cleanItems
+          ];
+
+          fs.writeFileSync(
+            file,
+            JSON.stringify(finalContent, null, 2),
+            "utf8"
+          );
+
+          console.log(
+            `Added ${cleanItems.length} items. Total: ${finalContent.length}`
+          );
+          NODE
+
+      - name: Commit generated content
+        run: |
+          git config user.name "GAMEZONE ARENA Auto Content"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add content/auto-content.json
+
+          if git diff --cached --quiet; then
+            echo "No content changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Generate daily GAMEZONE ARENA content"
+          git push
