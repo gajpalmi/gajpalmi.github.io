@@ -25,18 +25,19 @@ jobs:
           node <<'NODE'
           const fs = require("fs");
 
-          const apiKey = process.env.GEMINI_API_KEY;
+          async function main() {
+            const apiKey = process.env.GEMINI_API_KEY;
 
-          if (!apiKey) {
-            console.error("GEMINI_API_KEY secret is missing.");
-            process.exit(1);
-          }
+            if (!apiKey) {
+              console.error("GEMINI_API_KEY secret is missing.");
+              process.exit(1);
+            }
 
-          const model = "gemini-2.5-flash-lite";
-          const url =
-            `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+            const model = "gemini-2.5-flash-lite";
+            const url =
+              `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
-          const prompt = `
+            const prompt = `
           You are the automatic content writer for the GAMEZONE ARENA website.
 
           Generate 12 fresh, original website content items in English.
@@ -80,148 +81,155 @@ jobs:
           Gaming, Technology, Lifestyle, Tips
           `;
 
-          const response = await fetch(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "x-goog-api-key": apiKey
-            },
-            body: JSON.stringify({
-              contents: [
-                {
-                  parts: [
-                    {
-                      text: prompt
-                    }
-                  ]
-                }
-              ],
-              generationConfig: {
-                response_mime_type: "application/json",
-                response_schema: {
-                  type: "array",
-                  items: {
-                    type: "object",
-                    properties: {
-                      type: { type: "string" },
-                      title: { type: "string" },
-                      category: { type: "string" },
-                      content: { type: "string" }
-                    },
-                    required: [
-                      "type",
-                      "title",
-                      "category",
-                      "content"
+            const response = await fetch(url, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "x-goog-api-key": apiKey
+              },
+              body: JSON.stringify({
+                contents: [
+                  {
+                    parts: [
+                      {
+                        text: prompt
+                      }
                     ]
                   }
-                },
-                temperature: 0.9
+                ],
+                generationConfig: {
+                  response_mime_type: "application/json",
+                  response_schema: {
+                    type: "array",
+                    items: {
+                      type: "object",
+                      properties: {
+                        type: { type: "string" },
+                        title: { type: "string" },
+                        category: { type: "string" },
+                        content: { type: "string" }
+                      },
+                      required: [
+                        "type",
+                        "title",
+                        "category",
+                        "content"
+                      ]
+                    }
+                  },
+                  temperature: 0.9
+                }
+              })
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+              console.error("Gemini API request failed:");
+              console.error(JSON.stringify(result, null, 2));
+              process.exit(1);
+            }
+
+            const text =
+              result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+            if (!text) {
+              console.error("Gemini returned no content.");
+              console.error(JSON.stringify(result, null, 2));
+              process.exit(1);
+            }
+
+            let items;
+
+            try {
+              items = JSON.parse(text);
+            } catch (error) {
+              console.error("Gemini returned invalid JSON.");
+              console.error(text);
+              process.exit(1);
+            }
+
+            if (!Array.isArray(items)) {
+              console.error("Gemini response is not an array.");
+              process.exit(1);
+            }
+
+            const allowedTypes = new Set([
+              "jokes",
+              "shayari",
+              "knowledge",
+              "entertainment",
+              "bhakti",
+              "blog"
+            ]);
+
+            const cleanItems = items
+              .filter(item =>
+                item &&
+                allowedTypes.has(item.type) &&
+                typeof item.title === "string" &&
+                typeof item.category === "string" &&
+                typeof item.content === "string"
+              )
+              .map(item => ({
+                type: item.type.trim(),
+                title: item.title.trim(),
+                category: item.category.trim(),
+                content: item.content.trim(),
+                generatedAt: new Date().toISOString()
+              }))
+              .filter(item =>
+                item.title && item.content
+              );
+
+            if (cleanItems.length === 0) {
+              console.error("No valid content was generated.");
+              process.exit(1);
+            }
+
+            const file = "content/auto-content.json";
+
+            fs.mkdirSync("content", { recursive: true });
+
+            let existing = [];
+
+            if (fs.existsSync(file)) {
+              try {
+                const raw = fs.readFileSync(file, "utf8");
+
+                if (raw.trim()) {
+                  const parsed = JSON.parse(raw);
+
+                  if (Array.isArray(parsed)) {
+                    existing = parsed;
+                  }
+                }
+              } catch (error) {
+                console.log("Starting with empty content list.");
               }
-            })
-          });
+            }
 
-          const result = await response.json();
+            const finalContent = [
+              ...existing,
+              ...cleanItems
+            ];
 
-          if (!response.ok) {
-            console.error("Gemini API request failed:");
-            console.error(JSON.stringify(result, null, 2));
-            process.exit(1);
-          }
-
-          const text =
-            result?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-          if (!text) {
-            console.error("Gemini returned no content.");
-            console.error(JSON.stringify(result, null, 2));
-            process.exit(1);
-          }
-
-          let items;
-
-          try {
-            items = JSON.parse(text);
-          } catch (error) {
-            console.error("Gemini returned invalid JSON.");
-            console.error(text);
-            process.exit(1);
-          }
-
-          if (!Array.isArray(items)) {
-            console.error("Gemini response is not an array.");
-            process.exit(1);
-          }
-
-          const allowedTypes = new Set([
-            "jokes",
-            "shayari",
-            "knowledge",
-            "entertainment",
-            "bhakti",
-            "blog"
-          ]);
-
-          const cleanItems = items
-            .filter(item =>
-              item &&
-              allowedTypes.has(item.type) &&
-              typeof item.title === "string" &&
-              typeof item.category === "string" &&
-              typeof item.content === "string"
-            )
-            .map(item => ({
-              type: item.type.trim(),
-              title: item.title.trim(),
-              category: item.category.trim(),
-              content: item.content.trim(),
-              generatedAt: new Date().toISOString()
-            }))
-            .filter(item =>
-              item.title && item.content
+            fs.writeFileSync(
+              file,
+              JSON.stringify(finalContent, null, 2),
+              "utf8"
             );
 
-          if (cleanItems.length === 0) {
-            console.error("No valid content was generated.");
+            console.log(
+              `Added ${cleanItems.length} items. Total: ${finalContent.length}`
+            );
+          }
+
+          main().catch(error => {
+            console.error("Workflow script failed:");
+            console.error(error);
             process.exit(1);
-          }
-
-          const file = "content/auto-content.json";
-
-          fs.mkdirSync("content", { recursive: true });
-
-          let existing = [];
-
-          if (fs.existsSync(file)) {
-            try {
-              const raw = fs.readFileSync(file, "utf8");
-
-              if (raw.trim()) {
-                const parsed = JSON.parse(raw);
-
-                if (Array.isArray(parsed)) {
-                  existing = parsed;
-                }
-              }
-            } catch (error) {
-              console.log("Starting with empty content list.");
-            }
-          }
-
-          const finalContent = [
-            ...existing,
-            ...cleanItems
-          ];
-
-          fs.writeFileSync(
-            file,
-            JSON.stringify(finalContent, null, 2),
-            "utf8"
-          );
-
-          console.log(
-            `Added ${cleanItems.length} items. Total: ${finalContent.length}`
-          );
+          });
           NODE
 
       - name: Commit generated content
