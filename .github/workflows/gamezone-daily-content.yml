@@ -1,815 +1,366 @@
-name: GAMEZONE ARENA Daily Hindi Content
+import fs from "node:fs";
+import path from "node:path";
 
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: "45 3 * * *"
+const API_KEY = process.env.GEMINI_API_KEY;
 
-permissions:
-  contents: write
+if (!API_KEY) {
+  throw new Error("GEMINI_API_KEY secret is missing.");
+}
 
-jobs:
-  generate-content:
-    runs-on: ubuntu-latest
+const MODEL = "gemini-3.5-flash-lite";
+const API_URL =
+  `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`;
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+const NEWS_URL =
+  "https://news.google.com/rss?hl=hi&gl=IN&ceid=IN:hi";
 
-      - name: Generate content
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          cat > generate.mjs <<'EOF'
-          import fs from "fs";
+function stripHtml(text) {
+  return text
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
-          const API_KEY = process.env.GEMINI_API_KEY;
+async function getNews() {
+  const response = await fetch(NEWS_URL);
 
-          if (!API_KEY) {
-            throw new Error("GEMINI_API_KEY secret is missing.");
-          }
+  if (!response.ok) {
+    throw new Error(`Google News request failed: ${response.status}`);
+  }
 
-          const NEWS_RSS =
-            "https://news.google.com/rss?hl=hi&gl=IN&ceid=IN:hi";
+  const xml = await response.text();
 
-          const SITE_URL =
-            "https://gajpalmi.github.io";
+  const items = [];
+  const matches = xml.matchAll(/<item>([\s\S]*?)<\/item>/g);
 
-          function cleanText(value) {
-            return String(value ?? "").trim();
-          }
+  for (const match of matches) {
+    const block = match[1];
+    const titleMatch = block.match(/<title>([\s\S]*?)<\/title>/);
 
-          function decodeHtml(text) {
-            return String(text)
-              .replace(/<!\[CDATA\[(.*?)\]\]>/gs, "$1")
-              .replace(/&amp;/g, "&")
-              .replace(/&quot;/g, '"')
-              .replace(/&#39;/g, "'")
-              .replace(/&lt;/g, "<")
-              .replace(/&gt;/g, ">");
-          }
+    if (titleMatch) {
+      const title = stripHtml(titleMatch[1]);
 
-          function escapeHtml(value) {
-            return String(value ?? "")
-              .replace(/&/g, "&amp;")
-              .replace(/</g, "&lt;")
-              .replace(/>/g, "&gt;")
-              .replace(/"/g, "&quot;")
-              .replace(/'/g, "&#039;");
-          }
+      if (title && !items.includes(title)) {
+        items.push(title);
+      }
+    }
 
-          function escapeXml(value) {
-            return String(value ?? "")
-              .replace(/&/g, "&amp;")
-              .replace(/</g, "&lt;")
-              .replace(/>/g, "&gt;")
-              .replace(/"/g, "&quot;")
-              .replace(/'/g, "&apos;");
-          }
+    if (items.length >= 15) break;
+  }
 
-          function slugify(text) {
-            const value = cleanText(text);
+  return items;
+}
 
-            const slug = value
-              .toLowerCase()
-              .replace(/[^\p{L}\p{N}]+/gu, "-")
-              .replace(/^-+|-+$/g, "")
-              .slice(0, 80);
+async function generateContent(news) {
+  const newsText =
+    news.length > 0
+      ? news.map((x, i) => `${i + 1}. ${x}`).join("\n")
+      : "आज के समाचार उपलब्ध नहीं हैं।";
 
-            return slug || "gamezone-arena-content";
-          }
+  const prompt = `
+तुम GAMEZONE ARENA वेबसाइट के लिए रोज़ नई हिंदी सामग्री तैयार करने वाले संपादक हो।
 
-          async function getNews() {
-            try {
-              const response = await fetch(NEWS_RSS);
+सारी user-facing सामग्री मुख्य रूप से सरल और स्वाभाविक हिंदी देवनागरी में हो।
 
-              if (!response.ok) {
-                throw new Error(
-                  `Google News HTTP ${response.status}`
-                );
-              }
+आज के current topics के लिए नीचे दिए Google News India headlines को केवल संदर्भ की तरह इस्तेमाल करो:
 
-              const xml = await response.text();
+${newsText}
 
-              const titles = [
-                ...xml.matchAll(
-                  /<title>(.*?)<\/title>/gis
-                )
-              ]
-                .map((match) =>
-                  decodeHtml(match[1]).trim()
-                )
-                .filter(Boolean)
-                .slice(1, 16);
+कुल 20 अलग-अलग सामग्री तैयार करो।
 
-              console.log(
-                `Found ${titles.length} news topics.`
-              );
+इन विषयों को मिलाकर सामग्री बनाओ:
 
-              return titles;
-            } catch (error) {
-              console.log(
-                "News unavailable:",
-                error.message
-              );
+1. हिंदी चुटकुले
+2. मजेदार संवाद
+3. सुविचार
+4. हिंदी शायरी
+5. प्रेम शायरी
+6. दोस्ती शायरी
+7. भक्ति
+8. भजन/कीर्तन से संबंधित मौलिक जानकारी
+9. ज्ञान
+10. सामान्य ज्ञान
+11. मोबाइल
+12. इंटरनेट
+13. AI
+14. Google और technology
+15. gaming
+16. blogging
+17. आज के current topics/news से संबंधित सरल जानकारी
+18. उपयोगी how-to जानकारी
+19. मनोरंजन
+20. trending search topics
 
-              return [];
-            }
-          }
+महत्वपूर्ण नियम:
 
-          async function askGemini(newsTitles) {
-            const today =
-              new Date().toISOString();
+- झूठी खबर मत बनाओ।
+- current news में केवल दिए गए headlines से प्रेरित सामान्य जानकारी दो।
+- किसी व्यक्ति या संस्था पर बिना आधार आरोप मत लगाओ।
+- भक्ति सामग्री सम्मानजनक रखो।
+- मौलिक सामग्री लिखो।
+- किसी वेबसाइट का पूरा article copy मत करो।
+- हर item दूसरे item से अलग हो।
+- content इतना छोटा न हो कि Read More बेकार हो जाए।
+- प्रत्येक article के लिए पूरा उपयोगी content दो।
+- SEO के लिए keywords भी दो।
 
-            const newsContext =
-              newsTitles.length > 0
-                ? newsTitles
-                    .map(
-                      (title, index) =>
-                        `${index + 1}. ${title}`
-                    )
-                    .join("\n")
-                : "कोई current headline उपलब्ध नहीं है।";
+केवल valid JSON लौटाओ।
+Markdown मत लौटाओ।
+JSON के बाहर कोई text मत लिखो।
 
-            const prompt = `
-तुम GAMEZONE ARENA वेबसाइट के professional Hindi content editor हो।
+JSON format:
 
-आज की date/time:
-${today}
-
-Current Google News India Hindi topics:
-
-${newsContext}
-
-हर दिन लगभग 20 अलग-अलग नई सामग्री बनाओ।
-
-मुख्य भाषा:
-Hindi Devanagari.
-
-जरूरत पड़ने पर common English technical terms रख सकते हो।
-
-किसी दूसरी वेबसाइट का article copy नहीं करना है।
-
-Google News headlines को केवल topic idea की तरह इस्तेमाल करना है।
-
-Headline में जो जानकारी उपलब्ध नहीं है उसे invent नहीं करना है।
-
-Current news में केवल उपलब्ध जानकारी के आधार पर सावधानी से लिखना है।
-
-इन topics को मिलाकर content बनाओ:
-
-jokes
-shayari
-bhakti
-bhajan
-kirtan
-knowledge
-facts
-motivation
-technology
-mobile
-Android
-Google
-internet
-AI
-gaming
-apps
-social-media
-entertainment
-cricket
-sports
-education
-health-and-lifestyle
-tips
-how-to
-blogging
-digital
-cybersecurity-awareness
-current-news
-trending-topics
-dialogue
-family
-festival
-interesting-facts
-
-Search-friendly topics भी शामिल करो:
-
-मोबाइल में कैसे करें
-Android में कैसे करें
-Google में कैसे करें
-AI कैसे इस्तेमाल करें
-AI tools
-Internet tips
-Mobile tips
-Android tips
-Google tips
-Gaming tips
-Blogging tips
-Online safety
-Digital safety
-Technology explainers
-Apps की जानकारी
-YouTube basics
-Social media tips
-
-Health content में केवल general educational information देना है।
-Personal diagnosis या personal medical advice नहीं देना है।
-
-Cybersecurity content awareness और safety education पर आधारित होना चाहिए।
-
-हर item में exactly ये fields रखो:
-
-type
-category
-title
-slug
-excerpt
-content
-readMoreContent
-keywords
-seoTitle
-metaDescription
-sourceNote
-datePublished
-
-Rules:
-
-title छोटा और साफ हो।
-
-excerpt 1-2 lines का हो।
-
-content छोटा मुख्य article हो।
-
-readMoreContent पूरा detailed article हो।
-
-Read More article में जरूरत के अनुसार:
-परिचय
-मुख्य जानकारी
-आसान explanation
-examples
-practical tips
-सावधानियाँ
-conclusion
-
-keywords में 5-10 natural search phrases हों।
-
-seoTitle लगभग 50-60 characters का हो।
-
-metaDescription लगभग 120-160 characters की हो।
-
-Evergreen content के लिए sourceNote:
-मौलिक सामग्री
-
-Current topic के लिए sourceNote:
-Google News India के current topic से प्रेरित
-
-Jokes original हों।
-Shayari original हो।
-Bhakti content original हो।
-Bhajan/kirtan content original हो।
-Knowledge useful हो।
-Technology practical हो।
-Mobile और Android tips practical हों।
-AI content beginner-friendly हो।
-Gaming content useful हो।
-Blogging content useful हो।
-
-एक ही topic को repeat मत करो।
-
-Clickbait मत बनाओ।
-
-झूठे claims मत बनाओ।
-
-अंत में केवल valid JSON array दो।
-
-Markdown मत दो।
-```json मत दो।
-कोई extra explanation मत दो।
+{
+  "items": [
+    {
+      "type": "jokes",
+      "category": "Funny",
+      "title": "शीर्षक",
+      "excerpt": "छोटा परिचय",
+      "content": "पूरा लेख",
+      "readMoreContent": "पूरा विस्तृत लेख",
+      "keywords": ["हिंदी", "गेमिंग", "ज्ञान"],
+      "seoTitle": "SEO शीर्षक",
+      "metaDescription": "Meta description",
+      "sourceNote": "मौलिक सामग्री"
+    }
+  ]
+}
 `;
 
-            const url =
-              "https://generativelanguage.googleapis.com/v1beta/models/" +
-              "gemini-3.5-flash-lite:generateContent?key=" +
-              encodeURIComponent(API_KEY);
-
-            const response = await fetch(url, {
-              method: "POST",
-              headers: {
-                "Content-Type":
-                  "application/json"
-              },
-              body: JSON.stringify({
-                contents: [
-                  {
-                    parts: [
-                      {
-                        text: prompt
-                      }
-                    ]
-                  }
-                ],
-                generationConfig: {
-                  temperature: 0.8,
-                  maxOutputTokens: 20000,
-                  responseMimeType:
-                    "application/json"
-                }
-              })
-            });
-
-            const raw =
-              await response.text();
-
-            if (!response.ok) {
-              throw new Error(
-                `Gemini API ${response.status}: ${raw}`
-              );
-            }
-
-            const data =
-              JSON.parse(raw);
-
-            const text =
-              data?.candidates?.[0]?.content?.parts
-                ?.map(
-                  (part) =>
-                    part.text || ""
-                )
-                .join("")
-                .trim();
-
-            if (!text) {
-              throw new Error(
-                "Gemini returned empty content."
-              );
-            }
-
-            const cleaned =
-              text
-                .replace(
-                  /^```json\s*/i,
-                  ""
-                )
-                .replace(
-                  /^```\s*/i,
-                  ""
-                )
-                .replace(
-                  /\s*```$/i,
-                  ""
-                )
-                .trim();
-
-            const result =
-              JSON.parse(cleaned);
-
-            if (
-              !Array.isArray(result)
-            ) {
-              throw new Error(
-                "Gemini did not return a JSON array."
-              );
-            }
-
-            return result;
+  const body = {
+    contents: [
+      {
+        parts: [
+          {
+            text: prompt
           }
+        ]
+      }
+    ],
+    generationConfig: {
+      temperature: 0.9,
+      responseMimeType: "application/json"
+    }
+  };
 
-          function makeArticle(item) {
-            const articleUrl =
-              `${SITE_URL}/articles/${item.slug}/`;
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  });
 
-            const jsonLd = {
-              "@context":
-                "https://schema.org",
-              "@type":
-                item.type === "current-news"
-                  ? "NewsArticle"
-                  : "BlogPosting",
-              "headline":
-                item.title,
-              "description":
-                item.metaDescription,
-              "datePublished":
-                item.datePublished,
-              "dateModified":
-                item.datePublished,
-              "inLanguage":
-                "hi-IN",
-              "author": {
-                "@type":
-                  "Organization",
-                "name":
-                  "GAMEZONE ARENA"
-              },
-              "mainEntityOfPage": {
-                "@type":
-                  "WebPage",
-                "@id":
-                  articleUrl
-              }
-            };
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(
+      `Gemini API failed: ${response.status}\n${errorText}`
+    );
+  }
 
-            return `<!DOCTYPE html>
+  const data = await response.json();
+
+  const text =
+    data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+  if (!text) {
+    throw new Error("Gemini returned empty content.");
+  }
+
+  return JSON.parse(text);
+}
+
+function slugify(text) {
+  return text
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s-]/gu, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .slice(0, 100);
+}
+
+function escapeHtml(text) {
+  return String(text ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function createArticle(item, date) {
+  const slug =
+    item.slug ||
+    `${slugify(item.title)}-${Date.now()}`;
+
+  const dir = path.join("articles", slug);
+  fs.mkdirSync(dir, { recursive: true });
+
+  const html = `<!doctype html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>${escapeHtml(item.seoTitle)}</title>
-
-<meta
-  name="description"
-  content="${escapeHtml(item.metaDescription)}"
->
-
-<meta
-  name="robots"
-  content="index,follow"
->
-
-<link
-  rel="canonical"
-  href="${escapeHtml(articleUrl)}"
->
-
-<script type="application/ld+json">
-${JSON.stringify(jsonLd, null, 2)}
-</script>
-
-<style>
-body {
-  margin: 0;
-  padding: 0;
-  background: #0b0f14;
-  color: #ffffff;
-  font-family: Arial, sans-serif;
-  line-height: 1.8;
-}
-
-article {
-  max-width: 850px;
-  margin: auto;
-  padding: 24px;
-}
-
-h1 {
-  line-height: 1.4;
-}
-
-.meta {
-  opacity: 0.7;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-.excerpt {
-  font-size: 18px;
-  margin: 20px 0;
-}
-
-.content {
-  white-space: pre-wrap;
-  font-size: 17px;
-}
-
-a {
-  color: #5de6ff;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-hr {
-  margin: 35px 0;
-  opacity: 0.2;
-}
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${escapeHtml(item.seoTitle || item.title)}</title>
+<meta name="description" content="${escapeHtml(item.metaDescription || item.excerpt || "")}">
+<meta name="robots" content="index,follow">
 </head>
-
 <body>
-
-<article>
-
-<p>
-<a href="${SITE_URL}/">
-← GAMEZONE ARENA पर वापस जाएँ
-</a>
-</p>
-
+<main>
 <h1>${escapeHtml(item.title)}</h1>
 
-<div class="meta">
-${escapeHtml(item.category)}
-·
-${escapeHtml(item.datePublished)}
-</div>
+<p>${escapeHtml(item.excerpt || "")}</p>
 
-<div class="excerpt">
-${escapeHtml(item.excerpt)}
-</div>
+<article>
+${escapeHtml(item.content || "").replace(/\n/g, "<br><br>")}
 
-<div class="content">
-${escapeHtml(item.readMoreContent)}
-</div>
+<br><br>
 
-<hr>
-
-<p>
-${escapeHtml(item.sourceNote)}
-</p>
-
-<p>
-© GAMEZONE ARENA
-</p>
-
+${escapeHtml(item.readMoreContent || "").replace(/\n/g, "<br><br>")}
 </article>
 
+<p><small>${escapeHtml(item.sourceNote || "मौलिक सामग्री")}</small></p>
+
+<p><a href="/">← GAMEZONE ARENA पर वापस जाएँ</a></p>
+</main>
 </body>
 </html>`;
-          }
 
-          async function main() {
-            const news =
-              await getNews();
+  fs.writeFileSync(
+    path.join(dir, "index.html"),
+    html,
+    "utf8"
+  );
 
-            const generated =
-              await askGemini(news);
+  return slug;
+}
 
-            const now =
-              new Date();
+async function main() {
+  console.log("Getting current Google News headlines...");
 
-            const newItems =
-              generated
-                .slice(0, 20)
-                .map(
-                  (item, index) => {
-                    const title =
-                      cleanText(
-                        item?.title
-                      ) ||
-                      `GAMEZONE ARENA Content ${index + 1}`;
+  const news = await getNews();
 
-                    const content =
-                      cleanText(
-                        item?.content
-                      );
+  console.log(`News headlines found: ${news.length}`);
 
-                    const readMore =
-                      cleanText(
-                        item?.readMoreContent
-                      ) ||
-                      content;
+  console.log("Generating Hindi content...");
 
-                    return {
-                      type:
-                        cleanText(
-                          item?.type
-                        ) ||
-                        "knowledge",
+  const result = await generateContent(news);
 
-                      category:
-                        cleanText(
-                          item?.category
-                        ) ||
-                        "Hindi",
+  if (!Array.isArray(result.items)) {
+    throw new Error("Gemini JSON does not contain items array.");
+  }
 
-                      title,
+  const today = new Date().toISOString();
 
-                      slug:
-                        `${slugify(
-                          item?.slug ||
-                          title
-                        )}-${now.getTime()}-${index + 1}`,
+  const newItems = result.items.map((item) => ({
+    ...item,
+    datePublished: today
+  }));
 
-                      excerpt:
-                        cleanText(
-                          item?.excerpt
-                        ),
+  const contentDir = "content";
+  fs.mkdirSync(contentDir, { recursive: true });
 
-                      content,
+  const jsonFile = path.join(
+    contentDir,
+    "auto-content.json"
+  );
 
-                      readMoreContent:
-                        readMore,
+  let oldItems = [];
 
-                      keywords:
-                        Array.isArray(
-                          item?.keywords
-                        )
-                          ? item.keywords
-                              .map(
-                                (x) =>
-                                  cleanText(x)
-                              )
-                              .filter(Boolean)
-                              .slice(0, 10)
-                          : [],
+  if (fs.existsSync(jsonFile)) {
+    try {
+      const oldData = JSON.parse(
+        fs.readFileSync(jsonFile, "utf8")
+      );
 
-                      seoTitle:
-                        cleanText(
-                          item?.seoTitle
-                        ) ||
-                        title,
+      if (Array.isArray(oldData)) {
+        oldItems = oldData;
+      } else if (Array.isArray(oldData.items)) {
+        oldItems = oldData.items;
+      }
+    } catch {
+      console.log("Existing JSON could not be read. Starting fresh.");
+    }
+  }
 
-                      metaDescription:
-                        cleanText(
-                          item?.metaDescription
-                        ) ||
-                        cleanText(
-                          item?.excerpt
-                        ) ||
-                        title,
+  const combined = [
+    ...newItems,
+    ...oldItems
+  ].slice(0, 300);
 
-                      sourceNote:
-                        cleanText(
-                          item?.sourceNote
-                        ) ||
-                        "मौलिक सामग्री",
+  fs.writeFileSync(
+    jsonFile,
+    JSON.stringify(combined, null, 2),
+    "utf8"
+  );
 
-                      datePublished:
-                        now.toISOString()
-                    };
-                  }
-                );
+  console.log(
+    `Saved ${newItems.length} new items. Total stored: ${combined.length}`
+  );
 
-            if (
-              newItems.length === 0
-            ) {
-              throw new Error(
-                "No content generated."
-              );
-            }
+  for (const item of newItems) {
+    createArticle(item, today);
+  }
 
-            fs.mkdirSync(
-              "content",
-              {
-                recursive: true
-              }
-            );
+  const siteUrl = "https://gajpalmi.github.io/";
 
-            const file =
-              "content/auto-content.json";
+  const urls = [];
 
-            let oldItems = [];
+  for (const item of combined) {
+    if (item.title) {
+      const slug =
+        item.slug ||
+        slugify(item.title);
 
-            if (
-              fs.existsSync(file)
-            ) {
-              try {
-                const old =
-                  JSON.parse(
-                    fs.readFileSync(
-                      file,
-                      "utf8"
-                    )
-                  );
+      urls.push(
+        `${siteUrl}articles/${slug}/`
+      );
+    }
+  }
 
-                if (
-                  Array.isArray(old)
-                ) {
-                  oldItems = old;
-                } else if (
-                  Array.isArray(
-                    old?.items
-                  )
-                ) {
-                  oldItems =
-                    old.items;
-                }
-              } catch {
-                oldItems = [];
-              }
-            }
+  const sitemapUrls = urls
+    .map(
+      (url) =>
+        `  <url><loc>${escapeHtml(url)}</loc></url>`
+    )
+    .join("\n");
 
-            const allItems = [
-              ...newItems,
-              ...oldItems
-            ].slice(0, 300);
-
-            fs.writeFileSync(
-              file,
-              JSON.stringify(
-                {
-                  generatedAt:
-                    now.toISOString(),
-                  count:
-                    allItems.length,
-                  items:
-                    allItems
-                },
-                null,
-                2
-              )
-            );
-
-            console.log(
-              `Saved ${allItems.length} total content items.`
-            );
-
-            fs.mkdirSync(
-              "articles",
-              {
-                recursive: true
-              }
-            );
-
-            const urls = [];
-
-            for (
-              const item of newItems
-            ) {
-              const directory =
-                `articles/${item.slug}`;
-
-              fs.mkdirSync(
-                directory,
-                {
-                  recursive: true
-                }
-              );
-
-              const url =
-                `${SITE_URL}/articles/${item.slug}/`;
-
-              urls.push(url);
-
-              fs.writeFileSync(
-                `${directory}/index.html`,
-                makeArticle(item)
-              );
-            }
-
-            const sitemapUrls = [
-              `${SITE_URL}/`,
-              ...urls
-            ];
-
-            const sitemap =
-              `<?xml version="1.0" encoding="UTF-8"?>
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemapUrls
-  .map(
-    (url) =>
-      `<url>
-<loc>${escapeXml(url)}</loc>
-<lastmod>${now.toISOString()}</lastmod>
-</url>`
-  )
-  .join("\n")}
+  <url>
+    <loc>${siteUrl}</loc>
+  </url>
+${sitemapUrls}
 </urlset>`;
 
-            fs.writeFileSync(
-              "sitemap.xml",
-              sitemap
-            );
+  fs.writeFileSync(
+    "sitemap.xml",
+    sitemap,
+    "utf8"
+  );
 
-            fs.writeFileSync(
-              "robots.txt",
-              `User-agent: *
+  fs.writeFileSync(
+    "robots.txt",
+    `User-agent: *
 Allow: /
 
-Sitemap: ${SITE_URL}/sitemap.xml
-`
-            );
+Sitemap: ${siteUrl}sitemap.xml
+`,
+    "utf8"
+  );
 
-            console.log(
-              `Created ${urls.length} article pages.`
-            );
+  console.log("Content generation completed successfully.");
+}
 
-            console.log(
-              "Daily content generation completed."
-            );
-          }
-
-          main().catch(
-            (error) => {
-              console.error(
-                "WORKFLOW ERROR:"
-              );
-              console.error(error);
-              process.exit(1);
-            }
-          );
-          EOF
-
-          node generate.mjs
-
-      - name: Commit generated content
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add content/auto-content.json
-          git add articles
-          git add sitemap.xml
-          git add robots.txt
-
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-            exit 0
-          fi
-
-          git commit -m "auto: daily Hindi content update"
-
-          git push
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
