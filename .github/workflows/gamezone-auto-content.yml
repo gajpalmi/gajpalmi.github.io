@@ -1,11 +1,73 @@
-name: GAMEZONE ARENA Test
+name: GAMEZONE ARENA Gemini Test
 
 "on":
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  test:
+  test-gemini:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Test
-        run: echo "WORKFLOW OK"
+      - name: Test Gemini API
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          node <<'NODE'
+          async function main() {
+            const apiKey = process.env.GEMINI_API_KEY;
+
+            if (!apiKey) {
+              throw new Error("GEMINI_API_KEY secret is missing.");
+            }
+
+            const model = "gemini-2.5-flash-lite";
+
+            const url =
+              `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+
+            const response = await fetch(url, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "x-goog-api-key": apiKey
+              },
+              body: JSON.stringify({
+                contents: [
+                  {
+                    parts: [
+                      {
+                        text: "Reply with exactly this Hindi sentence: नमस्ते GAMEZONE ARENA"
+                      }
+                    ]
+                  }
+                ]
+              })
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+              console.error(JSON.stringify(result, null, 2));
+              process.exit(1);
+            }
+
+            const text =
+              result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+            if (!text) {
+              console.error(JSON.stringify(result, null, 2));
+              process.exit(1);
+            }
+
+            console.log("GEMINI TEST SUCCESS");
+            console.log(text);
+          }
+
+          main().catch(error => {
+            console.error(error.message);
+            process.exit(1);
+          });
+          NODE
