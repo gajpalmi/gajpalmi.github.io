@@ -2,30 +2,25 @@ name: GAMEZONE ARENA Daily Hindi Content
 
 "on":
   workflow_dispatch:
-
   schedule:
     - cron: "45 3 * * *"
 
 permissions:
   contents: write
 
-concurrency:
-  group: gamezone-arena-daily-content
-  cancel-in-progress: false
-
 jobs:
-  generate-content:
+  generate:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate Hindi content
+      - name: Generate content
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          python3 <<'PY'
+          python3 - <<'PY'
           import os
           import json
           import re
@@ -41,92 +36,123 @@ jobs:
           API = "https://generativelanguage.googleapis.com/v1beta/models/" + MODEL + ":generateContent"
           RSS = "https://news.google.com/rss?hl=hi&gl=IN&ceid=IN:hi"
           FILE = "content/auto-content.json"
-          LOGDIR = "content/logs"
+          LOG = "content/logs"
 
           def clean(x):
               x = html.unescape(str(x or ""))
-              x = re.sub(r"<!\[CDATA\[(.*?)\]\]>", r"\1", x, flags=re.S)
               x = re.sub(r"<[^>]+>", " ", x)
-              return re.sub(r"\s+", " ", x).strip()
+              x = re.sub(r"\s+", " ", x)
+              return x.strip()
 
-          def news():
+          def get_news():
               try:
                   req = urllib.request.Request(
                       RSS,
-                      headers={"User-Agent": "GAMEZONE-ARENA-Auto-Content/1.0"}
+                      headers={"User-Agent": "GAMEZONE-ARENA/1.0"}
                   )
-                  xml = urllib.request.urlopen(req, timeout=20).read().decode("utf-8")
-                  out = []
-                  for block in re.findall(r"<item>(.*?)</item>", xml, re.S)[:15]:
+                  data = urllib.request.urlopen(req, timeout=20).read().decode("utf-8")
+                  result = []
+
+                  for block in re.findall(r"<item>(.*?)</item>", data, re.S)[:15]:
                       m = re.search(r"<title>(.*?)</title>", block, re.S)
-                      l = re.search(r"<link>(.*?)</link>", block, re.S)
-                      if m:
-                          title = clean(m.group(1))
-                          if title and title.lower() not in [x["title"].lower() for x in out]:
-                              out.append({
-                                  "title": title,
-                                  "link": clean(l.group(1)) if l else ""
-                              })
-                  return out
+                      u = re.search(r"<link>(.*?)</link>", block, re.S)
+
+                      if not m:
+                          continue
+
+                      title = clean(m.group(1))
+                      link = clean(u.group(1)) if u else ""
+
+                      if title and title.lower() not in [x["title"].lower() for x in result]:
+                          result.append({
+                              "title": title,
+                              "link": link
+                          })
+
+                  return result
+
               except Exception as e:
-                  print("News RSS unavailable:", e)
+                  print("News unavailable:", e)
                   return []
 
-          topics = news()
+          news = get_news()
 
-          topic_text = "\n".join(
-              f"- {x['title']} | {x['link']}"
-              for x in topics
+          news_text = "\n".join(
+              "- " + x["title"] + " | " + x["link"]
+              for x in news
           )
 
-          prompt = f"""
-आप GAMEZONE ARENA वेबसाइट के automatic Hindi editor हैं।
+          prompt = """
+आप GAMEZONE ARENA वेबसाइट के automatic Hindi content editor हैं।
 
-EXACTLY 20 अलग-अलग COMPLETE items बनाइए।
+20 अलग-अलग COMPLETE सामग्री तैयार करें।
 
-सभी user-facing सामग्री सरल हिंदी देवनागरी में हो।
-Technical terms जरूरत के अनुसार English में रह सकते हैं।
+मुख्य भाषा सरल हिंदी देवनागरी हो।
 
-CURRENT GOOGLE NEWS INDIA TOPICS:
-{topic_text or "कोई current news उपलब्ध नहीं है। Current news invent न करें।"}
+विषयों में variety रखें:
 
-इन सभी विषयों में अच्छी variety रखें:
-चुटकुले, मजेदार संवाद, सुविचार, motivation,
-प्रेम शायरी, दोस्ती शायरी, जीवन शायरी,
-भक्ति, भजन, कीर्तन, आध्यात्मिक जानकारी,
-ज्ञान, सामान्य ज्ञान, current news, trends,
-mobile, Android, internet, online safety,
-AI, Google, technology, apps, gadgets,
-gaming, Ludo, cricket gaming, gaming tips,
-blogging, SEO, website, how-to और entertainment।
+हिंदी चुटकुले
+मजेदार संवाद
+सुविचार
+Motivation
+प्रेम शायरी
+दोस्ती शायरी
+जीवन शायरी
+भक्ति
+भजन
+कीर्तन
+आध्यात्मिक जानकारी
+ज्ञान
+सामान्य ज्ञान
+Current News
+Current Trends
+Mobile
+Android
+Internet
+Online Safety
+AI
+Google
+Technology
+Apps
+Gadgets
+Gaming
+Ludo
+Cricket Gaming
+Gaming Tips
+Blogging
+SEO
+Website
+How-To
+Entertainment
 
-हर item COMPLETE होना चाहिए।
-सिर्फ headline, teaser, अधूरा paragraph या placeholder नहीं।
+हर content पूरा और पढ़ने योग्य हो।
 
-लगभग ये minimum रखें:
-Jokes: 80-160 शब्द
-Dialogue: 100-200 शब्द
-Bhakti/Bhajan/Kirtan: 150-350 शब्द
-Knowledge: 220-400 शब्द
-Technology/Mobile/AI/Internet/Gaming: 250-500 शब्द
-Blog/SEO/Website/How-To: 300-600 शब्द
+सिर्फ headline या अधूरा paragraph नहीं।
 
-Current news के लिए केवल दिए गए source topics का उपयोग करें।
-Source में जो नहीं है उसे fact की तरह invent न करें।
-Fake names, fake numbers, fake quotes, fake dates और fake allegations नहीं।
+Jokes लगभग 80-160 शब्द।
+Dialogue लगभग 100-200 शब्द।
+Bhakti/Bhajan/Kirtan लगभग 150-350 शब्द।
+Knowledge लगभग 220-400 शब्द।
+Technology/Mobile/AI/Internet/Gaming लगभग 250-500 शब्द।
+Blog/SEO/Website/How-To लगभग 300-600 शब्द।
 
-Political topic हो तो neutral factual भाषा रखें।
-किसी party/candidate के पक्ष या विरोध में persuasion,
-ranking, winner/best/worst, motive speculation नहीं।
+Current News के लिए केवल उपलब्ध news topics का उपयोग करें।
+कोई fake fact, fake number, fake quote, fake date या fake allegation नहीं।
 
-Health या finance में diagnosis, guaranteed cure,
-guaranteed income/return या unsafe advice नहीं।
+Political विषय आने पर neutral factual भाषा रखें।
+किसी party/candidate के पक्ष या विरोध में persuasion नहीं।
+Winner/best/worst/ranking नहीं।
+Motive speculation नहीं।
+
+Health और finance में guaranteed cure, guaranteed income,
+guaranteed return या unsafe advice नहीं।
 
 Original jokes, shayari, dialogue और devotional content दें।
 Copyrighted भजन के पूरे lyrics copy न करें।
-किसी famous व्यक्ति के नाम से fake quote न बनाएं।
+Famous व्यक्ति के नाम से fake quote न बनाएं।
 
-हर item में ये fields अनिवार्य हैं:
+हर item में ये fields हों:
+
 type
 title
 category
@@ -140,44 +166,29 @@ sourceUrl
 keywords 3-8 रखें।
 metaDescription 160 characters से कम रखें।
 
-Current news/trends के लिए sourceNote:
-Google News India के current topic से प्रेरित
+Current news/trends:
+sourceNote = Google News India के current topic से प्रेरित
 
-बाकी original content के लिए:
-मौलिक सामग्री
+Original:
+sourceNote = मौलिक सामग्री
 
-Allowed type:
-jokes, shayari, suvichar, motivation, dialogue,
-bhakti, bhajan, kirtan, knowledge, news, trends,
-mobile, internet, ai, google, technology, apps,
-gadgets, gaming, entertainment, tips, blog, seo, website
+पूरा content content field में दें।
 
-कोई "Read More के लिए बाकी पढ़ें" जैसा अधूरा content नहीं।
-पूरा article content field में ही होना चाहिए।
-
-केवल JSON object दें:
-{{
-  "items": [
-    {{
-      "type": "jokes",
-      "title": "शीर्षक",
-      "category": "Funny",
-      "content": "पूरा content",
-      "keywords": ["हिंदी", "चुटकुले", "मजेदार"],
-      "seoTitle": "SEO title",
-      "metaDescription": "SEO description",
-      "sourceNote": "मौलिक सामग्री",
-      "sourceUrl": ""
-    }}
-  ]
-}}
+केवल JSON object दें।
 """
+
+          prompt += "\n\nCURRENT GOOGLE NEWS INDIA:\n" + (
+              news_text if news_text else
+              "आज current news उपलब्ध नहीं है। News invent न करें।"
+          )
 
           body = {
               "contents": [
                   {
                       "parts": [
-                          {"text": prompt}
+                          {
+                              "text": prompt
+                          }
                       ]
                   }
               ],
@@ -197,68 +208,44 @@ gadgets, gaming, entertainment, tips, blog, seo, website
               method="POST"
           )
 
-          with urllib.request.urlopen(req, timeout=180) as r:
-              result = json.loads(r.read().decode("utf-8"))
+          try:
+              response = urllib.request.urlopen(req, timeout=180)
+              result = json.loads(response.read().decode("utf-8"))
+          except Exception as e:
+              raise SystemExit("Gemini API error: " + str(e))
 
-          text = result["candidates"][0]["content"]["parts"][0]["text"]
-          data = json.loads(text)
-          generated = data.get("items", [])
+          try:
+              text = result["candidates"][0]["content"]["parts"][0]["text"]
+              data = json.loads(text)
+              items = data.get("items", [])
+          except Exception:
+              raise SystemExit("Gemini returned invalid JSON/content")
 
-          if len(generated) < 20:
-              raise SystemExit(
-                  f"Incomplete Gemini response: {len(generated)}/20 items"
-              )
+          if not isinstance(items, list):
+              raise SystemExit("Invalid items response")
 
-          def norm_type(x):
-              x = clean(x).lower()
-              aliases = {
-                  "joke": "jokes",
-                  "jokes": "jokes",
-                  "poetry": "shayari",
-                  "poem": "shayari",
-                  "shayari": "shayari",
-                  "dialogues": "dialogue",
-                  "dialogue": "dialogue",
-                  "suvichar": "suvichar",
-                  "motivation": "motivation",
-                  "bhakti": "bhakti",
-                  "bhajan": "bhajan",
-                  "kirtan": "kirtan",
-                  "gk": "knowledge",
-                  "knowledge": "knowledge",
-                  "news": "news",
-                  "trend": "trends",
-                  "trending": "trends",
-                  "trends": "trends",
-                  "android": "mobile",
-                  "mobile": "mobile",
-                  "internet": "internet",
-                  "ai": "ai",
-                  "google": "google",
-                  "tech": "technology",
-                  "technology": "technology",
-                  "app": "apps",
-                  "apps": "apps",
-                  "gadget": "gadgets",
-                  "gadgets": "gadgets",
-                  "game": "gaming",
-                  "gaming": "gaming",
-                  "ludo": "gaming",
-                  "entertainment": "entertainment",
-                  "tips": "tips",
-                  "how-to": "tips",
-                  "howto": "tips",
-                  "blog": "blog",
-                  "blogs": "blog",
-                  "seo": "seo",
-                  "website": "website"
-              }
-              return aliases.get(x, "blog")
+          new_items = []
 
-          now = datetime.now(timezone.utc).isoformat()
-          new = []
+          aliases = {
+              "joke": "jokes",
+              "poetry": "shayari",
+              "poem": "shayari",
+              "dialogues": "dialogue",
+              "gk": "knowledge",
+              "trend": "trends",
+              "trending": "trends",
+              "android": "mobile",
+              "tech": "technology",
+              "app": "apps",
+              "gadget": "gadgets",
+              "game": "gaming",
+              "ludo": "gaming",
+              "howto": "tips",
+              "how-to": "tips",
+              "blogs": "blog"
+          }
 
-          for item in generated[:20]:
+          for item in items[:20]:
               if not isinstance(item, dict):
                   continue
 
@@ -268,26 +255,39 @@ gadgets, gaming, entertainment, tips, blog, seo, website
               if not title or len(content) < 120:
                   continue
 
-              keywords = item.get("keywords", [])
-              if not isinstance(keywords, list):
-                  keywords = []
+              typ = clean(item.get("type")).lower()
+              typ = aliases.get(typ, typ)
 
-              new.append({
-                  "type": norm_type(item.get("type")),
+              new_items.append({
+                  "type": typ or "blog",
                   "title": title,
                   "category": clean(item.get("category")) or "General",
                   "content": content,
-                  "keywords": [clean(x) for x in keywords[:8] if clean(x)],
+                  "keywords": [
+                      clean(x)
+                      for x in item.get("keywords", [])
+                      if clean(x)
+                  ][:8],
                   "seoTitle": clean(item.get("seoTitle")) or title,
-                  "metaDescription": clean(item.get("metaDescription"))[:160],
-                  "sourceNote": clean(item.get("sourceNote")) or "मौलिक सामग्री",
-                  "sourceUrl": clean(item.get("sourceUrl")),
-                  "generatedAt": now
+                  "metaDescription": clean(
+                      item.get("metaDescription")
+                  )[:160],
+                  "sourceNote": clean(
+                      item.get("sourceNote")
+                  ) or "मौलिक सामग्री",
+                  "sourceUrl": clean(
+                      item.get("sourceUrl")
+                  ),
+                  "generatedAt": datetime.now(
+                      timezone.utc
+                  ).isoformat()
               })
 
-          if len(new) < 20:
+          if len(new_items) < 20:
               raise SystemExit(
-                  f"Only {len(new)} complete items remained after validation"
+                  "Incomplete content: only "
+                  + str(len(new_items))
+                  + " complete items generated"
               )
 
           try:
@@ -299,51 +299,77 @@ gadgets, gaming, entertainment, tips, blog, seo, website
           if not isinstance(old, list):
               old = []
 
-          seen = set()
           final = []
+          seen = set()
 
-          for item in new + old:
+          for item in new_items + old:
               key = clean(item.get("title")).lower()
+
               if not key or key in seen:
                   continue
+
               seen.add(key)
               final.append(item)
+
               if len(final) >= 300:
                   break
 
           os.makedirs("content", exist_ok=True)
+
           with open(FILE, "w", encoding="utf-8") as f:
-              json.dump(final, f, ensure_ascii=False, indent=2)
+              json.dump(
+                  final,
+                  f,
+                  ensure_ascii=False,
+                  indent=2
+              )
 
-          os.makedirs(LOGDIR, exist_ok=True)
-          today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          os.makedirs(LOG, exist_ok=True)
 
-          with open(f"{LOGDIR}/{today}.json", "w", encoding="utf-8") as f:
-              json.dump({
-                  "status": "success",
-                  "generatedAt": now,
-                  "model": MODEL,
-                  "newsTopics": len(topics),
-                  "newItems": len(new),
-                  "totalStored": len(final)
-              }, f, ensure_ascii=False, indent=2)
+          today = datetime.now(
+              timezone.utc
+          ).strftime("%Y-%m-%d")
 
-          print("SUCCESS")
-          print("News topics:", len(topics))
-          print("New complete items:", len(new))
+          with open(
+              LOG + "/" + today + ".json",
+              "w",
+              encoding="utf-8"
+          ) as f:
+              json.dump(
+                  {
+                      "status": "success",
+                      "model": MODEL,
+                      "newsTopics": len(news),
+                      "newItems": len(new_items),
+                      "totalStored": len(final),
+                      "generatedAt": datetime.now(
+                          timezone.utc
+                      ).isoformat()
+                  },
+                  f,
+                  ensure_ascii=False,
+                  indent=2
+              )
+
+          print("================================")
+          print("GAMEZONE ARENA CONTENT SUCCESS")
+          print("News topics:", len(news))
+          print("New items:", len(new_items))
           print("Total stored:", len(final))
+          print("================================")
           PY
 
-      - name: Commit generated content
+      - name: Commit content
         run: |
           git config user.name "GAMEZONE ARENA Auto Content"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add content/auto-content.json content/logs
 
           if git diff --cached --quiet; then
-            echo "No content changes."
+            echo "No changes to commit."
             exit 0
           fi
 
-          git commit -m "Generate daily Hindi GAMEZONE ARENA content"
+          git commit -m "Daily Hindi GAMEZONE ARENA content"
           git push
