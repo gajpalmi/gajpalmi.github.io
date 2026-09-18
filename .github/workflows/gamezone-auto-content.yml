@@ -1,20 +1,24 @@
-name: GAMEZONE ARENA Hindi Content Test
+name: GAMEZONE ARENA Daily Hindi Content
 
 "on":
   workflow_dispatch:
+  schedule:
+    - cron: "45 3 * * *"
 
 permissions:
   contents: write
 
 jobs:
-  test-content:
+  generate-content:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Generate Hindi content
+      - name: Generate daily Hindi content
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
@@ -30,16 +34,154 @@ jobs:
 
             const model = "gemini-3.5-flash-lite";
 
-            const url =
+            const apiUrl =
               `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
-            const prompt =
-              "Create exactly one original, family-friendly Hindi joke for a website. " +
-              "Write the title and content in Hindi Devanagari. " +
-              "Return JSON only in this format: " +
-              '{"title":"Hindi title","content":"Hindi joke","type":"jokes"}';
+            const newsUrl =
+              "https://news.google.com/rss?hl=hi&gl=IN&ceid=IN:hi";
 
-            const response = await fetch(url, {
+            async function getNews() {
+              const response = await fetch(newsUrl);
+
+              if (!response.ok) {
+                console.log("News feed unavailable.");
+                return [];
+              }
+
+              const xml = await response.text();
+              const items = [];
+              const matches = xml.matchAll(
+                /<item>([\s\S]*?)<\/item>/g
+              );
+
+              for (const match of matches) {
+                const block = match[1];
+
+                const titleMatch = block.match(
+                  /<title>([\s\S]*?)<\/title>/
+                );
+
+                const descriptionMatch = block.match(
+                  /<description>([\s\S]*?)<\/description>/
+                );
+
+                if (!titleMatch) {
+                  continue;
+                }
+
+                const clean = value =>
+                  String(value || "")
+                    .replace(/<!\[CDATA\[/g, "")
+                    .replace(/\]\]>/g, "")
+                    .replace(/<[^>]*>/g, " ")
+                    .replace(/&amp;/g, "&")
+                    .replace(/&quot;/g, '"')
+                    .replace(/&#39;/g, "'")
+                    .replace(/&lt;/g, "<")
+                    .replace(/&gt;/g, ">")
+                    .replace(/\s+/g, " ")
+                    .trim();
+
+                const title = clean(titleMatch[1]);
+                const description = clean(
+                  descriptionMatch ? descriptionMatch[1] : ""
+                );
+
+                if (title) {
+                  items.push({
+                    title,
+                    description
+                  });
+                }
+
+                if (items.length >= 12) {
+                  break;
+                }
+              }
+
+              return items;
+            }
+
+            const news = await getNews();
+
+            const newsContext = news.length
+              ? news
+                  .map(
+                    (item, index) =>
+                      `${index + 1}. TITLE: ${item.title}\nDESCRIPTION: ${item.description}`
+                  )
+                  .join("\n\n")
+              : "No current news source is available.";
+
+            const prompt = [
+              "You are the daily content editor for GAMEZONE ARENA.",
+              "",
+              "Generate EXACTLY 20 useful and original Hindi content items.",
+              "",
+              "IMPORTANT LANGUAGE RULE:",
+              "All user-facing content must be written in simple natural Hindi using Devanagari script.",
+              "JSON field names must remain in English.",
+              "",
+              "IMPORTANT NEWS RULE:",
+              "Create detailed Hindi news summaries, not headline-only posts.",
+              "Use the supplied title and description as the available source context.",
+              "Explain the topic in a useful, readable way using only supported information.",
+              "Do not invent names, numbers, dates, quotes, locations, causes, results or other facts.",
+              "If the source information is insufficient, clearly keep the article general instead of inventing details.",
+              "Do not claim to have read the original article.",
+              "",
+              "CURRENT NEWS SOURCE:",
+              newsContext,
+              "",
+              "CONTENT MIX:",
+              "Include current news, technology, mobile, Android, AI, Google, Internet safety, gaming, Ludo, Cricket, entertainment, knowledge, how-to, blogging, jokes, dialogue, shayari, motivation, bhakti, bhajan and spiritual topics.",
+              "",
+              "NEWS ITEMS:",
+              "At least 5 of the 20 items should be detailed current-news summaries based on the supplied source context.",
+              "",
+              "CONTENT RULES:",
+              "All content must be original.",
+              "Do not copy articles from other websites.",
+              "Do not create fake news.",
+              "Do not create fake quotes.",
+              "Do not make unsupported allegations.",
+              "Do not attempt political persuasion.",
+              "Do not make guaranteed health, financial or investment claims.",
+              "Keep content family-friendly.",
+              "Make every item meaningfully different.",
+              "How-to content should be practical and step-by-step.",
+              "Blog content should contain useful detail.",
+              "Jokes should be genuinely readable and entertaining.",
+              "Shayari should be original.",
+              "Bhakti content should be respectful.",
+              "Technology and gaming content should be practical.",
+              "",
+              "SOURCE NOTE:",
+              "Current news items must use: Topic reference from Google News headlines and descriptions",
+              "Original content items must use: Original content",
+              "",
+              "Return JSON only.",
+              "Do not return Markdown.",
+              "Do not return explanations outside JSON.",
+              "",
+              "Required JSON structure:",
+              "{",
+              '  "items": [',
+              "    {",
+              '      "type": "news",',
+              '      "title": "Hindi title",',
+              '      "category": "India",',
+              '      "content": "Detailed Hindi content",',
+              '      "keywords": ["keyword1", "keyword2", "keyword3"],',
+              '      "seoTitle": "Hindi SEO title",',
+              '      "metaDescription": "Hindi SEO description",',
+              '      "sourceNote": "Topic reference from Google News headlines and descriptions"',
+              "    }",
+              "  ]",
+              "}"
+            ].join("\n");
+
+            const response = await fetch(apiUrl, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -65,6 +207,7 @@ jobs:
             const result = await response.json();
 
             if (!response.ok) {
+              console.error("Gemini API request failed.");
               console.error(JSON.stringify(result, null, 2));
               process.exit(1);
             }
@@ -78,61 +221,132 @@ jobs:
               process.exit(1);
             }
 
-            let item;
+            let parsed;
 
             try {
-              item = JSON.parse(text);
+              parsed = JSON.parse(text);
             } catch (error) {
               console.error("Gemini returned invalid JSON.");
               console.error(text);
               process.exit(1);
             }
 
-            if (
-              !item ||
-              typeof item.title !== "string" ||
-              typeof item.content !== "string"
-            ) {
-              console.error("Invalid content structure.");
-              console.error(JSON.stringify(item, null, 2));
+            if (!parsed || !Array.isArray(parsed.items)) {
+              console.error("Invalid items array.");
               process.exit(1);
             }
+
+            const cleanItems = parsed.items
+              .filter(
+                item =>
+                  item &&
+                  typeof item.title === "string" &&
+                  typeof item.content === "string"
+              )
+              .slice(0, 20)
+              .map(item => ({
+                type: String(item.type || "blog").trim(),
+                title: String(item.title).trim(),
+                category: String(
+                  item.category || "General"
+                ).trim(),
+                content: String(item.content).trim(),
+                keywords: Array.isArray(item.keywords)
+                  ? item.keywords
+                      .map(x => String(x).trim())
+                      .filter(Boolean)
+                      .slice(0, 8)
+                  : [],
+                seoTitle: String(
+                  item.seoTitle || item.title
+                ).trim(),
+                metaDescription: String(
+                  item.metaDescription || item.content
+                )
+                  .trim()
+                  .slice(0, 160),
+                sourceNote: String(
+                  item.sourceNote || "Original content"
+                ).trim(),
+                generatedAt: new Date().toISOString()
+              }))
+              .filter(
+                item =>
+                  item.title &&
+                  item.content
+              );
+
+            if (cleanItems.length < 20) {
+              console.error(
+                `Only ${cleanItems.length} valid items were generated.`
+              );
+              process.exit(1);
+            }
+
+            const file = "content/auto-content.json";
 
             fs.mkdirSync("content", {
               recursive: true
             });
 
+            let existing = [];
+
+            if (fs.existsSync(file)) {
+              try {
+                const oldData = JSON.parse(
+                  fs.readFileSync(file, "utf8")
+                );
+
+                if (Array.isArray(oldData)) {
+                  existing = oldData;
+                }
+              } catch (error) {
+                console.log(
+                  "Existing content file could not be parsed."
+                );
+              }
+            }
+
+            const finalContent = [
+              ...cleanItems,
+              ...existing
+            ].slice(0, 300);
+
             fs.writeFileSync(
-              "content/test-content.json",
-              JSON.stringify(
-                {
-                  items: [item]
-                },
-                null,
-                2
-              ),
+              file,
+              JSON.stringify(finalContent, null, 2),
               "utf8"
             );
 
-            console.log("HINDI CONTENT TEST SUCCESS");
-            console.log(item.title);
-            console.log(item.content);
+            console.log(
+              `Generated ${cleanItems.length} new Hindi items.`
+            );
+
+            console.log(
+              `Stored ${finalContent.length} total items.`
+            );
+
+            console.log("CONTENT GENERATION SUCCESS");
           }
 
           main().catch(error => {
-            console.error("Test failed.");
+            console.error("Workflow failed.");
             console.error(error.message);
             process.exit(1);
           });
           NODE
 
-      - name: Commit test content
+      - name: Commit generated content
         run: |
           git config user.name "GAMEZONE ARENA Auto Content"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add content/test-content.json
+          git add content/auto-content.json
 
-          git commit -m "Test Hindi content generation" || echo "Nothing to commit"
+          if git diff --cached --quiet; then
+            echo "No content changes."
+            exit 0
+          fi
 
+          git commit -m "Generate daily Hindi GAMEZONE ARENA content"
           git push
