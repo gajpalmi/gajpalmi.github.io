@@ -17,11 +17,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
       - name: Generate full Hindi content
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
