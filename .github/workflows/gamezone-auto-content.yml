@@ -1,4 +1,4 @@
-name: GAMEZONE ARENA Daily Content
+name: GAMEZONE ARENA Hindi Auto Content
 
 on:
   schedule:
@@ -12,20 +12,129 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Generate content
+      - name: Generate Hindi content
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: node scripts/generate-content.js
+        run: |
+          node - <<'NODE'
+          const fs = require("fs");
 
-      - name: Save content
+          async function main() {
+            if (!process.env.GEMINI_API_KEY) {
+              throw new Error("GEMINI_API_KEY is missing");
+            }
+
+            const prompt = `
+You are the official content generator for GAMEZONE ARENA.
+
+Generate fresh, original Hindi content for:
+1. jokes
+2. shayari
+3. bhakti
+4. knowledge
+5. technology
+6. gaming
+7. entertainment
+8. blog
+
+Create 3 useful items for each category.
+
+Rules:
+- Natural Hindi.
+- Original writing only.
+- Do not copy websites.
+- Do not invent facts, news, people, quotes, dates or statistics.
+- No political persuasion.
+- No harmful instructions.
+- Keep jokes clean.
+- Make knowledge educational.
+- Make technology and gaming content useful.
+- Return ONLY valid JSON.
+
+JSON format:
+{
+  "jokes": [],
+  "shayari": [],
+  "bhakti": [],
+  "knowledge": [],
+  "technology": [],
+  "gaming": [],
+  "entertainment": [],
+  "blog": []
+}
+`;
+
+            const url =
+              "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=" +
+              process.env.GEMINI_API_KEY;
+
+            const response = await fetch(url, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                contents: [
+                  {
+                    parts: [
+                      {
+                        text: prompt
+                      }
+                    ]
+                  }
+                ],
+                generationConfig: {
+                  temperature: 0.8,
+                  responseMimeType: "application/json"
+                }
+              })
+            });
+
+            if (!response.ok) {
+              const error = await response.text();
+              throw new Error(error);
+            }
+
+            const result = await response.json();
+
+            const text =
+              result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+            if (!text) {
+              throw new Error("Gemini returned empty content");
+            }
+
+            const content = JSON.parse(text);
+
+            fs.mkdirSync("content", { recursive: true });
+
+            fs.writeFileSync(
+              "content/auto-content.json",
+              JSON.stringify(content, null, 2),
+              "utf8"
+            );
+
+            console.log("GAMEZONE ARENA content generated successfully.");
+          }
+
+          main().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Commit content
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add content/auto-content.json
-          git diff --cached --quiet || git commit -m "Update GAMEZONE ARENA daily content"
+
+          git diff --cached --quiet || git commit -m "Update GAMEZONE ARENA Hindi content"
+
           git push
