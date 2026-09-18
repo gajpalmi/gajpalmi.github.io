@@ -1,1 +1,31 @@
+name: GAMEZONE ARENA Daily Content
 
+on:
+  schedule:
+    - cron: "45 3 * * *"
+
+jobs:
+  generate-content:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate content
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node scripts/generate-content.js
+
+      - name: Save content
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/auto-content.json
+          git diff --cached --quiet || git commit -m "Update GAMEZONE ARENA daily content"
+          git push
