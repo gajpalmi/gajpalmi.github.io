@@ -1,32 +1,43 @@
-name: GAMEZONE ARENA Gemini Test
+name: GAMEZONE ARENA Hindi Content Test
 
 "on":
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  test-gemini:
+  test-content:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test Gemini API
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate Hindi content
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           node <<'NODE'
+          const fs = require("fs");
+
           async function main() {
             const apiKey = process.env.GEMINI_API_KEY;
 
             if (!apiKey) {
-              console.error("GEMINI_API_KEY secret is missing.");
-              process.exit(1);
+              throw new Error("GEMINI_API_KEY secret is missing.");
             }
 
             const model = "gemini-3.5-flash-lite";
 
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+            const url =
+              `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+
+            const prompt =
+              "Create exactly one original, family-friendly Hindi joke for a website. " +
+              "Write the title and content in Hindi Devanagari. " +
+              "Return JSON only in this format: " +
+              '{"title":"Hindi title","content":"Hindi joke","type":"jokes"}';
 
             const response = await fetch(url, {
               method: "POST",
@@ -39,18 +50,21 @@ jobs:
                   {
                     parts: [
                       {
-                        text: "Reply with exactly this sentence: GAMEZONE ARENA GEMINI TEST SUCCESS"
+                        text: prompt
                       }
                     ]
                   }
-                ]
+                ],
+                generationConfig: {
+                  temperature: 0.8,
+                  responseMimeType: "application/json"
+                }
               })
             });
 
             const result = await response.json();
 
             if (!response.ok) {
-              console.error("Gemini API request failed.");
               console.error(JSON.stringify(result, null, 2));
               process.exit(1);
             }
@@ -64,8 +78,45 @@ jobs:
               process.exit(1);
             }
 
-            console.log("GEMINI TEST SUCCESS");
-            console.log(text);
+            let item;
+
+            try {
+              item = JSON.parse(text);
+            } catch (error) {
+              console.error("Gemini returned invalid JSON.");
+              console.error(text);
+              process.exit(1);
+            }
+
+            if (
+              !item ||
+              typeof item.title !== "string" ||
+              typeof item.content !== "string"
+            ) {
+              console.error("Invalid content structure.");
+              console.error(JSON.stringify(item, null, 2));
+              process.exit(1);
+            }
+
+            fs.mkdirSync("content", {
+              recursive: true
+            });
+
+            fs.writeFileSync(
+              "content/test-content.json",
+              JSON.stringify(
+                {
+                  items: [item]
+                },
+                null,
+                2
+              ),
+              "utf8"
+            );
+
+            console.log("HINDI CONTENT TEST SUCCESS");
+            console.log(item.title);
+            console.log(item.content);
           }
 
           main().catch(error => {
@@ -74,3 +125,14 @@ jobs:
             process.exit(1);
           });
           NODE
+
+      - name: Commit test content
+        run: |
+          git config user.name "GAMEZONE ARENA Auto Content"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add content/test-content.json
+
+          git commit -m "Test Hindi content generation" || echo "Nothing to commit"
+
+          git push
