@@ -609,12 +609,27 @@
     /* AUTOMATIC CONTENT STATUS */
     .auto-status {
       margin-top: 15px;
-      padding: 10px 13px;
-      border-radius: 12px;
+      padding: 14px 15px;
+      border-radius: 14px;
       background: rgba(49,233,129,.08);
       border: 1px solid rgba(49,233,129,.16);
       color: var(--muted);
       font-size: 13px;
+    }
+
+    .auto-countdown {
+      display: inline-block;
+      margin-top: 8px;
+      color: var(--green);
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .auto-last-update {
+      display: inline-block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
     }
 
     /* RESPONSIVE */
@@ -712,6 +727,7 @@
       </nav>
 
       <div class="nav-actions">
+
         <button
           class="icon-btn menu-btn"
           onclick="toggleMenu()">
@@ -731,6 +747,7 @@
           title="Search">
           🔎
         </button>
+
       </div>
 
     </div>
@@ -936,19 +953,38 @@
 
             <div>
               <h2>Latest Content</h2>
+
               <p>
                 नई और रोचक सामग्री
               </p>
+
             </div>
 
           </div>
 
           <div id="homeLatest" class="grid"></div>
 
-          <div class="auto-status">
-            🤖 Automatic Content:
-            GitHub Actions से आने वाला नया content
-            यहाँ अपने-आप दिखाई देगा।
+          <div class="auto-status" id="autoStatus">
+
+            🤖 <strong>Automatic Content:</strong>
+            GitHub Actions से नया content अपने-आप आएगा।
+
+            <br />
+
+            <span
+              id="autoCountdown"
+              class="auto-countdown">
+              अगला automatic update तैयार हो रहा है...
+            </span>
+
+            <br />
+
+            <span
+              id="autoLastUpdate"
+              class="auto-last-update">
+              नवीनतम automatic content जाँचा जा रहा है...
+            </span>
+
           </div>
 
         </div>
@@ -2007,16 +2043,93 @@
 
     let autoContent = [];
 
+    let autoRefreshTimer = null;
+
+    let countdownTimer = null;
+
+
+    /* =========================================================
+       CONTENT TYPE NORMALIZER
+       पुराने और नए workflow दोनों को संभालता है
+       ========================================================= */
+
+    function normalizeContentType(type) {
+
+      const value =
+        String(type || "")
+          .trim()
+          .toLowerCase();
+
+      const map = {
+
+        joke: "joke",
+        jokes: "joke",
+
+        shayari: "shayari",
+        shayaris: "shayari",
+
+        bhakti: "bhakti",
+        spiritual: "bhakti",
+        spirituality: "bhakti",
+        devotional: "bhakti",
+
+        knowledge: "knowledge",
+        facts: "knowledge",
+        fact: "knowledge",
+
+        entertainment: "entertainment",
+        dialogue: "entertainment",
+        dialogues: "entertainment",
+        trend: "entertainment",
+        trends: "entertainment",
+
+        gaming: "gaming",
+
+        technology: "technology",
+        tech: "technology",
+
+        mobile: "mobile",
+
+        internet: "internet",
+
+        ai: "ai",
+
+        google: "technology",
+
+        news: "news",
+
+        blog: "blog",
+        blogs: "blog",
+        article: "blog",
+        articles: "blog",
+
+        video: "video",
+        videos: "video"
+
+      };
+
+      return map[value] || value;
+
+    }
+
+
+    /* =========================================================
+       AUTOMATIC CONTENT LOADER
+       ========================================================= */
+
     async function loadAutoContent() {
 
       try {
 
-        const response = await fetch(
-          "./content/auto-content.json?v=" + Date.now(),
-          {
-            cache: "no-store"
-          }
-        );
+        const response =
+          await fetch(
+            "./content/auto-content.json?v=" +
+            Date.now(),
+            {
+              cache:"no-store"
+            }
+          );
+
 
         if (!response.ok) {
 
@@ -2024,34 +2137,119 @@
             "Automatic content file not available yet."
           );
 
+          updateAutoContentStatus();
+
           return;
 
         }
 
-        const data = await response.json();
+
+        const data =
+          await response.json();
+
 
         if (Array.isArray(data)) {
 
-          autoContent = data
-            .filter(item => item && typeof item === "object")
-            .map(item => ({
+          autoContent =
+            data
 
-              id: item.id || ("auto-" + Date.now() + "-" + Math.random()),
+              .filter(
+                item =>
+                  item &&
+                  typeof item === "object"
+              )
 
-              type: String(item.type || "").toLowerCase(),
+              .map(
+                (item, index) => ({
 
-              title: String(item.title || "Untitled"),
+                  id:
+                    item.id ||
+                    (
+                      "auto-" +
+                      index +
+                      "-" +
+                      String(
+                        item.title ||
+                        ""
+                      )
+                    ),
 
-              category: String(item.category || item.type || "General"),
+                  type:
+                    normalizeContentType(
+                      item.type
+                    ),
 
-              content: String(item.content || ""),
+                  title:
+                    String(
+                      item.title ||
+                      "Untitled"
+                    ),
 
-              image: String(item.image || ""),
+                  category:
+                    String(
+                      item.category ||
+                      item.type ||
+                      "General"
+                    ),
 
-              video: String(item.video || "")
+                  content:
+                    String(
+                      item.content ||
+                      ""
+                    ),
 
-            }))
-            .filter(item => item.type && item.content);
+                  image:
+                    String(
+                      item.image ||
+                      ""
+                    ),
+
+                  video:
+                    String(
+                      item.video ||
+                      ""
+                    ),
+
+                  sourceNote:
+                    String(
+                      item.sourceNote ||
+                      ""
+                    ),
+
+                  datePublished:
+                    String(
+                      item.datePublished ||
+                      ""
+                    ),
+
+                  slug:
+                    String(
+                      item.slug ||
+                      ""
+                    ),
+
+                  excerpt:
+                    String(
+                      item.excerpt ||
+                      ""
+                    ),
+
+                  keywords:
+                    Array.isArray(item.keywords)
+                      ? item.keywords.join(", ")
+                      : String(
+                          item.keywords ||
+                          ""
+                        )
+
+                })
+              )
+
+              .filter(
+                item =>
+                  item.type &&
+                  item.content
+              );
 
         } else {
 
@@ -2059,19 +2257,18 @@
 
         }
 
-        renderHomeLatest();
-        renderJokes();
-        renderShayari();
-        renderKnowledge();
-        renderEntertainment();
-        renderBhakti();
-        renderVideos();
-        renderBlogs();
+
+        renderAllContent();
+
+
+        updateAutoContentStatus();
+
 
         console.log(
           "Automatic content loaded:",
           autoContent.length
         );
+
 
       } catch (error) {
 
@@ -2080,7 +2277,309 @@
           error
         );
 
+        updateAutoContentStatus();
+
       }
+
+    }
+
+
+    /* =========================================================
+       RENDER ALL
+       ========================================================= */
+
+    function renderAllContent() {
+
+      renderHomeLatest();
+
+      renderJokes();
+
+      renderShayari();
+
+      renderKnowledge();
+
+      renderEntertainment();
+
+      renderBhakti();
+
+      renderVideos();
+
+      renderBlogs();
+
+    }
+
+
+    /* =========================================================
+       AUTO CONTENT STATUS
+       ========================================================= */
+
+    function updateAutoContentStatus() {
+
+      const lastEl =
+        document.getElementById(
+          "autoLastUpdate"
+        );
+
+
+      if (!lastEl) return;
+
+
+      if (!autoContent.length) {
+
+        lastEl.textContent =
+          "Automatic content अभी उपलब्ध नहीं है। GitHub Actions का अगला update आने पर यहाँ दिखाई देगा।";
+
+        return;
+
+      }
+
+
+      const latest =
+        autoContent[0];
+
+
+      const latestTitle =
+        latest &&
+        latest.title
+          ? latest.title
+          : "नया content";
+
+
+      lastEl.textContent =
+        "Latest automatic content: " +
+        latestTitle +
+        " • Total automatic items: " +
+        autoContent.length;
+
+    }
+
+
+    /* =========================================================
+       AUTO REFRESH
+       Website खुली रहने पर हर 5 मिनट में नया content check
+       ========================================================= */
+
+    function startAutoContentRefresh() {
+
+      if (autoRefreshTimer) {
+
+        clearInterval(
+          autoRefreshTimer
+        );
+
+      }
+
+
+      autoRefreshTimer =
+        setInterval(
+          () => {
+
+            loadAutoContent();
+
+          },
+          5 * 60 * 1000
+        );
+
+    }
+
+
+    /* =========================================================
+       DAILY COUNTDOWN
+       Target:
+       09:15 AM IST
+       ========================================================= */
+
+    const AUTO_UPDATE_HOUR = 9;
+
+    const AUTO_UPDATE_MINUTE = 15;
+
+    const IST_OFFSET_MS =
+      5.5 * 60 * 60 * 1000;
+
+
+    function getNextAutoUpdate() {
+
+      const nowUTC =
+        Date.now();
+
+
+      const istNow =
+        new Date(
+          nowUTC +
+          IST_OFFSET_MS
+        );
+
+
+      const nextIST =
+        new Date(
+          istNow.getTime()
+        );
+
+
+      nextIST.setUTCHours(
+        AUTO_UPDATE_HOUR,
+        AUTO_UPDATE_MINUTE,
+        0,
+        0
+      );
+
+
+      if (
+        istNow.getTime() >=
+        nextIST.getTime()
+      ) {
+
+        nextIST.setUTCDate(
+          nextIST.getUTCDate() + 1
+        );
+
+      }
+
+
+      return new Date(
+        nextIST.getTime() -
+        IST_OFFSET_MS
+      );
+
+    }
+
+
+    function formatCountdown(
+      milliseconds
+    ) {
+
+      if (
+        milliseconds <= 0
+      ) {
+
+        return "Automatic update अब कभी भी शुरू हो सकता है...";
+
+      }
+
+
+      const totalSeconds =
+        Math.floor(
+          milliseconds / 1000
+        );
+
+
+      const days =
+        Math.floor(
+          totalSeconds /
+          86400
+        );
+
+
+      const hours =
+        Math.floor(
+          (
+            totalSeconds %
+            86400
+          ) / 3600
+        );
+
+
+      const minutes =
+        Math.floor(
+          (
+            totalSeconds %
+            3600
+          ) / 60
+        );
+
+
+      const seconds =
+        totalSeconds % 60;
+
+
+      const parts = [];
+
+
+      if (days > 0) {
+
+        parts.push(
+          days + " दिन"
+        );
+
+      }
+
+
+      parts.push(
+        String(hours).padStart(2,"0") +
+        " घंटे"
+      );
+
+
+      parts.push(
+        String(minutes).padStart(2,"0") +
+        " मिनट"
+      );
+
+
+      parts.push(
+        String(seconds).padStart(2,"0") +
+        " सेकंड"
+      );
+
+
+      return parts.join(" : ");
+
+    }
+
+
+    function updateAutoCountdown() {
+
+      const el =
+        document.getElementById(
+          "autoCountdown"
+        );
+
+
+      if (!el) return;
+
+
+      const next =
+        getNextAutoUpdate();
+
+
+      const remaining =
+        next.getTime() -
+        Date.now();
+
+
+      el.textContent =
+        "⏳ अगला Automatic Content Update: " +
+        formatCountdown(
+          remaining
+        ) +
+        " • रोज़ 09:15 AM IST";
+
+    }
+
+
+    function startAutoCountdown() {
+
+      if (countdownTimer) {
+
+        clearInterval(
+          countdownTimer
+        );
+
+      }
+
+
+      updateAutoCountdown();
+
+
+      countdownTimer =
+        setInterval(
+          () => {
+
+            updateAutoCountdown();
+
+          },
+          1000
+        );
 
     }
 
@@ -2105,44 +2604,66 @@
 
       return [
 
-        ...DEFAULT_JOKES.map(x => ({
-          ...x,
-          type:"joke"
-        })),
+        ...DEFAULT_JOKES.map(
+          x => ({
+            ...x,
+            type:"joke"
+          })
+        ),
 
-        ...DEFAULT_SHAYARI.map(x => ({
-          ...x,
-          type:"shayari"
-        })),
+        ...DEFAULT_SHAYARI.map(
+          x => ({
+            ...x,
+            type:"shayari"
+          })
+        ),
 
-        ...DEFAULT_KNOWLEDGE.map(x => ({
-          ...x,
-          type:"knowledge"
-        })),
+        ...DEFAULT_KNOWLEDGE.map(
+          x => ({
+            ...x,
+            type:"knowledge"
+          })
+        ),
 
-        ...DEFAULT_ENTERTAINMENT.map(x => ({
-          ...x,
-          type:"entertainment"
-        })),
+        ...DEFAULT_ENTERTAINMENT.map(
+          x => ({
+            ...x,
+            type:"entertainment"
+          })
+        ),
 
-        ...DEFAULT_BHAKTI.map(x => ({
-          ...x,
-          type:"bhakti"
-        })),
+        ...DEFAULT_BHAKTI.map(
+          x => ({
+            ...x,
+            type:"bhakti"
+          })
+        ),
 
-        ...DEFAULT_BLOGS.map(x => ({
-          ...x,
-          type:"blog"
-        })),
+        ...DEFAULT_BLOGS.map(
+          x => ({
+            ...x,
+            type:"blog"
+          })
+        ),
 
-        ...DEFAULT_VIDEOS.map(x => ({
-          ...x,
-          type:"video"
-        })),
+        ...DEFAULT_VIDEOS.map(
+          x => ({
+            ...x,
+            type:"video"
+          })
+        ),
 
         ...autoContent,
 
-        ...customContent
+        ...customContent.map(
+          x => ({
+            ...x,
+            type:
+              normalizeContentType(
+                x.type
+              )
+          })
+        )
 
       ];
 
@@ -2153,7 +2674,9 @@
 
       localStorage.setItem(
         "gamezone_custom_content",
-        JSON.stringify(customContent)
+        JSON.stringify(
+          customContent
+        )
       );
 
     }
@@ -2162,19 +2685,33 @@
     function toast(message) {
 
       const el =
-        document.getElementById("toast");
+        document.getElementById(
+          "toast"
+        );
+
 
       if (!el) return;
 
-      el.textContent = message;
 
-      el.classList.add("show");
+      el.textContent =
+        message;
 
-      setTimeout(() => {
 
-        el.classList.remove("show");
+      el.classList.add(
+        "show"
+      );
 
-      }, 2200);
+
+      setTimeout(
+        () => {
+
+          el.classList.remove(
+            "show"
+          );
+
+        },
+        2200
+      );
 
     }
 
@@ -2184,6 +2721,7 @@
       const value =
         String(text || "");
 
+
       if (
         navigator.clipboard &&
         navigator.clipboard.writeText
@@ -2191,23 +2729,40 @@
 
         navigator.clipboard
           .writeText(value)
-          .then(() => {
-            toast("Content copied ✅");
-          })
-          .catch(() => {
-            toast("Copy नहीं हो पाया");
-          });
+          .then(
+            () => {
+
+              toast(
+                "Content copied ✅"
+              );
+
+            }
+          )
+          .catch(
+            () => {
+
+              toast(
+                "Copy नहीं हो पाया"
+              );
+
+            }
+          );
 
       } else {
 
-        toast("Copy सुविधा उपलब्ध नहीं है");
+        toast(
+          "Copy सुविधा उपलब्ध नहीं है"
+        );
 
       }
 
     }
 
 
-    async function shareContent(title, text) {
+    async function shareContent(
+      title,
+      text
+    ) {
 
       if (navigator.share) {
 
@@ -2240,14 +2795,25 @@
           ) || "[]"
         );
 
-      if (!favorites.includes(title)) {
 
-        favorites.push(title);
+      if (
+        !favorites.includes(
+          title
+        )
+      ) {
+
+        favorites.push(
+          title
+        );
+
 
         localStorage.setItem(
           "gamezone_favorites",
-          JSON.stringify(favorites)
+          JSON.stringify(
+            favorites
+          )
         );
+
 
         toast(
           "Favorite में save हो गया ❤️"
@@ -2271,70 +2837,123 @@
     function showPage(page) {
 
       document
-        .querySelectorAll(".page")
-        .forEach(p => {
+        .querySelectorAll(
+          ".page"
+        )
+        .forEach(
+          p => {
 
-          p.classList.add("hidden");
+            p.classList.add(
+              "hidden"
+            );
 
-        });
+          }
+        );
 
 
       const target =
         document.getElementById(
-          "page-" + page
+          "page-" +
+          page
         );
 
 
       if (target) {
 
-        target.classList.remove("hidden");
+        target.classList.remove(
+          "hidden"
+        );
 
       }
 
 
       document
-        .getElementById("navLinks")
-        ?.classList.remove("show");
+        .getElementById(
+          "navLinks"
+        )
+        ?.classList.remove(
+          "show"
+        );
 
 
       window.scrollTo({
 
         top:0,
+
         behavior:"smooth"
 
       });
 
 
-      if (page === "home") {
+      if (
+        page === "home"
+      ) {
+
         renderHomeLatest();
+
       }
 
-      if (page === "jokes") {
+
+      if (
+        page === "jokes"
+      ) {
+
         renderJokes();
+
       }
 
-      if (page === "shayari") {
+
+      if (
+        page === "shayari"
+      ) {
+
         renderShayari();
+
       }
 
-      if (page === "knowledge") {
+
+      if (
+        page === "knowledge"
+      ) {
+
         renderKnowledge();
+
       }
 
-      if (page === "entertainment") {
+
+      if (
+        page === "entertainment"
+      ) {
+
         renderEntertainment();
+
       }
 
-      if (page === "bhakti") {
+
+      if (
+        page === "bhakti"
+      ) {
+
         renderBhakti();
+
       }
 
-      if (page === "videos") {
+
+      if (
+        page === "videos"
+      ) {
+
         renderVideos();
+
       }
 
-      if (page === "blog") {
+
+      if (
+        page === "blog"
+      ) {
+
         renderBlogs();
+
       }
 
     }
@@ -2343,8 +2962,12 @@
     function toggleMenu() {
 
       document
-        .getElementById("navLinks")
-        .classList.toggle("show");
+        .getElementById(
+          "navLinks"
+        )
+        .classList.toggle(
+          "show"
+        );
 
     }
 
@@ -2355,13 +2978,18 @@
 
     function toggleTheme() {
 
-      document.body.classList.toggle("light");
+      document.body.classList.toggle(
+        "light"
+      );
+
 
       localStorage.setItem(
 
         "gamezone_theme",
 
-        document.body.classList.contains("light")
+        document.body.classList.contains(
+          "light"
+        )
           ? "light"
           : "dark"
 
@@ -2378,7 +3006,9 @@
         );
 
 
-      if (theme === "light") {
+      if (
+        theme === "light"
+      ) {
 
         document.body.classList.add(
           "light"
@@ -2393,22 +3023,35 @@
        CARD BUILDERS
        ========================================================= */
 
-    function contentCard(item, type) {
+    function contentCard(
+      item,
+      type
+    ) {
 
       const title =
-        escapeHTML(item.title);
+        escapeHTML(
+          item.title
+        );
+
 
       const category =
-        escapeHTML(item.category);
+        escapeHTML(
+          item.category
+        );
+
 
       const content =
-        escapeHTML(item.content);
+        escapeHTML(
+          item.content
+        );
 
 
       let imageHTML = "";
 
 
-      if (item.image) {
+      if (
+        item.image
+      ) {
 
         imageHTML = `
 
@@ -2427,10 +3070,14 @@
       let videoHTML = "";
 
 
-      if (item.video) {
+      if (
+        item.video
+      ) {
 
         const embed =
-          toEmbedURL(item.video);
+          toEmbedURL(
+            item.video
+          );
 
 
         if (embed) {
@@ -2543,8 +3190,12 @@
 
       el.innerHTML =
         data
-          .map(item =>
-            contentCard(item, type)
+          .map(
+            item =>
+              contentCard(
+                item,
+                type
+              )
           )
           .join("");
 
@@ -2555,7 +3206,8 @@
        JOKES
        ========================================================= */
 
-    let currentJokeFilter = "All";
+    let currentJokeFilter =
+      "All";
 
 
     function getJokes() {
@@ -2565,11 +3217,17 @@
         ...DEFAULT_JOKES,
 
         ...autoContent.filter(
-          x => x.type === "joke"
+          x =>
+            x.type ===
+            "joke"
         ),
 
         ...customContent.filter(
-          x => x.type === "joke"
+          x =>
+            normalizeContentType(
+              x.type
+            ) ===
+            "joke"
         )
 
       ];
@@ -2578,7 +3236,8 @@
 
 
     function renderJokes(
-      filter = currentJokeFilter
+      filter =
+        currentJokeFilter
     ) {
 
       currentJokeFilter =
@@ -2586,13 +3245,16 @@
 
 
       const data =
-        getJokes().filter(
+        getJokes()
+          .filter(
 
-          x =>
-            filter === "All" ||
-            x.category === filter
+            x =>
+              filter ===
+              "All" ||
+              x.category ===
+              filter
 
-        );
+          );
 
 
       renderList(
@@ -2613,15 +3275,22 @@
         .querySelectorAll(
           "#page-jokes .category-bar button"
         )
-        .forEach(x =>
-          x.classList.remove("active")
+        .forEach(
+          x =>
+            x.classList.remove(
+              "active"
+            )
         );
 
 
-      btn?.classList.add("active");
+      btn?.classList.add(
+        "active"
+      );
 
 
-      renderJokes(filter);
+      renderJokes(
+        filter
+      );
 
     }
 
@@ -2641,11 +3310,17 @@
         ...DEFAULT_SHAYARI,
 
         ...autoContent.filter(
-          x => x.type === "shayari"
+          x =>
+            x.type ===
+            "shayari"
         ),
 
         ...customContent.filter(
-          x => x.type === "shayari"
+          x =>
+            normalizeContentType(
+              x.type
+            ) ===
+            "shayari"
         )
 
       ];
@@ -2654,7 +3329,8 @@
 
 
     function renderShayari(
-      filter = currentShayariFilter
+      filter =
+        currentShayariFilter
     ) {
 
       currentShayariFilter =
@@ -2662,13 +3338,16 @@
 
 
       const data =
-        getShayari().filter(
+        getShayari()
+          .filter(
 
-          x =>
-            filter === "All" ||
-            x.category === filter
+            x =>
+              filter ===
+              "All" ||
+              x.category ===
+              filter
 
-        );
+          );
 
 
       renderList(
@@ -2689,15 +3368,22 @@
         .querySelectorAll(
           "#page-shayari .category-bar button"
         )
-        .forEach(x =>
-          x.classList.remove("active")
+        .forEach(
+          x =>
+            x.classList.remove(
+              "active"
+            )
         );
 
 
-      btn?.classList.add("active");
+      btn?.classList.add(
+        "active"
+      );
 
 
-      renderShayari(filter);
+      renderShayari(
+        filter
+      );
 
     }
 
@@ -2717,11 +3403,17 @@
         ...DEFAULT_KNOWLEDGE,
 
         ...autoContent.filter(
-          x => x.type === "knowledge"
+          x =>
+            x.type ===
+            "knowledge"
         ),
 
         ...customContent.filter(
-          x => x.type === "knowledge"
+          x =>
+            normalizeContentType(
+              x.type
+            ) ===
+            "knowledge"
         )
 
       ];
@@ -2730,7 +3422,8 @@
 
 
     function renderKnowledge(
-      filter = currentKnowledgeFilter
+      filter =
+        currentKnowledgeFilter
     ) {
 
       currentKnowledgeFilter =
@@ -2738,13 +3431,16 @@
 
 
       const data =
-        getKnowledge().filter(
+        getKnowledge()
+          .filter(
 
-          x =>
-            filter === "All" ||
-            x.category === filter
+            x =>
+              filter ===
+              "All" ||
+              x.category ===
+              filter
 
-        );
+          );
 
 
       renderList(
@@ -2765,15 +3461,22 @@
         .querySelectorAll(
           "#page-knowledge .category-bar button"
         )
-        .forEach(x =>
-          x.classList.remove("active")
+        .forEach(
+          x =>
+            x.classList.remove(
+              "active"
+            )
         );
 
 
-      btn?.classList.add("active");
+      btn?.classList.add(
+        "active"
+      );
 
 
-      renderKnowledge(filter);
+      renderKnowledge(
+        filter
+      );
 
     }
 
@@ -2789,11 +3492,69 @@
         ...DEFAULT_ENTERTAINMENT,
 
         ...autoContent.filter(
-          x => x.type === "entertainment"
+          x =>
+            x.type ===
+            "entertainment"
+        ),
+
+        ...autoContent.filter(
+          x =>
+            x.type ===
+            "gaming"
+        ),
+
+        ...autoContent.filter(
+          x =>
+            x.type ===
+            "mobile"
+        ),
+
+        ...autoContent.filter(
+          x =>
+            x.type ===
+            "internet"
+        ),
+
+        ...autoContent.filter(
+          x =>
+            x.type ===
+            "ai"
+        ),
+
+        ...autoContent.filter(
+          x =>
+            x.type ===
+            "technology"
+        ),
+
+        ...autoContent.filter(
+          x =>
+            x.type ===
+            "news"
         ),
 
         ...customContent.filter(
-          x => x.type === "entertainment"
+          x =>
+            normalizeContentType(
+              x.type
+            ) ===
+            "entertainment"
+        ),
+
+        ...customContent.filter(
+          x =>
+            [
+              "gaming",
+              "mobile",
+              "internet",
+              "ai",
+              "technology",
+              "news"
+            ].includes(
+              normalizeContentType(
+                x.type
+              )
+            )
         )
 
       ];
@@ -2827,11 +3588,17 @@
         ...DEFAULT_BHAKTI,
 
         ...autoContent.filter(
-          x => x.type === "bhakti"
+          x =>
+            x.type ===
+            "bhakti"
         ),
 
         ...customContent.filter(
-          x => x.type === "bhakti"
+          x =>
+            normalizeContentType(
+              x.type
+            ) ===
+            "bhakti"
         )
 
       ];
@@ -2865,11 +3632,17 @@
         ...DEFAULT_VIDEOS,
 
         ...autoContent.filter(
-          x => x.type === "video"
+          x =>
+            x.type ===
+            "video"
         ),
 
         ...customContent.filter(
-          x => x.type === "video"
+          x =>
+            normalizeContentType(
+              x.type
+            ) ===
+            "video"
         )
 
       ];
@@ -2877,7 +3650,9 @@
     }
 
 
-    function toEmbedURL(url) {
+    function toEmbedURL(
+      url
+    ) {
 
       if (!url) return "";
 
@@ -2895,7 +3670,9 @@
         ) {
 
           const id =
-            u.searchParams.get("v");
+            u.searchParams.get(
+              "v"
+            );
 
 
           if (id) {
@@ -2927,7 +3704,9 @@
 
             const id2 =
               u.pathname
-                .split("/shorts/")[1]
+                .split(
+                  "/shorts/"
+                )[1]
                 .split("?")[0];
 
 
@@ -2948,7 +3727,10 @@
 
           const id =
             u.pathname
-              .replace("/", "")
+              .replace(
+                "/",
+                ""
+              )
               .split("?")[0];
 
 
@@ -2997,11 +3779,17 @@
         ...DEFAULT_BLOGS,
 
         ...autoContent.filter(
-          x => x.type === "blog"
+          x =>
+            x.type ===
+            "blog"
         ),
 
         ...customContent.filter(
-          x => x.type === "blog"
+          x =>
+            normalizeContentType(
+              x.type
+            ) ===
+            "blog"
         )
 
       ];
@@ -3026,14 +3814,19 @@
 
     /* =========================================================
        HOME LATEST
+       सबसे नया automatic content पहले
        ========================================================= */
 
     function renderHomeLatest() {
 
       const data =
         allContent()
-          .slice(-9)
-          .reverse();
+          .slice()
+          .reverse()
+          .slice(
+            0,
+            9
+          );
 
 
       renderList(
@@ -3055,38 +3848,49 @@
 
     function openSearch() {
 
-      showPage("search");
+      showPage(
+        "search"
+      );
 
 
-      setTimeout(() => {
+      setTimeout(
+        () => {
 
-        const input =
-          document.getElementById(
-            "homeSearch"
-          );
+          const input =
+            document.getElementById(
+              "homeSearch"
+            );
 
 
-        if (input) {
+          if (input) {
 
-          input.focus();
+            input.focus();
 
-        }
+          }
 
-      }, 100);
+        },
+        100
+      );
 
     }
 
 
-    function globalSearch(query) {
+    function globalSearch(
+      query
+    ) {
 
       query =
-        String(query || "")
-          .trim();
+        String(
+          query || ""
+        )
+        .trim();
 
 
       if (!query) {
 
-        showPage("search");
+        showPage(
+          "search"
+        );
 
 
         document.getElementById(
@@ -3110,25 +3914,36 @@
 
 
       const results =
-        allContent().filter(
-          item => {
+        allContent()
+          .filter(
+            item => {
 
-            return [
+              return [
 
-              item.title,
-              item.category,
-              item.content
+                item.title,
 
-            ]
-              .join(" ")
-              .toLowerCase()
-              .includes(lower);
+                item.category,
 
-          }
-        );
+                item.content,
+
+                item.type,
+
+                item.keywords
+
+              ]
+                .join(" ")
+                .toLowerCase()
+                .includes(
+                  lower
+                );
+
+            }
+          );
 
 
-      showPage("search");
+      showPage(
+        "search"
+      );
 
 
       document.getElementById(
@@ -3183,7 +3998,9 @@
       if (video) {
 
         const embed =
-          toEmbedURL(video);
+          toEmbedURL(
+            video
+          );
 
 
         if (embed) {
@@ -3245,8 +4062,12 @@
 
 
       document
-        .getElementById("contentModal")
-        .classList.add("show");
+        .getElementById(
+          "contentModal"
+        )
+        .classList.add(
+          "show"
+        );
 
     }
 
@@ -3254,8 +4075,12 @@
     function closeModal() {
 
       document
-        .getElementById("contentModal")
-        .classList.remove("show");
+        .getElementById(
+          "contentModal"
+        )
+        .classList.remove(
+          "show"
+        );
 
     }
 
@@ -3280,7 +4105,9 @@
        GAME MODAL
        ========================================================= */
 
-    function openGame(gameName) {
+    function openGame(
+      gameName
+    ) {
 
       document.getElementById(
         "modalContent"
@@ -3326,7 +4153,9 @@
         .getElementById(
           "contentModal"
         )
-        .classList.add("show");
+        .classList.add(
+          "show"
+        );
 
     }
 
@@ -3335,7 +4164,9 @@
        INFO PAGES
        ========================================================= */
 
-    function openInfo(type) {
+    function openInfo(
+      type
+    ) {
 
       const info = {
 
@@ -3416,8 +4247,11 @@ Games में दिखने वाली virtual coins या virtual reward
       openContent(
 
         item.title,
+
         item.content,
+
         "",
+
         ""
 
       );
@@ -3438,7 +4272,9 @@ Games में दिखने वाली virtual coins या virtual reward
         .getElementById(
           "adminModal"
         )
-        .classList.add("show");
+        .classList.add(
+          "show"
+        );
 
     }
 
@@ -3449,7 +4285,9 @@ Games में दिखने वाली virtual coins या virtual reward
         .getElementById(
           "adminModal"
         )
-        .classList.remove("show");
+        .classList.remove(
+          "show"
+        );
 
     }
 
@@ -3476,17 +4314,21 @@ Games में दिखने वाली virtual coins या virtual reward
         "adminTitle"
       ).value = "";
 
+
       document.getElementById(
         "adminCategory"
       ).value = "";
+
 
       document.getElementById(
         "adminContent"
       ).value = "";
 
+
       document.getElementById(
         "adminImage"
       ).value = "";
+
 
       document.getElementById(
         "adminVideo"
@@ -3506,34 +4348,42 @@ Games में दिखने वाली virtual coins या virtual reward
       const title =
         document.getElementById(
           "adminTitle"
-        ).value.trim();
+        ).value
+        .trim();
 
 
       const category =
         document.getElementById(
           "adminCategory"
-        ).value.trim();
+        ).value
+        .trim();
 
 
       const content =
         document.getElementById(
           "adminContent"
-        ).value.trim();
+        ).value
+        .trim();
 
 
       const image =
         document.getElementById(
           "adminImage"
-        ).value.trim();
+        ).value
+        .trim();
 
 
       const video =
         document.getElementById(
           "adminVideo"
-        ).value.trim();
+        ).value
+        .trim();
 
 
-      if (!title || !content) {
+      if (
+        !title ||
+        !content
+      ) {
 
         toast(
           "Title और Content जरूरी है।"
@@ -3546,14 +4396,19 @@ Games में दिखने वाली virtual coins या virtual reward
 
       customContent.push({
 
-        id: Date.now(),
+        id:
+          Date.now(),
 
-        type,
+        type:
+          normalizeContentType(
+            type
+          ),
 
         title,
 
         category:
-          category || type,
+          category ||
+          type,
 
         content,
 
@@ -3573,14 +4428,7 @@ Games में दिखने वाली virtual coins या virtual reward
       renderAdminItems();
 
 
-      renderHomeLatest();
-      renderJokes();
-      renderShayari();
-      renderKnowledge();
-      renderEntertainment();
-      renderBhakti();
-      renderVideos();
-      renderBlogs();
+      renderAllContent();
 
 
       toast(
@@ -3601,7 +4449,9 @@ Games में दिखने वाली virtual coins या virtual reward
       if (!el) return;
 
 
-      if (!customContent.length) {
+      if (
+        !customContent.length
+      ) {
 
         el.innerHTML = `
 
@@ -3622,7 +4472,10 @@ Games में दिखने वाली virtual coins या virtual reward
       el.innerHTML =
         customContent
           .map(
-            (item, index) => `
+            (
+              item,
+              index
+            ) => `
 
               <div class="admin-item">
 
@@ -3662,7 +4515,9 @@ Games में दिखने वाली virtual coins या virtual reward
     }
 
 
-    function deleteCustom(index) {
+    function deleteCustom(
+      index
+    ) {
 
       if (
         !confirm(
@@ -3687,14 +4542,7 @@ Games में दिखने वाली virtual coins या virtual reward
       renderAdminItems();
 
 
-      renderHomeLatest();
-      renderJokes();
-      renderShayari();
-      renderKnowledge();
-      renderEntertainment();
-      renderBhakti();
-      renderVideos();
-      renderBlogs();
+      renderAllContent();
 
 
       toast(
@@ -3711,32 +4559,49 @@ Games में दिखने वाली virtual coins या virtual reward
     document.getElementById(
       "year"
     ).textContent =
-      new Date().getFullYear();
+      new Date()
+        .getFullYear();
 
 
     loadTheme();
 
 
     renderHomeLatest();
+
     renderJokes();
+
     renderShayari();
+
     renderKnowledge();
+
     renderEntertainment();
+
     renderBhakti();
+
     renderVideos();
+
     renderBlogs();
 
 
-    showPage("home");
+    showPage(
+      "home"
+    );
 
 
     /*
-      IMPORTANT:
-      Automatic GitHub content is loaded after
-      the normal website content.
+      Automatic GitHub content:
+      1. तुरंत load
+      2. हर 5 मिनट में refresh
+      3. रोज़ 09:15 AM IST countdown
     */
 
     loadAutoContent();
+
+
+    startAutoContentRefresh();
+
+
+    startAutoCountdown();
 
   </script>
 
