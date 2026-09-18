@@ -4,41 +4,9 @@ on:
   schedule:
     - cron: "45 3 * * *"
 
-permissions:
-  contents: write
-
 jobs:
-  generate-content:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Generate full Hindi content
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          node scripts/generate-hindi-content.js
-
-      - name: Commit generated content
-        run: |
-          git config user.name "GAMEZONE ARENA Auto Content"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add content/auto-content.json
-
-          if git diff --cached --quiet; then
-            echo "No content changes to commit."
-            exit 0
-          fi
-
-          git commit -m "Generate daily Hindi GAMEZONE ARENA content"
-          git push
+      - name: Test workflow
+        run: echo "GAMEZONE ARENA workflow is working"
