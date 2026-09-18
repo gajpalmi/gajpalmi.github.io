@@ -66,7 +66,6 @@ jobs:
               }
 
               const xml = await response.text();
-
               const titles = [];
 
               const matches = xml.matchAll(
@@ -76,22 +75,17 @@ jobs:
               for (const match of matches) {
                 const block = match[1];
 
-                const titleMatch =
-                  block.match(
-                    /<title>([\s\S]*?)<\/title>/
-                  );
+                const titleMatch = block.match(
+                  /<title>([\s\S]*?)<\/title>/
+                );
 
                 if (!titleMatch) {
                   continue;
                 }
 
-                const title =
-                  cleanText(titleMatch[1]);
+                const title = cleanText(titleMatch[1]);
 
-                if (
-                  title &&
-                  !titles.includes(title)
-                ) {
+                if (title && !titles.includes(title)) {
                   titles.push(title);
                 }
 
@@ -106,14 +100,8 @@ jobs:
 
               return titles;
             } catch (error) {
-              console.log(
-                "Could not load Google News:"
-              );
-
-              console.log(
-                error.message
-              );
-
+              console.log("Could not load Google News:");
+              console.log(error.message);
               return [];
             }
           }
@@ -130,295 +118,246 @@ jobs:
                 : "आज कोई current headline उपलब्ध नहीं है।";
 
             const prompt = `
-          आप GAMEZONE ARENA वेबसाइट के लिए रोज़ नई,
-          मौलिक और उपयोगी हिंदी सामग्री तैयार करने वाले
-          professional automatic content editor हैं।
+आप GAMEZONE ARENA वेबसाइट के लिए रोज़ नई,
+मौलिक और उपयोगी हिंदी सामग्री तैयार करने वाले
+professional automatic content editor हैं।
+
+सभी user-facing सामग्री मुख्य रूप से सरल,
+स्वाभाविक और साफ हिंदी देवनागरी में होनी चाहिए।
+
+Brand name, app name, website name और जरूरी
+technical terms English में रह सकते हैं।
+
+आज के current topics के लिए नीचे दिए गए
+Google News India Hindi headlines को केवल
+संदर्भ के रूप में इस्तेमाल करें:
+
+${newsText}
+
+EXACTLY 20 अलग-अलग content items बनाइए।
+
+CONTENT TYPES:
+
+1. हिंदी चुटकुले
+2. मजेदार संवाद
+3. सुविचार
+4. हिंदी शायरी
+5. प्रेम शायरी
+6. दोस्ती शायरी
+7. जीवन शायरी
+8. मोटिवेशनल विचार
+9. भक्ति
+10. भजन
+11. कीर्तन
+12. आध्यात्मिक जानकारी
+13. ज्ञान
+14. सामान्य ज्ञान
+15. हिंदी न्यूज़ / current topics
+16. मोबाइल और Android
+17. Internet और online safety
+18. AI, Google और Technology
+19. Gaming, Ludo, Cricket और gaming tips
+20. Blogging, How-to, Entertainment और Trending topics
+
+अलग-अलग items में अलग-अलग विषय मिलाकर सामग्री
+तैयार करें ताकि रोज़ वेबसाइट पर नई variety आए।
+
+CATEGORIES:
+
+Jokes:
+Funny, Desi, Family, Friendship, School, Office
+
+Shayari:
+Love, Friendship, Life, Motivational, Emotional
+
+Bhakti:
+Prayer, Devotional, Spiritual, Bhajan, Kirtan, Festival
+
+Knowledge:
+Science, India, Space, Animals, History, General Knowledge
+
+News:
+India, World, Technology, Sports, Entertainment, Trending
+
+Technology:
+Technology, AI, Google, Internet, Apps, Gadgets, Cyber Safety
+
+Mobile:
+Android, Mobile Tips, Apps, Smartphones, Settings, Security
+
+Gaming:
+Games, Gaming Tips, Mobile Gaming, Ludo, Cricket, Esports
+
+Blogging:
+Blogging, SEO, Website, Content, How-To, Internet
+
+CONTENT RULES:
+
+1. सभी content मौलिक होना चाहिए।
+2. पुराने content की copy मत करें।
+3. एक ही joke, shayari या idea दोबारा मत लिखें।
+4. Family-friendly content रखें।
+5. भाषा सरल और स्वाभाविक हिंदी रखें।
+6. चुटकुले वास्तव में मजेदार और पढ़ने योग्य हों।
+7. संवाद natural और छोटे लेकिन interesting हों।
+8. शायरी मौलिक हो।
+9. प्रेम और दोस्ती की शायरी सम्मानजनक हो।
+10. भक्ति, भजन और कीर्तन से संबंधित सामग्री
+    सम्मानजनक और मौलिक हो।
+11. किसी प्रसिद्ध व्यक्ति के नाम से fake quote
+    मत बनाएं।
+12. Knowledge और GK में गलत तथ्य न लिखें।
+13. Fake news मत बनाएं।
+14. Current news में केवल दिए गए headlines
+    से topic/context लें।
+15. Headline में उपलब्ध जानकारी से आगे
+    कोई तथ्य invent मत करें।
+16. किसी व्यक्ति या संस्था पर बिना आधार
+    आरोप मत लगाएं।
+17. राजनीतिक persuasion मत करें।
+18. स्वास्थ्य, पैसे या investment के बारे में
+    guaranteed या झूठे claims मत करें।
+19. किसी दूसरी वेबसाइट का पूरा article,
+    paragraph या content copy मत करें।
+20. किसी copyrighted article को rewrite करके
+    लगभग वही पूरा article मत बनाएं।
+21. Trending topics में केवल उपलब्ध current
+    headlines से सुरक्षित और सामान्य जानकारी दें।
+22. अगर current headline की जानकारी पर्याप्त
+    नहीं है तो उसके बारे में details invent न करें।
+23. Mobile, Android, Internet, AI, Google,
+    Technology और Gaming पर practical जानकारी दें।
+24. How-to content step-by-step और उपयोगी हो।
+25. Blog content थोड़ा विस्तार से लिखा जाए।
+26. हर item दूसरे item से अलग होना चाहिए।
+27. Content इतना छोटा न हो कि website पर
+    उपयोगी न लगे।
+28. हर content के लिए SEO-friendly title रखें।
+29. हर content के लिए 3 से 8 useful keywords दें।
+30. हर item में sourceNote जरूर दें।
 
-          सभी user-facing सामग्री मुख्य रूप से सरल,
-          स्वाभाविक और साफ हिंदी देवनागरी में होनी चाहिए।
+IMPORTANT FULL CONTENT RULE:
 
-          Brand name, app name, website name और जरूरी
-          technical terms English में रह सकते हैं।
+किसी भी category का content केवल headline,
+title, नाम या 1-2 लाइन का छोटा text नहीं होना चाहिए।
 
-          आज के current topics के लिए नीचे दिए गए
-          Google News India Hindi headlines को केवल
-          संदर्भ के रूप में इस्तेमाल करें:
+हर item का पूरा पढ़ने योग्य content उसी
+"content" field में देना है।
 
-          ${newsText}
+Jokes:
+पूरा joke और उसका पूरा मजेदार संवाद/पंचलाइन दें।
 
-          EXACTLY 20 अलग-अलग content items बनाइए।
+Dialogue:
+पूरा छोटा लेकिन meaningful dialogue दें।
 
-          CONTENT TYPES:
+Shayari:
+पूरी मौलिक शायरी दें, केवल एक-दो पंक्तियां नहीं।
 
-          1. हिंदी चुटकुले
-          2. मजेदार संवाद
-          3. सुविचार
-          4. हिंदी शायरी
-          5. प्रेम शायरी
-          6. दोस्ती शायरी
-          7. जीवन शायरी
-          8. मोटिवेशनल विचार
-          9. भक्ति
-          10. भजन
-          11. कीर्तन
-          12. आध्यात्मिक जानकारी
-          13. ज्ञान
-          14. सामान्य ज्ञान
-          15. हिंदी न्यूज़ / current topics
-          16. मोबाइल और Android
-          17. Internet और online safety
-          18. AI, Google और Technology
-          19. Gaming, Ludo, Cricket और gaming tips
-          20. Blogging, How-to, Entertainment और Trending topics
-
-          अलग-अलग items में अलग-अलग विषय मिलाकर सामग्री
-          तैयार करें ताकि रोज़ वेबसाइट पर नई variety आए।
-
-          CATEGORIES:
-
-          Jokes:
-          Funny, Desi, Family, Friendship, School, Office
-
-          Shayari:
-          Love, Friendship, Life, Motivational, Emotional
-
-          Bhakti:
-          Prayer, Devotional, Spiritual, Bhajan, Kirtan, Festival
-
-          Knowledge:
-          Science, India, Space, Animals, History, General Knowledge
-
-          News:
-          India, World, Technology, Sports, Entertainment, Trending
-
-          Technology:
-          Technology, AI, Google, Internet, Apps, Gadgets, Cyber Safety
-
-          Mobile:
-          Android, Mobile Tips, Apps, Smartphones, Settings, Security
-
-          Gaming:
-          Games, Gaming Tips, Mobile Gaming, Ludo, Cricket, Esports
-
-          Blogging:
-          Blogging, SEO, Website, Content, How-To, Internet
-
-          CONTENT RULES:
-
-          1. सभी content मौलिक होना चाहिए।
-
-          2. पुराने content की copy मत करें।
-
-          3. एक ही joke, shayari या idea दोबारा मत लिखें।
-
-          4. Family-friendly content रखें।
-
-          5. भाषा सरल और स्वाभाविक हिंदी रखें।
-
-          6. चुटकुले वास्तव में मजेदार और पढ़ने योग्य हों।
-
-          7. संवाद natural और छोटे लेकिन interesting हों।
-
-          8. शायरी मौलिक हो।
-
-          9. प्रेम और दोस्ती की शायरी सम्मानजनक हो।
-
-          10. भक्ति, भजन और कीर्तन से संबंधित सामग्री
-              सम्मानजनक और मौलिक हो।
-
-          11. किसी प्रसिद्ध व्यक्ति के नाम से fake quote
-              मत बनाएं।
-
-          12. Knowledge और GK में गलत तथ्य न लिखें।
-
-          13. Fake news मत बनाएं।
-
-          14. Current news में केवल दिए गए headlines
-              से topic/context लें।
-
-          15. Headline में उपलब्ध जानकारी से आगे
-              कोई तथ्य invent मत करें।
-
-          16. किसी व्यक्ति या संस्था पर बिना आधार
-              आरोप मत लगाएं।
-
-          17. राजनीतिक persuasion मत करें।
-
-          18. स्वास्थ्य, पैसे या investment के बारे में
-              guaranteed या झूठे claims मत करें।
-
-          19. किसी दूसरी वेबसाइट का पूरा article,
-              paragraph या content copy मत करें।
-
-          20. किसी copyrighted article को rewrite करके
-              लगभग वही पूरा article मत बनाएं।
-
-          21. Trending topics में केवल उपलब्ध current
-              headlines से सुरक्षित और सामान्य जानकारी दें।
-
-          22. अगर current headline की जानकारी पर्याप्त
-              नहीं है तो उसके बारे में details invent न करें।
-
-          23. Mobile, Android, Internet, AI, Google,
-              Technology और Gaming पर practical जानकारी दें।
-
-          24. How-to content step-by-step और उपयोगी हो।
-
-          25. Blog content थोड़ा विस्तार से लिखा जाए।
-
-          26. हर item दूसरे item से अलग होना चाहिए।
-
-          27. Content इतना छोटा न हो कि website पर
-              उपयोगी न लगे।
-
-          28. हर content के लिए SEO-friendly title रखें।
-
-          29. हर content के लिए 3 से 8 useful keywords दें।
-
-          30. हर item में sourceNote जरूर दें।
-
-          IMPORTANT FULL CONTENT RULE:
-
-          किसी भी category का content केवल headline,
-          title, short teaser या 1-2 line का जवाब नहीं होना चाहिए।
-
-          हर item website पर पूरा पढ़ने योग्य होना चाहिए।
-
-          हर item में विषय को पर्याप्त विस्तार से समझाएं।
-
-          केवल headline लिखकर content समाप्त नहीं करना है।
-
-          केवल "Read More" के लिए मुख्य जानकारी छिपाकर
-          नहीं रखनी है।
-
-          जो भी सामग्री generate हो रही है,
-          उसका पूरा उपलब्ध मुख्य content उसी item के
-          "content" field में देना है।
-
-          FULL NEWS RULE:
-
-          Google News India से मिलने वाली current headline
-          को केवल headline की तरह publish नहीं करना है।
-
-          Current news item को एक पूरा,
-          सरल और पढ़ने योग्य Hindi news/explainer
-          बनाना है।
-
-          News item में:
-
-          - सबसे पहले headline का मुख्य विषय स्पष्ट करें।
-          - headline से उपलब्ध निश्चित जानकारी समझाएं।
-          - उपलब्ध topic/context को सरल हिंदी में समझाएं।
-          - पाठक को विषय का उपयोगी context दें।
-          - content को पर्याप्त विस्तार दें।
-          - केवल headline दोहराकर समाप्त न करें।
-          - केवल 1-2 वाक्य का news item न बनाएं।
-          - "Read More" के लिए अधूरी जानकारी न छोड़ें।
-          - पूरा उपलब्ध सुरक्षित content उसी item में रखें।
-
-          लेकिन Google News headline में जो जानकारी उपलब्ध
-          नहीं है, उसे अपनी तरफ से fact बनाकर नहीं जोड़ना है।
-
-          विशेष रूप से कोई नया:
-
-          - नाम
-          - तारीख
-          - संख्या
-          - स्थान
-          - बयान
-          - quote
-          - आरोप
-          - घटना की detail
-
-          बिना उपलब्ध आधार के invent नहीं करनी है।
-
-          अगर किसी current headline में बहुत कम जानकारी है,
-          तो उस headline के उपलब्ध विषय पर एक सुरक्षित,
-          सामान्य और स्पष्ट Hindi explainer बनाएं।
-
-          ऐसी स्थिति में अपुष्ट जानकारी को तथ्य की तरह
-          प्रस्तुत नहीं करना है।
-
-          Current news को किसी दूसरी website के article की
-          copy या near-copy नहीं बनाना है।
-
-          News original Hindi wording में लिखनी है।
-
-          FULL CONTENT RULE FOR ALL OTHER CATEGORIES:
-
-          Jokes में पूरा joke और punchline दें।
-
-          Dialogue में पूरा natural dialogue दें।
-
-          Shayari में पूरी shayari दें।
-
-          Bhakti में पूरी मौलिक devotional सामग्री दें।
-
-          Bhajan में पूरा मौलिक भजन-style content दें।
-
-          Kirtan में पूरा मौलिक kirtan-style content दें।
-
-          Knowledge में विषय को स्पष्ट रूप से समझाएं।
-
-          Mobile और Android content में पूरा useful explanation
-          और जरूरत होने पर step-by-step instructions दें।
-
-          Internet और online safety content में practical
-          जानकारी और जरूरी सावधानियां दें।
-
-          AI, Google और Technology content में पूरा
-          आसान explanation दें।
-
-          Gaming और Ludo content में उपयोगी पूरी जानकारी दें।
-
-          Blogging और SEO content में पूरा actionable
-          explanation दें।
-
-          How-to content में steps अधूरे नहीं होने चाहिए।
-
-          Entertainment और Trending content केवल छोटी
-          headline या teaser नहीं होना चाहिए।
-
-          SOURCE NOTE RULES:
-
-          Current/news/trending topics:
-          "Google News headlines से topic लिया गया"
-
-          Original jokes/shayari/bhakti/dialogue:
-          "मौलिक सामग्री"
-
-          Knowledge/tips/how-to/blog:
-          "मौलिक सामग्री"
-
-          URLs sourceNote में मत डालें।
-
-          EXACTLY 20 ITEMS लौटाएं।
-
-          JSON के अलावा कोई text मत लौटाएं।
-
-          Markdown मत लौटाएं।
-
-          JSON format:
-
-          {
-            "items": [
-              {
-                "type": "jokes",
-                "title": "हिंदी शीर्षक",
-                "category": "Funny",
-                "content": "पूरा उपयोगी और पढ़ने योग्य content",
-                "keywords": [
-                  "हिंदी चुटकुले",
-                  "मजेदार",
-                  "हंसी"
-                ],
-                "seoTitle": "SEO title",
-                "metaDescription": "छोटा SEO description",
-                "sourceNote": "मौलिक सामग्री"
-              }
-            ]
-          }
-          `;
+Bhakti:
+पूरी उपयोगी और सम्मानजनक devotional सामग्री दें।
+
+Bhajan:
+पूरा मौलिक devotional content दें।
+
+Kirtan:
+पूरा मौलिक और सम्मानजनक content दें।
+
+Knowledge/GK:
+विषय को समझाने वाला पूरा उपयोगी content दें।
+
+Mobile/Android:
+पूरी practical जानकारी और जहां जरूरी हो
+step-by-step instructions दें।
+
+Internet/AI/Google/Technology:
+पूरा explanation और उपयोगी जानकारी दें।
+
+Gaming/Ludo/Cricket:
+पूरा gaming-related explanation, tips या guide दें।
+
+Blogging/SEO/Website:
+पूरा उपयोगी article-style content दें।
+
+How-to:
+सिर्फ title या steps की एक छोटी list नहीं।
+विषय को पूरा समझाएं और जरूरी steps दें।
+
+Entertainment/Trending:
+सिर्फ trending headline नहीं।
+उपलब्ध जानकारी के आधार पर पूरा readable content दें।
+
+IMPORTANT NEWS RULE:
+
+Google News India से मिलने वाली current headline
+को वेबसाइट पर केवल headline के रूप में publish
+नहीं करना है।
+
+हर current news item के लिए:
+
+- headline का मुख्य विषय स्पष्ट करें।
+- उपलब्ध headline और उपलब्ध context से
+  पूरा readable Hindi news/explainer content बनाएं।
+- केवल headline को दोहराकर content समाप्त न करें।
+- पाठक को विषय का आसान और स्पष्ट संदर्भ दें।
+- उपलब्ध जानकारी को विस्तार से समझाएं।
+- पूरा उपलब्ध news content उसी "content"
+  field में रखें।
+- Read More के लिए मुख्य जानकारी छिपाकर न रखें।
+
+लेकिन headline या उपलब्ध context में जो जानकारी
+नहीं है, उसे अपनी तरफ से fact बनाकर नहीं जोड़ना है।
+
+नाम, तारीख, समय, स्थान, संख्या, आंकड़े,
+quotes, बयान, आरोप या घटना की अतिरिक्त details
+invent नहीं करनी हैं।
+
+यदि किसी headline में जानकारी बहुत कम है,
+तो उपलब्ध जानकारी के आधार पर सुरक्षित,
+स्पष्ट और उपयोगी Hindi explainer लिखें।
+
+Current news को दूसरी website से copy नहीं करना है।
+
+Current news को original Hindi wording में लिखना है।
+
+SOURCE NOTE RULES:
+
+Current/news/trending topics:
+"Google News headlines से topic लिया गया"
+
+Original jokes/shayari/bhakti/dialogue:
+"मौलिक सामग्री"
+
+Knowledge/tips/how-to/blog:
+"मौलिक सामग्री"
+
+URLs sourceNote में मत डालें।
+
+EXACTLY 20 ITEMS लौटाएं।
+
+JSON के अलावा कोई text मत लौटाएं।
+Markdown मत लौटाएं।
+
+JSON format:
+
+{
+  "items": [
+    {
+      "type": "jokes",
+      "title": "हिंदी शीर्षक",
+      "category": "Funny",
+      "content": "पूरा उपयोगी content",
+      "keywords": [
+        "हिंदी चुटकुले",
+        "मजेदार",
+        "हंसी"
+      ],
+      "seoTitle": "SEO title",
+      "metaDescription": "छोटा SEO description",
+      "sourceNote": "मौलिक सामग्री"
+    }
+  ]
+}
+`;
 
             const body = {
               contents: [
@@ -506,9 +445,7 @@ jobs:
               }
             };
 
-            console.log(
-              "Sending request to Gemini..."
-            );
+            console.log("Sending request to Gemini...");
 
             const response = await fetch(
               API_URL,
@@ -635,11 +572,7 @@ jobs:
                 "internet",
                 "ai",
                 "tips",
-                "blog",
-                "bhajan",
-                "kirtan",
-                "spiritual",
-                "trends"
+                "blog"
               ]);
 
             const cleanItems =
