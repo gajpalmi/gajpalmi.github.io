@@ -3,7 +3,7 @@ const fs = require("fs");
 const API_KEY = process.env.GEMINI_API_KEY;
 
 if (!API_KEY) {
-  console.error("ERROR: GEMINI_API_KEY secret is missing.");
+  console.error("GEMINI_API_KEY secret is missing.");
   process.exit(1);
 }
 
@@ -15,363 +15,114 @@ const API_URL =
 const NEWS_URL =
   "https://news.google.com/rss?hl=hi&gl=IN&ceid=IN:hi";
 
-const CONTENT_FILE =
+const OUTPUT_FILE =
   "content/auto-content.json";
-
-const LOG_DIR =
-  "content/logs";
-
-const MAX_STORED_ITEMS = 300;
-const TARGET_ITEMS = 20;
-const MAX_NEWS_TOPICS = 15;
 
 function cleanText(text) {
   return String(text || "")
-    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/gi, "$1")
-    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<!\[CDATA\[(.*?)\]\]>/g, "$1")
     .replace(/<[^>]*>/g, " ")
-    .replace(/&amp;/gi, "&")
-    .replace(/&quot;/gi, '"')
-    .replace(/&#39;/gi, "'")
-    .replace(/&apos;/gi, "'")
-    .replace(/&lt;/gi, "<")
-    .replace(/&gt;/gi, ">")
-    .replace(/&#(\d+);/g, (_, n) => {
-      try {
-        return String.fromCodePoint(Number(n));
-      } catch {
-        return "";
-      }
-    })
-    .replace(/&#x([0-9a-f]+);/gi, (_, n) => {
-      try {
-        return String.fromCodePoint(parseInt(n, 16));
-      } catch {
-        return "";
-      }
-    })
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
     .replace(/\s+/g, " ")
     .trim();
 }
 
-function makeMetaDescription(text) {
-  return cleanText(text)
-    .slice(0, 155);
-}
-
-function normalizeType(value) {
-  const raw = String(value || "")
-    .trim()
-    .toLowerCase();
-
-  const aliases = {
-    joke: "jokes",
-    jokes: "jokes",
-
-    shayari: "shayari",
-    poetry: "shayari",
-    poem: "shayari",
-
-    bhakti: "bhakti",
-    devotional: "bhakti",
-
-    bhajan: "bhajan",
-    bhajans: "bhajan",
-
-    kirtan: "kirtan",
-    kirtans: "kirtan",
-
-    spiritual: "bhakti",
-    spirituality: "bhakti",
-
-    knowledge: "knowledge",
-    gk: "knowledge",
-    "general knowledge": "knowledge",
-
-    news: "news",
-
-    technology: "technology",
-    tech: "technology",
-
-    mobile: "mobile",
-    android: "mobile",
-
-    internet: "internet",
-
-    ai: "ai",
-
-    google: "google",
-
-    apps: "apps",
-    app: "apps",
-
-    gadgets: "gadgets",
-    gadget: "gadgets",
-
-    gaming: "gaming",
-    game: "gaming",
-    ludo: "gaming",
-    "cricket gaming": "gaming",
-
-    entertainment: "entertainment",
-
-    dialogue: "dialogue",
-    dialogues: "dialogue",
-
-    tips: "tips",
-    tip: "tips",
-    "how-to": "tips",
-    howto: "tips",
-
-    blog: "blog",
-    blogs: "blog",
-
-    trending: "trends",
-    trends: "trends",
-
-    motivation: "motivation",
-    motivational: "motivation",
-
-    suvichar: "suvichar",
-    "su-vichar": "suvichar",
-
-    website: "website",
-    seo: "seo",
-
-    love: "shayari",
-    friendship: "shayari"
-  };
-
-  return aliases[raw] || "blog";
-}
-
-function normalizeKeywords(value) {
-  if (!Array.isArray(value)) {
-    return [];
-  }
-
-  const result = [];
-
-  for (const keyword of value) {
-    const text = cleanText(keyword);
-
-    if (!text) {
-      continue;
-    }
-
-    if (!result.includes(text)) {
-      result.push(text);
-    }
-
-    if (result.length >= 8) {
-      break;
-    }
-  }
-
-  return result;
-}
-
-function normalizeUrl(value) {
-  const url = String(value || "").trim();
-
-  if (!url) {
-    return "";
-  }
-
-  if (/^https?:\/\/[^\s]+$/i.test(url)) {
-    return url;
-  }
-
-  return "";
-}
-
-function normalizeItem(item, index, generatedAt) {
-  if (!item || typeof item !== "object") {
-    return null;
-  }
-
-  const title = cleanText(item.title);
-  const content = cleanText(item.content);
-
-  if (!title || !content) {
-    return null;
-  }
-
-  const type = normalizeType(item.type);
-
-  const category =
-    cleanText(item.category) ||
-    "General";
-
-  const keywords =
-    normalizeKeywords(item.keywords);
-
-  const seoTitle =
-    cleanText(item.seoTitle) ||
-    title;
-
-  const metaDescription =
-    cleanText(item.metaDescription) ||
-    makeMetaDescription(content);
-
-  let sourceNote =
-    cleanText(item.sourceNote);
-
-  if (!sourceNote) {
-    sourceNote =
-      type === "news" ||
-      type === "trends"
-        ? "Google News India के current topic से प्रेरित"
-        : "मौलिक सामग्री";
-  }
-
-  const sourceUrl =
-    normalizeUrl(item.sourceUrl);
-
-  return {
-    type,
-    title,
-    category,
-    content,
-    keywords,
-    seoTitle,
-    metaDescription:
-      metaDescription.slice(0, 160),
-    sourceNote,
-    sourceUrl,
-    generatedAt,
-    contentId:
-      `${Date.now()}-${index}-${Math.random()
-        .toString(36)
-        .slice(2, 8)}`
-  };
-}
-
 async function getCurrentNews() {
-  console.log(
-    "Getting current Google News India Hindi RSS..."
-  );
-
   try {
-    const response = await fetch(
-      NEWS_URL,
-      {
-        headers: {
-          "User-Agent":
-            "GAMEZONE-ARENA-Auto-Content/1.0"
-        }
-      }
-    );
+    console.log("Getting current Hindi Google News...");
+
+    const response = await fetch(NEWS_URL);
 
     if (!response.ok) {
       console.log(
-        `Google News RSS unavailable. HTTP ${response.status}`
+        `Google News RSS unavailable: ${response.status}`
       );
 
       return [];
     }
 
-    const xml =
-      await response.text();
+    const xml = await response.text();
 
-    if (!xml) {
-      return [];
-    }
+    const newsItems = [];
 
-    const items = [];
+    const matches = xml.matchAll(
+      /<item>([\s\S]*?)<\/item>/g
+    );
 
-    for (
-      const match of xml.matchAll(
-        /<item>([\s\S]*?)<\/item>/gi
-      )
-    ) {
-      const block =
-        match[1];
+    for (const match of matches) {
+      const block = match[1];
 
-      const titleMatch =
-        block.match(
-          /<title>([\s\S]*?)<\/title>/i
-        );
+      const titleMatch = block.match(
+        /<title>([\s\S]*?)<\/title>/
+      );
 
-      const descriptionMatch =
-        block.match(
-          /<description>([\s\S]*?)<\/description>/i
-        );
+      const descriptionMatch = block.match(
+        /<description>([\s\S]*?)<\/description>/
+      );
 
-      const linkMatch =
-        block.match(
-          /<link>([\s\S]*?)<\/link>/i
-        );
+      const linkMatch = block.match(
+        /<link>([\s\S]*?)<\/link>/
+      );
 
-      const dateMatch =
-        block.match(
-          /<pubDate>([\s\S]*?)<\/pubDate>/i
-        );
+      if (!titleMatch) {
+        continue;
+      }
 
       const title =
-        cleanText(
-          titleMatch?.[1]
-        );
+        cleanText(titleMatch[1]);
 
       const description =
         cleanText(
-          descriptionMatch?.[1]
+          descriptionMatch
+            ? descriptionMatch[1]
+            : ""
         );
 
       const link =
         cleanText(
-          linkMatch?.[1]
-        );
-
-      const published =
-        cleanText(
-          dateMatch?.[1]
+          linkMatch
+            ? linkMatch[1]
+            : ""
         );
 
       if (!title) {
         continue;
       }
 
-      const duplicate =
-        items.some(
-          item =>
-            item.title
-              .toLowerCase() ===
-            title.toLowerCase()
-        );
-
-      if (duplicate) {
+      if (
+        newsItems.some(
+          item => item.title === title
+        )
+      ) {
         continue;
       }
 
-      items.push({
+      newsItems.push({
         title,
         description,
-        link,
-        published
+        link
       });
 
-      if (
-        items.length >=
-        MAX_NEWS_TOPICS
-      ) {
+      if (newsItems.length >= 20) {
         break;
       }
     }
 
     console.log(
-      `Current news topics found: ${items.length}`
+      `Current news items found: ${newsItems.length}`
     );
 
-    return items;
+    return newsItems;
   } catch (error) {
     console.log(
-      "Google News RSS could not be loaded."
+      "Could not load Google News."
     );
 
-    console.log(
-      error.message
-    );
+    console.log(error.message);
 
     return [];
   }
@@ -379,325 +130,380 @@ async function getCurrentNews() {
 
 function buildNewsContext(news) {
   if (!news.length) {
-    return `
-आज Google News RSS उपलब्ध नहीं है।
-
-इस स्थिति में current news invent नहीं करनी है।
-
-News/trending article तभी बनाएं जब पर्याप्त
-विश्वसनीय current information उपलब्ध हो।
-
-बाकी original evergreen content बनाएं।
-`;
+    return "आज कोई current Hindi Google News headline उपलब्ध नहीं है।";
   }
 
   return news
-    .map(
-      (item, index) => `
-NEWS ${index + 1}
-Title: ${item.title}
-Description: ${
-        item.description ||
-        "उपलब्ध नहीं"
-      }
-Source URL: ${
-        item.link ||
-        "उपलब्ध नहीं"
-      }
-Published: ${
-        item.published ||
-        "उपलब्ध नहीं"
-      }
-`
-    )
-    .join("\n");
+    .map((item, index) => {
+      return [
+        `NEWS ${index + 1}`,
+        `Headline: ${item.title}`,
+        `Available description: ${item.description || "उपलब्ध नहीं"}`,
+        `Source link: ${item.link || "उपलब्ध नहीं"}`
+      ].join("\n");
+    })
+    .join("\n\n");
 }
 
-function buildPrompt(news) {
+async function generateContent(news) {
   const newsContext =
     buildNewsContext(news);
 
-  return `
-आप GAMEZONE ARENA वेबसाइट के लिए रोज नई,
-मौलिक, उपयोगी और family-friendly हिंदी सामग्री
-तैयार करने वाले professional automatic editor हैं।
+  const prompt = `
+आप GAMEZONE ARENA वेबसाइट के लिए रोज़ नई,
+मौलिक और उपयोगी हिंदी सामग्री तैयार करने वाले
+professional automatic content editor हैं।
 
-EXACTLY ${TARGET_ITEMS} अलग-अलग content items बनाइए।
+सभी user-facing सामग्री मुख्य रूप से सरल,
+स्वाभाविक और साफ हिंदी देवनागरी में होनी चाहिए।
 
-सभी user-facing content मुख्य रूप से सरल
-हिंदी देवनागरी में होना चाहिए।
+Brand name, app name, website name और जरूरी
+technical terms English में रह सकते हैं।
 
-जरूरी technical terms English में रह सकते हैं।
+आज के current topics के लिए नीचे दिए गए
+Google News India Hindi data को केवल उपलब्ध
+source/context के रूप में इस्तेमाल करें।
 
-==================================================
-CURRENT GOOGLE NEWS INDIA CONTEXT
-==================================================
+================ CURRENT NEWS DATA ================
 
 ${newsContext}
 
-ऊपर दिए गए Google News topics केवल current
-topic context के रूप में उपयोग करें।
+====================================================
 
-किसी भी current घटना की ऐसी जानकारी मत बनाएं
-जो दिए गए source information में मौजूद नहीं है।
+EXACTLY 20 अलग-अलग content items बनाइए।
 
-==================================================
-CONTENT VARIETY
-==================================================
+सबसे महत्वपूर्ण नियम:
 
-इन विषयों में variety रखें:
+किसी भी item को केवल headline,
+title, एक-दो लाइन या बहुत छोटा snippet
+बनाकर समाप्त नहीं करना है।
+
+हर item का पूरा readable content
+"content" field में देना है।
+
+हर item ऐसा होना चाहिए कि visitor उसे
+website पर खोलकर आराम से पढ़ सके।
+
+NEWS:
+
+News item में केवल headline दोहराकर
+नहीं छोड़ना है।
+
+Headline और उपलब्ध description/context
+के आधार पर पूरा Hindi news explainer लिखें।
+
+News को साफ तरीके से समझाएं:
+
+- घटना/विषय क्या है
+- headline में उपलब्ध मुख्य जानकारी क्या है
+- उसका सामान्य context क्या है
+- reader के लिए इसका क्या मतलब है
+- उपलब्ध जानकारी से जो सुरक्षित निष्कर्ष निकाला जा सकता है
+
+लेकिन source में उपलब्ध न होने वाली
+specific information invent नहीं करनी है।
+
+नाम, तारीख, समय, स्थान, संख्या,
+आंकड़े, quotes, बयान, आरोप या घटना-details
+अपनी तरफ से नहीं बनानी हैं।
+
+अगर headline बहुत छोटी है तो
+उसे लंबा fake news article न बनाएं।
+
+ऐसी स्थिति में उपलब्ध information के आधार पर
+पूरा लेकिन सावधान Hindi explainer लिखें।
+
+News content को किसी दूसरी website से copy नहीं करना है।
+
+NEWS SOURCE NOTE:
+
+Current/news/trending item के लिए:
+
+"Google News headlines से topic लिया गया"
+
+अनावश्यक URLs को content में न डालें।
+
+====================================================
+
+CONTENT TYPES:
 
 1. हिंदी चुटकुले
 2. मजेदार संवाद
 3. सुविचार
-4. मोटिवेशन
+4. हिंदी शायरी
 5. प्रेम शायरी
 6. दोस्ती शायरी
 7. जीवन शायरी
-8. भक्ति
-9. भजन
-10. कीर्तन
-11. आध्यात्मिक जानकारी
-12. सामान्य ज्ञान
-13. Knowledge
-14. Current-topic news
-15. Mobile
-16. Android
-17. Internet
-18. Online Safety
-19. AI
-20. Google
-21. Technology
-22. Apps
-23. Gadgets
-24. Gaming
-25. Ludo
-26. Cricket Gaming
-27. Gaming Tips
-28. Blogging
-29. SEO
-30. Website
-31. How-To
-32. Entertainment
-33. Trending Topics
-34. Internet searches से जुड़े सामान्य उपयोगी विषय
+8. मोटिवेशनल विचार
+9. भक्ति
+10. भजन
+11. कीर्तन
+12. आध्यात्मिक जानकारी
+13. ज्ञान
+14. सामान्य ज्ञान
+15. हिंदी न्यूज़ / current topics
+16. मोबाइल और Android
+17. Internet और online safety
+18. AI, Google और Technology
+19. Gaming, Ludo, Cricket और gaming tips
+20. Blogging, How-to, Entertainment और Trending topics
 
-हर दिन topics और ideas में variety रखें।
+अलग-अलग items में variety रखें।
 
-एक ही प्रकार के 20 items मत बनाएं।
+हर दिन एक ही तरह के 20 items न बनाएं।
 
-==================================================
-CONTENT LENGTH
-==================================================
+====================================================
 
-Jokes:
-80-180 शब्द।
+JOKES:
 
-Dialogue:
-100-220 शब्द।
+पूरा joke लिखें।
 
-Shayari:
-छोटी, original और meaningful रखें।
+Setup और punchline दोनों दें।
 
-Bhakti/Bhajan/Kirtan:
-150-400 शब्द।
+सिर्फ एक line का joke न दें।
 
-Knowledge/GK/Tips:
-250-450 शब्द।
+====================================================
 
-Mobile/Android/AI/Technology/Gaming:
-350-650 शब्द।
+DIALOGUE:
 
-Blog/current-topic article:
-450-800 शब्द, लेकिन केवल तभी जब
-उपलब्ध जानकारी पर्याप्त हो।
+Natural और readable dialogue दें।
 
-==================================================
-CURRENT NEWS RULES
-==================================================
+कम से कम पर्याप्त बातचीत हो ताकि
+visitor को पूरा dialogue समझ आए।
 
-Current news के लिए केवल दिए गए RSS context
-का उपयोग करें।
+====================================================
 
-Headline को देखकर unsupported details
-invent मत करें।
+SHAYARI:
 
-नाम invent मत करें।
+पूरी मौलिक shayari दें।
 
-आंकड़े invent मत करें।
+केवल एक या दो पंक्तियां नहीं।
 
-घटना की तारीख invent मत करें।
+Love, Friendship, Life,
+Motivational और Emotional themes
+का उपयोग कर सकते हैं।
 
-किसी व्यक्ति पर आरोप invent मत करें।
+सम्मानजनक भाषा रखें।
 
-किसी source की बात को fact से ज्यादा बड़ा
-बनाकर प्रस्तुत मत करें।
+====================================================
 
-यदि information सीमित है तो content में साफ
-बताएं कि उपलब्ध जानकारी सीमित है।
+BHAKTI:
 
-External article को copy मत करें।
+भक्ति content पूरा और उपयोगी होना चाहिए।
 
-News एक original Hindi summary/explanation
-होनी चाहिए।
+सिर्फ "जय श्री..." या कुछ छोटी lines
+देकर समाप्त नहीं करना है।
 
-Political topic आने पर केवल neutral factual
-भाषा रखें।
+विषय के अनुसार devotional explanation,
+भावना, महत्व या practical spiritual जानकारी दें।
 
-किसी पार्टी, नेता, उम्मीदवार या political
-position के पक्ष या विपक्ष में persuasion नहीं।
+====================================================
 
-किसी को winner/best/worst घोषित नहीं करें।
+BHAJAN:
 
-==================================================
-ORIGINAL CONTENT
-==================================================
+मौलिक और सम्मानजनक bhajan-related content दें।
 
-सभी jokes original हों।
+किसी प्रसिद्ध copyrighted भजन के पूरे lyrics
+copy नहीं करने हैं।
 
-सभी shayari original हों।
+====================================================
 
-सभी dialogues original हों।
+KIRTAN:
 
-Bhakti content respectful और original हो।
+मौलिक और सम्मानजनक kirtan-related content दें।
 
-Bhajan/Kirtan में copyrighted lyrics copy
-नहीं करने हैं।
+====================================================
 
-किसी प्रसिद्ध व्यक्ति के नाम से fake quote
-नहीं बनाना है।
+KNOWLEDGE / GK:
 
-Knowledge में गलत तथ्य नहीं लिखना है।
+विषय को समझाने वाला पूरा content दें।
 
-Family-friendly सामग्री रखें।
+गलत तथ्य नहीं लिखें।
 
-==================================================
-HEALTH / FINANCE SAFETY
-==================================================
+जहाँ factual certainty जरूरी हो,
+वहाँ केवल reliable general knowledge का उपयोग करें।
 
-Health और financial topics में:
+====================================================
 
-- dangerous medical advice नहीं
-- guaranteed result नहीं
-- guaranteed income नहीं
-- investment profit guarantee नहीं
-- बीमारी का diagnosis नहीं
-- unsafe treatment नहीं
+MOBILE / ANDROID:
 
-General educational information हो तो
-सावधानी वाली भाषा रखें।
+Practical जानकारी दें।
 
-==================================================
-SEO
-==================================================
+उदाहरण:
 
-हर item में ये fields जरूरी हैं:
+- Android settings
+- phone security
+- battery tips
+- storage
+- apps
+- privacy
+- useful settings
+- common problems
 
-type
-title
-category
-content
-keywords
-seoTitle
-metaDescription
-sourceNote
-sourceUrl
+How-to हो तो steps दें।
 
-keywords 3 से 8 हों।
+====================================================
 
-SEO title natural हो।
+INTERNET / ONLINE SAFETY:
 
-Meta description 160 characters के अंदर हो।
+Practical और सुरक्षित जानकारी दें।
 
-==================================================
-SOURCE NOTE
-==================================================
+Fake links, scams, phishing,
+password safety, privacy आदि पर
+useful guidance दी जा सकती है।
 
-Current news/trending:
+====================================================
 
-Google News India के current topic से प्रेरित
+AI / GOOGLE / TECHNOLOGY:
 
-Original content:
+Technology को सरल भाषा में समझाएं।
 
-मौलिक सामग्री
+AI tools, Google features,
+internet technology, apps और gadgets
+पर practical information दें।
 
-==================================================
-TYPE VALUES
-==================================================
+====================================================
 
-type में इनमें से suitable value इस्तेमाल करें:
+GAMING:
 
-jokes
-shayari
-bhakti
-bhajan
-kirtan
-suvichar
-motivation
-knowledge
-news
-technology
-mobile
-internet
-ai
-google
-apps
-gadgets
-gaming
-entertainment
-dialogue
-tips
-blog
-seo
-website
-trends
+Gaming, Ludo, Cricket,
+mobile gaming और gaming tips
+पर पूरा readable content दें।
 
-==================================================
-IMPORTANT
-==================================================
+Cheating या harmful activity promote न करें।
 
-EXACTLY ${TARGET_ITEMS} items।
+====================================================
 
-JSON के अलावा कोई text नहीं।
+BLOG / HOW-TO:
 
-Markdown नहीं।
+Blog content थोड़ा विस्तार से लिखें।
 
-हर item दूसरे item से अलग होना चाहिए।
+How-to content में:
 
-Content खाली नहीं होना चाहिए।
+1. समस्या/विषय
+2. जरूरी तैयारी
+3. step-by-step तरीका
+4. जरूरी सावधानी
+5. useful conclusion
 
-Read More के लिए content field में पूरा
-readable content रखना है।
+दें।
 
-==================================================
-OUTPUT JSON
-==================================================
+====================================================
+
+ENTERTAINMENT / TRENDING:
+
+सिर्फ headline नहीं।
+
+Available information के आधार पर
+पूरा readable content दें।
+
+Unsupported claims न बनाएं।
+
+====================================================
+
+GENERAL CONTENT RULES:
+
+1. सभी content मौलिक होना चाहिए।
+
+2. पुराने content की copy मत करें।
+
+3. एक ही joke, shayari या idea दोबारा मत लिखें।
+
+4. Family-friendly content रखें।
+
+5. भाषा सरल और स्वाभाविक हिंदी रखें।
+
+6. Content इतना छोटा न हो कि website पर
+   उपयोगी न लगे।
+
+7. हर item दूसरे item से अलग होना चाहिए।
+
+8. हर content के लिए SEO-friendly title रखें।
+
+9. हर content के लिए 3 से 8 useful keywords दें।
+
+10. हर item में sourceNote जरूर दें।
+
+11. Fake quotes नहीं।
+
+12. Fake news नहीं।
+
+13. Political persuasion नहीं।
+
+14. बिना आधार किसी व्यक्ति या संस्था पर
+    आरोप नहीं।
+
+15. Health, money या investment में
+    guaranteed claims नहीं।
+
+16. Copyrighted article copy नहीं।
+
+17. किसी दूसरे article को लगभग उसी रूप में
+    rewrite नहीं करना है।
+
+18. Current headline में उपलब्ध जानकारी से
+    बाहर specific facts invent नहीं करने हैं।
+
+====================================================
+
+SOURCE NOTE RULES:
+
+Current/news/trending:
+
+"Google News headlines से topic लिया गया"
+
+Original jokes/shayari/bhakti/dialogue:
+
+"मौलिक सामग्री"
+
+Knowledge/tips/how-to/blog:
+
+"मौलिक सामग्री"
+
+====================================================
+
+SEO:
+
+हर item में:
+
+- title
+- seoTitle
+- metaDescription
+- 3 से 8 keywords
+
+जरूर दें।
+
+====================================================
+
+IMPORTANT OUTPUT RULE:
+
+EXACTLY 20 ITEMS लौटाएं।
+
+JSON के अलावा कोई text मत लौटाएं।
+
+Markdown मत लौटाएं।
+
+JSON format:
 
 {
   "items": [
     {
       "type": "news",
-      "title": "पूरा शीर्षक",
+      "title": "हिंदी शीर्षक",
       "category": "India",
-      "content": "पूरा विस्तृत content",
+      "content": "पूरा readable content",
       "keywords": [
         "हिंदी न्यूज़",
-        "आज की खबर",
-        "current news"
+        "current news",
+        "भारत"
       ],
       "seoTitle": "SEO title",
-      "metaDescription": "SEO description",
-      "sourceNote": "Google News India के current topic से प्रेरित",
-      "sourceUrl": ""
+      "metaDescription": "छोटा SEO description",
+      "sourceNote": "Google News headlines से topic लिया गया"
     }
   ]
 }
 `;
-}
-
-async function generateContent(news) {
-  const prompt =
-    buildPrompt(news);
 
   const body = {
     contents: [
@@ -711,7 +517,7 @@ async function generateContent(news) {
     ],
 
     generationConfig: {
-      temperature: 0.85,
+      temperature: 0.9,
 
       responseMimeType:
         "application/json",
@@ -745,7 +551,6 @@ async function generateContent(news) {
 
                 keywords: {
                   type: "ARRAY",
-
                   items: {
                     type: "STRING"
                   }
@@ -761,10 +566,6 @@ async function generateContent(news) {
 
                 sourceNote: {
                   type: "STRING"
-                },
-
-                sourceUrl: {
-                  type: "STRING"
                 }
               },
 
@@ -776,8 +577,7 @@ async function generateContent(news) {
                 "keywords",
                 "seoTitle",
                 "metaDescription",
-                "sourceNote",
-                "sourceUrl"
+                "sourceNote"
               ]
             }
           }
@@ -794,31 +594,29 @@ async function generateContent(news) {
     "Sending request to Gemini..."
   );
 
-  const response =
-    await fetch(
-      API_URL,
-      {
-        method: "POST",
+  const response = await fetch(
+    API_URL,
+    {
+      method: "POST",
 
-        headers: {
-          "Content-Type":
-            "application/json",
+      headers: {
+        "Content-Type":
+          "application/json",
 
-          "x-goog-api-key":
-            API_KEY
-        },
+        "x-goog-api-key":
+          API_KEY
+      },
 
-        body:
-          JSON.stringify(body)
-      }
-    );
+      body: JSON.stringify(body)
+    }
+  );
 
   const result =
     await response.json();
 
   if (!response.ok) {
     console.error(
-      "Gemini API error:"
+      "Gemini API request failed."
     );
 
     console.error(
@@ -857,8 +655,7 @@ async function generateContent(news) {
   let parsed;
 
   try {
-    parsed =
-      JSON.parse(text);
+    parsed = JSON.parse(text);
   } catch (error) {
     console.error(
       "Gemini returned invalid JSON."
@@ -871,9 +668,7 @@ async function generateContent(news) {
 
   if (
     !parsed ||
-    !Array.isArray(
-      parsed.items
-    )
+    !Array.isArray(parsed.items)
   ) {
     console.error(
       "Gemini response does not contain items array."
@@ -882,177 +677,119 @@ async function generateContent(news) {
     process.exit(1);
   }
 
-  console.log(
-    `Gemini returned ${parsed.items.length} items.`
-  );
-
   return parsed.items;
 }
 
-function readExistingContent() {
-  if (
-    !fs.existsSync(
-      CONTENT_FILE
-    )
-  ) {
-    return [];
-  }
-
-  try {
-    const raw =
-      fs.readFileSync(
-        CONTENT_FILE,
-        "utf8"
-      );
-
-    if (!raw.trim()) {
-      return [];
-    }
-
-    const parsed =
-      JSON.parse(raw);
-
-    if (
-      Array.isArray(parsed)
-    ) {
-      return parsed;
-    }
-
-    if (
-      parsed &&
-      Array.isArray(
-        parsed.items
-      )
-    ) {
-      return parsed.items;
-    }
-
-    return [];
-  } catch (error) {
-    console.log(
-      "Existing auto-content.json could not be parsed."
-    );
-
-    console.log(
-      error.message
-    );
-
-    return [];
-  }
-}
-
-function removeDuplicateTitles(items) {
-  const seen =
-    new Set();
-
-  const result = [];
-
-  for (const item of items) {
-    const key =
-      cleanText(
-        item.title
-      )
-        .toLowerCase()
-        .replace(
-          /\s+/g,
-          " "
-        )
-        .trim();
-
-    if (!key) {
-      continue;
-    }
-
-    if (
-      seen.has(key)
-    ) {
-      continue;
-    }
-
-    seen.add(key);
-
-    result.push(item);
-  }
-
-  return result;
-}
-
 async function main() {
-  console.log("");
   console.log(
-    "=============================================="
+    "================================"
   );
+
   console.log(
     "GAMEZONE ARENA DAILY CONTENT"
   );
-  console.log(
-    "=============================================="
-  );
-
-  const generatedAt =
-    new Date().toISOString();
 
   console.log(
-    `Generated at: ${generatedAt}`
+    "================================"
   );
 
   const news =
     await getCurrentNews();
 
   const generated =
-    await generateContent(
-      news
-    );
+    await generateContent(news);
 
-  const normalized =
+  const allowedTypes =
+    new Set([
+      "jokes",
+      "shayari",
+      "bhakti",
+      "knowledge",
+      "news",
+      "technology",
+      "mobile",
+      "gaming",
+      "entertainment",
+      "dialogue",
+      "internet",
+      "ai",
+      "tips",
+      "blog"
+    ]);
+
+  const cleanItems =
     generated
-      .map(
-        (item, index) =>
-          normalizeItem(
-            item,
-            index,
-            generatedAt
-          )
+      .filter(
+        item =>
+          item &&
+          typeof item.title === "string" &&
+          typeof item.content === "string"
       )
-      .filter(Boolean);
+      .map(item => ({
+        type:
+          allowedTypes.has(
+            String(item.type || "").trim()
+          )
+            ? String(item.type).trim()
+            : "blog",
 
-  if (
-    normalized.length === 0
-  ) {
-    console.error(
-      "No valid content generated."
-    );
+        title:
+          String(item.title).trim(),
 
-    process.exit(1);
-  }
+        category:
+          String(
+            item.category || "General"
+          ).trim(),
 
-  const uniqueNew =
-    removeDuplicateTitles(
-      normalized
-    );
+        content:
+          String(item.content).trim(),
 
-  if (
-    uniqueNew.length === 0
-  ) {
-    console.error(
-      "All generated items were duplicates or invalid."
-    );
+        keywords:
+          Array.isArray(item.keywords)
+            ? item.keywords
+                .map(x =>
+                  String(x).trim()
+                )
+                .filter(Boolean)
+                .slice(0, 8)
+            : [],
 
-    process.exit(1);
-  }
+        seoTitle:
+          String(
+            item.seoTitle ||
+            item.title
+          ).trim(),
 
-  const existing =
-    readExistingContent();
+        metaDescription:
+          String(
+            item.metaDescription ||
+            item.content
+          )
+            .trim()
+            .slice(0, 160),
 
-  const finalContent =
-    removeDuplicateTitles([
-      ...uniqueNew,
-      ...existing
-    ])
-      .slice(
-        0,
-        MAX_STORED_ITEMS
+        sourceNote:
+          String(
+            item.sourceNote ||
+            "मौलिक सामग्री"
+          ).trim(),
+
+        generatedAt:
+          new Date().toISOString()
+      }))
+      .filter(
+        item =>
+          item.title &&
+          item.content
       );
+
+  if (cleanItems.length === 0) {
+    console.error(
+      "No valid content was generated."
+    );
+
+    process.exit(1);
+  }
 
   fs.mkdirSync(
     "content",
@@ -1061,8 +798,54 @@ async function main() {
     }
   );
 
+  let existing = [];
+
+  if (
+    fs.existsSync(OUTPUT_FILE)
+  ) {
+    try {
+      const raw =
+        fs.readFileSync(
+          OUTPUT_FILE,
+          "utf8"
+        );
+
+      if (raw.trim()) {
+        const parsed =
+          JSON.parse(raw);
+
+        if (Array.isArray(parsed)) {
+          existing = parsed;
+        } else if (
+          Array.isArray(parsed.items)
+        ) {
+          existing = parsed.items;
+        }
+      }
+    } catch (error) {
+      console.log(
+        "Existing content could not be read."
+      );
+
+      console.log(
+        "Starting with empty existing content."
+      );
+    }
+  }
+
+  /*
+    नया content सबसे ऊपर रहेगा।
+    पुराना content delete नहीं होगा।
+    कुल 300 items तक रखे जाएंगे।
+  */
+
+  const finalContent = [
+    ...cleanItems,
+    ...existing
+  ].slice(0, 300);
+
   fs.writeFileSync(
-    CONTENT_FILE,
+    OUTPUT_FILE,
 
     JSON.stringify(
       finalContent,
@@ -1073,88 +856,8 @@ async function main() {
     "utf8"
   );
 
-  fs.mkdirSync(
-    LOG_DIR,
-    {
-      recursive: true
-    }
-  );
-
-  const logDate =
-    generatedAt
-      .slice(
-        0,
-        10
-      );
-
-  const logFile =
-    `${LOG_DIR}/${logDate}.json`;
-
-  const logData = {
-    generatedAt,
-
-    requestedItems:
-      TARGET_ITEMS,
-
-    generatedItems:
-      generated.length,
-
-    validItems:
-      normalized.length,
-
-    newUniqueItems:
-      uniqueNew.length,
-
-    totalStoredItems:
-      finalContent.length,
-
-    newsTopics:
-      news.length,
-
-    model:
-      MODEL,
-
-    status:
-      "success"
-  };
-
-  fs.writeFileSync(
-    logFile,
-
-    JSON.stringify(
-      logData,
-      null,
-      2
-    ),
-
-    "utf8"
-  );
-
-  console.log("");
   console.log(
-    "=============================================="
-  );
-  console.log(
-    "SUCCESS"
-  );
-  console.log(
-    "=============================================="
-  );
-
-  console.log(
-    `News topics: ${news.length}`
-  );
-
-  console.log(
-    `Gemini items: ${generated.length}`
-  );
-
-  console.log(
-    `Valid items: ${normalized.length}`
-  );
-
-  console.log(
-    `New unique items: ${uniqueNew.length}`
+    `New Hindi items added: ${cleanItems.length}`
   );
 
   console.log(
@@ -1162,37 +865,24 @@ async function main() {
   );
 
   console.log(
-    `Content file: ${CONTENT_FILE}`
+    "================================"
   );
 
   console.log(
-    `Log file: ${logFile}`
+    "CONTENT GENERATION SUCCESS"
   );
 
   console.log(
-    "=============================================="
+    "================================"
   );
 }
 
-main().catch(
-  error => {
-    console.error("");
-    console.error(
-      "=============================================="
-    );
-    console.error(
-      "WORKFLOW FAILED"
-    );
-    console.error(
-      "=============================================="
-    );
+main().catch(error => {
+  console.error(
+    "Workflow script failed:"
+  );
 
-    console.error(
-      error?.stack ||
-      error?.message ||
-      error
-    );
+  console.error(error);
 
-    process.exit(1);
-  }
-);
+  process.exit(1);
+});
