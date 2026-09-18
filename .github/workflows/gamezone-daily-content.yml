@@ -1,12 +1,1 @@
-name: GAMEZONE ARENA Daily Hindi Content
 
-on:
-  schedule:
-    - cron: "45 3 * * *"
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Test workflow
-        run: echo "GAMEZONE ARENA workflow is working"
