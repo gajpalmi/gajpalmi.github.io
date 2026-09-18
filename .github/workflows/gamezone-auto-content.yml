@@ -1,139 +1,131 @@
 name: GAMEZONE ARENA Daily Hindi Content
 
 "on":
-workflow_dispatch:
-schedule:
-- cron: "45 3 * * *"
+  workflow_dispatch:
+  schedule:
+    - cron: "45 3 * * *"
 
 permissions:
-contents: write
+  contents: write
 
 jobs:
-generate-content:
-runs-on: ubuntu-latest
+  generate-content:
+    runs-on: ubuntu-latest
 
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v4
-    with:
-      fetch-depth: 0
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-  - name: Generate Hindi content with Gemini
-    env:
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-    run: |
-      node <<'NODE'
-      const fs = require("fs");
+      - name: Generate Hindi content with Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          node <<'NODE'
+          const fs = require("fs");
 
-      const API_KEY = process.env.GEMINI_API_KEY;
+          const API_KEY = process.env.GEMINI_API_KEY;
 
-      if (!API_KEY) {
-        console.error("GEMINI_API_KEY secret is missing.");
-        process.exit(1);
-      }
-
-      const MODEL = "gemini-3.5-flash-lite";
-
-      const API_URL =
-        `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
-
-      const NEWS_URL =
-        "https://news.google.com/rss?hl=hi&gl=IN&ceid=IN:hi";
-
-      function cleanText(text) {
-        return String(text || "")
-          .replace(/<!CDATA\[(.*?)\]>/g, "$1")
-          .replace(/<[^>]*>/g, " ")
-          .replace(/&amp;/g, "&")
-          .replace(/&quot;/g, '"')
-          .replace(/&#39;/g, "'")
-          .replace(/&lt;/g, "<")
-          .replace(/&gt;/g, ">")
-          .replace(/\s+/g, " ")
-          .trim();
-      }
-
-      async function getCurrentNews() {
-        try {
-          console.log("Getting current Hindi Google News...");
-
-          const response = await fetch(NEWS_URL);
-
-          if (!response.ok) {
-            console.log(
-              `Google News RSS unavailable: ${response.status}`
-            );
-            return [];
+          if (!API_KEY) {
+            console.error("GEMINI_API_KEY secret is missing.");
+            process.exit(1);
           }
 
-          const xml = await response.text();
+          const MODEL = "gemini-3.5-flash-lite";
 
-          const titles = [];
+          const API_URL =
+            `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
-          const matches = xml.matchAll(
-            /<item>([\s\S]*?)<\/item>/g
-          );
+          const NEWS_URL =
+            "https://news.google.com/rss?hl=hi&gl=IN&ceid=IN:hi";
 
-          for (const match of matches) {
-            const block = match[1];
+          function cleanText(text) {
+            return String(text || "")
+              .replace(/<!\[CDATA\[(.*?)\]\]>/g, "$1")
+              .replace(/<[^>]*>/g, " ")
+              .replace(/&amp;/g, "&")
+              .replace(/&quot;/g, '"')
+              .replace(/&#39;/g, "'")
+              .replace(/&lt;/g, "<")
+              .replace(/&gt;/g, ">")
+              .replace(/\s+/g, " ")
+              .trim();
+          }
 
-            const titleMatch = block.match(
-              /<title>([\s\S]*?)<\/title>/
-            );
+          async function getCurrentNews() {
+            try {
+              console.log("Getting current Hindi Google News...");
 
-            if (!titleMatch) {
-              continue;
-            }
+              const response = await fetch(NEWS_URL);
 
-            const title = cleanText(titleMatch[1]);
+              if (!response.ok) {
+                console.log(
+                  `Google News RSS unavailable: ${response.status}`
+                );
+                return [];
+              }
 
-            if (title && !titles.includes(title)) {
-              titles.push(title);
-            }
+              const xml = await response.text();
+              const titles = [];
 
-            if (titles.length >= 20) {
-              break;
+              const matches = xml.matchAll(
+                /<item>([\s\S]*?)<\/item>/g
+              );
+
+              for (const match of matches) {
+                const block = match[1];
+
+                const titleMatch = block.match(
+                  /<title>([\s\S]*?)<\/title>/
+                );
+
+                if (!titleMatch) {
+                  continue;
+                }
+
+                const title = cleanText(titleMatch[1]);
+
+                if (title && !titles.includes(title)) {
+                  titles.push(title);
+                }
+
+                if (titles.length >= 20) {
+                  break;
+                }
+              }
+
+              console.log(
+                `Current headlines found: ${titles.length}`
+              );
+
+              return titles;
+            } catch (error) {
+              console.log("Could not load Google News:");
+              console.log(error.message);
+              return [];
             }
           }
 
-          console.log(
-            `Current headlines found: ${titles.length}`
-          );
+          async function generateContent(news) {
+            const newsText =
+              news.length > 0
+                ? news
+                    .map(
+                      (title, index) =>
+                        `${index + 1}. ${title}`
+                    )
+                    .join("\n")
+                : "आज कोई current headline उपलब्ध नहीं है।";
 
-          return titles;
-        } catch (error) {
-          console.log("Could not load Google News:");
-          console.log(error.message);
-          return [];
-        }
-      }
+            const prompt = `
+आप GAMEZONE ARENA वेबसाइट के लिए रोज़ नई, मौलिक और उपयोगी हिंदी सामग्री तैयार करने वाले professional automatic content editor हैं।
 
-      async function generateContent(news) {
-        const newsText =
-          news.length > 0
-            ? news
-                .map(
-                  (title, index) =>
-                    `${index + 1}. ${title}`
-                )
-                .join("\n")
-            : "आज कोई current headline उपलब्ध नहीं है।";
+सभी user-facing सामग्री मुख्य रूप से सरल, स्वाभाविक और साफ हिंदी देवनागरी में होनी चाहिए।
 
-        const prompt = `
+Brand name, app name, website name और जरूरी technical terms English में रह सकते हैं।
 
-आप GAMEZONE ARENA वेबसाइट के लिए रोज़ नई,
-मौलिक और उपयोगी हिंदी सामग्री तैयार करने वाले
-professional automatic content editor हैं।
-
-सभी user-facing सामग्री मुख्य रूप से सरल,
-स्वाभाविक और साफ हिंदी देवनागरी में होनी चाहिए।
-
-Brand name, app name, website name और जरूरी
-technical terms English में रह सकते हैं।
-
-आज के current topics के लिए नीचे दिए गए
-Google News India Hindi headlines को केवल
-संदर्भ के रूप में इस्तेमाल करें:
+आज के current topics के लिए नीचे दिए गए Google News India Hindi headlines को केवल संदर्भ के रूप में इस्तेमाल करें:
 
 ${newsText}
 
@@ -162,8 +154,7 @@ CONTENT TYPES:
 19. Gaming, Ludo, Cricket और gaming tips
 20. Blogging, How-to, Entertainment और Trending topics
 
-अलग-अलग items में अलग-अलग विषय मिलाकर सामग्री
-तैयार करें ताकि रोज़ वेबसाइट पर नई variety आए।
+अलग-अलग items में अलग-अलग विषय मिलाकर सामग्री तैयार करें ताकि रोज़ वेबसाइट पर नई variety आए।
 
 CATEGORIES:
 
@@ -242,12 +233,9 @@ URLs sourceNote में मत डालें।
 
 IMPORTANT:
 
-Current news को factual news article की तरह
-invent मत करें।
+Current news को factual news article की तरह invent मत करें।
 
-अगर केवल headline उपलब्ध है तो headline से
-संबंधित सामान्य जानकारी दें और कोई अतिरिक्त
-अपुष्ट तथ्य न जोड़ें।
+अगर केवल headline उपलब्ध है तो headline से संबंधित सामान्य जानकारी दें और कोई अतिरिक्त अपुष्ट तथ्य न जोड़ें।
 
 बाकी content evergreen original content हो सकता है।
 
@@ -259,355 +247,355 @@ Markdown मत लौटाएं।
 JSON format:
 
 {
-"items": [
-{
-"type": "jokes",
-"title": "हिंदी शीर्षक",
-"category": "Funny",
-"content": "पूरा उपयोगी content",
-"keywords": [
-"हिंदी चुटकुले",
-"मजेदार",
-"हंसी"
-],
-"seoTitle": "SEO title",
-"metaDescription": "छोटा SEO description",
-"sourceNote": "मौलिक सामग्री"
-}
-]
+  "items": [
+    {
+      "type": "jokes",
+      "title": "हिंदी शीर्षक",
+      "category": "Funny",
+      "content": "पूरा उपयोगी content",
+      "keywords": [
+        "हिंदी चुटकुले",
+        "मजेदार",
+        "हंसी"
+      ],
+      "seoTitle": "SEO title",
+      "metaDescription": "छोटा SEO description",
+      "sourceNote": "मौलिक सामग्री"
+    }
+  ]
 }
 `;
 
-        const body = {
-          contents: [
-            {
-              parts: [
+            const body = {
+              contents: [
                 {
-                  text: prompt
+                  parts: [
+                    {
+                      text: prompt
+                    }
+                  ]
                 }
-              ]
-            }
-          ],
-          generationConfig: {
-            temperature: 0.9,
-            responseMimeType: "application/json",
-            responseSchema: {
-              type: "OBJECT",
-              properties: {
-                items: {
-                  type: "ARRAY",
-                  items: {
-                    type: "OBJECT",
-                    properties: {
-                      type: {
-                        type: "STRING"
-                      },
-                      title: {
-                        type: "STRING"
-                      },
-                      category: {
-                        type: "STRING"
-                      },
-                      content: {
-                        type: "STRING"
-                      },
-                      keywords: {
-                        type: "ARRAY",
-                        items: {
-                          type: "STRING"
-                        }
-                      },
-                      seoTitle: {
-                        type: "STRING"
-                      },
-                      metaDescription: {
-                        type: "STRING"
-                      },
-                      sourceNote: {
-                        type: "STRING"
+              ],
+              generationConfig: {
+                temperature: 0.9,
+                responseMimeType: "application/json",
+                responseSchema: {
+                  type: "OBJECT",
+                  properties: {
+                    items: {
+                      type: "ARRAY",
+                      items: {
+                        type: "OBJECT",
+                        properties: {
+                          type: {
+                            type: "STRING"
+                          },
+                          title: {
+                            type: "STRING"
+                          },
+                          category: {
+                            type: "STRING"
+                          },
+                          content: {
+                            type: "STRING"
+                          },
+                          keywords: {
+                            type: "ARRAY",
+                            items: {
+                              type: "STRING"
+                            }
+                          },
+                          seoTitle: {
+                            type: "STRING"
+                          },
+                          metaDescription: {
+                            type: "STRING"
+                          },
+                          sourceNote: {
+                            type: "STRING"
+                          }
+                        },
+                        required: [
+                          "type",
+                          "title",
+                          "category",
+                          "content",
+                          "keywords",
+                          "seoTitle",
+                          "metaDescription",
+                          "sourceNote"
+                        ]
                       }
-                    },
-                    required: [
-                      "type",
-                      "title",
-                      "category",
-                      "content",
-                      "keywords",
-                      "seoTitle",
-                      "metaDescription",
-                      "sourceNote"
-                    ]
-                  }
+                    }
+                  },
+                  required: [
+                    "items"
+                  ]
                 }
-              },
-              required: [
-                "items"
-              ]
+              }
+            };
+
+            console.log("Sending request to Gemini...");
+
+            const response = await fetch(
+              API_URL,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "x-goog-api-key": API_KEY
+                },
+                body: JSON.stringify(body)
+              }
+            );
+
+            const result = await response.json();
+
+            if (!response.ok) {
+              console.error("Gemini API request failed.");
+              console.error(
+                JSON.stringify(result, null, 2)
+              );
+              process.exit(1);
             }
+
+            const text =
+              result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+            if (!text) {
+              console.error("Gemini returned no content.");
+              console.error(
+                JSON.stringify(result, null, 2)
+              );
+              process.exit(1);
+            }
+
+            let parsed;
+
+            try {
+              parsed = JSON.parse(text);
+            } catch (error) {
+              console.error("Gemini returned invalid JSON.");
+              console.error(text);
+              process.exit(1);
+            }
+
+            if (
+              !parsed ||
+              !Array.isArray(parsed.items)
+            ) {
+              console.error(
+                "Gemini response does not contain items array."
+              );
+              process.exit(1);
+            }
+
+            return parsed.items;
           }
-        };
 
-        console.log("Sending request to Gemini...");
+          async function main() {
+            console.log("================================");
+            console.log("GAMEZONE ARENA DAILY CONTENT");
+            console.log("================================");
 
-        const response = await fetch(
-          API_URL,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "x-goog-api-key": API_KEY
-            },
-            body: JSON.stringify(body)
-          }
-        );
+            const news = await getCurrentNews();
 
-        const result = await response.json();
+            const generated = await generateContent(news);
 
-        if (!response.ok) {
-          console.error("Gemini API request failed.");
-          console.error(
-            JSON.stringify(result, null, 2)
-          );
-          process.exit(1);
-        }
+            const allowedTypes = new Set([
+              "jokes",
+              "shayari",
+              "bhakti",
+              "knowledge",
+              "news",
+              "technology",
+              "mobile",
+              "gaming",
+              "entertainment",
+              "dialogue",
+              "internet",
+              "ai",
+              "tips",
+              "blog"
+            ]);
 
-        const text =
-          result?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-        if (!text) {
-          console.error("Gemini returned no content.");
-          console.error(
-            JSON.stringify(result, null, 2)
-          );
-          process.exit(1);
-        }
-
-        let parsed;
-
-        try {
-          parsed = JSON.parse(text);
-        } catch (error) {
-          console.error("Gemini returned invalid JSON.");
-          console.error(text);
-          process.exit(1);
-        }
-
-        if (
-          !parsed ||
-          !Array.isArray(parsed.items)
-        ) {
-          console.error(
-            "Gemini response does not contain items array."
-          );
-          process.exit(1);
-        }
-
-        return parsed.items;
-      }
-
-      async function main() {
-        console.log("================================");
-        console.log("GAMEZONE ARENA DAILY CONTENT");
-        console.log("================================");
-
-        const news = await getCurrentNews();
-
-        const generated = await generateContent(news);
-
-        const allowedTypes = new Set([
-          "jokes",
-          "shayari",
-          "bhakti",
-          "knowledge",
-          "news",
-          "technology",
-          "mobile",
-          "gaming",
-          "entertainment",
-          "dialogue",
-          "internet",
-          "ai",
-          "tips",
-          "blog"
-        ]);
-
-        const cleanItems = generated
-          .filter(
-            item =>
-              item &&
-              typeof item.title === "string" &&
-              typeof item.content === "string"
-          )
-          .map(item => ({
-            type:
-              allowedTypes.has(
-                String(item.type || "").trim()
+            const cleanItems = generated
+              .filter(
+                item =>
+                  item &&
+                  typeof item.title === "string" &&
+                  typeof item.content === "string"
               )
-                ? String(item.type).trim()
-                : "blog",
+              .map(item => ({
+                type:
+                  allowedTypes.has(
+                    String(item.type || "").trim()
+                  )
+                    ? String(item.type).trim()
+                    : "blog",
 
-            title:
-              String(item.title).trim(),
+                title:
+                  String(item.title).trim(),
 
-            category:
-              String(
-                item.category || "General"
-              ).trim(),
+                category:
+                  String(
+                    item.category || "General"
+                  ).trim(),
 
-            content:
-              String(item.content).trim(),
+                content:
+                  String(item.content).trim(),
 
-            keywords:
-              Array.isArray(item.keywords)
-                ? item.keywords
-                    .map(x => String(x).trim())
-                    .filter(Boolean)
-                    .slice(0, 8)
-                : [],
+                keywords:
+                  Array.isArray(item.keywords)
+                    ? item.keywords
+                        .map(x => String(x).trim())
+                        .filter(Boolean)
+                        .slice(0, 8)
+                    : [],
 
-            seoTitle:
-              String(
-                item.seoTitle || item.title
-              ).trim(),
+                seoTitle:
+                  String(
+                    item.seoTitle || item.title
+                  ).trim(),
 
-            metaDescription:
-              String(
-                item.metaDescription ||
-                item.content
-              )
-                .trim()
-                .slice(0, 160),
+                metaDescription:
+                  String(
+                    item.metaDescription ||
+                    item.content
+                  )
+                    .trim()
+                    .slice(0, 160),
 
-            sourceNote:
-              String(
-                item.sourceNote ||
-                "मौलिक सामग्री"
-              ).trim(),
+                sourceNote:
+                  String(
+                    item.sourceNote ||
+                    "मौलिक सामग्री"
+                  ).trim(),
 
-            generatedAt:
-              new Date().toISOString()
-          }))
-          .filter(
-            item =>
-              item.title &&
-              item.content
-          );
-
-        if (cleanItems.length === 0) {
-          console.error(
-            "No valid content was generated."
-          );
-          process.exit(1);
-        }
-
-        const file =
-          "content/auto-content.json";
-
-        fs.mkdirSync(
-          "content",
-          {
-            recursive: true
-          }
-        );
-
-        let existing = [];
-
-        if (fs.existsSync(file)) {
-          try {
-            const raw =
-              fs.readFileSync(
-                file,
-                "utf8"
+                generatedAt:
+                  new Date().toISOString()
+              }))
+              .filter(
+                item =>
+                  item.title &&
+                  item.content
               );
 
-            if (raw.trim()) {
-              const parsed =
-                JSON.parse(raw);
+            if (cleanItems.length === 0) {
+              console.error(
+                "No valid content was generated."
+              );
+              process.exit(1);
+            }
 
-              if (Array.isArray(parsed)) {
-                existing = parsed;
-              } else if (
-                Array.isArray(parsed.items)
-              ) {
-                existing = parsed.items;
+            const file =
+              "content/auto-content.json";
+
+            fs.mkdirSync(
+              "content",
+              {
+                recursive: true
+              }
+            );
+
+            let existing = [];
+
+            if (fs.existsSync(file)) {
+              try {
+                const raw =
+                  fs.readFileSync(
+                    file,
+                    "utf8"
+                  );
+
+                if (raw.trim()) {
+                  const parsed =
+                    JSON.parse(raw);
+
+                  if (Array.isArray(parsed)) {
+                    existing = parsed;
+                  } else if (
+                    Array.isArray(parsed.items)
+                  ) {
+                    existing = parsed.items;
+                  }
+                }
+              } catch (error) {
+                console.log(
+                  "Existing content could not be read."
+                );
+
+                console.log(
+                  "Starting with existing content as empty."
+                );
               }
             }
-          } catch (error) {
-            console.log(
-              "Existing content could not be read."
+
+            /*
+              नया content सबसे ऊपर रहेगा।
+              पुराना content delete नहीं होगा।
+              कुल 300 items तक रखे जाएंगे।
+            */
+
+            const finalContent = [
+              ...cleanItems,
+              ...existing
+            ].slice(0, 300);
+
+            fs.writeFileSync(
+              file,
+              JSON.stringify(
+                finalContent,
+                null,
+                2
+              ),
+              "utf8"
             );
 
             console.log(
-              "Starting with existing content as empty."
+              `New Hindi items added: ${cleanItems.length}`
+            );
+
+            console.log(
+              `Total stored items: ${finalContent.length}`
+            );
+
+            console.log(
+              "================================"
+            );
+
+            console.log(
+              "CONTENT GENERATION SUCCESS"
+            );
+
+            console.log(
+              "================================"
             );
           }
-        }
 
-        /*
-          नया content सबसे ऊपर रहेगा।
-          पुराना content delete नहीं होगा।
-          कुल 300 items तक रखे जाएंगे।
-        */
+          main().catch(error => {
+            console.error(
+              "Workflow script failed:"
+            );
 
-        const finalContent = [
-          ...cleanItems,
-          ...existing
-        ].slice(0, 300);
+            console.error(error);
 
-        fs.writeFileSync(
-          file,
-          JSON.stringify(
-            finalContent,
-            null,
-            2
-          ),
-          "utf8"
-        );
+            process.exit(1);
+          });
+          NODE
 
-        console.log(
-          `New Hindi items added: ${cleanItems.length}`
-        );
+      - name: Commit generated content
+        run: |
+          git config user.name "GAMEZONE ARENA Auto Content"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-        console.log(
-          `Total stored items: ${finalContent.length}`
-        );
+          git add -A
 
-        console.log(
-          "================================"
-        );
+          if git diff --cached --quiet; then
+            echo "No content changes to commit."
+            exit 0
+          fi
 
-        console.log(
-          "CONTENT GENERATION SUCCESS"
-        );
+          git commit -m "Generate daily Hindi GAMEZONE ARENA content"
 
-        console.log(
-          "================================"
-        );
-      }
-
-      main().catch(error => {
-        console.error(
-          "Workflow script failed:"
-        );
-
-        console.error(error);
-
-        process.exit(1);
-      });
-      NODE
-
-  - name: Commit generated content
-    run: |
-      git config user.name "GAMEZONE ARENA Auto Content"
-      git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-      git add -A
-
-      if git diff --cached --quiet; then
-        echo "No content changes to commit."
-        exit 0
-      fi
-
-      git commit -m "Generate daily Hindi GAMEZONE ARENA content"
-
-      git push
+          git push
