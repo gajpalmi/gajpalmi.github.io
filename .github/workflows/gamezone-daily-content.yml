@@ -1,6 +1,8 @@
 name: GAMEZONE ARENA Daily Hindi Content
 
-on:
+"on":
+  workflow_dispatch:
+
   schedule:
     - cron: "45 3 * * *"
 
