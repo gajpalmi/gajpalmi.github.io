@@ -1,7 +1,6 @@
 name: GAMEZONE ARENA Daily Hindi Content
 
 "on":
-  workflow_dispatch:
   schedule:
     - cron: "45 3 * * *"
 
@@ -9,367 +8,862 @@ permissions:
   contents: write
 
 jobs:
-  generate:
+  generate-content:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Generate content
+      - name: Generate Hindi content with Gemini
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          python3 - <<'PY'
-          import os
-          import json
-          import re
-          import html
-          import urllib.request
-          from datetime import datetime, timezone
+          node <<'NODE'
+          const fs = require("fs");
 
-          KEY = os.environ.get("GEMINI_API_KEY")
-          if not KEY:
-              raise SystemExit("GEMINI_API_KEY secret missing")
+          const API_KEY = process.env.GEMINI_API_KEY;
 
-          MODEL = "gemini-3.5-flash-lite"
-          API = "https://generativelanguage.googleapis.com/v1beta/models/" + MODEL + ":generateContent"
-          RSS = "https://news.google.com/rss?hl=hi&gl=IN&ceid=IN:hi"
-          FILE = "content/auto-content.json"
-          LOG = "content/logs"
+          if (!API_KEY) {
+            console.error("GEMINI_API_KEY secret is missing.");
+            process.exit(1);
+          }
 
-          def clean(x):
-              x = html.unescape(str(x or ""))
-              x = re.sub(r"<[^>]+>", " ", x)
-              x = re.sub(r"\s+", " ", x)
-              return x.strip()
+          const MODEL = "gemini-3.5-flash-lite";
 
-          def get_news():
-              try:
-                  req = urllib.request.Request(
-                      RSS,
-                      headers={"User-Agent": "GAMEZONE-ARENA/1.0"}
-                  )
-                  data = urllib.request.urlopen(req, timeout=20).read().decode("utf-8")
-                  result = []
+          const API_URL =
+            `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
-                  for block in re.findall(r"<item>(.*?)</item>", data, re.S)[:15]:
-                      m = re.search(r"<title>(.*?)</title>", block, re.S)
-                      u = re.search(r"<link>(.*?)</link>", block, re.S)
+          const NEWS_URL =
+            "https://news.google.com/rss?hl=hi&gl=IN&ceid=IN:hi";
 
-                      if not m:
-                          continue
+          function cleanText(text) {
+            return String(text || "")
+              .replace(/<!\[CDATA\[(.*?)\]\]>/g, "$1")
+              .replace(/<[^>]*>/g, " ")
+              .replace(/&amp;/g, "&")
+              .replace(/&quot;/g, '"')
+              .replace(/&#39;/g, "'")
+              .replace(/&lt;/g, "<")
+              .replace(/&gt;/g, ">")
+              .replace(/\s+/g, " ")
+              .trim();
+          }
 
-                      title = clean(m.group(1))
-                      link = clean(u.group(1)) if u else ""
+          async function getCurrentNews() {
+            try {
+              console.log("Getting current Hindi Google News...");
 
-                      if title and title.lower() not in [x["title"].lower() for x in result]:
-                          result.append({
-                              "title": title,
-                              "link": link
-                          })
+              const response = await fetch(NEWS_URL);
 
-                  return result
-
-              except Exception as e:
-                  print("News unavailable:", e)
-                  return []
-
-          news = get_news()
-
-          news_text = "\n".join(
-              "- " + x["title"] + " | " + x["link"]
-              for x in news
-          )
-
-          prompt = """
-आप GAMEZONE ARENA वेबसाइट के automatic Hindi content editor हैं।
-
-20 अलग-अलग COMPLETE सामग्री तैयार करें।
-
-मुख्य भाषा सरल हिंदी देवनागरी हो।
-
-विषयों में variety रखें:
-
-हिंदी चुटकुले
-मजेदार संवाद
-सुविचार
-Motivation
-प्रेम शायरी
-दोस्ती शायरी
-जीवन शायरी
-भक्ति
-भजन
-कीर्तन
-आध्यात्मिक जानकारी
-ज्ञान
-सामान्य ज्ञान
-Current News
-Current Trends
-Mobile
-Android
-Internet
-Online Safety
-AI
-Google
-Technology
-Apps
-Gadgets
-Gaming
-Ludo
-Cricket Gaming
-Gaming Tips
-Blogging
-SEO
-Website
-How-To
-Entertainment
-
-हर content पूरा और पढ़ने योग्य हो।
-
-सिर्फ headline या अधूरा paragraph नहीं।
-
-Jokes लगभग 80-160 शब्द।
-Dialogue लगभग 100-200 शब्द।
-Bhakti/Bhajan/Kirtan लगभग 150-350 शब्द।
-Knowledge लगभग 220-400 शब्द।
-Technology/Mobile/AI/Internet/Gaming लगभग 250-500 शब्द।
-Blog/SEO/Website/How-To लगभग 300-600 शब्द।
-
-Current News के लिए केवल उपलब्ध news topics का उपयोग करें।
-कोई fake fact, fake number, fake quote, fake date या fake allegation नहीं।
-
-Political विषय आने पर neutral factual भाषा रखें।
-किसी party/candidate के पक्ष या विरोध में persuasion नहीं।
-Winner/best/worst/ranking नहीं।
-Motive speculation नहीं।
-
-Health और finance में guaranteed cure, guaranteed income,
-guaranteed return या unsafe advice नहीं।
-
-Original jokes, shayari, dialogue और devotional content दें।
-Copyrighted भजन के पूरे lyrics copy न करें।
-Famous व्यक्ति के नाम से fake quote न बनाएं।
-
-हर item में ये fields हों:
-
-type
-title
-category
-content
-keywords
-seoTitle
-metaDescription
-sourceNote
-sourceUrl
-
-keywords 3-8 रखें।
-metaDescription 160 characters से कम रखें।
-
-Current news/trends:
-sourceNote = Google News India के current topic से प्रेरित
-
-Original:
-sourceNote = मौलिक सामग्री
-
-पूरा content content field में दें।
-
-केवल JSON object दें।
-"""
-
-          prompt += "\n\nCURRENT GOOGLE NEWS INDIA:\n" + (
-              news_text if news_text else
-              "आज current news उपलब्ध नहीं है। News invent न करें।"
-          )
-
-          body = {
-              "contents": [
-                  {
-                      "parts": [
-                          {
-                              "text": prompt
-                          }
-                      ]
-                  }
-              ],
-              "generationConfig": {
-                  "temperature": 0.75,
-                  "responseMimeType": "application/json"
+              if (!response.ok) {
+                console.log(
+                  `Google News RSS unavailable: ${response.status}`
+                );
+                return [];
               }
+
+              const xml = await response.text();
+
+              const titles = [];
+
+              const matches = xml.matchAll(
+                /<item>([\s\S]*?)<\/item>/g
+              );
+
+              for (const match of matches) {
+                const block = match[1];
+
+                const titleMatch =
+                  block.match(
+                    /<title>([\s\S]*?)<\/title>/
+                  );
+
+                if (!titleMatch) {
+                  continue;
+                }
+
+                const title =
+                  cleanText(titleMatch[1]);
+
+                if (
+                  title &&
+                  !titles.includes(title)
+                ) {
+                  titles.push(title);
+                }
+
+                if (titles.length >= 20) {
+                  break;
+                }
+              }
+
+              console.log(
+                `Current headlines found: ${titles.length}`
+              );
+
+              return titles;
+            } catch (error) {
+              console.log(
+                "Could not load Google News:"
+              );
+
+              console.log(
+                error.message
+              );
+
+              return [];
+            }
           }
 
-          req = urllib.request.Request(
-              API,
-              data=json.dumps(body, ensure_ascii=False).encode("utf-8"),
-              headers={
-                  "Content-Type": "application/json",
-                  "x-goog-api-key": KEY
-              },
-              method="POST"
-          )
+          async function generateContent(news) {
+            const newsText =
+              news.length > 0
+                ? news
+                    .map(
+                      (title, index) =>
+                        `${index + 1}. ${title}`
+                    )
+                    .join("\n")
+                : "आज कोई current headline उपलब्ध नहीं है।";
 
-          try:
-              response = urllib.request.urlopen(req, timeout=180)
-              result = json.loads(response.read().decode("utf-8"))
-          except Exception as e:
-              raise SystemExit("Gemini API error: " + str(e))
+            const prompt = `
+          आप GAMEZONE ARENA वेबसाइट के लिए रोज़ नई,
+          मौलिक और उपयोगी हिंदी सामग्री तैयार करने वाले
+          professional automatic content editor हैं।
 
-          try:
-              text = result["candidates"][0]["content"]["parts"][0]["text"]
-              data = json.loads(text)
-              items = data.get("items", [])
-          except Exception:
-              raise SystemExit("Gemini returned invalid JSON/content")
+          सभी user-facing सामग्री मुख्य रूप से सरल,
+          स्वाभाविक और साफ हिंदी देवनागरी में होनी चाहिए।
 
-          if not isinstance(items, list):
-              raise SystemExit("Invalid items response")
+          Brand name, app name, website name और जरूरी
+          technical terms English में रह सकते हैं।
 
-          new_items = []
+          आज के current topics के लिए नीचे दिए गए
+          Google News India Hindi headlines को केवल
+          संदर्भ के रूप में इस्तेमाल करें:
 
-          aliases = {
-              "joke": "jokes",
-              "poetry": "shayari",
-              "poem": "shayari",
-              "dialogues": "dialogue",
-              "gk": "knowledge",
-              "trend": "trends",
-              "trending": "trends",
-              "android": "mobile",
-              "tech": "technology",
-              "app": "apps",
-              "gadget": "gadgets",
-              "game": "gaming",
-              "ludo": "gaming",
-              "howto": "tips",
-              "how-to": "tips",
-              "blogs": "blog"
+          ${newsText}
+
+          EXACTLY 20 अलग-अलग content items बनाइए।
+
+          CONTENT TYPES:
+
+          1. हिंदी चुटकुले
+          2. मजेदार संवाद
+          3. सुविचार
+          4. हिंदी शायरी
+          5. प्रेम शायरी
+          6. दोस्ती शायरी
+          7. जीवन शायरी
+          8. मोटिवेशनल विचार
+          9. भक्ति
+          10. भजन
+          11. कीर्तन
+          12. आध्यात्मिक जानकारी
+          13. ज्ञान
+          14. सामान्य ज्ञान
+          15. हिंदी न्यूज़ / current topics
+          16. मोबाइल और Android
+          17. Internet और online safety
+          18. AI, Google और Technology
+          19. Gaming, Ludo, Cricket और gaming tips
+          20. Blogging, How-to, Entertainment और Trending topics
+
+          अलग-अलग items में अलग-अलग विषय मिलाकर सामग्री
+          तैयार करें ताकि रोज़ वेबसाइट पर नई variety आए।
+
+          CATEGORIES:
+
+          Jokes:
+          Funny, Desi, Family, Friendship, School, Office
+
+          Shayari:
+          Love, Friendship, Life, Motivational, Emotional
+
+          Bhakti:
+          Prayer, Devotional, Spiritual, Bhajan, Kirtan, Festival
+
+          Knowledge:
+          Science, India, Space, Animals, History, General Knowledge
+
+          News:
+          India, World, Technology, Sports, Entertainment, Trending
+
+          Technology:
+          Technology, AI, Google, Internet, Apps, Gadgets, Cyber Safety
+
+          Mobile:
+          Android, Mobile Tips, Apps, Smartphones, Settings, Security
+
+          Gaming:
+          Games, Gaming Tips, Mobile Gaming, Ludo, Cricket, Esports
+
+          Blogging:
+          Blogging, SEO, Website, Content, How-To, Internet
+
+          CONTENT RULES:
+
+          1. सभी content मौलिक होना चाहिए।
+
+          2. पुराने content की copy मत करें।
+
+          3. एक ही joke, shayari या idea दोबारा मत लिखें।
+
+          4. Family-friendly content रखें।
+
+          5. भाषा सरल और स्वाभाविक हिंदी रखें।
+
+          6. चुटकुले वास्तव में मजेदार और पढ़ने योग्य हों।
+
+          7. संवाद natural और छोटे लेकिन interesting हों।
+
+          8. शायरी मौलिक हो।
+
+          9. प्रेम और दोस्ती की शायरी सम्मानजनक हो।
+
+          10. भक्ति, भजन और कीर्तन से संबंधित सामग्री
+              सम्मानजनक और मौलिक हो।
+
+          11. किसी प्रसिद्ध व्यक्ति के नाम से fake quote
+              मत बनाएं।
+
+          12. Knowledge और GK में गलत तथ्य न लिखें।
+
+          13. Fake news मत बनाएं।
+
+          14. Current news में केवल दिए गए headlines
+              से topic/context लें।
+
+          15. Headline में उपलब्ध जानकारी से आगे
+              कोई तथ्य invent मत करें।
+
+          16. किसी व्यक्ति या संस्था पर बिना आधार
+              आरोप मत लगाएं।
+
+          17. राजनीतिक persuasion मत करें।
+
+          18. स्वास्थ्य, पैसे या investment के बारे में
+              guaranteed या झूठे claims मत करें।
+
+          19. किसी दूसरी वेबसाइट का पूरा article,
+              paragraph या content copy मत करें।
+
+          20. किसी copyrighted article को rewrite करके
+              लगभग वही पूरा article मत बनाएं।
+
+          21. Trending topics में केवल उपलब्ध current
+              headlines से सुरक्षित और सामान्य जानकारी दें।
+
+          22. अगर current headline की जानकारी पर्याप्त
+              नहीं है तो उसके बारे में details invent न करें।
+
+          23. Mobile, Android, Internet, AI, Google,
+              Technology और Gaming पर practical जानकारी दें।
+
+          24. How-to content step-by-step और उपयोगी हो।
+
+          25. Blog content थोड़ा विस्तार से लिखा जाए।
+
+          26. हर item दूसरे item से अलग होना चाहिए।
+
+          27. Content इतना छोटा न हो कि website पर
+              उपयोगी न लगे।
+
+          28. हर content के लिए SEO-friendly title रखें।
+
+          29. हर content के लिए 3 से 8 useful keywords दें।
+
+          30. हर item में sourceNote जरूर दें।
+
+          IMPORTANT FULL CONTENT RULE:
+
+          किसी भी category का content केवल headline,
+          title, short teaser या 1-2 line का जवाब नहीं होना चाहिए।
+
+          हर item website पर पूरा पढ़ने योग्य होना चाहिए।
+
+          हर item में विषय को पर्याप्त विस्तार से समझाएं।
+
+          केवल headline लिखकर content समाप्त नहीं करना है।
+
+          केवल "Read More" के लिए मुख्य जानकारी छिपाकर
+          नहीं रखनी है।
+
+          जो भी सामग्री generate हो रही है,
+          उसका पूरा उपलब्ध मुख्य content उसी item के
+          "content" field में देना है।
+
+          FULL NEWS RULE:
+
+          Google News India से मिलने वाली current headline
+          को केवल headline की तरह publish नहीं करना है।
+
+          Current news item को एक पूरा,
+          सरल और पढ़ने योग्य Hindi news/explainer
+          बनाना है।
+
+          News item में:
+
+          - सबसे पहले headline का मुख्य विषय स्पष्ट करें।
+          - headline से उपलब्ध निश्चित जानकारी समझाएं।
+          - उपलब्ध topic/context को सरल हिंदी में समझाएं।
+          - पाठक को विषय का उपयोगी context दें।
+          - content को पर्याप्त विस्तार दें।
+          - केवल headline दोहराकर समाप्त न करें।
+          - केवल 1-2 वाक्य का news item न बनाएं।
+          - "Read More" के लिए अधूरी जानकारी न छोड़ें।
+          - पूरा उपलब्ध सुरक्षित content उसी item में रखें।
+
+          लेकिन Google News headline में जो जानकारी उपलब्ध
+          नहीं है, उसे अपनी तरफ से fact बनाकर नहीं जोड़ना है।
+
+          विशेष रूप से कोई नया:
+
+          - नाम
+          - तारीख
+          - संख्या
+          - स्थान
+          - बयान
+          - quote
+          - आरोप
+          - घटना की detail
+
+          बिना उपलब्ध आधार के invent नहीं करनी है।
+
+          अगर किसी current headline में बहुत कम जानकारी है,
+          तो उस headline के उपलब्ध विषय पर एक सुरक्षित,
+          सामान्य और स्पष्ट Hindi explainer बनाएं।
+
+          ऐसी स्थिति में अपुष्ट जानकारी को तथ्य की तरह
+          प्रस्तुत नहीं करना है।
+
+          Current news को किसी दूसरी website के article की
+          copy या near-copy नहीं बनाना है।
+
+          News original Hindi wording में लिखनी है।
+
+          FULL CONTENT RULE FOR ALL OTHER CATEGORIES:
+
+          Jokes में पूरा joke और punchline दें।
+
+          Dialogue में पूरा natural dialogue दें।
+
+          Shayari में पूरी shayari दें।
+
+          Bhakti में पूरी मौलिक devotional सामग्री दें।
+
+          Bhajan में पूरा मौलिक भजन-style content दें।
+
+          Kirtan में पूरा मौलिक kirtan-style content दें।
+
+          Knowledge में विषय को स्पष्ट रूप से समझाएं।
+
+          Mobile और Android content में पूरा useful explanation
+          और जरूरत होने पर step-by-step instructions दें।
+
+          Internet और online safety content में practical
+          जानकारी और जरूरी सावधानियां दें।
+
+          AI, Google और Technology content में पूरा
+          आसान explanation दें।
+
+          Gaming और Ludo content में उपयोगी पूरी जानकारी दें।
+
+          Blogging और SEO content में पूरा actionable
+          explanation दें।
+
+          How-to content में steps अधूरे नहीं होने चाहिए।
+
+          Entertainment और Trending content केवल छोटी
+          headline या teaser नहीं होना चाहिए।
+
+          SOURCE NOTE RULES:
+
+          Current/news/trending topics:
+          "Google News headlines से topic लिया गया"
+
+          Original jokes/shayari/bhakti/dialogue:
+          "मौलिक सामग्री"
+
+          Knowledge/tips/how-to/blog:
+          "मौलिक सामग्री"
+
+          URLs sourceNote में मत डालें।
+
+          EXACTLY 20 ITEMS लौटाएं।
+
+          JSON के अलावा कोई text मत लौटाएं।
+
+          Markdown मत लौटाएं।
+
+          JSON format:
+
+          {
+            "items": [
+              {
+                "type": "jokes",
+                "title": "हिंदी शीर्षक",
+                "category": "Funny",
+                "content": "पूरा उपयोगी और पढ़ने योग्य content",
+                "keywords": [
+                  "हिंदी चुटकुले",
+                  "मजेदार",
+                  "हंसी"
+                ],
+                "seoTitle": "SEO title",
+                "metaDescription": "छोटा SEO description",
+                "sourceNote": "मौलिक सामग्री"
+              }
+            ]
           }
+          `;
 
-          for item in items[:20]:
-              if not isinstance(item, dict):
-                  continue
+            const body = {
+              contents: [
+                {
+                  parts: [
+                    {
+                      text: prompt
+                    }
+                  ]
+                }
+              ],
 
-              title = clean(item.get("title"))
-              content = clean(item.get("content"))
+              generationConfig: {
+                temperature: 0.9,
 
-              if not title or len(content) < 120:
-                  continue
+                responseMimeType:
+                  "application/json",
 
-              typ = clean(item.get("type")).lower()
-              typ = aliases.get(typ, typ)
+                responseSchema: {
+                  type: "OBJECT",
 
-              new_items.append({
-                  "type": typ or "blog",
-                  "title": title,
-                  "category": clean(item.get("category")) or "General",
-                  "content": content,
-                  "keywords": [
-                      clean(x)
-                      for x in item.get("keywords", [])
-                      if clean(x)
-                  ][:8],
-                  "seoTitle": clean(item.get("seoTitle")) or title,
-                  "metaDescription": clean(
-                      item.get("metaDescription")
-                  )[:160],
-                  "sourceNote": clean(
-                      item.get("sourceNote")
-                  ) or "मौलिक सामग्री",
-                  "sourceUrl": clean(
-                      item.get("sourceUrl")
-                  ),
-                  "generatedAt": datetime.now(
-                      timezone.utc
-                  ).isoformat()
-              })
+                  properties: {
+                    items: {
+                      type: "ARRAY",
 
-          if len(new_items) < 20:
-              raise SystemExit(
-                  "Incomplete content: only "
-                  + str(len(new_items))
-                  + " complete items generated"
-              )
+                      items: {
+                        type: "OBJECT",
 
-          try:
-              with open(FILE, "r", encoding="utf-8") as f:
-                  old = json.load(f)
-          except Exception:
-              old = []
+                        properties: {
+                          type: {
+                            type: "STRING"
+                          },
 
-          if not isinstance(old, list):
-              old = []
+                          title: {
+                            type: "STRING"
+                          },
 
-          final = []
-          seen = set()
+                          category: {
+                            type: "STRING"
+                          },
 
-          for item in new_items + old:
-              key = clean(item.get("title")).lower()
+                          content: {
+                            type: "STRING"
+                          },
 
-              if not key or key in seen:
-                  continue
+                          keywords: {
+                            type: "ARRAY",
 
-              seen.add(key)
-              final.append(item)
+                            items: {
+                              type: "STRING"
+                            }
+                          },
 
-              if len(final) >= 300:
-                  break
+                          seoTitle: {
+                            type: "STRING"
+                          },
 
-          os.makedirs("content", exist_ok=True)
+                          metaDescription: {
+                            type: "STRING"
+                          },
 
-          with open(FILE, "w", encoding="utf-8") as f:
-              json.dump(
-                  final,
-                  f,
-                  ensure_ascii=False,
-                  indent=2
-              )
+                          sourceNote: {
+                            type: "STRING"
+                          }
+                        },
 
-          os.makedirs(LOG, exist_ok=True)
-
-          today = datetime.now(
-              timezone.utc
-          ).strftime("%Y-%m-%d")
-
-          with open(
-              LOG + "/" + today + ".json",
-              "w",
-              encoding="utf-8"
-          ) as f:
-              json.dump(
-                  {
-                      "status": "success",
-                      "model": MODEL,
-                      "newsTopics": len(news),
-                      "newItems": len(new_items),
-                      "totalStored": len(final),
-                      "generatedAt": datetime.now(
-                          timezone.utc
-                      ).isoformat()
+                        required: [
+                          "type",
+                          "title",
+                          "category",
+                          "content",
+                          "keywords",
+                          "seoTitle",
+                          "metaDescription",
+                          "sourceNote"
+                        ]
+                      }
+                    }
                   },
-                  f,
-                  ensure_ascii=False,
-                  indent=2
+
+                  required: [
+                    "items"
+                  ]
+                }
+              }
+            };
+
+            console.log(
+              "Sending request to Gemini..."
+            );
+
+            const response = await fetch(
+              API_URL,
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json",
+
+                  "x-goog-api-key":
+                    API_KEY
+                },
+
+                body: JSON.stringify(body)
+              }
+            );
+
+            const result =
+              await response.json();
+
+            if (!response.ok) {
+              console.error(
+                "Gemini API request failed."
+              );
+
+              console.error(
+                JSON.stringify(
+                  result,
+                  null,
+                  2
+                )
+              );
+
+              process.exit(1);
+            }
+
+            const text =
+              result
+                ?.candidates?.[0]
+                ?.content?.parts?.[0]
+                ?.text;
+
+            if (!text) {
+              console.error(
+                "Gemini returned no content."
+              );
+
+              console.error(
+                JSON.stringify(
+                  result,
+                  null,
+                  2
+                )
+              );
+
+              process.exit(1);
+            }
+
+            let parsed;
+
+            try {
+              parsed =
+                JSON.parse(text);
+            } catch (error) {
+              console.error(
+                "Gemini returned invalid JSON."
+              );
+
+              console.error(text);
+
+              process.exit(1);
+            }
+
+            if (
+              !parsed ||
+              !Array.isArray(
+                parsed.items
               )
+            ) {
+              console.error(
+                "Gemini response does not contain items array."
+              );
 
-          print("================================")
-          print("GAMEZONE ARENA CONTENT SUCCESS")
-          print("News topics:", len(news))
-          print("New items:", len(new_items))
-          print("Total stored:", len(final))
-          print("================================")
-          PY
+              process.exit(1);
+            }
 
-      - name: Commit content
+            return parsed.items;
+          }
+
+          async function main() {
+            console.log(
+              "================================"
+            );
+
+            console.log(
+              "GAMEZONE ARENA DAILY CONTENT"
+            );
+
+            console.log(
+              "================================"
+            );
+
+            const news =
+              await getCurrentNews();
+
+            const generated =
+              await generateContent(
+                news
+              );
+
+            const allowedTypes =
+              new Set([
+                "jokes",
+                "shayari",
+                "bhakti",
+                "knowledge",
+                "news",
+                "technology",
+                "mobile",
+                "gaming",
+                "entertainment",
+                "dialogue",
+                "internet",
+                "ai",
+                "tips",
+                "blog",
+                "bhajan",
+                "kirtan",
+                "spiritual",
+                "trends"
+              ]);
+
+            const cleanItems =
+              generated
+                .filter(
+                  item =>
+                    item &&
+                    typeof item.title ===
+                      "string" &&
+                    typeof item.content ===
+                      "string"
+                )
+                .map(item => ({
+                  type:
+                    allowedTypes.has(
+                      String(
+                        item.type || ""
+                      ).trim()
+                    )
+                      ? String(
+                          item.type
+                        ).trim()
+                      : "blog",
+
+                  title:
+                    String(
+                      item.title
+                    ).trim(),
+
+                  category:
+                    String(
+                      item.category ||
+                        "General"
+                    ).trim(),
+
+                  content:
+                    String(
+                      item.content
+                    ).trim(),
+
+                  keywords:
+                    Array.isArray(
+                      item.keywords
+                    )
+                      ? item.keywords
+                          .map(
+                            x =>
+                              String(
+                                x
+                              ).trim()
+                          )
+                          .filter(Boolean)
+                          .slice(0, 8)
+                      : [],
+
+                  seoTitle:
+                    String(
+                      item.seoTitle ||
+                        item.title
+                    ).trim(),
+
+                  metaDescription:
+                    String(
+                      item.metaDescription ||
+                        item.content
+                    )
+                      .trim()
+                      .slice(0, 160),
+
+                  sourceNote:
+                    String(
+                      item.sourceNote ||
+                        "मौलिक सामग्री"
+                    ).trim(),
+
+                  generatedAt:
+                    new Date()
+                      .toISOString()
+                }))
+                .filter(
+                  item =>
+                    item.title &&
+                    item.content
+                );
+
+            if (
+              cleanItems.length === 0
+            ) {
+              console.error(
+                "No valid content was generated."
+              );
+
+              process.exit(1);
+            }
+
+            const file =
+              "content/auto-content.json";
+
+            fs.mkdirSync(
+              "content",
+              {
+                recursive: true
+              }
+            );
+
+            let existing = [];
+
+            if (
+              fs.existsSync(file)
+            ) {
+              try {
+                const raw =
+                  fs.readFileSync(
+                    file,
+                    "utf8"
+                  );
+
+                if (
+                  raw.trim()
+                ) {
+                  const parsed =
+                    JSON.parse(
+                      raw
+                    );
+
+                  if (
+                    Array.isArray(
+                      parsed
+                    )
+                  ) {
+                    existing =
+                      parsed;
+                  } else if (
+                    Array.isArray(
+                      parsed.items
+                    )
+                  ) {
+                    existing =
+                      parsed.items;
+                  }
+                }
+              } catch (error) {
+                console.log(
+                  "Existing content could not be read."
+                );
+
+                console.log(
+                  "Starting with existing content as empty."
+                );
+              }
+            }
+
+            /*
+              नया content सबसे ऊपर रहेगा।
+              पुराना content delete नहीं होगा।
+              कुल 300 items तक रखे जाएंगे।
+            */
+
+            const finalContent = [
+              ...cleanItems,
+              ...existing
+            ].slice(
+              0,
+              300
+            );
+
+            fs.writeFileSync(
+              file,
+
+              JSON.stringify(
+                finalContent,
+                null,
+                2
+              ),
+
+              "utf8"
+            );
+
+            console.log(
+              `New Hindi items added: ${cleanItems.length}`
+            );
+
+            console.log(
+              `Total stored items: ${finalContent.length}`
+            );
+
+            console.log(
+              "================================"
+            );
+
+            console.log(
+              "CONTENT GENERATION SUCCESS"
+            );
+
+            console.log(
+              "================================"
+            );
+          }
+
+          main().catch(error => {
+            console.error(
+              "Workflow script failed:"
+            );
+
+            console.error(
+              error
+            );
+
+            process.exit(1);
+          });
+          NODE
+
+      - name: Commit generated content
         run: |
           git config user.name "GAMEZONE ARENA Auto Content"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add content/auto-content.json content/logs
+          git add -A
 
           if git diff --cached --quiet; then
-            echo "No changes to commit."
+            echo "No content changes to commit."
             exit 0
           fi
 
-          git commit -m "Daily Hindi GAMEZONE ARENA content"
+          git commit -m "Generate daily Hindi GAMEZONE ARENA content"
+
           git push
