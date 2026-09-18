@@ -1,12 +1,1 @@
-name: GAMEZONE ARENA Auto Content
 
-on:
-  schedule:
-    - cron: "45 3 * * *"
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Test
-        run: echo "GAMEZONE ARENA AUTO CONTENT OK"
