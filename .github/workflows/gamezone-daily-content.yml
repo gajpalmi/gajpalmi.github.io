@@ -18,555 +18,115 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Generate complete Hindi content
+      - name: Generate Hindi content
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          cat > /tmp/gamezone-content.mjs <<'EOF'
-          import fs from "fs";
-
-          const API_KEY = process.env.GEMINI_API_KEY;
-
-          if (!API_KEY) {
-            console.error("ERROR: GEMINI_API_KEY secret is missing.");
-            process.exit(1);
-          }
-
-          const MODEL = "gemini-3.5-flash-lite";
-
-          const API_URL =
-            `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
-
-          const NEWS_URL =
-            "https://news.google.com/rss?hl=hi&gl=IN&ceid=IN:hi";
-
-          const CONTENT_FILE =
-            "content/auto-content.json";
-
-          const LOG_DIR =
-            "content/logs";
-
-          const TARGET_ITEMS = 20;
-          const MAX_STORED_ITEMS = 300;
-          const MAX_NEWS_TOPICS = 15;
-
-          function cleanText(value) {
-            return String(value || "")
-              .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/gi, "$1")
-              .replace(/<br\s*\/?>/gi, " ")
-              .replace(/<[^>]*>/g, " ")
-              .replace(/&amp;/gi, "&")
-              .replace(/&quot;/gi, '"')
-              .replace(/&#39;/gi, "'")
-              .replace(/&apos;/gi, "'")
-              .replace(/&lt;/gi, "<")
-              .replace(/&gt;/gi, ">")
-              .replace(/&#(\d+);/g, (_, n) => {
-                try {
-                  return String.fromCodePoint(Number(n));
-                } catch {
-                  return "";
-                }
-              })
-              .replace(/&#x([0-9a-f]+);/gi, (_, n) => {
-                try {
-                  return String.fromCodePoint(parseInt(n, 16));
-                } catch {
-                  return "";
-                }
-              })
-              .replace(/\s+/g, " ")
-              .trim();
-          }
-
-          function metaDescription(text) {
-            return cleanText(text).slice(0, 155);
-          }
-
-          function normalizeType(value) {
-            const raw = cleanText(value).toLowerCase();
-
-            const aliases = {
-              joke: "jokes",
-              jokes: "jokes",
-
-              shayari: "shayari",
-              poetry: "shayari",
-              poem: "shayari",
-
-              suvichar: "suvichar",
-              "su vichar": "suvichar",
-
-              motivation: "motivation",
-              motivational: "motivation",
-
-              dialogue: "dialogue",
-              dialogues: "dialogue",
-
-              bhakti: "bhakti",
-              devotional: "bhakti",
-              spiritual: "bhakti",
-
-              bhajan: "bhajan",
-              bhajans: "bhajan",
-
-              kirtan: "kirtan",
-              kirtans: "kirtan",
-
-              knowledge: "knowledge",
-              gk: "knowledge",
-
-              news: "news",
-
-              technology: "technology",
-              tech: "technology",
-
-              mobile: "mobile",
-              android: "mobile",
-
-              internet: "internet",
-
-              ai: "ai",
-
-              google: "google",
-
-              app: "apps",
-              apps: "apps",
-
-              gadget: "gadgets",
-              gadgets: "gadgets",
-
-              gaming: "gaming",
-              game: "gaming",
-              ludo: "gaming",
-
-              entertainment: "entertainment",
-
-              tips: "tips",
-              tip: "tips",
-              howto: "tips",
-              "how-to": "tips",
-
-              blog: "blog",
-              blogs: "blog",
-
-              seo: "seo",
-
-              website: "website",
-
-              trending: "trends",
-              trends: "trends",
-
-              "cricket gaming": "gaming"
-            };
-
-            return aliases[raw] || "blog";
-          }
-
-          function normalizeUrl(value) {
-            const url = String(value || "").trim();
-
-            if (/^https?:\/\/[^\s]+$/i.test(url)) {
-              return url;
-            }
-
-            return "";
-          }
-
-          function normalizeKeywords(value) {
-            if (!Array.isArray(value)) {
-              return [];
-            }
-
-            const result = [];
-
-            for (const item of value) {
-              const keyword = cleanText(item);
-
-              if (!keyword) {
-                continue;
-              }
-
-              if (!result.includes(keyword)) {
-                result.push(keyword);
-              }
-
-              if (result.length >= 8) {
-                break;
-              }
-            }
-
-            return result;
-          }
-
-          async function getCurrentNews() {
-            console.log("Getting current Google News India...");
-
-            try {
-              const response = await fetch(NEWS_URL, {
-                headers: {
-                  "User-Agent":
-                    "GAMEZONE-ARENA-Auto-Content/1.0"
-                }
-              });
-
-              if (!response.ok) {
-                console.log(
-                  `Google News RSS unavailable: HTTP ${response.status}`
-                );
-
-                return [];
-              }
-
-              const xml = await response.text();
-
-              if (!xml) {
-                return [];
-              }
-
-              const items = [];
-
-              for (
-                const match of xml.matchAll(
-                  /<item>([\s\S]*?)<\/item>/gi
-                )
-              ) {
-                const block = match[1];
-
-                const titleMatch =
-                  block.match(
-                    /<title>([\s\S]*?)<\/title>/i
-                  );
-
-                const descriptionMatch =
-                  block.match(
-                    /<description>([\s\S]*?)<\/description>/i
-                  );
-
-                const linkMatch =
-                  block.match(
-                    /<link>([\s\S]*?)<\/link>/i
-                  );
-
-                const dateMatch =
-                  block.match(
-                    /<pubDate>([\s\S]*?)<\/pubDate>/i
-                  );
-
-                const title =
-                  cleanText(titleMatch?.[1] || "");
-
-                const description =
-                  cleanText(descriptionMatch?.[1] || "");
-
-                const link =
-                  cleanText(linkMatch?.[1] || "");
-
-                const published =
-                  cleanText(dateMatch?.[1] || "");
-
-                if (!title) {
-                  continue;
-                }
-
-                const duplicate =
-                  items.some(
-                    item =>
-                      item.title.toLowerCase() ===
-                      title.toLowerCase()
-                  );
-
-                if (duplicate) {
-                  continue;
-                }
-
-                items.push({
-                  title,
-                  description,
-                  link,
-                  published
-                });
-
-                if (
-                  items.length >=
-                  MAX_NEWS_TOPICS
-                ) {
-                  break;
-                }
-              }
-
-              console.log(
-                `Current news topics found: ${items.length}`
-              );
-
-              return items;
-            } catch (error) {
-              console.log(
-                "Google News RSS could not be loaded."
-              );
-
-              console.log(
-                error?.message || error
-              );
-
-              return [];
-            }
-          }
-
-          function makeNewsContext(news) {
-            if (!news.length) {
-              return `
-आज Google News RSS उपलब्ध नहीं है।
-
-इस स्थिति में current news या trending घटना
-invent नहीं करनी है।
-
-बाकी original evergreen content बनाएं।
-`;
-            }
-
-            return news
-              .map(
-                (item, index) => `
-NEWS ${index + 1}
-Title: ${item.title}
-Description: ${
-                  item.description ||
-                  "उपलब्ध नहीं"
-                }
-Source URL: ${
-                  item.link ||
-                  "उपलब्ध नहीं"
-                }
-Published: ${
-                  item.published ||
-                  "उपलब्ध नहीं"
-                }
-`
-              )
-              .join("\n");
-          }
-
-          function buildPrompt(news) {
-            const newsContext =
-              makeNewsContext(news);
-
-            return `
-आप GAMEZONE ARENA वेबसाइट के लिए रोज नई,
-मौलिक, उपयोगी, family-friendly और पढ़ने योग्य
-हिंदी सामग्री तैयार करने वाले professional
-automatic editor हैं।
-
-EXACTLY ${TARGET_ITEMS} अलग-अलग items बनाइए।
+          python3 <<'PY'
+          import os
+          import json
+          import re
+          import html
+          import urllib.request
+          from datetime import datetime, timezone
+
+          KEY = os.environ.get("GEMINI_API_KEY")
+          if not KEY:
+              raise SystemExit("GEMINI_API_KEY secret missing")
+
+          MODEL = "gemini-3.5-flash-lite"
+          API = "https://generativelanguage.googleapis.com/v1beta/models/" + MODEL + ":generateContent"
+          RSS = "https://news.google.com/rss?hl=hi&gl=IN&ceid=IN:hi"
+          FILE = "content/auto-content.json"
+          LOGDIR = "content/logs"
+
+          def clean(x):
+              x = html.unescape(str(x or ""))
+              x = re.sub(r"<!\[CDATA\[(.*?)\]\]>", r"\1", x, flags=re.S)
+              x = re.sub(r"<[^>]+>", " ", x)
+              return re.sub(r"\s+", " ", x).strip()
+
+          def news():
+              try:
+                  req = urllib.request.Request(
+                      RSS,
+                      headers={"User-Agent": "GAMEZONE-ARENA-Auto-Content/1.0"}
+                  )
+                  xml = urllib.request.urlopen(req, timeout=20).read().decode("utf-8")
+                  out = []
+                  for block in re.findall(r"<item>(.*?)</item>", xml, re.S)[:15]:
+                      m = re.search(r"<title>(.*?)</title>", block, re.S)
+                      l = re.search(r"<link>(.*?)</link>", block, re.S)
+                      if m:
+                          title = clean(m.group(1))
+                          if title and title.lower() not in [x["title"].lower() for x in out]:
+                              out.append({
+                                  "title": title,
+                                  "link": clean(l.group(1)) if l else ""
+                              })
+                  return out
+              except Exception as e:
+                  print("News RSS unavailable:", e)
+                  return []
+
+          topics = news()
+
+          topic_text = "\n".join(
+              f"- {x['title']} | {x['link']}"
+              for x in topics
+          )
+
+          prompt = f"""
+आप GAMEZONE ARENA वेबसाइट के automatic Hindi editor हैं।
+
+EXACTLY 20 अलग-अलग COMPLETE items बनाइए।
+
+सभी user-facing सामग्री सरल हिंदी देवनागरी में हो।
+Technical terms जरूरत के अनुसार English में रह सकते हैं।
+
+CURRENT GOOGLE NEWS INDIA TOPICS:
+{topic_text or "कोई current news उपलब्ध नहीं है। Current news invent न करें।"}
+
+इन सभी विषयों में अच्छी variety रखें:
+चुटकुले, मजेदार संवाद, सुविचार, motivation,
+प्रेम शायरी, दोस्ती शायरी, जीवन शायरी,
+भक्ति, भजन, कीर्तन, आध्यात्मिक जानकारी,
+ज्ञान, सामान्य ज्ञान, current news, trends,
+mobile, Android, internet, online safety,
+AI, Google, technology, apps, gadgets,
+gaming, Ludo, cricket gaming, gaming tips,
+blogging, SEO, website, how-to और entertainment।
 
 हर item COMPLETE होना चाहिए।
+सिर्फ headline, teaser, अधूरा paragraph या placeholder नहीं।
 
-सिर्फ headline, आधा article, अधूरा paragraph,
-placeholder या "Read More" के लिए अधूरा text
-नहीं देना है।
+लगभग ये minimum रखें:
+Jokes: 80-160 शब्द
+Dialogue: 100-200 शब्द
+Bhakti/Bhajan/Kirtan: 150-350 शब्द
+Knowledge: 220-400 शब्द
+Technology/Mobile/AI/Internet/Gaming: 250-500 शब्द
+Blog/SEO/Website/How-To: 300-600 शब्द
 
-हर item का content field अपने आप में पूरा
-पढ़ने योग्य content होना चाहिए।
+Current news के लिए केवल दिए गए source topics का उपयोग करें।
+Source में जो नहीं है उसे fact की तरह invent न करें।
+Fake names, fake numbers, fake quotes, fake dates और fake allegations नहीं।
 
-सभी user-facing content मुख्य रूप से सरल
-हिंदी देवनागरी में होना चाहिए।
+Political topic हो तो neutral factual भाषा रखें।
+किसी party/candidate के पक्ष या विरोध में persuasion,
+ranking, winner/best/worst, motive speculation नहीं।
 
-जरूरी technical terms English में रह सकते हैं।
+Health या finance में diagnosis, guaranteed cure,
+guaranteed income/return या unsafe advice नहीं।
 
-==================================================
-CURRENT GOOGLE NEWS INDIA
-==================================================
+Original jokes, shayari, dialogue और devotional content दें।
+Copyrighted भजन के पूरे lyrics copy न करें।
+किसी famous व्यक्ति के नाम से fake quote न बनाएं।
 
-${newsContext}
-
-ऊपर की news केवल current topics समझने के
-लिए है।
-
-जो जानकारी source में उपलब्ध नहीं है उसे
-invent मत करें।
-
-==================================================
-CONTENT VARIETY
-==================================================
-
-20 items में अच्छी variety रखें।
-
-इन categories को मिलाकर content बनाएं:
-
-- हिंदी चुटकुले
-- मजेदार संवाद
-- सुविचार
-- मोटिवेशन
-- प्रेम शायरी
-- दोस्ती शायरी
-- जीवन शायरी
-- भक्ति
-- भजन
-- कीर्तन
-- आध्यात्मिक जानकारी
-- ज्ञान
-- सामान्य ज्ञान
-- Current News
-- Current Trends
-- Mobile
-- Android
-- Internet
-- Online Safety
-- AI
-- Google
-- Technology
-- Apps
-- Gadgets
-- Gaming
-- Ludo
-- Cricket Gaming
-- Gaming Tips
-- Blogging
-- SEO
-- Website
-- How-To
-- Entertainment
-- Internet पर लोगों के काम आने वाले नए
-  और उपयोगी विषय
-
-एक ही category के बहुत सारे items नहीं।
-
-हर item का idea अलग हो।
-
-==================================================
-CONTENT COMPLETENESS
-==================================================
-
-Jokes:
-80-160 शब्द।
-
-Dialogue:
-100-200 शब्द।
-
-Shayari:
-original और पूरी हो।
-
-Suvichar/Motivation:
-पूरा छोटा article या explanation दें।
-
-Bhakti:
-150-350 शब्द।
-
-Bhajan/Kirtan:
-original devotional content दें।
-
-Copyrighted भजन के पूरे lyrics copy मत करें।
-
-Knowledge/GK:
-220-400 शब्द।
-
-Mobile/Android/Internet/AI/Technology:
-250-500 शब्द।
-
-Gaming/Ludo/Cricket Gaming:
-250-500 शब्द।
-
-Blog/SEO/Website/How-To:
-300-600 शब्द।
-
-Current News:
-उपलब्ध source information के अनुसार
-पूरा लेकिन factual summary दें।
-
-==================================================
-NEWS RULES
-==================================================
-
-Current news में:
-
-- केवल उपलब्ध RSS information का उपयोग करें।
-- unsupported facts नहीं।
-- नाम invent नहीं।
-- आंकड़े invent नहीं।
-- तारीख invent नहीं।
-- location invent नहीं।
-- आरोप invent नहीं।
-- quotes invent नहीं।
-- headline से आगे अनुमान को fact की तरह
-  नहीं लिखना।
-- source information कम हो तो साफ बताना।
-- पूरा external article copy नहीं करना।
-
-News original Hindi summary/explanation हो।
-
-==================================================
-POLITICAL SAFETY
-==================================================
-
-अगर current news में politics आती है तो:
-
-- केवल neutral factual भाषा।
-- किसी party या candidate के पक्ष में
-  persuasion नहीं।
-- किसी party या candidate के खिलाफ
-  persuasion नहीं।
-- campaign language नहीं।
-- winner/best/worst घोषित नहीं करना।
-- ranking या score नहीं देना।
-- motive या intent speculate नहीं करना।
-- health, intelligence या fitness पर
-  speculation नहीं करना।
-
-==================================================
-ORIGINAL CONTENT
-==================================================
-
-Jokes original हों।
-
-Shayari original हो।
-
-Dialogues original हों।
-
-Suvichar original हों।
-
-Bhakti content respectful और original हो।
-
-Bhajan/Kirtan में copyrighted lyrics
-copy नहीं करने हैं।
-
-किसी प्रसिद्ध व्यक्ति के नाम से fake quote
-नहीं बनाना है।
-
-Knowledge में गलत facts नहीं लिखना है।
-
-Family-friendly content रखें।
-
-==================================================
-HEALTH / FINANCE
-==================================================
-
-Health या finance topic आने पर:
-
-- dangerous medical advice नहीं।
-- diagnosis नहीं।
-- guaranteed cure नहीं।
-- guaranteed income नहीं।
-- guaranteed investment return नहीं।
-- unsafe treatment नहीं।
-
-General educational information ही दें।
-
-==================================================
-SEO
-==================================================
-
-हर item में:
-
+हर item में ये fields अनिवार्य हैं:
 type
 title
 category
@@ -577,735 +137,213 @@ metaDescription
 sourceNote
 sourceUrl
 
-जरूर दें।
+keywords 3-8 रखें।
+metaDescription 160 characters से कम रखें।
 
-keywords:
-3 से 8 keywords।
-
-seoTitle:
-natural और readable।
-
-metaDescription:
-160 characters से कम।
-
-==================================================
-SOURCE
-==================================================
-
-Current news/trending:
-
+Current news/trends के लिए sourceNote:
 Google News India के current topic से प्रेरित
 
-Original content:
-
+बाकी original content के लिए:
 मौलिक सामग्री
 
-==================================================
-TYPE VALUES
-==================================================
+Allowed type:
+jokes, shayari, suvichar, motivation, dialogue,
+bhakti, bhajan, kirtan, knowledge, news, trends,
+mobile, internet, ai, google, technology, apps,
+gadgets, gaming, entertainment, tips, blog, seo, website
 
-इनमें से suitable type चुनें:
+कोई "Read More के लिए बाकी पढ़ें" जैसा अधूरा content नहीं।
+पूरा article content field में ही होना चाहिए।
 
-jokes
-shayari
-suvichar
-motivation
-dialogue
-bhakti
-bhajan
-kirtan
-knowledge
-news
-trends
-mobile
-internet
-ai
-google
-technology
-apps
-gadgets
-gaming
-entertainment
-tips
-blog
-seo
-website
-
-==================================================
-FINAL REQUIREMENT
-==================================================
-
-EXACTLY ${TARGET_ITEMS} items।
-
-हर item complete होना चाहिए।
-
-किसी item में:
-
-"Read More के लिए बाकी पढ़ें"
-
-"आगे की जानकारी..."
-
-"यह एक संक्षिप्त जानकारी है"
-
-जैसा अधूरा placeholder नहीं होना चाहिए।
-
-पूरा content content field में ही देना है।
-
-JSON के अलावा कोई text नहीं।
-
-Markdown नहीं।
-
-==================================================
-OUTPUT
-==================================================
-
-{
+केवल JSON object दें:
+{{
   "items": [
-    {
-      "type": "news",
-      "title": "पूरा शीर्षक",
-      "category": "India",
-      "content": "पूरा और पढ़ने योग्य content",
-      "keywords": [
-        "हिंदी न्यूज़",
-        "आज की खबर",
-        "current news"
-      ],
-      "seoTitle": "पूरा SEO title",
-      "metaDescription": "पूरी SEO description",
-      "sourceNote": "Google News India के current topic से प्रेरित",
-      "sourceUrl": "https://example.com"
-    }
+    {{
+      "type": "jokes",
+      "title": "शीर्षक",
+      "category": "Funny",
+      "content": "पूरा content",
+      "keywords": ["हिंदी", "चुटकुले", "मजेदार"],
+      "seoTitle": "SEO title",
+      "metaDescription": "SEO description",
+      "sourceNote": "मौलिक सामग्री",
+      "sourceUrl": ""
+    }}
   ]
-}
-`;
-          }
+}}
+"""
 
-          async function callGemini(news) {
-            const prompt =
-              buildPrompt(news);
-
-            const body = {
-              contents: [
-                {
-                  parts: [
-                    {
-                      text: prompt
-                    }
-                  ]
-                }
+          body = {
+              "contents": [
+                  {
+                      "parts": [
+                          {"text": prompt}
+                      ]
+                  }
               ],
-
-              generationConfig: {
-                temperature: 0.75,
-
-                responseMimeType:
-                  "application/json",
-
-                responseSchema: {
-                  type: "OBJECT",
-
-                  properties: {
-                    items: {
-                      type: "ARRAY",
-
-                      items: {
-                        type: "OBJECT",
-
-                        properties: {
-                          type: {
-                            type: "STRING"
-                          },
-
-                          title: {
-                            type: "STRING"
-                          },
-
-                          category: {
-                            type: "STRING"
-                          },
-
-                          content: {
-                            type: "STRING"
-                          },
-
-                          keywords: {
-                            type: "ARRAY",
-
-                            items: {
-                              type: "STRING"
-                            }
-                          },
-
-                          seoTitle: {
-                            type: "STRING"
-                          },
-
-                          metaDescription: {
-                            type: "STRING"
-                          },
-
-                          sourceNote: {
-                            type: "STRING"
-                          },
-
-                          sourceUrl: {
-                            type: "STRING"
-                          }
-                        },
-
-                        required: [
-                          "type",
-                          "title",
-                          "category",
-                          "content",
-                          "keywords",
-                          "seoTitle",
-                          "metaDescription",
-                          "sourceNote",
-                          "sourceUrl"
-                        ]
-                      }
-                    }
-                  },
-
-                  required: [
-                    "items"
-                  ]
-                }
+              "generationConfig": {
+                  "temperature": 0.75,
+                  "responseMimeType": "application/json"
               }
-            };
+          }
 
-            console.log(
-              "Sending complete content request to Gemini..."
-            );
+          req = urllib.request.Request(
+              API,
+              data=json.dumps(body, ensure_ascii=False).encode("utf-8"),
+              headers={
+                  "Content-Type": "application/json",
+                  "x-goog-api-key": KEY
+              },
+              method="POST"
+          )
 
-            const response =
-              await fetch(
-                API_URL,
-                {
-                  method: "POST",
+          with urllib.request.urlopen(req, timeout=180) as r:
+              result = json.loads(r.read().decode("utf-8"))
 
-                  headers: {
-                    "Content-Type":
-                      "application/json",
+          text = result["candidates"][0]["content"]["parts"][0]["text"]
+          data = json.loads(text)
+          generated = data.get("items", [])
 
-                    "x-goog-api-key":
-                      API_KEY
-                  },
-
-                  body:
-                    JSON.stringify(body)
-                }
-              );
-
-            const result =
-              await response.json();
-
-            if (!response.ok) {
-              console.error(
-                "Gemini API error:"
-              );
-
-              console.error(
-                JSON.stringify(
-                  result,
-                  null,
-                  2
-                )
-              );
-
-              process.exit(1);
-            }
-
-            const text =
-              result
-                ?.candidates?.[0]
-                ?.content?.parts?.[0]
-                ?.text;
-
-            if (!text) {
-              console.error(
-                "Gemini returned no content."
-              );
-
-              console.error(
-                JSON.stringify(
-                  result,
-                  null,
-                  2
-                )
-              );
-
-              process.exit(1);
-            }
-
-            let parsed;
-
-            try {
-              parsed =
-                JSON.parse(text);
-            } catch (error) {
-              console.error(
-                "Gemini returned invalid JSON."
-              );
-
-              console.error(text);
-
-              process.exit(1);
-            }
-
-            if (
-              !parsed ||
-              !Array.isArray(
-                parsed.items
+          if len(generated) < 20:
+              raise SystemExit(
+                  f"Incomplete Gemini response: {len(generated)}/20 items"
               )
-            ) {
-              console.error(
-                "Gemini response does not contain items."
-              );
 
-              process.exit(1);
-            }
+          def norm_type(x):
+              x = clean(x).lower()
+              aliases = {
+                  "joke": "jokes",
+                  "jokes": "jokes",
+                  "poetry": "shayari",
+                  "poem": "shayari",
+                  "shayari": "shayari",
+                  "dialogues": "dialogue",
+                  "dialogue": "dialogue",
+                  "suvichar": "suvichar",
+                  "motivation": "motivation",
+                  "bhakti": "bhakti",
+                  "bhajan": "bhajan",
+                  "kirtan": "kirtan",
+                  "gk": "knowledge",
+                  "knowledge": "knowledge",
+                  "news": "news",
+                  "trend": "trends",
+                  "trending": "trends",
+                  "trends": "trends",
+                  "android": "mobile",
+                  "mobile": "mobile",
+                  "internet": "internet",
+                  "ai": "ai",
+                  "google": "google",
+                  "tech": "technology",
+                  "technology": "technology",
+                  "app": "apps",
+                  "apps": "apps",
+                  "gadget": "gadgets",
+                  "gadgets": "gadgets",
+                  "game": "gaming",
+                  "gaming": "gaming",
+                  "ludo": "gaming",
+                  "entertainment": "entertainment",
+                  "tips": "tips",
+                  "how-to": "tips",
+                  "howto": "tips",
+                  "blog": "blog",
+                  "blogs": "blog",
+                  "seo": "seo",
+                  "website": "website"
+              }
+              return aliases.get(x, "blog")
 
-            return parsed.items;
-          }
+          now = datetime.now(timezone.utc).isoformat()
+          new = []
 
-          function normalizeItem(
-            item,
-            index,
-            generatedAt
-          ) {
-            if (
-              !item ||
-              typeof item !== "object"
-            ) {
-              return null;
-            }
+          for item in generated[:20]:
+              if not isinstance(item, dict):
+                  continue
 
-            const title =
-              cleanText(
-                item.title
-              );
+              title = clean(item.get("title"))
+              content = clean(item.get("content"))
 
-            const content =
-              cleanText(
-                item.content
-              );
+              if not title or len(content) < 120:
+                  continue
 
-            if (
-              !title ||
-              !content
-            ) {
-              return null;
-            }
+              keywords = item.get("keywords", [])
+              if not isinstance(keywords, list):
+                  keywords = []
 
-            const type =
-              normalizeType(
-                item.type
-              );
+              new.append({
+                  "type": norm_type(item.get("type")),
+                  "title": title,
+                  "category": clean(item.get("category")) or "General",
+                  "content": content,
+                  "keywords": [clean(x) for x in keywords[:8] if clean(x)],
+                  "seoTitle": clean(item.get("seoTitle")) or title,
+                  "metaDescription": clean(item.get("metaDescription"))[:160],
+                  "sourceNote": clean(item.get("sourceNote")) or "मौलिक सामग्री",
+                  "sourceUrl": clean(item.get("sourceUrl")),
+                  "generatedAt": now
+              })
 
-            const category =
-              cleanText(
-                item.category
-              ) ||
-              "General";
-
-            const keywords =
-              normalizeKeywords(
-                item.keywords
-              );
-
-            const seoTitle =
-              cleanText(
-                item.seoTitle
-              ) ||
-              title;
-
-            const description =
-              cleanText(
-                item.metaDescription
-              ) ||
-              metaDescription(
-                content
-              );
-
-            let sourceNote =
-              cleanText(
-                item.sourceNote
-              );
-
-            if (!sourceNote) {
-              sourceNote =
-                type === "news" ||
-                type === "trends"
-                  ? "Google News India के current topic से प्रेरित"
-                  : "मौलिक सामग्री";
-            }
-
-            const sourceUrl =
-              normalizeUrl(
-                item.sourceUrl
-              );
-
-            return {
-              type,
-              title,
-              category,
-              content,
-              keywords,
-              seoTitle,
-              metaDescription:
-                description.slice(
-                  0,
-                  160
-                ),
-              sourceNote,
-              sourceUrl,
-              generatedAt,
-              contentId:
-                `${Date.now()}-${index}`
-            };
-          }
-
-          function readExisting() {
-            if (
-              !fs.existsSync(
-                CONTENT_FILE
+          if len(new) < 20:
+              raise SystemExit(
+                  f"Only {len(new)} complete items remained after validation"
               )
-            ) {
-              return [];
-            }
 
-            try {
-              const raw =
-                fs.readFileSync(
-                  CONTENT_FILE,
-                  "utf8"
-                );
-
-              if (!raw.trim()) {
-                return [];
-              }
-
-              const parsed =
-                JSON.parse(raw);
-
-              if (
-                Array.isArray(
-                  parsed
-                )
-              ) {
-                return parsed;
-              }
-
-              if (
-                parsed &&
-                Array.isArray(
-                  parsed.items
-                )
-              ) {
-                return parsed.items;
-              }
-
-              return [];
-            } catch (error) {
-              console.log(
-                "Existing content could not be parsed."
-              );
-
-              return [];
-            }
-          }
-
-          function uniqueByTitle(items) {
-            const seen =
-              new Set();
-
-            const result = [];
-
-            for (
-              const item of items
-            ) {
-              const key =
-                cleanText(
-                  item.title
-                )
-                  .toLowerCase()
-                  .replace(
-                    /\s+/g,
-                    " "
-                  )
-                  .trim();
-
-              if (!key) {
-                continue;
-              }
-
-              if (
-                seen.has(key)
-              ) {
-                continue;
-              }
-
-              seen.add(key);
-
-              result.push(item);
-            }
-
-            return result;
-          }
-
-          async function main() {
-            console.log("");
-            console.log(
-              "=============================================="
-            );
-            console.log(
-              "GAMEZONE ARENA DAILY HINDI CONTENT"
-            );
-            console.log(
-              "=============================================="
-            );
-
-            const generatedAt =
-              new Date().toISOString();
-
-            const news =
-              await getCurrentNews();
-
-            const generated =
-              await callGemini(
-                news
-              );
-
-            console.log(
-              `Gemini returned: ${generated.length} items`
-            );
-
-            if (
-              generated.length <
-              TARGET_ITEMS
-            ) {
-              console.error(
-                `Incomplete response: expected ${TARGET_ITEMS}, got ${generated.length}.`
-              );
-
-              console.error(
-                "The run is stopped so incomplete content is not published."
-              );
-
-              process.exit(1);
-            }
-
-            const normalized =
-              generated
-                .slice(
-                  0,
-                  TARGET_ITEMS
-                )
-                .map(
-                  (item, index) =>
-                    normalizeItem(
-                      item,
-                      index,
-                      generatedAt
-                    )
-                )
-                .filter(Boolean);
-
-            if (
-              normalized.length <
-              TARGET_ITEMS
-            ) {
-              console.error(
-                `Only ${normalized.length} complete items are valid.`
-              );
-
-              console.error(
-                "Incomplete content will not be published."
-              );
-
-              process.exit(1);
-            }
-
-            const uniqueNew =
-              uniqueByTitle(
-                normalized
-              );
-
-            if (
-              uniqueNew.length <
-              TARGET_ITEMS
-            ) {
-              console.error(
-                `Duplicate titles reduced the complete set to ${uniqueNew.length}.`
-              );
-
-              console.error(
-                "Run stopped so the daily update remains complete."
-              );
-
-              process.exit(1);
-            }
-
-            const existing =
-              readExisting();
-
-            const finalContent =
-              uniqueByTitle([
-                ...uniqueNew,
-                ...existing
-              ])
-                .slice(
-                  0,
-                  MAX_STORED_ITEMS
-                );
-
-            fs.mkdirSync(
-              "content",
-              {
-                recursive: true
-              }
-            );
-
-            fs.writeFileSync(
-              CONTENT_FILE,
-
-              JSON.stringify(
-                finalContent,
-                null,
-                2
-              ),
-
-              "utf8"
-            );
-
-            fs.mkdirSync(
-              LOG_DIR,
-              {
-                recursive: true
-              }
-            );
-
-            const date =
-              generatedAt.slice(
-                0,
-                10
-              );
-
-            const logFile =
-              `${LOG_DIR}/${date}.json`;
-
-            const log = {
-              status: "success",
-
-              generatedAt,
-
-              model: MODEL,
-
-              requestedItems:
-                TARGET_ITEMS,
-
-              generatedItems:
-                generated.length,
-
-              completeItems:
-                normalized.length,
-
-              newUniqueItems:
-                uniqueNew.length,
-
-              newsTopics:
-                news.length,
-
-              totalStoredItems:
-                finalContent.length
-            };
-
-            fs.writeFileSync(
-              logFile,
-
-              JSON.stringify(
-                log,
-                null,
-                2
-              ),
-
-              "utf8"
-            );
-
-            console.log("");
-            console.log(
-              "=============================================="
-            );
-            console.log(
-              "SUCCESS"
-            );
-            console.log(
-              "=============================================="
-            );
-
-            console.log(
-              `News topics: ${news.length}`
-            );
-
-            console.log(
-              `Complete new items: ${uniqueNew.length}`
-            );
-
-            console.log(
-              `Total stored: ${finalContent.length}`
-            );
-
-            console.log(
-              `File: ${CONTENT_FILE}`
-            );
-
-            console.log(
-              `Log: ${logFile}`
-            );
-
-            console.log(
-              "=============================================="
-            );
-          }
-
-          main().catch(error => {
-            console.error("");
-            console.error(
-              "=============================================="
-            );
-            console.error(
-              "WORKFLOW FAILED"
-            );
-            console.error(
-              "=============================================="
-            );
-
-            console.error(
-              error?.stack ||
-              error?.message ||
-              error
-            );
-
-            process.exit(1);
-          });
-          EOF
-
-          node /tmp/gamezone-content.mjs
-
-      - name: Commit and push complete content
+          try:
+              with open(FILE, "r", encoding="utf-8") as f:
+                  old = json.load(f)
+          except Exception:
+              old = []
+
+          if not isinstance(old, list):
+              old = []
+
+          seen = set()
+          final = []
+
+          for item in new + old:
+              key = clean(item.get("title")).lower()
+              if not key or key in seen:
+                  continue
+              seen.add(key)
+              final.append(item)
+              if len(final) >= 300:
+                  break
+
+          os.makedirs("content", exist_ok=True)
+          with open(FILE, "w", encoding="utf-8") as f:
+              json.dump(final, f, ensure_ascii=False, indent=2)
+
+          os.makedirs(LOGDIR, exist_ok=True)
+          today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+          with open(f"{LOGDIR}/{today}.json", "w", encoding="utf-8") as f:
+              json.dump({
+                  "status": "success",
+                  "generatedAt": now,
+                  "model": MODEL,
+                  "newsTopics": len(topics),
+                  "newItems": len(new),
+                  "totalStored": len(final)
+              }, f, ensure_ascii=False, indent=2)
+
+          print("SUCCESS")
+          print("News topics:", len(topics))
+          print("New complete items:", len(new))
+          print("Total stored:", len(final))
+          PY
+
+      - name: Commit generated content
         run: |
           git config user.name "GAMEZONE ARENA Auto Content"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
           git add content/auto-content.json content/logs
 
           if git diff --cached --quiet; then
-            echo "No content changes to commit."
+            echo "No content changes."
             exit 0
           fi
 
-          git commit -m "Generate complete daily Hindi GAMEZONE ARENA content"
+          git commit -m "Generate daily Hindi GAMEZONE ARENA content"
           git push
