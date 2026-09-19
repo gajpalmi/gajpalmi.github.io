@@ -932,6 +932,6 @@ jobs:
             exit 0
           fi
 
-          git commit -m "Generate daily Hindi GAMEZONE ARENA content"
+                    git commit -m "Generate daily Hindi GAMEZONE ARENA content"
 
-          git pushl
+          git push origin main
