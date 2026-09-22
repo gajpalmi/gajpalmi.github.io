@@ -40,7 +40,12 @@ content="GAMEZONE ARENA — Free browser games, Ludo, Carrom, Quiz, Daily Challe
  --danger:#ff5252;
  --warning:#ffc107;
  --blue:#4da3ff;
- --shadow:0 15px 40px rgba(0,0,0,.28)
+ --shadow:0 15px 40px rgba(0,0,0,.28);
+
+ --ludo-red:#ef3b3b;
+ --ludo-green:#20b866;
+ --ludo-yellow:#f5c928;
+ --ludo-blue:#3188e8;
 }
 
 body.light{
@@ -70,6 +75,7 @@ body.no-scroll{overflow:hidden}
 
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
+button:disabled{cursor:not-allowed;opacity:.5}
 img,iframe,video{max-width:100%}
 a{color:inherit;text-decoration:none}
 
@@ -380,14 +386,14 @@ footer button{
  display:none;
  place-items:center;
  padding:18px;
- background:rgba(0,0,0,.75)
+ background:rgba(0,0,0,.78)
 }
 
 .modal.show{display:grid}
 
 .modal-box{
- width:min(850px,100%);
- max-height:92vh;
+ width:min(1050px,100%);
+ max-height:94vh;
  overflow-y:auto;
  background:var(--card);
  border:1px solid var(--border);
@@ -405,7 +411,8 @@ footer button{
  border:0;
  border-radius:10px;
  background:var(--card2);
- color:var(--text)
+ color:var(--text);
+ z-index:20
 }
 
 .form-group{margin-bottom:14px}
@@ -470,7 +477,9 @@ textarea.form-control{min-height:130px;resize:vertical}
  color:var(--green)
 }
 
-/* GAME AREA */
+/* =========================================================
+   GAME AREA
+   ========================================================= */
 
 .game-wrap{
  background:var(--card);
@@ -502,7 +511,33 @@ textarea.form-control{min-height:130px;resize:vertical}
  text-align:center
 }
 
-/* QUIZ */
+/* =========================================================
+   QUIZ
+   ========================================================= */
+
+.quiz-topbar{
+ display:flex;
+ flex-wrap:wrap;
+ gap:10px;
+ margin-bottom:10px
+}
+
+.quiz-progress{
+ height:8px;
+ width:100%;
+ background:var(--card2);
+ border-radius:99px;
+ overflow:hidden;
+ margin:12px 0
+}
+
+.quiz-progress span{
+ display:block;
+ height:100%;
+ width:0;
+ background:linear-gradient(90deg,var(--green),var(--blue));
+ transition:.3s
+}
 
 .quiz-question{
  font-size:23px;
@@ -521,7 +556,8 @@ textarea.form-control{min-height:130px;resize:vertical}
  color:var(--text);
  border-radius:13px;
  padding:13px;
- text-align:left
+ text-align:left;
+ transition:.15s
 }
 
 .quiz-option:hover{
@@ -539,147 +575,713 @@ textarea.form-control{min-height:130px;resize:vertical}
  border-color:var(--danger)
 }
 
-/* LUDO */
+.quiz-feedback{
+ margin-top:15px;
+ min-height:48px
+}
+
+/* =========================================================
+   LUDO — PROPER 15 x 15 BOARD
+   ========================================================= */
+
+.ludo-stage{
+ width:min(760px,100%);
+ margin:0 auto
+}
+
+.ludo-board-wrap{
+ position:relative;
+ width:min(600px,94vw);
+ margin:75px auto;
+ padding:0
+}
 
 .ludo-board{
- width:min(430px,90vw);
+ width:100%;
  aspect-ratio:1;
  display:grid;
  grid-template-columns:repeat(15,1fr);
  grid-template-rows:repeat(15,1fr);
- border:3px solid var(--text);
- background:#eee;
+ border:5px solid #161616;
+ background:#fff;
  margin:auto;
- overflow:hidden
+ overflow:hidden;
+ border-radius:8px;
+ box-shadow:
+  0 20px 50px rgba(0,0,0,.38),
+  0 0 0 4px rgba(255,255,255,.12)
 }
 
 .ludo-cell{
  display:grid;
  place-items:center;
- border:1px solid rgba(0,0,0,.15);
- font-size:clamp(8px,2vw,15px);
+ border:1px solid rgba(0,0,0,.17);
+ font-size:clamp(7px,1.6vw,13px);
+ position:relative;
+ background:#fff;
+ overflow:hidden
+}
+
+.ludo-red{background:#ef3b3b}
+.ludo-green{background:#20b866}
+.ludo-yellow{background:#f5c928}
+.ludo-blue{background:#3188e8}
+
+.ludo-path{
+ background:#fff!important
+}
+
+.ludo-path.start-red{background:#ffdede!important}
+.ludo-path.start-green{background:#dcf8e9!important}
+.ludo-path.start-yellow{background:#fff3b8!important}
+.ludo-path.start-blue{background:#dcebff!important}
+
+.ludo-center{
+ background:
+ conic-gradient(
+  var(--ludo-green) 0 25%,
+  var(--ludo-yellow) 25% 50%,
+  var(--ludo-blue) 50% 75%,
+  var(--ludo-red) 75% 100%
+ )!important;
  position:relative
 }
 
-.ludo-red{background:#ff6565}
-.ludo-green{background:#51dc8a}
-.ludo-yellow{background:#ffd84d}
-.ludo-blue{background:#55aaff}
-.ludo-path{background:#fff}
-.ludo-safe{background:#dff7e9!important}
-.ludo-center{
- background:linear-gradient(135deg,#31e981,#4da3ff,#ffdc4d,#ff6262)
+.ludo-center:after{
+ content:"";
+ position:absolute;
+ inset:16%;
+ background:var(--card);
+ clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);
+ opacity:.96
+}
+
+.ludo-home{
+ position:relative;
+ padding:7px;
+}
+
+.ludo-home-inner{
+ width:100%;
+ height:100%;
+ background:#fff;
+ border-radius:8px;
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ grid-template-rows:1fr 1fr;
+ gap:9px;
+ padding:9px
+}
+
+.ludo-home-spot{
+ border-radius:50%;
+ border:3px solid rgba(0,0,0,.22);
+ background:#fff;
+ box-shadow:inset 0 2px 6px rgba(0,0,0,.12);
+ display:grid;
+ place-items:center
+}
+
+.ludo-home-red{background:var(--ludo-red)}
+.ludo-home-green{background:var(--ludo-green)}
+.ludo-home-yellow{background:var(--ludo-yellow)}
+.ludo-home-blue{background:var(--ludo-blue)}
+
+.ludo-finish-red{background:#ffb6b6!important}
+.ludo-finish-green{background:#a9ebc7!important}
+.ludo-finish-yellow{background:#ffe889!important}
+.ludo-finish-blue{background:#a9d0ff!important}
+
+.ludo-safe{
+ background:#e7fff0!important
+}
+
+.ludo-safe.star-cell:after{
+ content:"★";
+ color:#159447;
+ font-size:clamp(10px,2.2vw,19px);
+ position:absolute;
+ z-index:1
 }
 
 .ludo-token{
  width:70%;
  height:70%;
+ min-width:12px;
+ min-height:12px;
  border-radius:50%;
- border:2px solid rgba(0,0,0,.35);
- box-shadow:0 2px 5px rgba(0,0,0,.25);
+ border:3px solid rgba(255,255,255,.9);
+ box-shadow:
+  0 2px 4px rgba(0,0,0,.35),
+  inset 0 2px 3px rgba(255,255,255,.35);
  display:grid;
  place-items:center;
- font-size:10px;
+ font-size:clamp(7px,1.4vw,12px);
  font-weight:900;
- color:#fff
+ color:#fff;
+ position:relative;
+ z-index:8;
+ transition:transform .12s
 }
 
-.ludo-red-token{background:#e33}
-.ludo-green-token{background:#159447}
-.ludo-yellow-token{background:#c59a00}
-.ludo-blue-token{background:#1671c9}
+.ludo-token:hover{transform:scale(1.1)}
 
-.ludo-safe::after{
- content:"★";
- color:#159447;
+.ludo-red-token{background:#d92727}
+.ludo-green-token{background:#118d4c}
+.ludo-yellow-token{background:#c29600;color:#fff}
+.ludo-blue-token{background:#1267b8}
+
+.ludo-token.movable{
+ box-shadow:
+  0 0 0 3px #fff,
+  0 0 14px rgba(49,233,129,.9)
+}
+
+.ludo-token.home-token{
+ width:60%;
+ height:60%
+}
+
+.ludo-token-layer{
+ position:absolute;
+ inset:0;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:1px;
+ z-index:8
+}
+
+.ludo-token-mini{
+ width:45%;
+ height:45%;
+ min-width:9px;
+ min-height:9px;
+ border-radius:50%;
+ border:1px solid #fff;
+ box-shadow:0 1px 3px rgba(0,0,0,.35)
+}
+
+.ludo-mini-red{background:#d92727}
+.ludo-mini-green{background:#118d4c}
+.ludo-mini-yellow{background:#c29600}
+.ludo-mini-blue{background:#1267b8}
+
+.ludo-dice{
+ position:absolute;
+ width:72px;
+ height:72px;
+ border-radius:18px;
+ background:#fff;
+ color:#111;
+ border:4px solid #222;
+ box-shadow:0 10px 25px rgba(0,0,0,.35);
+ display:grid;
+ place-items:center;
+ font-size:42px;
+ font-weight:900;
+ z-index:30;
+ transition:.2s
+}
+
+.ludo-dice:active{transform:scale(.94)}
+
+.ludo-dice.disabled{
+ opacity:.35;
+ filter:grayscale(1);
+ cursor:not-allowed
+}
+
+.ludo-dice.active{
+ box-shadow:
+  0 0 0 4px rgba(49,233,129,.3),
+  0 12px 30px rgba(0,0,0,.4)
+}
+
+.ludo-dice.red-dice{border-color:var(--ludo-red)}
+.ludo-dice.green-dice{border-color:var(--ludo-green)}
+.ludo-dice.yellow-dice{border-color:var(--ludo-yellow)}
+.ludo-dice.blue-dice{border-color:var(--ludo-blue)}
+
+.ludo-dice.top-left{
+ top:-82px;
+ left:-82px
+}
+
+.ludo-dice.top-right{
+ top:-82px;
+ right:-82px
+}
+
+.ludo-dice.bottom-left{
+ bottom:-82px;
+ left:-82px
+}
+
+.ludo-dice.bottom-right{
+ bottom:-82px;
+ right:-82px
+}
+
+.ludo-dice.rolling{
+ animation:ludoDiceRoll .12s linear infinite
+}
+
+@keyframes ludoDiceRoll{
+ 0%{transform:rotate(-10deg) scale(.92)}
+ 50%{transform:rotate(10deg) scale(1.06)}
+ 100%{transform:rotate(-10deg) scale(.92)}
+}
+
+.ludo-turn-banner{
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ gap:10px;
+ flex-wrap:wrap;
+ margin:10px auto 18px;
+ width:min(600px,94vw);
+ padding:12px 15px;
+ background:var(--card2);
+ border:1px solid var(--border);
+ border-radius:14px;
+ font-weight:900
+}
+
+.ludo-turn-dot{
+ width:14px;
+ height:14px;
+ border-radius:50%
+}
+
+.ludo-player-controls{
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:center;
+ gap:8px;
+ margin:15px 0
+}
+
+.ludo-player-btn{
+ border:1px solid var(--border);
+ background:var(--card2);
+ color:var(--text);
+ padding:8px 12px;
+ border-radius:10px;
+ font-weight:800
+}
+
+.ludo-player-btn.active{
+ border-color:var(--green);
+ box-shadow:0 0 0 2px rgba(49,233,129,.12)
+}
+
+.ludo-token-controls{
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:center;
+ gap:8px;
+ margin-top:10px
+}
+
+.ludo-token-btn{
+ border:1px solid var(--border);
+ background:var(--card2);
+ color:var(--text);
+ border-radius:11px;
+ padding:9px 12px
+}
+
+.ludo-token-btn.can-move{
+ border-color:var(--green);
+ color:var(--green);
+ box-shadow:0 0 0 2px rgba(49,233,129,.10)
+}
+
+.ludo-rules{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:8px;
+ margin-top:16px
+}
+
+.ludo-rule{
+ padding:10px;
+ border-radius:10px;
+ background:var(--card2);
+ color:var(--muted);
  font-size:12px
 }
 
-/* CARROM */
+/* =========================================================
+   CARROM — PROPER BOARD
+   ========================================================= */
+
+.carrom-stage{
+ width:min(560px,96vw);
+ margin:auto
+}
 
 .carrom-board{
- width:min(430px,90vw);
+ width:100%;
  aspect-ratio:1;
- background:#b8793b;
- border:18px solid #713e1d;
- border-radius:15px;
+ background:
+  radial-gradient(circle at 50% 50%,rgba(255,255,255,.08),transparent 38%),
+  #d99b57;
+ border:24px solid #713e1d;
+ border-radius:14px;
  position:relative;
- box-shadow:inset 0 0 0 5px #e8bb79;
+ box-shadow:
+  inset 0 0 0 5px #f1c681,
+  inset 0 0 0 9px #9c5a28,
+  0 18px 40px rgba(0,0,0,.38);
  overflow:hidden
 }
 
-.pocket{
+.carrom-inner{
  position:absolute;
- width:34px;
- height:34px;
- background:#111;
- border-radius:50%;
- z-index:4
+ inset:14px;
+ border:2px solid #633719;
+ border-radius:4px
 }
 
-.p1{top:-17px;left:-17px}
-.p2{top:-17px;right:-17px}
-.p3{bottom:-17px;left:-17px}
-.p4{bottom:-17px;right:-17px}
+.carrom-pocket{
+ position:absolute;
+ width:46px;
+ height:46px;
+ background:#111;
+ border-radius:50%;
+ z-index:4;
+ box-shadow:inset 0 0 0 4px #39200f
+}
+
+.pocket.p1{top:-23px;left:-23px}
+.pocket.p2{top:-23px;right:-23px}
+.pocket.p3{bottom:-23px;left:-23px}
+.pocket.p4{bottom:-23px;right:-23px}
+
+.carrom-diagonal{
+ position:absolute;
+ width:72%;
+ height:2px;
+ background:#713e1d;
+ left:14%;
+ top:50%;
+ transform-origin:center
+}
+
+.carrom-diagonal.d1{transform:rotate(45deg)}
+.carrom-diagonal.d2{transform:rotate(-45deg)}
 
 .carrom-center{
  position:absolute;
- width:80px;
- height:80px;
- border:2px solid #6b3c1d;
+ width:92px;
+ height:92px;
+ border:3px solid #713e1d;
  border-radius:50%;
  left:50%;
  top:50%;
  transform:translate(-50%,-50%)
 }
 
-.carrom-line{
+.carrom-center:after{
+ content:"";
  position:absolute;
- background:#6b3c1d
+ width:26px;
+ height:26px;
+ background:#e22;
+ border-radius:50%;
+ left:50%;
+ top:50%;
+ transform:translate(-50%,-50%);
+ border:2px solid #713e1d
 }
 
 .carrom-baseline{
- height:3px;
- width:70%;
- left:15%;
- bottom:16%
+ position:absolute;
+ height:4px;
+ width:68%;
+ left:16%;
+ background:#713e1d
 }
 
+.carrom-baseline.top{top:14%}
+.carrom-baseline.bottom{bottom:14%}
+
+.carrom-arrow{
+ position:absolute;
+ width:13px;
+ height:13px;
+ border-top:3px solid #713e1d;
+ border-right:3px solid #713e1d;
+ transform:rotate(45deg)
+}
+
+.carrom-arrow.a1{left:15%;bottom:13%;transform:rotate(45deg)}
+.carrom-arrow.a2{right:15%;bottom:13%;transform:rotate(45deg)}
+.carrom-arrow.a3{left:15%;top:13%;transform:rotate(-135deg)}
+.carrom-arrow.a4{right:15%;top:13%;transform:rotate(-135deg)}
+
 .striker{
- width:30px;
- height:30px;
+ width:34px;
+ height:34px;
  border-radius:50%;
  background:#f7f7f7;
  border:3px solid #333;
  position:absolute;
- bottom:10%;
+ bottom:8%;
  left:50%;
  transform:translateX(-50%);
- z-index:5;
- transition:.35s
+ z-index:8;
+ transition:.45s
 }
 
-.coin{
- width:28px;
- height:28px;
+.aim-line{
+ position:absolute;
+ height:3px;
+ width:40%;
+ left:30%;
+ bottom:calc(8% + 17px);
+ background:rgba(49,233,129,.8);
+ transform-origin:left center;
+ z-index:7;
+ pointer-events:none
+}
+
+.carrom-coin{
+ width:30px;
+ height:30px;
  border-radius:50%;
  position:absolute;
- left:50%;
- top:50%;
  transform:translate(-50%,-50%);
  display:grid;
  place-items:center;
- font-size:10px;
+ font-size:9px;
+ font-weight:900;
+ z-index:5;
+ box-shadow:
+  0 2px 4px rgba(0,0,0,.4),
+  inset 0 2px 3px rgba(255,255,255,.3)
+}
+
+.carrom-black{background:#111;color:#fff}
+.carrom-white{background:#f8f8f8;color:#111}
+.carrom-queen{background:#e22;color:#fff;border:2px solid #fff}
+
+.carrom-score{
+ display:flex;
+ justify-content:center;
+ gap:10px;
+ flex-wrap:wrap;
+ margin:10px 0
+}
+
+.carrom-stat{
+ padding:8px 13px;
+ background:var(--card2);
+ border:1px solid var(--border);
+ border-radius:10px;
+ font-weight:800
+}
+
+/* =========================================================
+   CRICKET — PROPER MINI CRICKET
+   ========================================================= */
+
+.cricket-wrap{
+ width:min(700px,100%);
+ margin:auto
+}
+
+.cricket-scoreboard{
+ display:grid;
+ grid-template-columns:1.5fr 1fr 1fr 1fr;
+ gap:8px;
+ margin-bottom:14px
+}
+
+.cricket-stat{
+ background:#111;
+ color:#fff;
+ border-radius:10px;
+ padding:10px;
+ text-align:center;
+ border:1px solid rgba(255,255,255,.1)
+}
+
+.cricket-stat strong{
+ display:block;
+ font-size:25px;
+ color:#fff
+}
+
+.cricket-ground{
+ width:100%;
+ aspect-ratio:1.55;
+ min-height:330px;
+ border-radius:50%;
+ background:
+  radial-gradient(
+   ellipse at center,
+   #65b849 0 44%,
+   #459e36 45% 70%,
+   #337d2b 71% 100%
+  );
+ border:10px solid #173d17;
+ position:relative;
+ overflow:hidden;
+ box-shadow:inset 0 0 40px rgba(0,0,0,.28)
+}
+
+.cricket-boundary{
+ position:absolute;
+ inset:9%;
+ border:3px solid rgba(255,255,255,.75);
+ border-radius:50%
+}
+
+.cricket-pitch{
+ position:absolute;
+ width:25%;
+ height:66%;
+ left:37.5%;
+ top:17%;
+ background:#d4b37b;
+ border:3px solid #9b784b;
+ border-radius:4px
+}
+
+.cricket-crease{
+ position:absolute;
+ width:72%;
+ height:3px;
+ left:14%;
+ background:#fff
+}
+
+.cricket-crease.top{top:13%}
+.cricket-crease.bottom{bottom:13%}
+
+.cricket-wicket{
+ position:absolute;
+ bottom:18%;
+ left:50%;
+ transform:translateX(-50%);
+ display:flex;
+ gap:4px;
+ z-index:7
+}
+
+.cricket-stump{
+ width:6px;
+ height:48px;
+ background:#f2f2d0;
+ border-radius:3px
+}
+
+.cricket-bail{
+ position:absolute;
+ width:32px;
+ height:5px;
+ background:#e9e9bd;
+ top:-4px;
+ left:-3px
+}
+
+.cricket-bowler{
+ position:absolute;
+ top:23%;
+ left:15%;
+ font-size:42px;
+ z-index:6;
+ transition:.2s
+}
+
+.cricket-bowler.throw{
+ animation:bowlerThrow .45s ease
+}
+
+@keyframes bowlerThrow{
+ 0%{transform:translateX(0)}
+ 50%{transform:translateX(22px) rotate(-12deg)}
+ 100%{transform:translateX(0)}
+}
+
+.cricket-batsman{
+ position:absolute;
+ bottom:23%;
+ left:58%;
+ font-size:48px;
+ z-index:8;
+ transition:.15s
+}
+
+.cricket-batsman.shot{
+ animation:batsmanShot .42s ease
+}
+
+@keyframes batsmanShot{
+ 0%{transform:rotate(0)}
+ 45%{transform:rotate(-20deg) translateY(-5px)}
+ 100%{transform:rotate(0)}
+}
+
+.cricket-ball{
+ position:absolute;
+ width:15px;
+ height:15px;
+ border-radius:50%;
+ background:#c92727;
+ border:2px solid #fff;
+ left:20%;
+ top:30%;
+ opacity:0;
+ z-index:10
+}
+
+.cricket-ball.bowled{
+ opacity:1;
+ animation:ballBowled .6s ease forwards
+}
+
+@keyframes ballBowled{
+ 0%{left:20%;top:30%;transform:scale(1)}
+ 100%{left:59%;top:67%;transform:scale(.8)}
+}
+
+.cricket-action{
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:8px;
+ margin-top:15px
+}
+
+.shot-btn{
+ border:1px solid var(--border);
+ background:var(--card2);
+ color:var(--text);
+ border-radius:11px;
+ padding:11px 14px;
  font-weight:900
 }
 
-.black{background:#111;color:#fff}
-.white{background:#fff;color:#111}
-.red{background:#e22;color:#fff}
+.shot-btn:hover{
+ border-color:var(--green);
+ color:var(--green)
+}
 
-#installButton{display:none}
+.cricket-result{
+ min-height:52px;
+ display:grid;
+ place-items:center;
+ margin-top:12px
+}
 
-/* MEMORY */
+/* =========================================================
+   MEMORY
+   ========================================================= */
 
 .memory-grid{
  display:grid;
@@ -703,7 +1305,9 @@ textarea.form-control{min-height:130px;resize:vertical}
  background:rgba(49,233,129,.18)
 }
 
-/* RACING */
+/* =========================================================
+   RACING
+   ========================================================= */
 
 .race-track{
  width:min(430px,95vw);
@@ -737,7 +1341,9 @@ textarea.form-control{min-height:130px;resize:vertical}
  top:-50px
 }
 
-/* SPIN */
+/* =========================================================
+   SPIN
+   ========================================================= */
 
 .spin-wheel{
  width:220px;
@@ -760,7 +1366,9 @@ textarea.form-control{min-height:130px;resize:vertical}
  transition:transform 2s cubic-bezier(.15,.7,.2,1)
 }
 
-/* SOUND */
+/* =========================================================
+   SOUND
+   ========================================================= */
 
 .sound-control{
  display:flex;
@@ -781,33 +1389,14 @@ textarea.form-control{min-height:130px;resize:vertical}
  border-color:var(--green)!important
 }
 
-/* LUDO CONTROLS */
-
-.ludo-controls{
- display:flex;
- flex-wrap:wrap;
- gap:8px;
- justify-content:center;
- margin-top:10px
-}
-
-.player-chip{
- padding:7px 10px;
- border-radius:999px;
- background:var(--card2);
- border:1px solid var(--border);
- font-size:12px
-}
-
-.player-chip.active{
- border-color:var(--green);
- color:var(--green);
- box-shadow:0 0 0 2px rgba(49,233,129,.12)
-}
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 
 @media(max-width:950px){
  .grid,.grid-4{grid-template-columns:repeat(2,1fr)}
  .footer-grid{grid-template-columns:1fr 1fr}
+
  .nav-links{
   position:absolute;
   top:70px;
@@ -820,9 +1409,20 @@ textarea.form-control{min-height:130px;resize:vertical}
   padding:10px;
   border-bottom:1px solid var(--border)
  }
+
  .nav-links.show{display:flex}
  .nav-links button{text-align:left}
  .menu-btn{display:block}
+
+ .ludo-dice.top-left,
+ .ludo-dice.bottom-left{
+  left:-20px
+ }
+
+ .ludo-dice.top-right,
+ .ludo-dice.bottom-right{
+  right:-20px
+ }
 }
 
 @media(max-width:650px){
@@ -833,7 +1433,79 @@ textarea.form-control{min-height:130px;resize:vertical}
  .search-box{flex-direction:column}
  .search-box .btn{width:100%}
  .hero{padding-top:30px}
- .memory-grid{grid-template-columns:repeat(4,1fr)}
+
+ .ludo-board-wrap{
+  margin-top:65px;
+  margin-bottom:65px
+ }
+
+ .ludo-dice{
+  width:55px;
+  height:55px;
+  font-size:31px;
+  border-radius:13px
+ }
+
+ .ludo-dice.top-left,
+ .ludo-dice.bottom-left{
+  left:-8px
+ }
+
+ .ludo-dice.top-right,
+ .ludo-dice.bottom-right{
+  right:-8px
+ }
+
+ .ludo-dice.top-left,
+ .ludo-dice.top-right{
+  top:-62px
+ }
+
+ .ludo-dice.bottom-left,
+ .ludo-dice.bottom-right{
+  bottom:-62px
+ }
+
+ .ludo-rules{grid-template-columns:1fr}
+
+ .cricket-scoreboard{
+  grid-template-columns:repeat(2,1fr)
+ }
+
+ .cricket-ground{
+  min-height:270px
+ }
+
+ .cricket-bowler{font-size:30px}
+ .cricket-batsman{font-size:35px}
+
+ .carrom-board{
+  border-width:16px
+ }
+
+ .carrom-pocket{
+  width:36px;
+  height:36px
+ }
+
+ .pocket.p1{top:-18px;left:-18px}
+ .pocket.p2{top:-18px;right:-18px}
+ .pocket.p3{bottom:-18px;left:-18px}
+ .pocket.p4{bottom:-18px;right:-18px}
+}
+
+/* =========================================================
+   INSTALL STATUS
+   ========================================================= */
+
+.install-help{
+ margin-top:10px;
+ padding:10px;
+ background:rgba(49,233,129,.07);
+ border:1px solid rgba(49,233,129,.13);
+ border-radius:10px;
+ color:var(--muted);
+ font-size:12px
 }
 </style>
 </head>
@@ -1054,7 +1726,7 @@ onclick="playDailyChallenge()">
 <div class="card">
 <div class="game-icon">🎲</div>
 <h3>Ludo</h3>
-<p>Human multiplayer browser Ludo.</p>
+<p>Proper 2–4 player human multiplayer Ludo.</p>
 <button class="btn btn-primary"
 onclick="openGame('ludo')">Play</button>
 </div>
@@ -1062,7 +1734,7 @@ onclick="openGame('ludo')">Play</button>
 <div class="card">
 <div class="game-icon">🏏</div>
 <h3>Cricket</h3>
-<p>Quick cricket challenge.</p>
+<p>Bat, ball, runs, boundaries और wickets वाला cricket.</p>
 <button class="btn btn-primary"
 onclick="openGame('cricket')">Play</button>
 </div>
@@ -1070,7 +1742,7 @@ onclick="openGame('cricket')">Play</button>
 <div class="card">
 <div class="game-icon">🎯</div>
 <h3>Carrom</h3>
-<p>Browser carrom mini-game.</p>
+<p>Proper board, pockets, queen और striker.</p>
 <button class="btn btn-primary"
 onclick="openGame('carrom')">Play</button>
 </div>
@@ -1102,7 +1774,7 @@ onclick="openGame('plazo')">Play</button>
 <div class="card">
 <div class="game-icon">❓</div>
 <h3>Quick Quiz</h3>
-<p>Test your knowledge.</p>
+<p>हर बार अलग question cycle.</p>
 <button class="btn btn-primary"
 onclick="showPage('quiz')">Play</button>
 </div>
@@ -1135,13 +1807,14 @@ Virtual coins/XP have no monetary value and cannot be withdrawn.
 <div class="section-head">
 <div>
 <h2>🧠 Daily Quiz</h2>
-<p>10 free questions. सही answer पर XP.</p>
+<p>10 questions. सही answer पर XP.</p>
 </div>
 </div>
 
 <div class="game-wrap">
 
 <div class="xp-box">
+
 <div class="stat">
 <strong id="quizNumber">1</strong>
 Question
@@ -1156,6 +1829,7 @@ Score
 <strong id="quizXP">0</strong>
 XP
 </div>
+
 </div>
 
 <div id="quizArea"></div>
@@ -1510,7 +2184,7 @@ onclick="closeModal()">✕</button>
 
 /* =========================================================
    GAMEZONE ARENA
-   OLD CONTENT SYSTEM + GAMES + SOUND + QUIZ NO-REPEAT + PWA
+   EXISTING CONTENT + PWA + SOUND + GAMES
    ========================================================= */
 
 const AUTO_CONTENT_URL =
@@ -1537,8 +2211,6 @@ let player={
 
 /* =========================================================
    SOUND ENGINE
-   No external sound file required.
-   Browser audio starts after user interaction.
    ========================================================= */
 
 let audioContext=null;
@@ -1600,7 +2272,7 @@ function playTone(
   osc.frequency.value=frequency;
 
   gain.gain.setValueAtTime(
-   0.0001,
+   .0001,
    ctx.currentTime
   );
 
@@ -1680,8 +2352,19 @@ function playSound(type){
    [600,.08,"square",.03]
   ],
 
+  diceRoll:[
+   [240,.045,"square",.022],
+   [340,.045,"square",.024],
+   [470,.045,"square",.026],
+   [620,.06,"square",.03]
+  ],
+
   move:[
    [420,.06,"sine",.03]
+  ],
+
+  step:[
+   [470,.045,"triangle",.025]
   ],
 
   capture:[
@@ -1694,6 +2377,17 @@ function playSound(type){
    [990,.12,"sine",.045]
   ],
 
+  home:[
+   [660,.07,"sine",.035],
+   [784,.07,"sine",.04],
+   [1046,.17,"sine",.05]
+  ],
+
+  turn:[
+   [520,.07,"triangle",.035],
+   [700,.10,"triangle",.04]
+  ],
+
   win:[
    [523,.10,"sine",.04],
    [659,.10,"sine",.04],
@@ -1701,9 +2395,26 @@ function playSound(type){
    [1046,.20,"sine",.05]
   ],
 
+  ludoOpen:[
+   [360,.06,"triangle",.025],
+   [520,.08,"triangle",.035],
+   [720,.12,"triangle",.04]
+  ],
+
   cricket:[
    [440,.06,"triangle",.03],
    [660,.08,"triangle",.04]
+  ],
+
+  ball:[
+   [300,.04,"triangle",.025],
+   [360,.05,"triangle",.025]
+  ],
+
+  four:[
+   [440,.07,"triangle",.035],
+   [660,.08,"triangle",.04],
+   [880,.13,"triangle",.045]
   ],
 
   six:[
@@ -1717,6 +2428,12 @@ function playSound(type){
    [150,.18,"sawtooth",.025]
   ],
 
+  over:[
+   [523,.08,"sine",.035],
+   [659,.08,"sine",.04],
+   [784,.13,"sine",.045]
+  ],
+
   carrom:[
    [350,.06,"triangle",.03],
    [520,.09,"triangle",.035]
@@ -1725,6 +2442,11 @@ function playSound(type){
   pocket:[
    [500,.08,"sine",.04],
    [800,.13,"sine",.045]
+  ],
+
+  carromMiss:[
+   [230,.09,"triangle",.025],
+   [180,.12,"triangle",.02]
   ],
 
   spin:[
@@ -1749,6 +2471,10 @@ function playSound(type){
   match:[
    [660,.08,"sine",.035],
    [880,.12,"sine",.045]
+  ],
+
+  quizNext:[
+   [620,.05,"sine",.025]
   ]
 
  };
@@ -1788,9 +2514,7 @@ function toggleSound(){
 function updateSoundButton(){
 
  const button=
-  document.getElementById(
-   "soundButton"
-  );
+  document.getElementById("soundButton");
 
  if(!button)return;
 
@@ -1805,7 +2529,6 @@ function updateSoundButton(){
 }
 
 
-/* Start audio on first real user interaction */
 document.addEventListener(
  "pointerdown",
  ()=>{
@@ -1837,20 +2560,9 @@ function escapeHTML(value){
 
 function savePlayer(){
 
- localStorage.setItem(
-  "gamezone_xp",
-  player.xp
- );
-
- localStorage.setItem(
-  "gamezone_streak",
-  player.streak
- );
-
- localStorage.setItem(
-  "gamezone_badges",
-  player.badges
- );
+ localStorage.setItem("gamezone_xp",player.xp);
+ localStorage.setItem("gamezone_streak",player.streak);
+ localStorage.setItem("gamezone_badges",player.badges);
 
  updatePlayerUI();
  renderLeaderboard();
@@ -1963,13 +2675,20 @@ async function installPWA(){
   return;
  }
 
- deferredInstallPrompt.prompt();
+ try{
 
- const result=
-  await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt.prompt();
 
- if(result.outcome==="accepted"){
-  showToast("📱 GAMEZONE install हो रहा है...");
+  const result=
+   await deferredInstallPrompt.userChoice;
+
+  if(result.outcome==="accepted")
+   showToast("📱 GAMEZONE install हो रहा है...");
+
+ }catch(error){
+
+  showToast("📱 Install menu से GAMEZONE जोड़ें।");
+
  }
 
  deferredInstallPrompt=null;
@@ -2130,7 +2849,7 @@ function normalizeItem(item,index=0){
 
   tags:
    Array.isArray(item.tags)
-    ? item.tags:[]
+    ?item.tags:[]
 
  };
 
@@ -2159,9 +2878,7 @@ async function loadAutoContent(){
    );
 
   if(!response.ok)
-   throw new Error(
-    "HTTP "+response.status
-   );
+   throw new Error("HTTP "+response.status);
 
   const data=
    await response.json();
@@ -2211,10 +2928,7 @@ async function loadAutoContent(){
 
  }catch(error){
 
-  console.error(
-   "Automatic content error:",
-   error
-  );
+  console.error("Automatic content error:",error);
 
   if(status)
    status.innerHTML=
@@ -2268,9 +2982,7 @@ function showPage(page){
  );
 
  const target=
-  document.getElementById(
-   "page-"+page
-  );
+  document.getElementById("page-"+page);
 
  if(target)
   target.classList.add("active");
@@ -2344,11 +3056,7 @@ function openSearch(){
  showPage("search");
 
  setTimeout(()=>{
-
-  document
-   .getElementById("homeSearch")
-   ?.focus();
-
+  document.getElementById("homeSearch")?.focus();
  },100);
 
 }
@@ -2365,22 +3073,17 @@ function handleSearchKey(event){
 function globalSearch(query){
 
  const q=
-  String(query||"")
-  .trim()
-  .toLowerCase();
+  String(query||"").trim().toLowerCase();
 
  showPage("search");
 
- const text=
-  document.getElementById("searchText");
-
- const results=
-  document.getElementById("searchResults");
+ const text=document.getElementById("searchText");
+ const results=document.getElementById("searchResults");
 
  if(text)
   text.textContent=
    q
-   ? `“${query}” के लिए results`
+   ?`“${query}” के लिए results`
    :"सभी content";
 
  if(!results)return;
@@ -2393,6 +3096,7 @@ function globalSearch(query){
    </div>`;
 
   return;
+
  }
 
  const matches=
@@ -2448,9 +3152,7 @@ function renderCard(item){
  ${escapeHTML(item.category||item.type)}
  </span>
 
- <h3>
- ${escapeHTML(item.title)}
- </h3>
+ <h3>${escapeHTML(item.title)}</h3>
 
  <div class="content-text">
  ${escapeHTML(item.content)}
@@ -2535,13 +3237,11 @@ function renderEverything(){
 
 function renderHomeLatest(){
 
- const box=
-  document.getElementById("homeLatest");
+ const box=document.getElementById("homeLatest");
 
  if(!box)return;
 
- const items=
-  sortedContent().slice(0,12);
+ const items=sortedContent().slice(0,12);
 
  box.innerHTML=
   items.length
@@ -2555,8 +3255,7 @@ function renderHomeLatest(){
 
 function renderType(type,id){
 
- const box=
-  document.getElementById(id);
+ const box=document.getElementById(id);
 
  if(!box)return;
 
@@ -2574,7 +3273,7 @@ function renderType(type,id){
 }
 
 
-function filterContent(type,category,button){
+function filterContent(type,category){
 
  playSound("click");
 
@@ -2584,8 +3283,7 @@ function filterContent(type,category,button){
   knowledge:"knowledgeList"
  };
 
- const box=
-  document.getElementById(idMap[type]);
+ const box=document.getElementById(idMap[type]);
 
  if(!box)return;
 
@@ -2622,11 +3320,8 @@ function openContent(item){
 
  playSound("click");
 
- const modal=
-  document.getElementById("mainModal");
-
- const content=
-  document.getElementById("modalContent");
+ const modal=document.getElementById("mainModal");
+ const content=document.getElementById("modalContent");
 
  if(!modal||!content)return;
 
@@ -2725,11 +3420,8 @@ function openVideo(url){
 
  playSound("click");
 
- const modal=
-  document.getElementById("mainModal");
-
- const content=
-  document.getElementById("modalContent");
+ const modal=document.getElementById("mainModal");
+ const content=document.getElementById("modalContent");
 
  if(!modal||!content)return;
 
@@ -2742,7 +3434,6 @@ function openVideo(url){
   <h2>🎬 Video</h2>
 
   <iframe
-   class="media"
    style="width:100%;aspect-ratio:16/9;border:0;border-radius:15px"
    src="https://www.youtube.com/embed/${encodeURIComponent(id)}"
    title="GAMEZONE ARENA Video"
@@ -2783,11 +3474,8 @@ function openGame(game){
 
  playSound("click");
 
- const modal=
-  document.getElementById("mainModal");
-
- const content=
-  document.getElementById("modalContent");
+ const modal=document.getElementById("mainModal");
+ const content=document.getElementById("modalContent");
 
  if(!modal||!content)return;
 
@@ -2818,13 +3506,30 @@ function openGame(game){
  modal.classList.add("show");
  document.body.classList.add("no-scroll");
 
+ if(game==="ludo")
+  playSound("ludoOpen");
+
 }
 
 
 /* =========================================================
-   LUDO — HUMAN LOCAL MULTIPLAYER
-   No computer / no AI
+   LUDO
    ========================================================= */
+
+const LUDO_PATH=[
+ [6,0],[6,1],[6,2],[6,3],[6,4],[6,5],
+ [5,6],[4,6],[3,6],[2,6],[1,6],[0,6],
+ [0,7],[0,8],
+ [1,8],[2,8],[3,8],[4,8],[5,8],
+ [6,9],[6,10],[6,11],[6,12],[6,13],[6,14],
+ [7,14],
+ [8,14],[8,13],[8,12],[8,11],[8,10],[8,9],
+ [9,8],[10,8],[11,8],[12,8],[13,8],[14,8],
+ [14,7],[14,6],
+ [13,6],[12,6],[11,6],[10,6],[9,6],
+ [8,5],[8,4],[8,3],[8,2],[8,1],[8,0],
+ [7,0]
+];
 
 const LUDO_PATH_LENGTH=52;
 
@@ -2836,7 +3541,7 @@ const LUDO_STARTS={
 };
 
 const LUDO_SAFE=[
-  0,8,13,21,26,34,39,47
+ 0,8,13,21,26,34,39,47
 ];
 
 const LUDO_COLORS={
@@ -2846,6 +3551,34 @@ const LUDO_COLORS={
  B:"blue"
 };
 
+const LUDO_NAMES={
+ R:"Red",
+ G:"Green",
+ Y:"Yellow",
+ B:"Blue"
+};
+
+const LUDO_HOME_COORDS={
+ R:[[1,1],[1,4],[4,1],[4,4]],
+ G:[[1,10],[1,13],[4,10],[4,13]],
+ Y:[[10,10],[10,13],[13,10],[13,13]],
+ B:[[10,1],[10,4],[13,1],[13,4]]
+};
+
+const LUDO_FINISH={
+ R:[[7,1],[7,2],[7,3],[7,4],[7,5],[7,6]],
+ G:[[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]],
+ Y:[[7,13],[7,12],[7,11],[7,10],[7,9],[7,8]],
+ B:[[13,7],[12,7],[11,7],[10,7],[9,7],[8,7]]
+};
+
+const LUDO_DICE_POS={
+ R:"top-left",
+ G:"top-right",
+ Y:"bottom-right",
+ B:"bottom-left"
+};
+
 let ludoState={
  players:2,
  activePlayers:["R","Y"],
@@ -2853,8 +3586,14 @@ let ludoState={
  dice:0,
  rolling:false,
  winner:null,
- tokens:{}
+ tokens:{},
+ moving:false
 };
+
+
+function delay(ms){
+ return new Promise(resolve=>setTimeout(resolve,ms));
+}
 
 
 function createLudoTokens(players){
@@ -2873,7 +3612,8 @@ function createLudoTokens(players){
   dice:0,
   rolling:false,
   winner:null,
-  tokens:{}
+  tokens:{},
+  moving:false
  };
 
  colors.forEach(color=>{
@@ -2890,103 +3630,340 @@ function createLudoTokens(players){
 }
 
 
-function renderLudoGame(content){
+function getLudoPathIndex(r,c){
 
- createLudoTokens(2);
+ for(let i=0;i<LUDO_PATH.length;i++){
 
- let cells="";
+  if(
+   LUDO_PATH[i][0]===r &&
+   LUDO_PATH[i][1]===c
+  )
+   return i;
 
- for(let r=0;r<15;r++){
+ }
 
-  for(let c=0;c<15;c++){
+ return null;
 
-   let cls="ludo-cell";
+}
 
-   if(r<6&&c<6)
-    cls+=" ludo-red";
 
-   else if(r<6&&c>8)
-    cls+=" ludo-green";
+function getLudoFinishIndex(color,r,c){
 
-   else if(r>8&&c<6)
-    cls+=" ludo-blue";
+ const lane=LUDO_FINISH[color]||[];
 
-   else if(r>8&&c>8)
-    cls+=" ludo-yellow";
+ for(let i=0;i<lane.length;i++){
 
-   else if(r===7&&c===7)
-    cls+=" ludo-center";
+  if(
+   lane[i][0]===r &&
+   lane[i][1]===c
+  )
+   return i;
 
-   else
-    cls+=" ludo-path";
+ }
 
-   const pathIndex=
-    getBoardPathIndex(r,c);
+ return null;
 
-   if(
-    pathIndex!==null &&
-    LUDO_SAFE.includes(pathIndex)
-   )
-    cls+=" ludo-safe";
+}
 
-   cells+=
-    `<div
-      class="${cls}"
-      data-path="${pathIndex===null?"":pathIndex}"
-      id="ludo-cell-${r}-${c}">
-     </div>`;
+
+function buildLudoCell(r,c){
+
+ const homeColors=[
+  {name:"R",condition:r<6&&c<6},
+  {name:"G",condition:r<6&&c>8},
+  {name:"Y",condition:r>8&&c>8},
+  {name:"B",condition:r>8&&c<6}
+ ];
+
+ const home=
+  homeColors.find(x=>x.condition);
+
+ let cls="ludo-cell";
+ let inner="";
+
+ if(home){
+
+  cls+=` ludo-${home.name==="R"?"red":
+                home.name==="G"?"green":
+                home.name==="Y"?"yellow":"blue"}
+          ludo-home`;
+
+  const color=home.name;
+
+  const spot=
+   LUDO_HOME_COORDS[color]
+   .findIndex(p=>p[0]===r&&p[1]===c);
+
+  if(spot>=0){
+
+   inner=`
+    <div class="ludo-home-inner">
+     ${[0,1,2,3].map(i=>
+      `<div class="ludo-home-spot ${
+       i===spot
+       ?"ludo-home-"+LUDO_COLORS[color]
+       :""
+      }"
+      data-home-color="${color}"
+      data-home-index="${i}">
+      </div>`
+     ).join("")}
+    </div>
+   `;
+
+  }
+
+ }else{
+
+  const pathIndex=getLudoPathIndex(r,c);
+
+  if(pathIndex!==null){
+
+   cls+=" ludo-path";
+
+   if(pathIndex===0)
+    cls+=" start-red";
+
+   if(pathIndex===13)
+    cls+=" start-green";
+
+   if(pathIndex===26)
+    cls+=" start-yellow";
+
+   if(pathIndex===39)
+    cls+=" start-blue";
+
+   if(LUDO_SAFE.includes(pathIndex))
+    cls+=" ludo-safe star-cell";
+
+  }
+
+  const finishColors=
+   ["R","G","Y","B"];
+
+  for(const color of finishColors){
+
+   const fi=getLudoFinishIndex(color,r,c);
+
+   if(fi!==null){
+
+    cls+=` ludo-finish-${LUDO_COLORS[color]}`;
+
+   }
+
+  }
+
+  if(r===7&&c===7){
+
+   cls="ludo-cell ludo-center";
 
   }
 
  }
 
+ return`
+  <div
+   class="${cls}"
+   id="ludo-cell-${r}-${c}"
+   data-r="${r}"
+   data-c="${c}">
+   ${inner}
+  </div>
+ `;
+
+}
+
+
+function renderLudoBoard(){
+
+ let cells="";
+
+ for(let r=0;r<15;r++){
+
+  for(let c=0;c<15;c++)
+   cells+=buildLudoCell(r,c);
+
+ }
+
+ return cells;
+
+}
+
+
+function getLudoColorName(color){
+
+ return{
+  R:"Red",
+  G:"Green",
+  Y:"Yellow",
+  B:"Blue"
+ }[color]||color;
+
+}
+
+
+function getLudoEmoji(color){
+
+ return{
+  R:"🔴",
+  G:"🟢",
+  Y:"🟡",
+  B:"🔵"
+ }[color]||"🎲";
+
+}
+
+
+function getLudoTokenBoardPosition(color,progress){
+
+ if(progress<0||progress>56)
+  return null;
+
+ if(progress<52){
+
+  const index=
+   (LUDO_STARTS[color]+progress)%52;
+
+  return LUDO_PATH[index];
+
+ }
+
+ const lane=LUDO_FINISH[color];
+
+ return lane[Math.min(5,progress-52)]||null;
+
+}
+
+
+function renderLudoGame(content){
+
+ createLudoTokens(2);
+
  content.innerHTML=`
+
+ <div class="ludo-stage">
 
  <h2>🎲 Human Multiplayer Ludo</h2>
 
- <p style="color:var(--muted);margin:8px 0 15px">
- 2–4 players • No Computer • No AI • Local human play
+ <p style="color:var(--muted);margin:8px 0 10px;text-align:center">
+ Red • Green • Yellow • Blue — केवल Human Players • No Computer • No AI
  </p>
 
- <div class="ludo-controls">
-  <button class="small-btn" onclick="setLudoPlayers(2)">2 Players</button>
-  <button class="small-btn" onclick="setLudoPlayers(3)">3 Players</button>
-  <button class="small-btn" onclick="setLudoPlayers(4)">4 Players</button>
+ <div class="ludo-player-controls">
+  <button class="ludo-player-btn active"
+   onclick="setLudoPlayers(2)">
+   2 Players
+  </button>
+
+  <button class="ludo-player-btn"
+   onclick="setLudoPlayers(3)">
+   3 Players
+  </button>
+
+  <button class="ludo-player-btn"
+   onclick="setLudoPlayers(4)">
+   4 Players
+  </button>
  </div>
 
- <div class="ludo-board" id="ludoBoard">
- ${cells}
+ <div id="ludoTurnBanner" class="ludo-turn-banner">
+  <span id="ludoTurnDot" class="ludo-turn-dot"></span>
+  <span id="ludoTurnText">Red की बारी</span>
  </div>
 
- <div class="ludo-controls" id="ludoPlayers"></div>
+ <div class="ludo-board-wrap">
 
- <div class="game-screen" style="min-height:180px">
+  <button
+   id="ludoDice-R"
+   class="ludo-dice red-dice top-left"
+   onclick="rollLudoDiceFor('R')">
+   🎲
+  </button>
 
-  <div id="ludoDice" class="big-number">🎲</div>
+  <button
+   id="ludoDice-G"
+   class="ludo-dice green-dice top-right"
+   onclick="rollLudoDiceFor('G')">
+   🎲
+  </button>
 
-  <div id="ludoMessage" class="game-message">
-   Red player की turn है। Dice roll करें।
+  <button
+   id="ludoDice-Y"
+   class="ludo-dice yellow-dice bottom-right"
+   onclick="rollLudoDiceFor('Y')">
+   🎲
+  </button>
+
+  <button
+   id="ludoDice-B"
+   class="ludo-dice blue-dice bottom-left"
+   onclick="rollLudoDiceFor('B')">
+   🎲
+  </button>
+
+  <div class="ludo-board" id="ludoBoard">
+   ${renderLudoBoard()}
   </div>
 
-  <div id="ludoTokenButtons"
-       class="ludo-controls">
-  </div>
+ </div>
 
-  <button class="btn btn-primary"
-  onclick="rollLudoDice()">
-   🎲 Roll Dice
+ <div id="ludoTokenButtons"
+      class="ludo-token-controls"></div>
+
+ <div id="ludoMessage"
+      class="game-message">
+  Red की बारी
+ </div>
+
+ <div class="card-actions"
+      style="justify-content:center;margin-top:14px">
+
+  <button class="btn btn-secondary"
+   onclick="resetLudo()">
+   🔄 New Game
   </button>
 
   <button class="btn btn-secondary"
-  onclick="resetLudo()">
-   🔄 New Game
+   onclick="showToast('🎲 अपनी बारी के रंग वाले dice पर tap करें।')">
+   ℹ️ How to Play
   </button>
+
+ </div>
+
+ <div class="ludo-rules">
+
+  <div class="ludo-rule">
+   🎲 Token बाहर निकालने के लिए 6 चाहिए।
+  </div>
+
+  <div class="ludo-rule">
+   ⭐ Star safe जगह है।
+  </div>
+
+  <div class="ludo-rule">
+   💥 Opponent को capture किया जा सकता है।
+  </div>
+
+  <div class="ludo-rule">
+   🏠 56 progress पर token home पहुँचता है।
+  </div>
+
+  <div class="ludo-rule">
+   🧱 दो opponent tokens एक जगह हों तो block बनता है।
+  </div>
+
+  <div class="ludo-rule">
+   🔁 6 आने पर उसी player की फिर बारी।
+  </div>
+
+ </div>
 
  </div>
 
  `;
 
  updateLudoUI();
+ renderLudoTokens();
 
 }
 
@@ -2998,11 +3975,97 @@ function setLudoPlayers(number){
  const content=
   document.getElementById("modalContent");
 
- if(content)
-  renderLudoGame(content);
+ if(!content)return;
 
  createLudoTokens(number);
+
+ content.innerHTML=`
+
+ <div class="ludo-stage">
+
+ <h2>🎲 Human Multiplayer Ludo</h2>
+
+ <p style="color:var(--muted);margin:8px 0 10px;text-align:center">
+ ${number} Players • Human only • No Computer • No AI
+ </p>
+
+ <div class="ludo-player-controls">
+
+  <button class="ludo-player-btn ${number===2?"active":""}"
+   onclick="setLudoPlayers(2)">
+   2 Players
+  </button>
+
+  <button class="ludo-player-btn ${number===3?"active":""}"
+   onclick="setLudoPlayers(3)">
+   3 Players
+  </button>
+
+  <button class="ludo-player-btn ${number===4?"active":""}"
+   onclick="setLudoPlayers(4)">
+   4 Players
+  </button>
+
+ </div>
+
+ <div id="ludoTurnBanner" class="ludo-turn-banner">
+  <span id="ludoTurnDot" class="ludo-turn-dot"></span>
+  <span id="ludoTurnText"></span>
+ </div>
+
+ <div class="ludo-board-wrap">
+
+  <button id="ludoDice-R"
+   class="ludo-dice red-dice top-left"
+   onclick="rollLudoDiceFor('R')">🎲</button>
+
+  <button id="ludoDice-G"
+   class="ludo-dice green-dice top-right"
+   onclick="rollLudoDiceFor('G')">🎲</button>
+
+  <button id="ludoDice-Y"
+   class="ludo-dice yellow-dice bottom-right"
+   onclick="rollLudoDiceFor('Y')">🎲</button>
+
+  <button id="ludoDice-B"
+   class="ludo-dice blue-dice bottom-left"
+   onclick="rollLudoDiceFor('B')">🎲</button>
+
+  <div class="ludo-board" id="ludoBoard">
+   ${renderLudoBoard()}
+  </div>
+
+ </div>
+
+ <div id="ludoTokenButtons"
+      class="ludo-token-controls"></div>
+
+ <div id="ludoMessage" class="game-message"></div>
+
+ <div class="card-actions" style="justify-content:center">
+  <button class="btn btn-secondary"
+   onclick="resetLudo()">
+   🔄 New Game
+  </button>
+ </div>
+
+ <div class="ludo-rules">
+
+  <div class="ludo-rule">🎲 6 से token बाहर आता है।</div>
+  <div class="ludo-rule">⭐ Safe/star cell पर capture नहीं।</div>
+  <div class="ludo-rule">💥 Opponent capture होगा।</div>
+  <div class="ludo-rule">🏠 56 पर token home।</div>
+  <div class="ludo-rule">🧱 Two-token block को पार नहीं कर सकते।</div>
+  <div class="ludo-rule">🔁 6 पर फिर turn।</div>
+
+ </div>
+
+ </div>
+
+ `;
+
  updateLudoUI();
+ renderLudoTokens();
 
 }
 
@@ -3012,38 +4075,12 @@ function resetLudo(){
  playSound("click");
 
  createLudoTokens(ludoState.players);
- updateLudoUI();
 
-}
+ const content=
+  document.getElementById("modalContent");
 
-
-function getBoardPathIndex(r,c){
-
- /*
-  Simple 52-space visual path around the central area.
-  The actual token progress remains independent from CSS coordinates.
- */
-
- const path=[];
-
- for(let c0=1;c0<=13;c0++)
-  path.push([6,c0]);
-
- for(let r0=7;r0<=13;r0++)
-  path.push([r0,13]);
-
- for(let c0=12;c0>=1;c0--)
-  path.push([13,c0]);
-
- for(let r0=12;r0>=7;r0--)
-  path.push([r0,1]);
-
- const found=
-  path.findIndex(
-   p=>p[0]===r&&p[1]===c
-  );
-
- return found>=0?found:null;
+ if(content)
+  renderLudoGame(content);
 
 }
 
@@ -3057,55 +4094,236 @@ function currentLudoColor(){
 }
 
 
-function rollLudoDice(){
+function isLudoPlayerActive(color){
 
- if(ludoState.rolling||ludoState.winner)
-  return;
-
- ludoState.rolling=true;
-
- playSound("dice");
-
- const dice=
-  Math.floor(Math.random()*6)+1;
-
- ludoState.dice=dice;
-
- const diceEl=
-  document.getElementById("ludoDice");
-
- if(diceEl)
-  diceEl.textContent=dice;
-
- setTimeout(()=>{
-
-  ludoState.rolling=false;
-
-  const color=
-   currentLudoColor();
-
-  const message=
-   document.getElementById("ludoMessage");
-
-  if(message)
-   message.textContent=
-    `${getLudoColorName(color)} player को ${dice} मिला। Token चुनें।`;
-
-  renderLudoTokenButtons();
-
- },250);
+ return ludoState.activePlayers.includes(color);
 
 }
 
 
-function getLudoColorName(color){
+function getLudoOccupants(boardPosition){
 
- return{
-  R:"🔴 Red",
-  G:"🟢 Green",
-  Y:"🟡 Yellow",
-  B:"🔵 Blue"
- }[color]||color;
+ const occupants=[];
+
+ ludoState.activePlayers.forEach(color=>{
+
+  ludoState.tokens[color].forEach(
+   (token,index)=>{
+
+    if(token.progress<0||token.progress>=52)
+     return;
+
+    const pos=
+     (LUDO_STARTS[color]+token.progress)%52;
+
+    if(pos===boardPosition)
+     occupants.push({
+      color,
+      index,
+      token
+     });
+
+   }
+  );
+
+ });
+
+ return occupants;
+
+}
+
+
+function getLudoLegalMove(color,index,dice){
+
+ const token=
+  ludoState.tokens[color]?.[index];
+
+ if(!token)return false;
+
+ if(token.progress<0)
+  return dice===6;
+
+ if(token.progress+dice>56)
+  return false;
+
+ if(token.progress+dice<52)
+  return !ludoWouldHitBlock(
+   color,
+   index,
+   token.progress+dice
+  );
+
+ return true;
+
+}
+
+
+function ludoWouldHitBlock(color,index,newProgress){
+
+ const target=
+  (LUDO_STARTS[color]+newProgress)%52;
+
+ const occupants=
+  getLudoOccupants(target)
+  .filter(o=>
+   o.color!==color
+  );
+
+ if(occupants.length>=2)
+  return true;
+
+ return false;
+
+}
+
+
+function renderLudoTokens(){
+
+ const board=
+  document.getElementById("ludoBoard");
+
+ if(!board)return;
+
+ board.querySelectorAll(".ludo-token-layer")
+  .forEach(el=>el.remove());
+
+ board.querySelectorAll(".ludo-token")
+  .forEach(el=>el.remove());
+
+ ludoState.activePlayers.forEach(color=>{
+
+  ludoState.tokens[color].forEach(
+   (token,index)=>{
+
+    if(token.progress<0){
+
+     const home=
+      LUDO_HOME_COORDS[color][index];
+
+     const cell=
+      document.getElementById(
+       `ludo-cell-${home[0]}-${home[1]}`
+      );
+
+     if(cell){
+
+      const tokenEl=
+       document.createElement("div");
+
+      tokenEl.className=
+       `ludo-token home-token ludo-${LUDO_COLORS[color]}-token`;
+
+      tokenEl.textContent=index+1;
+
+      tokenEl.title=
+       `${getLudoColorName(color)} token ${index+1}`;
+
+      cell.innerHTML="";
+      cell.appendChild(tokenEl);
+
+     }
+
+     return;
+
+    }
+
+    const pos=
+     getLudoTokenBoardPosition(
+      color,
+      token.progress
+     );
+
+    if(!pos)return;
+
+    const cell=
+     document.getElementById(
+      `ludo-cell-${pos[0]}-${pos[1]}`
+     );
+
+    if(!cell)return;
+
+    let layer=
+     cell.querySelector(".ludo-token-layer");
+
+    if(!layer){
+
+     layer=
+      document.createElement("div");
+
+     layer.className="ludo-token-layer";
+     cell.appendChild(layer);
+
+    }
+
+    const tokenEl=
+     document.createElement("div");
+
+    tokenEl.className=
+     `ludo-token-mini ludo-mini-${LUDO_COLORS[color]}`;
+
+    tokenEl.textContent=index+1;
+
+    layer.appendChild(tokenEl);
+
+   }
+  );
+
+ });
+
+}
+
+
+function updateLudoUI(){
+
+ const color=currentLudoColor();
+
+ const turnText=
+  document.getElementById("ludoTurnText");
+
+ const dot=
+  document.getElementById("ludoTurnDot");
+
+ if(turnText)
+  turnText.textContent=
+   `${getLudoColorName(color)} की बारी`;
+
+ if(dot){
+
+  dot.style.background=
+   color==="R"
+   ?"var(--ludo-red)"
+   :color==="G"
+   ?"var(--ludo-green)"
+   :color==="Y"
+   ?"var(--ludo-yellow)"
+   :"var(--ludo-blue)";
+
+ }
+
+ ["R","G","Y","B"].forEach(c=>{
+
+  const dice=
+   document.getElementById("ludoDice-"+c);
+
+  if(!dice)return;
+
+  const active=
+   c===color &&
+   ludoState.activePlayers.includes(c) &&
+   !ludoState.winner;
+
+  dice.classList.toggle("active",active);
+  dice.classList.toggle("disabled",!active);
+
+  if(ludoState.dice&&c===color)
+   dice.textContent=ludoState.dice;
+  else
+   dice.textContent="🎲";
+
+ });
+
+ renderLudoTokens();
+ renderLudoTokenButtons();
 
 }
 
@@ -3113,36 +4331,48 @@ function getLudoColorName(color){
 function renderLudoTokenButtons(){
 
  const box=
-  document.getElementById(
-   "ludoTokenButtons"
-  );
+  document.getElementById("ludoTokenButtons");
 
  if(!box)return;
 
- const color=
-  currentLudoColor();
+ const color=currentLudoColor();
+ const dice=ludoState.dice;
 
- const tokens=
-  ludoState.tokens[color]||[];
+ if(!dice||ludoState.winner){
+
+  box.innerHTML=
+   `<div class="game-message">
+    ${ludoState.winner
+      ?"🏆 Game complete."
+      :"अपनी बारी के रंग वाले dice पर tap करें।"}
+   </div>`;
+
+  return;
+
+ }
 
  box.innerHTML=
-  tokens.map((token,index)=>{
+  ludoState.tokens[color]
+  .map((token,index)=>{
 
-   const disabled=
-    token.progress<0 &&
-    ludoState.dice!==6;
+   const canMove=
+    getLudoLegalMove(
+     color,
+     index,
+     dice
+    );
 
    return`
+    <button
+     class="ludo-token-btn ${canMove?"can-move":""}"
+     ${canMove?"":"disabled"}
+     onclick="moveLudoToken(${index})">
 
-   <button
-    class="small-btn"
-    ${disabled?"disabled":""}
-    onclick="moveLudoToken(${index})">
-    ${getLudoColorName(color)}
-    Token ${index+1}
-    ${token.progress<0?"(Home)":""}
-   </button>
+     ${getLudoEmoji(color)}
+     Token ${index+1}
+     ${token.progress<0?"• Home":"• "+token.progress}
 
+    </button>
    `;
 
   }).join("");
@@ -3150,62 +4380,197 @@ function renderLudoTokenButtons(){
 }
 
 
-function moveLudoToken(index){
+function rollLudoDiceFor(color){
 
- const color=
-  currentLudoColor();
-
- const token=
-  ludoState.tokens[color]?.[index];
-
- if(!token||!ludoState.dice)
+ if(ludoState.winner||
+    ludoState.moving||
+    ludoState.rolling)
   return;
 
- const dice=
-  ludoState.dice;
+ if(color!==currentLudoColor()){
 
- playSound("move");
+  playSound("wrong");
+  showToast(`${getLudoColorName(currentLudoColor())} की बारी है।`);
+  return;
 
- if(token.progress<0){
+ }
 
-  if(dice!==6){
+ ludoState.rolling=true;
 
-   showToast("Token निकालने के लिए 6 चाहिए।");
-   playSound("wrong");
-   return;
+ const diceEl=
+  document.getElementById("ludoDice-"+color);
+
+ if(diceEl)
+  diceEl.classList.add("rolling");
+
+ playSound("diceRoll");
+
+ let frames=0;
+
+ const timer=setInterval(()=>{
+
+  frames++;
+
+  if(diceEl)
+   diceEl.textContent=
+    Math.floor(Math.random()*6)+1;
+
+  playSound("diceRoll");
+
+  if(frames>=7){
+
+   clearInterval(timer);
+
+   const value=
+    Math.floor(Math.random()*6)+1;
+
+   ludoState.dice=value;
+   ludoState.rolling=false;
+
+   if(diceEl){
+
+    diceEl.classList.remove("rolling");
+    diceEl.textContent=value;
+
+   }
+
+   playSound("dice");
+
+   handleLudoDiceResult(color,value);
 
   }
 
-  token.progress=0;
+ },90);
 
- }else{
+}
 
-  token.progress+=dice;
 
- }
+function rollLudoDice(){
 
- if(token.progress>56){
+ rollLudoDiceFor(currentLudoColor());
 
-  token.progress-=dice;
+}
 
-  showToast("इतनी चाल से Home से आगे नहीं जा सकते।");
+
+function handleLudoDiceResult(color,dice){
+
+ const message=
+  document.getElementById("ludoMessage");
+
+ const legal=
+  ludoState.tokens[color]
+  .some((token,index)=>
+   getLudoLegalMove(color,index,dice)
+  );
+
+ if(!legal){
+
+  if(message)
+   message.textContent=
+    `${getLudoColorName(color)} को ${dice} मिला — कोई valid चाल नहीं।`;
+
   playSound("wrong");
+
+  if(dice!==6){
+
+   setTimeout(()=>{
+
+    ludoState.dice=0;
+
+    ludoState.current=
+     (ludoState.current+1)%
+     ludoState.activePlayers.length;
+
+    playSound("turn");
+
+    updateLudoUI();
+
+   },700);
+
+  }else{
+
+   ludoState.dice=0;
+   updateLudoUI();
+
+  }
+
   return;
 
  }
 
- ludoState.dice=0;
+ if(message)
+  message.textContent=
+   `${getLudoColorName(color)} को ${dice} मिला। Token चुनें।`;
 
- if(token.progress>=56){
+ renderLudoTokenButtons();
 
-  playSound("win");
+}
 
-  const message=
-   document.getElementById("ludoMessage");
 
-  if(message)
-   message.textContent=
-    `🏆 ${getLudoColorName(color)} token Home पहुँच गया!`;
+async function moveLudoToken(index){
+
+ if(ludoState.moving||
+    ludoState.winner)
+  return;
+
+ const color=currentLudoColor();
+ const dice=ludoState.dice;
+ const token=ludoState.tokens[color]?.[index];
+
+ if(!token||!dice)return;
+
+ if(!getLudoLegalMove(color,index,dice)){
+
+  playSound("wrong");
+  showToast("यह token इस dice से नहीं चल सकता।");
+  return;
+
+ }
+
+ ludoState.moving=true;
+
+ const oldProgress=token.progress;
+
+ if(token.progress<0){
+
+  token.progress=0;
+
+  renderLudoTokens();
+
+  playSound("home");
+
+  await delay(260);
+
+ }else{
+
+  for(
+   let p=token.progress+1;
+   p<=token.progress+dice;
+   p++
+  ){
+
+   token.progress=p;
+
+   renderLudoTokens();
+
+   playSound("step");
+
+   await delay(170);
+
+  }
+
+ }
+
+ const reachedHome=
+  token.progress>=56;
+
+ if(reachedHome){
+
+  playSound("home");
+
+  showToast(
+   `${getLudoColorName(color)} token Home पहुँच गया!`
+  );
 
   addXP(15,"Ludo Home");
 
@@ -3213,12 +4578,15 @@ function moveLudoToken(index){
 
  checkLudoCapture(color,index);
 
+ ludoState.dice=0;
+
  if(
   ludoState.tokens[color]
   .every(t=>t.progress>=56)
  ){
 
   ludoState.winner=color;
+  ludoState.moving=false;
 
   playSound("win");
 
@@ -3227,23 +4595,47 @@ function moveLudoToken(index){
 
   if(message)
    message.textContent=
-    `🏆 ${getLudoColorName(color)} player जीत गया! +50 XP`;
+    `🏆 ${getLudoColorName(color)} जीत गया!`;
 
   addXP(50,"Ludo Winner");
 
   updateLudoUI();
+
   return;
 
  }
 
  /*
-  6 = same player gets another turn.
+  Six gives another turn.
   Otherwise next human player.
  */
- if(dice!==6)
+ if(
+  dice!==6
+ ){
+
   ludoState.current=
    (ludoState.current+1)%
    ludoState.activePlayers.length;
+
+  playSound("turn");
+
+ }else{
+
+  playSound("turn");
+
+ }
+
+ ludoState.moving=false;
+
+ const message=
+  document.getElementById("ludoMessage");
+
+ if(message&&!ludoState.winner){
+
+  message.textContent=
+   `${getLudoColorName(currentLudoColor())} की बारी`;
+
+ }
 
  updateLudoUI();
 
@@ -3255,53 +4647,50 @@ function checkLudoCapture(color,index){
  const token=
   ludoState.tokens[color][index];
 
- if(token.progress<0||token.progress>=56)
+ if(token.progress<0||
+    token.progress>=52)
   return;
 
  const boardPosition=
-  (LUDO_STARTS[color]+token.progress)%
-  LUDO_PATH_LENGTH;
+  (LUDO_STARTS[color]+token.progress)%52;
 
  if(LUDO_SAFE.includes(boardPosition)){
 
   playSound("safe");
+
+  showToast("⭐ Safe cell — capture नहीं होगा।");
+
   return;
 
  }
 
- let captured=false;
+ const opponents=
+  getLudoOccupants(boardPosition)
+  .filter(o=>o.color!==color);
 
- ludoState.activePlayers
- .filter(other=>other!==color)
- .forEach(other=>{
+ if(opponents.length>=2){
 
-  ludoState.tokens[other].forEach(otherToken=>{
+  /*
+   Two opponent tokens = block.
+   A block cannot be captured.
+  */
+  playSound("wrong");
+  showToast("🧱 Block — दो tokens की वजह से capture नहीं हुआ।");
+  return;
 
-   if(otherToken.progress<0)
-    return;
+ }
 
-   const otherPosition=
-    (LUDO_STARTS[other]+otherToken.progress)%
-    LUDO_PATH_LENGTH;
+ if(opponents.length===1){
 
-   if(
-    otherPosition===boardPosition
-   ){
+  const target=opponents[0];
 
-    otherToken.progress=-1;
-    captured=true;
-
-   }
-
-  });
-
- });
-
- if(captured){
+  target.token.progress=-1;
 
   playSound("capture");
 
-  showToast("💥 Opponent token captured!");
+  showToast(
+   `💥 ${getLudoColorName(target.color)} token capture!`
+  );
 
   addXP(5,"Ludo Capture");
 
@@ -3310,84 +4699,172 @@ function checkLudoCapture(color,index){
 }
 
 
-function updateLudoUI(){
-
- const playersBox=
-  document.getElementById(
-   "ludoPlayers"
-  );
-
- if(playersBox){
-
-  playersBox.innerHTML=
-   ludoState.activePlayers.map(
-    (color,i)=>
-     `<span class="player-chip ${
-       i===ludoState.current?"active":""
-     }">
-      ${getLudoColorName(color)}
-     </span>`
-   ).join("");
-
- }
-
- const message=
-  document.getElementById("ludoMessage");
-
- if(message&&!ludoState.winner){
-
-  message.textContent=
-   `${getLudoColorName(currentLudoColor())} player की turn है।`;
-
- }
-
- renderLudoTokenButtons();
-
-}
-
-
 /* =========================================================
    CRICKET
    ========================================================= */
 
+let cricketState={
+ runs:0,
+ wickets:0,
+ balls:0,
+ maxBalls:12,
+ busy:false,
+ target:null,
+ inningsOver:false
+};
+
+
+function cricketOvers(){
+
+ return `${Math.floor(cricketState.balls/6)}.${cricketState.balls%6}`;
+}
+
+
 function renderCricketGame(content){
+
+ cricketState={
+  runs:0,
+  wickets:0,
+  balls:0,
+  maxBalls:12,
+  busy:false,
+  target:null,
+  inningsOver:false
+ };
 
  content.innerHTML=`
 
- <h2>🏏 Quick Cricket</h2>
+ <div class="cricket-wrap">
 
- <div class="game-screen">
+ <h2>🏏 GAMEZONE Cricket</h2>
 
- <div id="cricketScore"
- class="big-number">
- 0 / 0
- </div>
-
- <p class="game-message">
- 6 balls खेलिए और ज्यादा runs बनाने की कोशिश करें।
+ <p style="color:var(--muted);margin:5px 0 14px;text-align:center">
+ 12-ball mini innings • Shot चुनें • Runs बनाइए • Wicket से बचिए
  </p>
 
- <button class="btn btn-primary"
- onclick="hitCricket()">
- 🏏 Hit
- </button>
+ <div class="cricket-scoreboard">
 
- <button class="btn btn-secondary"
- onclick="resetCricket()">
- Reset
- </button>
+  <div class="cricket-stat">
+   <strong id="cricketRuns">0</strong>
+   RUNS
+  </div>
 
- <div id="cricketMessage"
- class="game-message">
- Ready!
+  <div class="cricket-stat">
+   <strong id="cricketWickets">0</strong>
+   WICKETS
+  </div>
+
+  <div class="cricket-stat">
+   <strong id="cricketOvers">0.0</strong>
+   OVER
+  </div>
+
+  <div class="cricket-stat">
+   <strong id="cricketBalls">12</strong>
+   BALLS
+  </div>
+
+ </div>
+
+ <div class="cricket-ground">
+
+  <div class="cricket-boundary"></div>
+
+  <div class="cricket-pitch">
+
+   <div class="cricket-crease top"></div>
+   <div class="cricket-crease bottom"></div>
+
+  </div>
+
+  <div id="cricketBowler"
+       class="cricket-bowler">
+   🏃
+  </div>
+
+  <div id="cricketBatsman"
+       class="cricket-batsman">
+   🏏
+  </div>
+
+  <div id="cricketBall"
+       class="cricket-ball">
+  </div>
+
+  <div class="cricket-wicket">
+   <div class="cricket-stump"></div>
+   <div class="cricket-stump"></div>
+   <div class="cricket-stump"></div>
+   <div class="cricket-bail"></div>
+  </div>
+
+ </div>
+
+ <div id="cricketResult"
+      class="cricket-result game-message">
+  Bowler तैयार है — shot चुनिए।
+ </div>
+
+ <div class="cricket-action">
+
+  <button class="shot-btn"
+   onclick="playCricketShot('defend')">
+   🛡️ DEFEND
+  </button>
+
+  <button class="shot-btn"
+   onclick="playCricketShot('drive')">
+   🏏 DRIVE
+  </button>
+
+  <button class="shot-btn"
+   onclick="playCricketShot('loft')">
+   🚀 LOFT
+  </button>
+
+  <button class="shot-btn"
+   onclick="playCricketShot('sweep')">
+   🔥 SWEEP
+  </button>
+
+ </div>
+
+ <div class="card-actions"
+      style="justify-content:center;margin-top:14px">
+
+  <button class="btn btn-secondary"
+   onclick="resetCricket()">
+   🔄 New Innings
+  </button>
+
  </div>
 
  </div>
 
  `;
 
- window.cricketRuns=0;
- window.cricketBalls=0;
+ updateCricketUI();
+
+}
+
+
+function updateCricketUI(){
+
+ const runs=document.getElementById("cricketRuns");
+ const wickets=document.getElementById("cricketWickets");
+ const overs=document.getElementById("cricketOvers");
+ const balls=document.getElementById("cricketBalls");
+
+ if(runs)runs.textContent=cricketState.runs;
+ if(wickets)wickets.textContent=cricketState.wickets;
+ if(overs)overs.textContent=cricketOvers();
+
+ if(balls)
+  balls.textContent=
+   Math.max(
+    0,
+    cricketState.maxBalls-cricketState.balls
+   );
 
 }
 
@@ -3396,75 +4873,216 @@ function resetCricket(){
 
  playSound("click");
 
- window.cricketRuns=0;
- window.cricketBalls=0;
+ const content=
+  document.getElementById("modalContent");
 
- const el=
-  document.getElementById("cricketScore");
-
- if(el)
-  el.textContent="0 / 0";
+ if(content)
+  renderCricketGame(content);
 
 }
 
 
-function hitCricket(){
+async function playCricketShot(shot){
 
- if(window.cricketBalls>=6){
-
-  showToast(
-   `🏏 Innings finished: ${window.cricketRuns} runs`
-  );
-
+ if(
+  cricketState.busy||
+  cricketState.inningsOver
+ )
   return;
 
+ cricketState.busy=true;
+
+ const bowler=
+  document.getElementById("cricketBowler");
+
+ const batsman=
+  document.getElementById("cricketBatsman");
+
+ const ball=
+  document.getElementById("cricketBall");
+
+ const resultBox=
+  document.getElementById("cricketResult");
+
+ if(bowler)bowler.classList.add("throw");
+ if(batsman)batsman.classList.add("shot");
+
+ if(ball){
+
+  ball.classList.remove("bowled");
+
+  void ball.offsetWidth;
+
+  ball.classList.add("bowled");
+
  }
 
- const outcomes=[
-  {run:0,sound:"wicket"},
-  {run:1,sound:"cricket"},
-  {run:2,sound:"cricket"},
-  {run:4,sound:"cricket"},
-  {run:6,sound:"six"}
- ];
+ playSound("ball");
+
+ await delay(650);
+
+ if(bowler)bowler.classList.remove("throw");
+ if(batsman)batsman.classList.remove("shot");
 
  const result=
-  outcomes[
-   Math.floor(Math.random()*outcomes.length)
-  ];
+  cricketOutcome(shot);
 
- window.cricketRuns+=result.run;
- window.cricketBalls++;
+ cricketState.balls++;
 
- playSound(result.sound);
+ if(result.wicket){
 
- const el=
-  document.getElementById("cricketScore");
+  cricketState.wickets++;
 
- if(el)
-  el.textContent=
-   `${window.cricketRuns} / ${window.cricketBalls}`;
+  playSound("wicket");
 
- const msg=
-  document.getElementById("cricketMessage");
+  if(resultBox)
+   resultBox.textContent=
+    "❌ WICKET! बल्लेबाज़ out.";
 
- if(msg){
+ }else{
 
-  msg.textContent=
-   result.run===0
-   ?"❌ Wicket!"
-   :`🏏 ${result.run} run${result.run>1?"s":""}!`;
+  cricketState.runs+=result.runs;
+
+  if(result.runs===6)
+   playSound("six");
+
+  else if(result.runs===4)
+   playSound("four");
+
+  else
+   playSound("cricket");
+
+  if(resultBox){
+
+   if(result.runs===6)
+    resultBox.textContent="🚀 SIX! शानदार छक्का!";
+
+   else if(result.runs===4)
+    resultBox.textContent="🔥 FOUR! Boundary!";
+
+   else if(result.runs===0)
+    resultBox.textContent="🛡️ Dot ball.";
+
+   else
+    resultBox.textContent=
+     `🏏 ${result.runs} run${result.runs>1?"s":""}!`;
+
+  }
+
+  if(result.runs>0)
+   addXP(
+    result.runs===6?8:
+    result.runs===4?5:2,
+    "Cricket"
+   );
 
  }
 
- addXP(
-  result.run===6
-  ?8
-  :result.run===0
-  ?0
-  :2,
-  "Cricket"
- );
+ updateCricketUI();
+
+ if(
+  cricketState.balls>=cricketState.maxBalls||
+  cricketState.wickets>=3
+ ){
+
+  cricketState.inningsOver=true;
+
+  playSound("over");
+
+  if(resultBox)
+   resultBox.innerHTML=
+    `🏁 Innings complete!<br>
+     Score: <strong>${cricketState.runs}/${cricketState.wickets}</strong>
+     <br>
+     Overs: ${cricketOvers()}`;
+
+  addXP(
+   cricketState.runs>=30?15:5,
+   "Cricket Innings"
+  );
+
+ }
+
+ cricketState.busy=false;
+
+}
+
+
+function cricketOutcome(shot){
+
+ const r=Math.random();
+
+ /*
+  Shot type changes probability slightly.
+  No real money / gambling — only browser gameplay.
+ */
+
+ if(shot==="defend"){
+
+  if(r<.08)
+   return {runs:0,wicket:true};
+
+  if(r<.72)
+   return {runs:0,wicket:false};
+
+  if(r<.88)
+   return {runs:1,wicket:false};
+
+  return {runs:2,wicket:false};
+
+ }
+
+ if(shot==="drive"){
+
+  if(r<.10)
+   return {runs:0,wicket:true};
+
+  if(r<.28)
+   return {runs:1,wicket:false};
+
+  if(r<.62)
+   return {runs:2,wicket:false};
+
+  if(r<.82)
+   return {runs:4,wicket:false};
+
+  return {runs:6,wicket:false};
+
+ }
+
+ if(shot==="loft"){
+
+  if(r<.20)
+   return {runs:0,wicket:true};
+
+  if(r<.30)
+   return {runs:1,wicket:false};
+
+  if(r<.50)
+   return {runs:2,wicket:false};
+
+  if(r<.72)
+   return {runs:4,wicket:false};
+
+  return {runs:6,wicket:false};
+
+ }
+
+ /* sweep */
+
+ if(r<.13)
+  return {runs:0,wicket:true};
+
+ if(r<.35)
+  return {runs:1,wicket:false};
+
+ if(r<.63)
+  return {runs:2,wicket:false};
+
+ if(r<.87)
+  return {runs:4,wicket:false};
+
+ return {runs:6,wicket:false};
 
 }
 
@@ -3476,116 +5094,207 @@ function hitCricket(){
 let carromAngle=0;
 let carromPower=50;
 let carromCoins=[];
+let carromScore=0;
+let carromQueenPocketed=false;
 
 
 function renderCarromGame(content){
 
+ carromAngle=0;
+ carromPower=50;
+ carromScore=0;
+ carromQueenPocketed=false;
+
  carromCoins=[
-  {x:50,y:50,type:"red"},
+  {x:50,y:50,type:"queen"},
   {x:44,y:50,type:"black"},
   {x:56,y:50,type:"white"},
   {x:50,y:44,type:"black"},
-  {x:50,y:56,type:"white"}
+  {x:50,y:56,type:"white"},
+  {x:44,y:44,type:"white"},
+  {x:56,y:44,type:"black"},
+  {x:44,y:56,type:"black"},
+  {x:56,y:56,type:"white"},
+  {x:47,y:47,type:"black"},
+  {x:53,y:47,type:"white"},
+  {x:47,y:53,type:"white"},
+  {x:53,y:53,type:"black"}
  ];
 
  content.innerHTML=`
 
- <h2>🎯 Mini Carrom</h2>
+ <div class="carrom-stage">
 
- <div class="game-screen">
+ <h2>🎯 GAMEZONE Carrom</h2>
 
- <div class="carrom-board" id="carromBoard">
+ <p style="color:var(--muted);text-align:center;margin:5px 0 12px">
+  Proper board • 4 pockets • Queen • Coins • Striker
+ </p>
 
-  <div class="pocket p1"></div>
-  <div class="pocket p2"></div>
-  <div class="pocket p3"></div>
-  <div class="pocket p4"></div>
+ <div class="carrom-score">
+  <div class="carrom-stat">
+   🎯 Score: <span id="carromScore">0</span>
+  </div>
+
+  <div class="carrom-stat">
+   👑 Queen:
+   <span id="carromQueen">On Board</span>
+  </div>
+ </div>
+
+ <div class="carrom-board"
+      id="carromBoard">
+
+  <div class="carrom-inner"></div>
+
+  <div class="pocket p1 carrom-pocket"></div>
+  <div class="pocket p2 carrom-pocket"></div>
+  <div class="pocket p3 carrom-pocket"></div>
+  <div class="pocket p4 carrom-pocket"></div>
+
+  <div class="carrom-diagonal d1"></div>
+  <div class="carrom-diagonal d2"></div>
 
   <div class="carrom-center"></div>
-  <div class="carrom-line carrom-baseline"></div>
+
+  <div class="carrom-line carrom-baseline top"></div>
+  <div class="carrom-line carrom-baseline bottom"></div>
+
+  <div class="carrom-arrow a1"></div>
+  <div class="carrom-arrow a2"></div>
+  <div class="carrom-arrow a3"></div>
+  <div class="carrom-arrow a4"></div>
 
   ${carromCoins.map((coin,i)=>
    `<div
-    class="coin ${coin.type}"
+    class="carrom-coin ${
+     coin.type==="queen"
+     ?"carrom-queen"
+     :coin.type==="black"
+     ?"carrom-black"
+     :"carrom-white"
+    }"
     id="carrom-coin-${i}"
     style="
      left:${coin.x}%;
      top:${coin.y}%;
     ">
-    ●
+    ${coin.type==="queen"?"Q":"●"}
    </div>`
   ).join("")}
 
-  <div class="striker" id="carromStriker"></div>
+  <div
+   class="aim-line"
+   id="carromAimLine">
+  </div>
+
+  <div
+   class="striker"
+   id="carromStriker">
+  </div>
 
  </div>
 
- <label style="width:min(430px,90vw)">
+ <label style="display:block;margin-top:18px">
  Angle
  <input
+  id="carromAngleInput"
   type="range"
   min="-45"
   max="45"
   value="0"
   class="form-control"
-  oninput="carromAngle=Number(this.value)">
+  oninput="carromAngle=Number(this.value);updateCarromAim()">
  </label>
 
- <label style="width:min(430px,90vw)">
+ <label style="display:block;margin-top:10px">
  Power
  <input
+  id="carromPowerInput"
   type="range"
   min="20"
   max="100"
   value="50"
   class="form-control"
-  oninput="carromPower=Number(this.value)">
+  oninput="carromPower=Number(this.value);updateCarromAim()">
  </label>
 
- <button class="btn btn-primary"
- onclick="shootCarrom()">
- 🎯 Shoot
- </button>
+ <div class="card-actions"
+      style="justify-content:center;margin-top:15px">
+
+  <button class="btn btn-primary"
+   onclick="shootCarrom()">
+   🎯 Shoot
+  </button>
+
+  <button class="btn btn-secondary"
+   onclick="renderCarromGame(document.getElementById('modalContent'))">
+   🔄 New Board
+  </button>
+
+ </div>
 
  <div id="carromMessage"
- class="game-message">
- Angle और power चुनकर striker चलाएँ।
+      class="game-message"
+      style="margin-top:12px">
+  Angle और power चुनकर striker चलाएँ।
  </div>
 
  </div>
 
  `;
 
+ updateCarromAim();
+
 }
 
 
-function shootCarrom(){
+function updateCarromAim(){
+
+ const line=
+  document.getElementById("carromAimLine");
+
+ if(!line)return;
+
+ const length=
+  25+(carromPower/100)*25;
+
+ line.style.width=length+"%";
+
+ line.style.transform=
+  `rotate(${carromAngle}deg)`;
+
+}
+
+
+async function shootCarrom(){
 
  const striker=
-  document.getElementById(
-   "carromStriker"
-  );
+  document.getElementById("carromStriker");
 
  if(!striker)return;
 
  playSound("carrom");
 
- const distance=
-  Math.min(
-   40,
-   8+(carromPower/100)*32
-  );
+ striker.style.transform=
+  "translateX(-50%) scale(.92)";
+
+ await delay(120);
 
  const rad=
   carromAngle*Math.PI/180;
 
+ const distance=
+  Math.min(
+   42,
+   8+(carromPower/100)*34
+  );
+
  const x=
-  50+
-  Math.sin(rad)*distance;
+  50+Math.sin(rad)*distance;
 
  const y=
-  90-
-  Math.cos(rad)*distance;
+  90-Math.cos(rad)*distance;
 
  striker.style.left=
   Math.max(8,Math.min(92,x))+"%";
@@ -3593,59 +5302,118 @@ function shootCarrom(){
  striker.style.bottom=
   Math.max(8,Math.min(82,100-y))+"%";
 
+ await delay(420);
+
  const success=
   Math.random()<
-  .25+
-  (carromPower/100)*.35;
+  .20+
+  (carromPower/100)*.40;
 
  const message=
-  document.getElementById(
-   "carromMessage"
-  );
+  document.getElementById("carromMessage");
 
  if(success){
 
-  playSound("pocket");
-
   const available=
    carromCoins.findIndex(
-    c=>c.x!==-1
+    c=>c.x!==-1 &&
+       (
+        c.type!=="queen"||
+        !carromQueenPocketed
+       )
    );
 
   if(available>=0){
 
-   const coin=
+   const coin=carromCoins[available];
+
+   const coinEl=
     document.getElementById(
      "carrom-coin-"+available
     );
 
-   if(coin){
+   if(coin.type==="queen"){
 
-    coin.style.left="3%";
-    coin.style.top="3%";
-    coin.style.opacity="0";
+    carromQueenPocketed=true;
+
+    if(coinEl){
+
+     coinEl.style.transform=
+      "translate(-50%,-50%) scale(.2)";
+     coinEl.style.opacity="0";
+
+    }
+
+    carromScore+=20;
+
+    const q=
+     document.getElementById("carromQueen");
+
+    if(q)q.textContent="Pocketed";
+
+    playSound("pocket");
+
+    if(message)
+     message.textContent=
+      "👑 QUEEN pocket! +20 XP";
+
+    addXP(20,"Carrom Queen");
+
+   }else{
+
+    if(coinEl){
+
+     coinEl.style.transform=
+      "translate(-50%,-50%) scale(.2)";
+     coinEl.style.opacity="0";
+
+    }
+
+    coin.x=-1;
+    carromScore+=10;
+
+    playSound("pocket");
+
+    if(message)
+     message.textContent=
+      "🎯 Coin pocket! +10 XP";
+
+    addXP(10,"Carrom");
 
    }
 
-   carromCoins[available].x=-1;
+   const score=
+    document.getElementById("carromScore");
+
+   if(score)
+    score.textContent=carromScore;
+
+  }else{
+
+   playSound("wrong");
+
+   if(message)
+    message.textContent=
+     "Board clear! 🏆";
 
   }
 
-  if(message)
-   message.textContent=
-    "🎯 Coin pocket! +10 XP";
-
-  addXP(10,"Carrom");
-
  }else{
 
+  playSound("carromMiss");
+
   if(message)
    message.textContent=
-    "Miss! Angle और power बदलकर फिर कोशिश करें।";
-
-  addXP(1,"Carrom");
+    "❌ Miss! Angle और power बदलकर फिर कोशिश करें।";
 
  }
+
+ await delay(250);
+
+ striker.style.left="50%";
+ striker.style.bottom="8%";
+ striker.style.transform=
+  "translateX(-50%)";
 
 }
 
@@ -3703,17 +5471,13 @@ function spinWheel(){
   Math.floor(Math.random()*360);
 
  const wheel=
-  document.getElementById(
-   "spinWheel"
-  );
+  document.getElementById("spinWheel");
 
  if(wheel)
   wheel.style.transform=
    `rotate(${spinAngle}deg)`;
 
- const rewards=[
-  5,10,15,20,25
- ];
+ const rewards=[5,10,15,20,25];
 
  const reward=
   rewards[
@@ -3723,15 +5487,14 @@ function spinWheel(){
  setTimeout(()=>{
 
   const msg=
-   document.getElementById(
-    "spinMessage"
-   );
+   document.getElementById("spinMessage");
 
   if(msg)
    msg.textContent=
     `⭐ आपको ${reward} XP मिले।`;
 
   addXP(reward,"Spin");
+
   spinBusy=false;
 
  },2100);
@@ -3827,11 +5590,8 @@ function startRace(){
 
  clearInterval(raceTimer);
 
- const track=
-  document.getElementById("raceTrack");
-
- const message=
-  document.getElementById("raceMessage");
+ const track=document.getElementById("raceTrack");
+ const message=document.getElementById("raceMessage");
 
  if(!track)return;
 
@@ -3858,9 +5618,7 @@ function startRace(){
 
    if(
     top>210 &&
-    Math.abs(
-     obstacleX-racePosition
-    )<10
+    Math.abs(obstacleX-racePosition)<10
    ){
 
     clearInterval(raceTimer);
@@ -4014,7 +5772,7 @@ function memoryClick(card){
 
 
 /* =========================================================
-   PLAZO CHALLENGE
+   PLAZO
    ========================================================= */
 
 function renderPlazoGame(content){
@@ -4060,15 +5818,11 @@ function checkPlazo(number){
 
  const answer=
   Number(
-   document.getElementById(
-    "plazoAnswer"
-   )?.value
+   document.getElementById("plazoAnswer")?.value
   );
 
  const message=
-  document.getElementById(
-   "plazoMessage"
-  );
+  document.getElementById("plazoMessage");
 
  if(answer===number*2){
 
@@ -4106,9 +5860,7 @@ function playDailyChallenge(){
  showPage("challenge");
 
  const area=
-  document.getElementById(
-   "challengeArea"
-  );
+  document.getElementById("challengeArea");
 
  if(!area)return;
 
@@ -4121,9 +5873,7 @@ function playDailyChallenge(){
  ${number}
  </div>
 
- <h2>
- Quick Math Challenge
- </h2>
+ <h2>Quick Math Challenge</h2>
 
  <p class="game-message">
  ${number} × 2 कितना होगा?
@@ -4152,15 +5902,11 @@ function checkDailyChallenge(number){
 
  const answer=
   Number(
-   document.getElementById(
-    "dailyAnswer"
-   )?.value
+   document.getElementById("dailyAnswer")?.value
   );
 
  const result=
-  document.getElementById(
-   "dailyResult"
-  );
+  document.getElementById("dailyResult");
 
  if(answer===number*2){
 
@@ -4188,8 +5934,7 @@ function checkDailyChallenge(number){
 
 
 /* =========================================================
-   QUIZ
-   NO-REPEAT SYSTEM
+   QUIZ — EXPANDED NO REPEAT SYSTEM
    ========================================================= */
 
 const quizQuestions=[
@@ -4407,6 +6152,216 @@ const quizQuestions=[
   q:"2 × 8 कितना होता है?",
   options:["12","14","16","18"],
   answer:2
+ },
+
+ {
+  id:"q031",
+  q:"भारत का राष्ट्रीय खेल किसे आधिकारिक रूप से घोषित किया गया है?",
+  options:["हॉकी","क्रिकेट","कबड्डी","कोई आधिकारिक राष्ट्रीय खेल नहीं"],
+  answer:3
+ },
+
+ {
+  id:"q032",
+  q:"सौरमंडल का सबसे बड़ा ग्रह कौन सा है?",
+  options:["पृथ्वी","बृहस्पति","शनि","मंगल"],
+  answer:1
+ },
+
+ {
+  id:"q033",
+  q:"एक वर्ष में सामान्यतः कितने महीने होते हैं?",
+  options:["10","11","12","13"],
+  answer:2
+ },
+
+ {
+  id:"q034",
+  q:"भारत का राष्ट्रीय ध्वज किस नाम से जाना जाता है?",
+  options:["तिरंगा","केसरिया","भारत ध्वज","जनध्वज"],
+  answer:0
+ },
+
+ {
+  id:"q035",
+  q:"पृथ्वी का लगभग कितना भाग जल से ढका है?",
+  options:["लगभग 10%","लगभग 30%","लगभग 50%","लगभग 71%"],
+  answer:3
+ },
+
+ {
+  id:"q036",
+  q:"किस ग्रह के चारों ओर प्रमुख rings दिखाई देती हैं?",
+  options:["शनि","बुध","मंगल","पृथ्वी"],
+  answer:0
+ },
+
+ {
+  id:"q037",
+  q:"JavaScript का उपयोग website में मुख्यतः किसके लिए किया जाता है?",
+  options:["Interactivity","केवल image storage","केवल printing","केवल typing"],
+  answer:0
+ },
+
+ {
+  id:"q038",
+  q:"RAM का उपयोग computer में किसके लिए होता है?",
+  options:["Temporary working memory","Permanent printing","Internet cable","Power supply"],
+  answer:0
+ },
+
+ {
+  id:"q039",
+  q:"भारत में स्वतंत्रता दिवस कब मनाया जाता है?",
+  options:["26 जनवरी","15 अगस्त","2 अक्टूबर","14 नवंबर"],
+  answer:1
+ },
+
+ {
+  id:"q040",
+  q:"गणतंत्र दिवस भारत में कब मनाया जाता है?",
+  options:["15 अगस्त","26 जनवरी","5 सितंबर","2 अक्टूबर"],
+  answer:1
+ },
+
+ {
+  id:"q041",
+  q:"पौधे प्रकाश संश्लेषण के लिए मुख्यतः किस ऊर्जा का उपयोग करते हैं?",
+  options:["सूर्य का प्रकाश","चंद्रमा का प्रकाश","बिजली","ध्वनि"],
+  answer:0
+ },
+
+ {
+  id:"q042",
+  q:"भारत की राष्ट्रीय नदी कौन सी मानी जाती है?",
+  options:["यमुना","गंगा","नर्मदा","गोदावरी"],
+  answer:1
+ },
+
+ {
+  id:"q043",
+  q:"मानव शरीर में रक्त पंप करने वाला अंग कौन सा है?",
+  options:["फेफड़ा","हृदय","यकृत","गुर्दा"],
+  answer:1
+ },
+
+ {
+  id:"q044",
+  q:"5 × 5 कितना होता है?",
+  options:["15","20","25","30"],
+  answer:2
+ },
+
+ {
+  id:"q045",
+  q:"CSS में रंग बदलने के लिए सामान्यतः कौन सी property उपयोग होती है?",
+  options:["color","paint","font","image"],
+  answer:0
+ },
+
+ {
+  id:"q046",
+  q:"HTML में link बनाने के लिए कौन सा tag उपयोग होता है?",
+  options:["<a>","<p>","<img>","<table>"],
+  answer:0
+ },
+
+ {
+  id:"q047",
+  q:"भारत का राष्ट्रीय फूल कौन सा है?",
+  options:["कमल","गुलाब","गेंदा","चमेली"],
+  answer:0
+ },
+
+ {
+  id:"q048",
+  q:"चंद्रमा पर गुरुत्वाकर्षण पृथ्वी की तुलना में कैसा है?",
+  options:["कम","ज्यादा","समान","नहीं होता"],
+  answer:0
+ },
+
+ {
+  id:"q049",
+  q:"HTTP का उपयोग किससे संबंधित है?",
+  options:["Web communication","Cooking","Camera lens","Battery charging"],
+  answer:0
+ },
+
+ {
+  id:"q050",
+  q:"भारत का सबसे बड़ा राज्य क्षेत्रफल के आधार पर कौन सा है?",
+  options:["उत्तर प्रदेश","राजस्थान","महाराष्ट्र","मध्य प्रदेश"],
+  answer:1
+ },
+
+ {
+  id:"q051",
+  q:"कंप्यूटर में mouse किस प्रकार का device है?",
+  options:["Input","Output","Storage","Power"],
+  answer:0
+ },
+
+ {
+  id:"q052",
+  q:"भारत की राष्ट्रीय मुद्रा का नाम क्या है?",
+  options:["रुपया","डॉलर","दिनार","येन"],
+  answer:0
+ },
+
+ {
+  id:"q053",
+  q:"विश्व का सबसे बड़ा महाद्वीप कौन सा है?",
+  options:["अफ्रीका","एशिया","यूरोप","ऑस्ट्रेलिया"],
+  answer:1
+ },
+
+ {
+  id:"q054",
+  q:"एक घंटे में कितने मिनट होते हैं?",
+  options:["30","45","60","90"],
+  answer:2
+ },
+
+ {
+  id:"q055",
+  q:"एक मिनट में कितने सेकंड होते हैं?",
+  options:["30","45","60","100"],
+  answer:2
+ },
+
+ {
+  id:"q056",
+  q:"Wi-Fi मुख्यतः किसके लिए उपयोग होता है?",
+  options:["Wireless network connection","Cooking","Printing paper only","Battery replacement"],
+  answer:0
+ },
+
+ {
+  id:"q057",
+  q:"URL किससे संबंधित है?",
+  options:["Web address","Computer battery","Keyboard key","Camera sensor"],
+  answer:0
+ },
+
+ {
+  id:"q058",
+  q:"Google Chrome क्या है?",
+  options:["Web browser","Operating system only","Game console","Printer"],
+  answer:0
+ },
+
+ {
+  id:"q059",
+  q:"2 + 3 कितना होता है?",
+  options:["4","5","6","7"],
+  answer:1
+ },
+
+ {
+  id:"q060",
+  q:"भारत का राष्ट्रीय पक्षी कौन है?",
+  options:["मोर","तोता","कौआ","हंस"],
+  answer:0
  }
 
 ];
@@ -4419,7 +6374,8 @@ let quizState={
  xp:0,
  answered:false,
  active:false,
- completed:false
+ completed:false,
+ timer:null
 };
 
 
@@ -4484,8 +6440,8 @@ function createQuizSet(){
   );
 
  /*
-  जब सभी questions इस्तेमाल हो जाएँ,
-  तभी पुराना pool reset होता है।
+  पूरा pool इस्तेमाल होने से पहले
+  पुराने questions repeat नहीं होंगे।
  */
  if(unseen.length<10){
 
@@ -4520,6 +6476,8 @@ function createQuizSet(){
 
 function startQuiz(){
 
+ clearTimeout(quizState.timer);
+
  quizState={
   questions:createQuizSet(),
   index:0,
@@ -4527,7 +6485,8 @@ function startQuiz(){
   xp:0,
   answered:false,
   active:true,
-  completed:false
+  completed:false,
+  timer:null
  };
 
  playSound("click");
@@ -4540,9 +6499,7 @@ function startQuiz(){
 function renderQuiz(){
 
  const area=
-  document.getElementById(
-   "quizArea"
-  );
+  document.getElementById("quizArea");
 
  if(!area)return;
 
@@ -4561,22 +6518,24 @@ function renderQuiz(){
    quizState.index
   ];
 
- document.getElementById(
-  "quizNumber"
- ).textContent=
+ const progress=
+  ((quizState.index)/
+   quizState.questions.length)*100;
+
+ document.getElementById("quizNumber").textContent=
   quizState.index+1;
 
- document.getElementById(
-  "quizScore"
- ).textContent=
+ document.getElementById("quizScore").textContent=
   quizState.score;
 
- document.getElementById(
-  "quizXP"
- ).textContent=
+ document.getElementById("quizXP").textContent=
   quizState.xp;
 
  area.innerHTML=`
+
+ <div class="quiz-progress">
+  <span style="width:${progress}%"></span>
+ </div>
 
  <div class="quiz-question">
  ${escapeHTML(q.q)}
@@ -4596,9 +6555,8 @@ function renderQuiz(){
  </div>
 
  <div id="quizFeedback"
- class="game-message"
- style="margin-top:15px">
- Question ${quizState.index+1} of 10
+      class="quiz-feedback game-message">
+  Question ${quizState.index+1} of 10
  </div>
 
  `;
@@ -4624,9 +6582,7 @@ function answerQuiz(index){
   q.optionsData[index];
 
  const buttons=
-  document.querySelectorAll(
-   ".quiz-option"
-  );
+  document.querySelectorAll(".quiz-option");
 
  buttons.forEach(
   (button,i)=>{
@@ -4635,7 +6591,7 @@ function answerQuiz(index){
     button.classList.add("correct");
 
    if(
-    i===index&&
+    i===index &&
     !q.optionsData[i].correct
    )
     button.classList.add("wrong");
@@ -4646,9 +6602,7 @@ function answerQuiz(index){
  );
 
  const feedback=
-  document.getElementById(
-   "quizFeedback"
-  );
+  document.getElementById("quizFeedback");
 
  if(selected&&selected.correct){
 
@@ -4671,13 +6625,48 @@ function answerQuiz(index){
 
  }
 
- setTimeout(()=>{
+ /*
+  Auto advance के साथ fallback Next button भी।
+ */
+ if(feedback){
 
-  quizState.index++;
-  quizState.answered=false;
-  renderQuiz();
+  const next=
+   document.createElement("button");
 
- },900);
+  next.className="btn btn-primary";
+  next.style.marginTop="10px";
+  next.textContent="➡️ Next Question";
+
+  next.onclick=()=>{
+   clearTimeout(quizState.timer);
+   nextQuizQuestion();
+  };
+
+  feedback.appendChild(next);
+
+ }
+
+ quizState.timer=
+  setTimeout(
+   nextQuizQuestion,
+   1100
+  );
+
+}
+
+
+function nextQuizQuestion(){
+
+ if(!quizState.active)return;
+
+ clearTimeout(quizState.timer);
+
+ quizState.index++;
+ quizState.answered=false;
+
+ playSound("quizNext");
+
+ renderQuiz();
 
 }
 
@@ -4710,22 +6699,16 @@ function completeQuiz(){
  );
 
  const area=
-  document.getElementById(
-   "quizArea"
-  );
+  document.getElementById("quizArea");
 
  if(area)
   area.innerHTML=`
 
   <div class="game-screen">
 
-   <div class="big-number">
-    🏆
-   </div>
+   <div class="big-number">🏆</div>
 
-   <h2>
-    Quiz Complete
-   </h2>
+   <h2>Quiz Complete</h2>
 
    <p class="game-message">
     Score: ${quizState.score}/10
@@ -4749,6 +6732,7 @@ function completeQuiz(){
   "Quiz Complete"
  );
 
+
 }
 
 
@@ -4759,18 +6743,29 @@ function completeQuiz(){
 function renderLeaderboard(){
 
  const box=
-  document.getElementById(
-   "leaderboardList"
-  );
+  document.getElementById("leaderboardList");
 
  if(!box)return;
 
- const saved=
-  JSON.parse(
-   localStorage.getItem(
-    "gamezone_leaderboard"
-   )||"[]"
-  );
+ let saved=[];
+
+ try{
+
+  saved=
+   JSON.parse(
+    localStorage.getItem(
+     "gamezone_leaderboard"
+    )||"[]"
+   );
+
+  if(!Array.isArray(saved))
+   saved=[];
+
+ }catch(error){
+
+  saved=[];
+
+ }
 
  let list=[
   ...saved,
@@ -4781,11 +6776,10 @@ function renderLeaderboard(){
  ];
 
  list.sort(
-  (a,b)=>b.xp-a.xp
+  (a,b)=>Number(b.xp)-Number(a.xp)
  );
 
- list=
-  list.slice(0,10);
+ list=list.slice(0,10);
 
  box.innerHTML=`
 
@@ -4875,11 +6869,8 @@ function openInfo(type){
 
  playSound("click");
 
- const modal=
-  document.getElementById("mainModal");
-
- const content=
-  document.getElementById("modalContent");
+ const modal=document.getElementById("mainModal");
+ const content=document.getElementById("modalContent");
 
  const info={
 
@@ -4915,9 +6906,7 @@ function openInfo(type){
 
  content.innerHTML=`
 
- <h2>
- ${escapeHTML(selected[0])}
- </h2>
+ <h2>${escapeHTML(selected[0])}</h2>
 
  <p style="margin-top:18px;color:var(--muted)">
  ${escapeHTML(selected[1])}
@@ -4965,9 +6954,7 @@ function showToast(message){
 function updateLastUpdate(){
 
  const el=
-  document.getElementById(
-   "autoLastUpdate"
-  );
+  document.getElementById("autoLastUpdate");
 
  if(!el)return;
 
@@ -4986,7 +6973,6 @@ function updateLastUpdate(){
 function getNext0915(){
 
  const now=new Date();
-
  const target=new Date(now);
 
  target.setHours(9,15,0,0);
@@ -5004,9 +6990,7 @@ function getNext0915(){
 function updateCountdown(){
 
  const el=
-  document.getElementById(
-   "autoCountdown"
-  );
+  document.getElementById("autoCountdown");
 
  if(!el)return;
 
@@ -5072,55 +7056,24 @@ document.addEventListener(
 
 
 /* =========================================================
-   GLOBAL BUTTON SOUND
-   ========================================================= */
-
-document.addEventListener(
- "click",
- event=>{
-
-  const button=
-   event.target.closest(
-    "button"
-   );
-
-  if(
-   button &&
-   !button.matches(
-    ".quiz-option,.memory-card"
-   )
-  ){
-
-   /*
-    Game-specific sounds are handled
-    by their own functions.
-   */
-
-  }
-
- }
-);
-
-
-/* =========================================================
    STARTUP
    ========================================================= */
 
 function startup(){
 
- document.getElementById(
-  "year"
- ).textContent=
-  new Date().getFullYear();
+ const year=
+  document.getElementById("year");
+
+ if(year)
+  year.textContent=
+   new Date().getFullYear();
 
  loadLocalContent();
 
  updateStreak();
 
  const savedTheme=
-  localStorage.getItem(
-   "gamezone_theme"
-  );
+  localStorage.getItem("gamezone_theme");
 
  if(savedTheme==="light")
   document.body.classList.add("light");
