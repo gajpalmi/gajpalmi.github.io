@@ -4,674 +4,739 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<!-- Google AdSense — EXISTING ID UNCHANGED -->
+<!-- PWA -->
+<meta name="theme-color" content="#10151f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GAMEZONE ARENA">
+
+<!-- EXISTING ADSENSE ID — UNCHANGED -->
 <script async
 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5348301935438016"
 crossorigin="anonymous"></script>
 
-<title>GAMEZONE ARENA — Gaming, News & Entertainment</title>
+<title>GAMEZONE ARENA — Games, Quiz, News & Entertainment</title>
 
 <meta name="description"
-content="GAMEZONE ARENA — Games, News, Technology, AI, Mobile, Internet, Jokes, Shayari, Knowledge, Bhakti, Videos and Blogs.">
+content="GAMEZONE ARENA — Free browser games, Ludo, Carrom, Quiz, Daily Challenge, News, Technology, AI, Jokes, Shayari and Knowledge.">
 
-<meta name="theme-color" content="#10151f">
+<link rel="manifest" href="./manifest.json">
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --bg:#08110d;
-  --bg2:#0d1713;
-  --card:#111d18;
-  --card2:#17251f;
-  --text:#f5fff8;
-  --muted:#a9bbb1;
-  --green:#31e981;
-  --green2:#18b85e;
-  --white:#fff;
-  --border:rgba(255,255,255,.10);
-  --danger:#ff5252;
-  --warning:#ffc107;
-  --shadow:0 15px 40px rgba(0,0,0,.28);
+ --bg:#08110d;
+ --bg2:#0d1713;
+ --card:#111d18;
+ --card2:#17251f;
+ --text:#f5fff8;
+ --muted:#a9bbb1;
+ --green:#31e981;
+ --green2:#18b85e;
+ --white:#fff;
+ --border:rgba(255,255,255,.10);
+ --danger:#ff5252;
+ --warning:#ffc107;
+ --blue:#4da3ff;
+ --shadow:0 15px 40px rgba(0,0,0,.28)
 }
 
 body.light{
-  --bg:#f3f7f4;
-  --bg2:#fff;
-  --card:#fff;
-  --card2:#edf5ef;
-  --text:#132019;
-  --muted:#52645a;
-  --border:rgba(0,0,0,.10);
-  --shadow:0 12px 30px rgba(0,0,0,.10);
+ --bg:#f3f7f4;
+ --bg2:#fff;
+ --card:#fff;
+ --card2:#edf5ef;
+ --text:#132019;
+ --muted:#52645a;
+ --border:rgba(0,0,0,.10);
+ --shadow:0 12px 30px rgba(0,0,0,.10)
 }
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:
-    radial-gradient(
-      circle at top right,
-      rgba(49,233,129,.10),
-      transparent 35%
-    ),
-    var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  line-height:1.6;
+ font-family:Arial,Helvetica,sans-serif;
+ background:
+ radial-gradient(circle at top right,rgba(49,233,129,.10),transparent 35%),
+ var(--bg);
+ color:var(--text);
+ min-height:100vh;
+ line-height:1.6
 }
 
-body.no-scroll{
-  overflow:hidden;
-}
+body.no-scroll{overflow:hidden}
 
-button,
-input,
-textarea,
-select{
-  font:inherit;
-}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+img,iframe,video{max-width:100%}
+a{color:inherit;text-decoration:none}
 
-button{
-  cursor:pointer;
-}
-
-img,
-iframe,
-video{
-  max-width:100%;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-.container{
-  width:min(1180px,92%);
-  margin:auto;
-}
+.container{width:min(1180px,92%);margin:auto}
 
 header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(8,17,13,.94);
-  backdrop-filter:blur(15px);
-  border-bottom:1px solid var(--border);
+ position:sticky;
+ top:0;
+ z-index:1000;
+ background:rgba(8,17,13,.94);
+ backdrop-filter:blur(15px);
+ border-bottom:1px solid var(--border)
 }
 
-body.light header{
-  background:rgba(255,255,255,.95);
-}
+body.light header{background:rgba(255,255,255,.95)}
 
 .nav{
-  min-height:70px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
+ min-height:70px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:12px
 }
 
 .brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:900;
-  white-space:nowrap;
+ display:flex;
+ align-items:center;
+ gap:10px;
+ font-weight:900;
+ white-space:nowrap
 }
 
 .brand-logo{
-  width:43px;
-  height:43px;
-  display:grid;
-  place-items:center;
-  border-radius:13px;
-  background:linear-gradient(135deg,var(--green),#fff);
-  color:#07130d;
-  font-size:22px;
+ width:43px;
+ height:43px;
+ display:grid;
+ place-items:center;
+ border-radius:13px;
+ background:linear-gradient(135deg,var(--green),#fff);
+ color:#07130d;
+ font-size:22px
 }
 
 .brand-text small{
-  display:block;
-  color:var(--muted);
-  font-size:10px;
-  font-weight:500;
+ display:block;
+ color:var(--muted);
+ font-size:10px;
+ font-weight:500
 }
 
 .nav-links{
-  display:flex;
-  align-items:center;
-  gap:4px;
-  overflow-x:auto;
+ display:flex;
+ align-items:center;
+ gap:4px;
+ overflow-x:auto
 }
 
 .nav-links button{
-  border:0;
-  background:transparent;
-  color:var(--text);
-  padding:9px 10px;
-  border-radius:10px;
-  white-space:nowrap;
+ border:0;
+ background:transparent;
+ color:var(--text);
+ padding:9px 10px;
+ border-radius:10px;
+ white-space:nowrap
 }
 
 .nav-links button:hover,
 .nav-links button.active{
-  background:rgba(49,233,129,.12);
-  color:var(--green);
+ background:rgba(49,233,129,.12);
+ color:var(--green)
 }
 
-.nav-actions{
-  display:flex;
-  gap:7px;
-}
+.nav-actions{display:flex;gap:7px}
 
 .icon-btn{
-  width:40px;
-  height:40px;
-  border:1px solid var(--border);
-  background:var(--card);
-  color:var(--text);
-  border-radius:11px;
+ width:40px;
+ height:40px;
+ border:1px solid var(--border);
+ background:var(--card);
+ color:var(--text);
+ border-radius:11px
 }
 
-.menu-btn{
-  display:none;
-}
+.menu-btn{display:none}
 
-main{
-  min-height:70vh;
-}
+main{min-height:70vh}
 
-.page{
-  display:none;
-}
+.page{display:none}
+.page.active{display:block}
 
-.page.active{
-  display:block;
-}
-
-.hero{
-  padding:65px 0 35px;
-}
+.hero{padding:55px 0 30px}
 
 .hero-box{
-  background:
-    linear-gradient(135deg,rgba(49,233,129,.15),transparent 55%),
-    var(--card);
-  border:1px solid var(--border);
-  border-radius:28px;
-  padding:clamp(30px,7vw,70px);
-  box-shadow:var(--shadow);
+ background:
+ linear-gradient(135deg,rgba(49,233,129,.15),transparent 55%),
+ var(--card);
+ border:1px solid var(--border);
+ border-radius:28px;
+ padding:clamp(30px,7vw,70px);
+ box-shadow:var(--shadow)
 }
 
-.eyebrow{
-  color:var(--green);
-  font-weight:800;
-  margin-bottom:10px;
-}
+.eyebrow{color:var(--green);font-weight:800;margin-bottom:10px}
 
 .hero h1{
-  font-size:clamp(40px,8vw,76px);
-  line-height:1;
-  margin-bottom:20px;
+ font-size:clamp(40px,8vw,76px);
+ line-height:1;
+ margin-bottom:20px
 }
 
-.hero h1 span{
-  color:var(--green);
-}
+.hero h1 span{color:var(--green)}
 
 .hero p{
-  color:var(--muted);
-  max-width:800px;
-  font-size:18px;
-  margin-bottom:25px;
+ color:var(--muted);
+ max-width:800px;
+ font-size:18px;
+ margin-bottom:25px
 }
 
-.hero-buttons,
-.card-actions,
-.category-bar{
-  display:flex;
-  flex-wrap:wrap;
-  gap:9px;
+.hero-buttons,.card-actions,.category-bar{
+ display:flex;
+ flex-wrap:wrap;
+ gap:9px
 }
 
 .btn{
-  border:0;
-  padding:12px 17px;
-  border-radius:12px;
-  font-weight:800;
+ border:0;
+ padding:12px 17px;
+ border-radius:12px;
+ font-weight:800
 }
 
-.btn-primary{
-  background:var(--green);
-  color:#07130d;
-}
-
+.btn-primary{background:var(--green);color:#07130d}
 .btn-secondary{
-  background:transparent;
-  border:1px solid var(--border);
-  color:var(--text);
+ background:transparent;
+ border:1px solid var(--border);
+ color:var(--text)
 }
+.btn-danger{background:var(--danger);color:#fff}
 
-.btn-danger{
-  background:var(--danger);
-  color:#fff;
-}
-
-section{
-  padding:40px 0;
-}
+section{padding:35px 0}
 
 .section-head{
-  display:flex;
-  align-items:end;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:20px;
+ display:flex;
+ align-items:end;
+ justify-content:space-between;
+ gap:15px;
+ margin-bottom:20px
 }
 
-.section-head h2{
-  font-size:clamp(26px,4vw,38px);
+.section-head h2{font-size:clamp(26px,4vw,38px)}
+.section-head p{color:var(--muted)}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:18px
 }
 
-.section-head p{
-  color:var(--muted);
+.grid-4{grid-template-columns:repeat(4,1fr)}
+
+.card{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:20px;
+ padding:20px;
+ box-shadow:var(--shadow)
 }
 
-.search-area{
-  padding:20px 0;
+.card h3{margin-bottom:8px}
+.card p{color:var(--muted)}
+
+.card-icon,.game-icon{
+ width:55px;
+ height:55px;
+ display:grid;
+ place-items:center;
+ background:rgba(49,233,129,.11);
+ border-radius:16px;
+ font-size:27px;
+ margin-bottom:14px
 }
+
+.game-icon{
+ margin-left:auto;
+ margin-right:auto;
+ font-size:42px
+}
+
+.tag,.badge{
+ display:inline-block;
+ color:var(--green);
+ background:rgba(49,233,129,.10);
+ border-radius:999px;
+ padding:4px 9px;
+ font-size:12px;
+ margin-bottom:10px
+}
+
+.content-text{white-space:pre-line;color:var(--text)}
+.content-meta{margin-top:10px;color:var(--muted);font-size:12px}
+
+.source-note{
+ margin-top:12px;
+ padding:10px;
+ border-radius:10px;
+ background:rgba(49,233,129,.06);
+ border:1px solid rgba(49,233,129,.12);
+ color:var(--muted);
+ font-size:12px
+}
+
+.news-hero,.auto-status{
+ background:
+ linear-gradient(135deg,rgba(49,233,129,.12),transparent),
+ var(--card);
+ border:1px solid var(--border);
+ border-radius:20px;
+ padding:22px;
+ margin-bottom:22px
+}
+
+.auto-status{color:var(--muted)}
+.auto-countdown{
+ display:block;
+ color:var(--green);
+ font-weight:800;
+ margin-top:6px
+}
+.auto-last-update{display:block;margin-top:5px}
+
+.search-area{padding:20px 0}
 
 .search-box{
-  display:flex;
-  gap:8px;
-  background:var(--card);
-  border:1px solid var(--border);
-  padding:8px;
-  border-radius:16px;
-  box-shadow:var(--shadow);
+ display:flex;
+ gap:8px;
+ background:var(--card);
+ border:1px solid var(--border);
+ padding:8px;
+ border-radius:16px;
+ box-shadow:var(--shadow)
 }
 
 .search-box input{
-  flex:1;
-  min-width:0;
-  border:0;
-  outline:0;
-  background:transparent;
-  color:var(--text);
-  padding:10px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-}
-
-.grid-4{
-  grid-template-columns:repeat(4,1fr);
-}
-
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:20px;
-  box-shadow:var(--shadow);
-}
-
-.card:hover{
-  transform:translateY(-2px);
-}
-
-.card-icon,
-.game-icon{
-  width:55px;
-  height:55px;
-  display:grid;
-  place-items:center;
-  background:rgba(49,233,129,.11);
-  border-radius:16px;
-  font-size:27px;
-  margin-bottom:14px;
-}
-
-.game-icon{
-  margin-left:auto;
-  margin-right:auto;
-  font-size:42px;
-}
-
-.card h3{
-  margin-bottom:8px;
-}
-
-.card p{
-  color:var(--muted);
-}
-
-.tag{
-  display:inline-block;
-  color:var(--green);
-  background:rgba(49,233,129,.10);
-  border-radius:999px;
-  padding:4px 9px;
-  font-size:12px;
-  margin-bottom:10px;
-}
-
-.content-text{
-  white-space:pre-line;
-  color:var(--text);
-}
-
-.content-meta{
-  margin-top:10px;
-  color:var(--muted);
-  font-size:12px;
-}
-
-.source-note{
-  margin-top:12px;
-  padding:10px;
-  border-radius:10px;
-  background:rgba(49,233,129,.06);
-  border:1px solid rgba(49,233,129,.12);
-  color:var(--muted);
-  font-size:12px;
-}
-
-.news-hero,
-.auto-status{
-  background:
-    linear-gradient(135deg,rgba(49,233,129,.12),transparent),
-    var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:22px;
-  margin-bottom:22px;
-}
-
-.auto-status{
-  color:var(--muted);
-}
-
-.auto-countdown{
-  display:block;
-  color:var(--green);
-  font-weight:800;
-  margin-top:6px;
-}
-
-.auto-last-update{
-  display:block;
-  margin-top:5px;
-}
-
-.media{
-  width:100%;
-  aspect-ratio:16/9;
-  border-radius:15px;
-  border:0;
-  background:#000;
-  margin-bottom:14px;
+ flex:1;
+ min-width:0;
+ border:0;
+ outline:0;
+ background:transparent;
+ color:var(--text);
+ padding:10px
 }
 
 .small-btn{
-  border:1px solid var(--border);
-  background:var(--card2);
-  color:var(--text);
-  border-radius:9px;
-  padding:7px 10px;
-  font-size:13px;
-}
-
-.small-btn:hover{
-  color:var(--green);
-}
-
-footer{
-  margin-top:50px;
-  border-top:1px solid var(--border);
-  background:var(--bg2);
-}
-
-.footer-grid{
-  padding:45px 0;
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr 1fr;
-  gap:25px;
-}
-
-footer h3{
-  margin-bottom:10px;
-}
-
-footer p,
-footer button,
-footer a{
-  color:var(--muted);
-}
-
-footer button{
-  display:block;
-  border:0;
-  background:transparent;
-  margin:7px 0;
-}
-
-.copyright{
-  border-top:1px solid var(--border);
-  padding:18px;
-  text-align:center;
-  color:var(--muted);
-  font-size:13px;
-}
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:3000;
-  display:none;
-  place-items:center;
-  padding:18px;
-  background:rgba(0,0,0,.75);
-}
-
-.modal.show{
-  display:grid;
-}
-
-.modal-box{
-  width:min(760px,100%);
-  max-height:90vh;
-  overflow-y:auto;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:25px;
-  position:relative;
-}
-
-.modal-close{
-  position:absolute;
-  right:15px;
-  top:15px;
-  width:38px;
-  height:38px;
-  border:0;
-  border-radius:10px;
-  background:var(--card2);
-  color:var(--text);
-}
-
-.form-group{
-  margin-bottom:14px;
-}
-
-.form-group label{
-  display:block;
-  margin-bottom:6px;
-  font-weight:700;
-}
-
-.form-control{
-  width:100%;
-  border:1px solid var(--border);
-  background:var(--bg2);
-  color:var(--text);
-  border-radius:12px;
-  padding:11px;
-  outline:none;
-}
-
-textarea.form-control{
-  min-height:130px;
-  resize:vertical;
-}
-
-.toast{
-  position:fixed;
-  bottom:22px;
-  left:50%;
-  transform:translate(-50%,130px);
-  background:var(--card);
-  border:1px solid var(--border);
-  color:var(--text);
-  padding:12px 17px;
-  border-radius:12px;
-  box-shadow:var(--shadow);
-  z-index:5000;
-  transition:.3s;
-}
-
-.toast.show{
-  transform:translate(-50%,0);
-}
-
-.hidden{
-  display:none!important;
+ border:1px solid var(--border);
+ background:var(--card2);
+ color:var(--text);
+ border-radius:9px;
+ padding:7px 10px;
+ font-size:13px
 }
 
 .empty{
-  text-align:center;
-  padding:40px 20px;
-  color:var(--muted);
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
+ text-align:center;
+ padding:40px 20px;
+ color:var(--muted);
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:18px
 }
 
-.admin-list{
-  display:grid;
-  gap:10px;
-  margin-top:20px;
+.loading{text-align:center;padding:30px;color:var(--muted)}
+
+footer{
+ margin-top:50px;
+ border-top:1px solid var(--border);
+ background:var(--bg2)
 }
 
-.admin-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  padding:12px;
-  background:var(--card2);
-  border-radius:12px;
+.footer-grid{
+ padding:45px 0;
+ display:grid;
+ grid-template-columns:2fr 1fr 1fr 1fr;
+ gap:25px
 }
 
-.favorite{
-  color:#ff5577;
+footer h3{margin-bottom:10px}
+footer p,footer button,footer a{color:var(--muted)}
+footer button{
+ display:block;
+ border:0;
+ background:transparent;
+ margin:7px 0
 }
 
-.badge{
-  display:inline-block;
-  padding:4px 8px;
-  border-radius:999px;
-  background:rgba(49,233,129,.10);
-  color:var(--green);
-  font-size:11px;
-  margin-bottom:8px;
+.copyright{
+ border-top:1px solid var(--border);
+ padding:18px;
+ text-align:center;
+ color:var(--muted);
+ font-size:13px
 }
 
-.loading{
-  text-align:center;
-  padding:30px;
-  color:var(--muted);
+.modal{
+ position:fixed;
+ inset:0;
+ z-index:3000;
+ display:none;
+ place-items:center;
+ padding:18px;
+ background:rgba(0,0,0,.75)
+}
+
+.modal.show{display:grid}
+
+.modal-box{
+ width:min(850px,100%);
+ max-height:92vh;
+ overflow-y:auto;
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:22px;
+ padding:25px;
+ position:relative
+}
+
+.modal-close{
+ position:absolute;
+ right:15px;
+ top:15px;
+ width:38px;
+ height:38px;
+ border:0;
+ border-radius:10px;
+ background:var(--card2);
+ color:var(--text)
+}
+
+.form-group{margin-bottom:14px}
+
+.form-group label{
+ display:block;
+ margin-bottom:6px;
+ font-weight:700
+}
+
+.form-control{
+ width:100%;
+ border:1px solid var(--border);
+ background:var(--bg2);
+ color:var(--text);
+ border-radius:12px;
+ padding:11px;
+ outline:none
+}
+
+textarea.form-control{min-height:130px;resize:vertical}
+
+.toast{
+ position:fixed;
+ bottom:22px;
+ left:50%;
+ transform:translate(-50%,130px);
+ background:var(--card);
+ border:1px solid var(--border);
+ color:var(--text);
+ padding:12px 17px;
+ border-radius:12px;
+ box-shadow:var(--shadow);
+ z-index:5000;
+ transition:.3s
+}
+
+.toast.show{transform:translate(-50%,0)}
+
+.hidden{display:none!important}
+
+.xp-box{
+ display:flex;
+ flex-wrap:wrap;
+ gap:10px;
+ margin:15px 0
+}
+
+.stat{
+ flex:1;
+ min-width:130px;
+ padding:15px;
+ background:var(--card2);
+ border-radius:14px;
+ text-align:center;
+ border:1px solid var(--border)
+}
+
+.stat strong{
+ display:block;
+ font-size:25px;
+ color:var(--green)
+}
+
+/* GAME AREA */
+
+.game-wrap{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:20px;
+ padding:20px
+}
+
+.game-screen{
+ min-height:350px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ gap:15px
+}
+
+.big-number{
+ font-size:80px;
+ font-weight:900;
+ color:var(--green)
+}
+
+.game-message{
+ padding:12px;
+ background:var(--card2);
+ border-radius:12px;
+ color:var(--muted);
+ text-align:center
+}
+
+/* QUIZ */
+
+.quiz-question{
+ font-size:23px;
+ font-weight:800;
+ margin:20px 0
+}
+
+.quiz-options{
+ display:grid;
+ gap:10px
+}
+
+.quiz-option{
+ border:1px solid var(--border);
+ background:var(--card2);
+ color:var(--text);
+ border-radius:13px;
+ padding:13px;
+ text-align:left
+}
+
+.quiz-option:hover{
+ border-color:var(--green);
+ color:var(--green)
+}
+
+.quiz-option.correct{
+ background:rgba(49,233,129,.15);
+ border-color:var(--green)
+}
+
+.quiz-option.wrong{
+ background:rgba(255,82,82,.15);
+ border-color:var(--danger)
+}
+
+/* LUDO */
+
+.ludo-board{
+ width:min(430px,90vw);
+ aspect-ratio:1;
+ display:grid;
+ grid-template-columns:repeat(15,1fr);
+ grid-template-rows:repeat(15,1fr);
+ border:3px solid var(--text);
+ background:#eee;
+ margin:auto;
+ overflow:hidden
+}
+
+.ludo-cell{
+ display:grid;
+ place-items:center;
+ border:1px solid rgba(0,0,0,.15);
+ font-size:clamp(8px,2vw,15px);
+ position:relative
+}
+
+.ludo-red{background:#ff6565}
+.ludo-green{background:#51dc8a}
+.ludo-yellow{background:#ffd84d}
+.ludo-blue{background:#55aaff}
+.ludo-path{background:#fff}
+.ludo-safe{background:#dff7e9!important}
+.ludo-center{
+ background:linear-gradient(135deg,#31e981,#4da3ff,#ffdc4d,#ff6262)
+}
+
+/* CARROM */
+
+.carrom-board{
+ width:min(430px,90vw);
+ aspect-ratio:1;
+ background:#b8793b;
+ border:18px solid #713e1d;
+ border-radius:15px;
+ position:relative;
+ box-shadow:inset 0 0 0 5px #e8bb79
+}
+
+.pocket{
+ position:absolute;
+ width:34px;
+ height:34px;
+ background:#111;
+ border-radius:50%
+}
+
+.p1{top:-17px;left:-17px}
+.p2{top:-17px;right:-17px}
+.p3{bottom:-17px;left:-17px}
+.p4{bottom:-17px;right:-17px}
+
+.carrom-center{
+ position:absolute;
+ width:80px;
+ height:80px;
+ border:2px solid #6b3c1d;
+ border-radius:50%;
+ left:50%;
+ top:50%;
+ transform:translate(-50%,-50%)
+}
+
+.coin{
+ width:28px;
+ height:28px;
+ border-radius:50%;
+ position:absolute;
+ left:50%;
+ top:50%;
+ transform:translate(-50%,-50%);
+ display:grid;
+ place-items:center;
+ font-size:10px;
+ font-weight:900
+}
+
+.black{background:#111;color:#fff}
+.white{background:#fff;color:#111}
+.red{background:#e22;color:#fff}
+
+#installButton{display:none}
+
+/* MEMORY */
+
+.memory-grid{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:10px;
+ width:min(420px,95vw)
+}
+
+.memory-card{
+ aspect-ratio:1;
+ border:0;
+ border-radius:13px;
+ background:var(--card2);
+ color:transparent;
+ font-size:30px
+}
+
+.memory-card.open,
+.memory-card.done{
+ color:var(--text);
+ background:rgba(49,233,129,.18)
+}
+
+/* RACING */
+
+.race-track{
+ width:min(430px,95vw);
+ height:300px;
+ position:relative;
+ overflow:hidden;
+ background:
+ repeating-linear-gradient(
+  to bottom,
+  #333 0,
+  #333 45px,
+  #555 46px,
+  #555 90px
+ );
+ border:4px solid var(--text);
+ border-radius:15px
+}
+
+.car{
+ position:absolute;
+ bottom:20px;
+ left:50%;
+ transform:translateX(-50%);
+ font-size:45px;
+ transition:.08s
+}
+
+.obstacle{
+ position:absolute;
+ font-size:35px;
+ top:-50px
+}
+
+/* SPIN */
+
+.spin-wheel{
+ width:220px;
+ height:220px;
+ border-radius:50%;
+ background:conic-gradient(
+  #31e981 0 45deg,
+  #4da3ff 45deg 90deg,
+  #ffd84d 90deg 135deg,
+  #ff6565 135deg 180deg,
+  #31e981 180deg 225deg,
+  #4da3ff 225deg 270deg,
+  #ffd84d 270deg 315deg,
+  #ff6565 315deg 360deg
+ );
+ border:8px solid var(--text);
+ display:grid;
+ place-items:center;
+ font-size:35px;
+ transition:transform 2s cubic-bezier(.15,.7,.2,1)
 }
 
 @media(max-width:950px){
-  .grid,
-  .grid-4{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .footer-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .nav-links{
-    position:absolute;
-    top:70px;
-    left:0;
-    right:0;
-    display:none;
-    flex-direction:column;
-    align-items:stretch;
-    background:var(--bg2);
-    padding:10px;
-    border-bottom:1px solid var(--border);
-  }
-
-  .nav-links.show{
-    display:flex;
-  }
-
-  .nav-links button{
-    text-align:left;
-  }
-
-  .menu-btn{
-    display:block;
-  }
+ .grid,.grid-4{grid-template-columns:repeat(2,1fr)}
+ .footer-grid{grid-template-columns:1fr 1fr}
+ .nav-links{
+  position:absolute;
+  top:70px;
+  left:0;
+  right:0;
+  display:none;
+  flex-direction:column;
+  align-items:stretch;
+  background:var(--bg2);
+  padding:10px;
+  border-bottom:1px solid var(--border)
+ }
+ .nav-links.show{display:flex}
+ .nav-links button{text-align:left}
+ .menu-btn{display:block}
 }
 
 @media(max-width:650px){
-  .grid,
-  .grid-4,
-  .footer-grid{
-    grid-template-columns:1fr;
-  }
-
-  .brand-text{
-    display:none;
-  }
-
-  .nav{
-    min-height:62px;
-  }
-
-  .nav-links{
-    top:62px;
-  }
-
-  .search-box{
-    flex-direction:column;
-  }
-
-  .search-box .btn{
-    width:100%;
-  }
-
-  .hero{
-    padding-top:30px;
-  }
+ .grid,.grid-4,.footer-grid{grid-template-columns:1fr}
+ .brand-text{display:none}
+ .nav{min-height:62px}
+ .nav-links{top:62px}
+ .search-box{flex-direction:column}
+ .search-box .btn{width:100%}
+ .hero{padding-top:30px}
+ .memory-grid{grid-template-columns:repeat(4,1fr)}
 }
 </style>
 </head>
@@ -682,17 +747,20 @@ textarea.form-control{
 <div class="container nav">
 
 <a href="#home" class="brand" onclick="showPage('home')">
-  <div class="brand-logo">🎮</div>
-  <div class="brand-text">
-    GAMEZONE ARENA
-    <small>Play sharp. Rise fast.</small>
-  </div>
+<div class="brand-logo">🎮</div>
+<div class="brand-text">
+GAMEZONE ARENA
+<small>Play sharp. Rise fast.</small>
+</div>
 </a>
 
 <nav class="nav-links" id="navLinks">
 
 <button onclick="showPage('home')">Home</button>
 <button onclick="showPage('games')">🎮 Games</button>
+<button onclick="showPage('quiz')">🧠 Quiz</button>
+<button onclick="showPage('challenge')">🔥 Challenge</button>
+<button onclick="showPage('leaderboard')">🏆 Leaderboard</button>
 <button onclick="showPage('news')">📰 News</button>
 <button onclick="showPage('technology')">🤖 Technology</button>
 <button onclick="showPage('entertainment')">🎭 Entertainment</button>
@@ -707,8 +775,8 @@ textarea.form-control{
 
 <div class="nav-actions">
 <button class="icon-btn menu-btn" onclick="toggleMenu()">☰</button>
-<button class="icon-btn" onclick="toggleTheme()" title="Theme">🌙</button>
-<button class="icon-btn" onclick="openSearch()" title="Search">🔎</button>
+<button class="icon-btn" onclick="toggleTheme()">🌙</button>
+<button class="icon-btn" onclick="openSearch()">🔎</button>
 </div>
 
 </div>
@@ -717,15 +785,15 @@ textarea.form-control{
 <main>
 
 <!-- HOME -->
+
 <div id="page-home" class="page active">
 
 <section class="hero">
 <div class="container">
-
 <div class="hero-box">
 
 <div class="eyebrow">
-🎮 GAMING • NEWS • TECHNOLOGY • ENTERTAINMENT
+🎮 FREE GAMES • QUIZ • DAILY CHALLENGE
 </div>
 
 <h1>
@@ -734,40 +802,56 @@ Welcome to
 </h1>
 
 <p>
-Games, latest news, technology, AI, mobile tips,
-internet, jokes, shayari, knowledge, bhakti,
-videos और blogs — सब एक ही जगह।
+Free browser games, Quiz, Daily Challenge, XP,
+Leaderboard, News, Technology, AI, Jokes, Shayari,
+Knowledge, Bhakti, Videos और Blogs — सब एक ही जगह।
 </p>
 
 <div class="hero-buttons">
 
-<button
-class="btn btn-primary"
+<button class="btn btn-primary"
 onclick="showPage('games')">
 🎮 Play Games
 </button>
 
-<button
-class="btn btn-secondary"
-onclick="showPage('news')">
-📰 Latest News
+<button class="btn btn-primary"
+onclick="showPage('quiz')">
+🧠 Daily Quiz
 </button>
 
-<button
-class="btn btn-secondary"
-onclick="showPage('technology')">
-🤖 Technology & AI
+<button class="btn btn-secondary"
+onclick="showPage('challenge')">
+🔥 Daily Challenge
 </button>
 
-<button
-class="btn btn-secondary"
-onclick="showPage('blog')">
-📝 Blogs
+<button class="btn btn-secondary"
+id="installButton"
+onclick="installPWA()">
+📱 Install GAMEZONE
 </button>
 
 </div>
 
-<div class="auto-status" style="margin-top:25px">
+<div class="xp-box">
+
+<div class="stat">
+<strong id="homeXP">0</strong>
+XP
+</div>
+
+<div class="stat">
+<strong id="homeStreak">0</strong>
+Day Streak
+</div>
+
+<div class="stat">
+<strong id="homeBadges">0</strong>
+Badges
+</div>
+
+</div>
+
+<div class="auto-status">
 
 🤖 <strong>Automatic Content System</strong>
 
@@ -775,14 +859,12 @@ onclick="showPage('blog')">
 Content loading...
 </span>
 
-<span
-id="autoCountdown"
+<span id="autoCountdown"
 class="auto-countdown">
 अगला automatic update जाँचा जा रहा है...
 </span>
 
-<span
-id="autoLastUpdate"
+<span id="autoLastUpdate"
 class="auto-last-update">
 Latest automatic content जाँचा जा रहा है...
 </span>
@@ -797,15 +879,12 @@ Latest automatic content जाँचा जा रहा है...
 
 <div class="search-box">
 
-<input
-id="homeSearch"
+<input id="homeSearch"
 type="search"
-placeholder="News, Games, AI, Blog, Jokes, Shayari खोजें..."
-onkeydown="handleSearchKey(event)"
->
+placeholder="News, Games, AI, Quiz, Jokes, Shayari खोजें..."
+onkeydown="handleSearchKey(event)">
 
-<button
-class="btn btn-primary"
+<button class="btn btn-primary"
 onclick="globalSearch(document.getElementById('homeSearch').value)">
 Search
 </button>
@@ -818,8 +897,39 @@ Search
 
 <div class="section-head">
 <div>
+<h2>🔥 Daily Challenge</h2>
+<p>हर दिन नया challenge और XP.</p>
+</div>
+<button class="btn btn-primary"
+onclick="showPage('challenge')">
+Play
+</button>
+</div>
+
+<div class="card">
+<h3 id="dailyChallengeTitle">
+आज का Challenge
+</h3>
+<p id="dailyChallengeText">
+एक छोटा challenge पूरा करें और XP कमाएँ।
+</p>
+<button class="btn btn-primary"
+style="margin-top:15px"
+onclick="playDailyChallenge()">
+🔥 Start Challenge
+</button>
+</div>
+
+</div>
+</section>
+
+<section>
+<div class="container">
+
+<div class="section-head">
+<div>
 <h2>Latest Content</h2>
-<p>नई automatic सामग्री सबसे पहले यहाँ दिखाई जाएगी।</p>
+<p>नई automatic सामग्री यहाँ दिखाई जाएगी।</p>
 </div>
 </div>
 
@@ -832,6 +942,7 @@ Search
 
 
 <!-- GAMES -->
+
 <div id="page-games" class="page">
 
 <section>
@@ -840,89 +951,188 @@ Search
 <div class="section-head">
 <div>
 <h2>🎮 GAMEZONE ARENA Games</h2>
-<p>Play sharp. Rise fast.</p>
+<p>सीधे browser में खेलें — application install करना जरूरी नहीं।</p>
 </div>
 </div>
 
 <div class="grid grid-4">
 
-<div class="card game-card">
+<div class="card">
 <div class="game-icon">🎲</div>
 <h3>Ludo</h3>
-<p>Human multiplayer Ludo.</p>
-<div class="card-actions">
-<button class="btn btn-primary" onclick="openGame('Ludo')">Play</button>
-</div>
+<p>Free browser Ludo.</p>
+<button class="btn btn-primary"
+onclick="openGame('ludo')">Play</button>
 </div>
 
-<div class="card game-card">
+<div class="card">
 <div class="game-icon">🏏</div>
 <h3>Cricket</h3>
-<p>Cricket gaming experience.</p>
-<div class="card-actions">
-<button class="btn btn-primary" onclick="openGame('Cricket')">Play</button>
-</div>
+<p>Quick cricket challenge.</p>
+<button class="btn btn-primary"
+onclick="openGame('cricket')">Play</button>
 </div>
 
-<div class="card game-card">
+<div class="card">
 <div class="game-icon">🎯</div>
 <h3>Carrom</h3>
-<p>Classic carrom game.</p>
-<div class="card-actions">
-<button class="btn btn-primary" onclick="openGame('Carrom')">Play</button>
-</div>
+<p>Browser carrom mini-game.</p>
+<button class="btn btn-primary"
+onclick="openGame('carrom')">Play</button>
 </div>
 
-<div class="card game-card">
+<div class="card">
 <div class="game-icon">🎡</div>
 <h3>Spin</h3>
-<p>Fun virtual rewards.</p>
-<div class="card-actions">
-<button class="btn btn-primary" onclick="openGame('Spin')">Play</button>
-</div>
+<p>Virtual XP spin only.</p>
+<button class="btn btn-primary"
+onclick="openGame('spin')">Play</button>
 </div>
 
-<div class="card game-card">
+<div class="card">
 <div class="game-icon">🏎️</div>
 <h3>Racing</h3>
-<p>Fast racing action.</p>
-<div class="card-actions">
-<button class="btn btn-primary" onclick="openGame('Racing')">Play</button>
-</div>
+<p>Mini browser racing.</p>
+<button class="btn btn-primary"
+onclick="openGame('racing')">Play</button>
 </div>
 
-<div class="card game-card">
+<div class="card">
 <div class="game-icon">🧩</div>
 <h3>Plazo Challenge</h3>
-<p>Challenge your skills.</p>
-<div class="card-actions">
-<button class="btn btn-primary" onclick="openGame('Plazo Challenge')">Play</button>
-</div>
+<p>Skill challenge.</p>
+<button class="btn btn-primary"
+onclick="openGame('plazo')">Play</button>
 </div>
 
-<div class="card game-card">
+<div class="card">
 <div class="game-icon">❓</div>
 <h3>Quick Quiz</h3>
 <p>Test your knowledge.</p>
-<div class="card-actions">
-<button class="btn btn-primary" onclick="openGame('Quick Quiz')">Play</button>
-</div>
+<button class="btn btn-primary"
+onclick="showPage('quiz')">Play</button>
 </div>
 
-<div class="card game-card">
+<div class="card">
 <div class="game-icon">🧠</div>
 <h3>Memory Match</h3>
 <p>Train your memory.</p>
-<div class="card-actions">
-<button class="btn btn-primary" onclick="openGame('Memory Match')">Play</button>
-</div>
+<button class="btn btn-primary"
+onclick="openGame('memory')">Play</button>
 </div>
 
 </div>
 
 <div class="auto-status" style="margin-top:25px">
-Virtual coins have no monetary value and cannot be withdrawn.
+Virtual coins/XP have no monetary value and cannot be withdrawn.
 </div>
+
+</div>
+</section>
+
+</div>
+
+
+<!-- QUIZ -->
+
+<div id="page-quiz" class="page">
+
+<section>
+<div class="container">
+
+<div class="section-head">
+<div>
+<h2>🧠 Daily Quiz</h2>
+<p>10 free questions. सही answer पर XP.</p>
+</div>
+</div>
+
+<div class="game-wrap">
+
+<div class="xp-box">
+<div class="stat">
+<strong id="quizNumber">1</strong>
+Question
+</div>
+
+<div class="stat">
+<strong id="quizScore">0</strong>
+Score
+</div>
+
+<div class="stat">
+<strong id="quizXP">0</strong>
+XP
+</div>
+</div>
+
+<div id="quizArea"></div>
+
+</div>
+
+</div>
+</section>
+
+</div>
+
+
+<!-- DAILY CHALLENGE -->
+
+<div id="page-challenge" class="page">
+
+<section>
+<div class="container">
+
+<div class="section-head">
+<div>
+<h2>🔥 Daily Challenge</h2>
+<p>हर दिन एक नया free challenge.</p>
+</div>
+</div>
+
+<div class="game-wrap">
+
+<div id="challengeArea"
+class="game-screen">
+
+<div class="big-number">🔥</div>
+
+<h2>Daily Challenge</h2>
+
+<p class="game-message">
+Challenge पूरा करके XP कमाएँ।
+</p>
+
+<button class="btn btn-primary"
+onclick="playDailyChallenge()">
+Start
+</button>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+</div>
+
+
+<!-- LEADERBOARD -->
+
+<div id="page-leaderboard" class="page">
+
+<section>
+<div class="container">
+
+<div class="section-head">
+<div>
+<h2>🏆 Leaderboard</h2>
+<p>XP के आधार पर local leaderboard.</p>
+</div>
+</div>
+
+<div id="leaderboardList"></div>
 
 </div>
 </section>
@@ -931,417 +1141,296 @@ Virtual coins have no monetary value and cannot be withdrawn.
 
 
 <!-- NEWS -->
-<div id="page-news" class="page">
 
+<div id="page-news" class="page">
 <section>
 <div class="container">
 
 <div class="news-hero">
-
 <h2>📰 Latest News</h2>
-
 <p>
-भारत और दुनिया की उपलब्ध automatic news summaries यहाँ
-दिखाई जाएँगी। नई news आने पर automatic content JSON
-के माध्यम से website पर दिखाई जाएगी।
+भारत और दुनिया की news summaries यहाँ दिखाई जाएँगी।
 </p>
-
 </div>
 
 <div id="newsContent" class="grid"></div>
 
 </div>
 </section>
-
 </div>
 
 
 <!-- TECHNOLOGY -->
-<div id="page-technology" class="page">
 
+<div id="page-technology" class="page">
 <section>
 <div class="container">
 
 <div class="section-head">
-
 <div>
 <h2>🤖 Technology, AI & Mobile</h2>
-
-<p>
-Android, AI, Google, Internet, Mobile और Technology
-की automatic जानकारी।
-</p>
+<p>Android, AI, Google, Internet और Technology.</p>
 </div>
-
 </div>
 
 <div id="technologyContent" class="grid"></div>
 
 </div>
 </section>
-
 </div>
 
 
 <!-- ENTERTAINMENT -->
-<div id="page-entertainment" class="page">
 
+<div id="page-entertainment" class="page">
 <section>
 <div class="container">
 
 <div class="section-head">
-
 <div>
 <h2>🎭 Entertainment</h2>
-<p>मजेदार और रोचक entertainment content।</p>
+<p>मजेदार और रोचक content.</p>
 </div>
-
 </div>
 
 <div id="entertainmentList" class="grid"></div>
 
 </div>
 </section>
-
 </div>
 
 
 <!-- JOKES -->
-<div id="page-jokes" class="page">
 
+<div id="page-jokes" class="page">
 <section>
 <div class="container">
 
 <div class="section-head">
-
 <div>
 <h2>😂 Jokes</h2>
 <p>मुस्कुराते रहिए!</p>
 </div>
-
 </div>
 
 <div class="category-bar">
-
-<button class="active" onclick="filterContent('joke','All',this)">
-All
-</button>
-
-<button onclick="filterContent('joke','Funny',this)">
-Funny
-</button>
-
-<button onclick="filterContent('joke','Desi',this)">
-Desi
-</button>
-
-<button onclick="filterContent('joke','Friendship',this)">
-Friendship
-</button>
-
-<button onclick="filterContent('joke','Family',this)">
-Family
-</button>
-
+<button onclick="filterContent('joke','All',this)">All</button>
+<button onclick="filterContent('joke','Funny',this)">Funny</button>
+<button onclick="filterContent('joke','Desi',this)">Desi</button>
+<button onclick="filterContent('joke','Friendship',this)">Friendship</button>
+<button onclick="filterContent('joke','Family',this)">Family</button>
 </div>
 
 <div id="jokesList" class="grid"></div>
 
 </div>
 </section>
-
 </div>
 
 
 <!-- SHAYARI -->
-<div id="page-shayari" class="page">
 
+<div id="page-shayari" class="page">
 <section>
 <div class="container">
 
 <div class="section-head">
-
 <div>
 <h2>❤️ Shayari</h2>
 <p>दिल की बातें शब्दों में।</p>
 </div>
-
 </div>
 
 <div class="category-bar">
-
-<button class="active"
-onclick="filterContent('shayari','All',this)">
-All
-</button>
-
-<button onclick="filterContent('shayari','Love',this)">
-Love
-</button>
-
-<button onclick="filterContent('shayari','Friendship',this)">
-Friendship
-</button>
-
-<button onclick="filterContent('shayari','Motivational',this)">
-Motivational
-</button>
-
-<button onclick="filterContent('shayari','Life',this)">
-Life
-</button>
-
+<button onclick="filterContent('shayari','All',this)">All</button>
+<button onclick="filterContent('shayari','Love',this)">Love</button>
+<button onclick="filterContent('shayari','Friendship',this)">Friendship</button>
+<button onclick="filterContent('shayari','Motivational',this)">Motivational</button>
+<button onclick="filterContent('shayari','Life',this)">Life</button>
 </div>
 
 <div id="shayariList" class="grid"></div>
 
 </div>
 </section>
-
 </div>
 
 
 <!-- KNOWLEDGE -->
-<div id="page-knowledge" class="page">
 
+<div id="page-knowledge" class="page">
 <section>
 <div class="container">
 
 <div class="section-head">
-
 <div>
 <h2>💡 ज्ञान की दुनिया</h2>
 <p>हर दिन कुछ नया जानिए।</p>
 </div>
-
 </div>
 
 <div class="category-bar">
-
-<button class="active"
-onclick="filterContent('knowledge','All',this)">
-All
-</button>
-
-<button onclick="filterContent('knowledge','Science',this)">
-Science
-</button>
-
-<button onclick="filterContent('knowledge','Technology',this)">
-Technology
-</button>
-
-<button onclick="filterContent('knowledge','India',this)">
-India
-</button>
-
-<button onclick="filterContent('knowledge','Space',this)">
-Space
-</button>
-
-<button onclick="filterContent('knowledge','Animals',this)">
-Animals
-</button>
-
+<button onclick="filterContent('knowledge','All',this)">All</button>
+<button onclick="filterContent('knowledge','Science',this)">Science</button>
+<button onclick="filterContent('knowledge','Technology',this)">Technology</button>
+<button onclick="filterContent('knowledge','India',this)">India</button>
+<button onclick="filterContent('knowledge','Space',this)">Space</button>
+<button onclick="filterContent('knowledge','Animals',this)">Animals</button>
 </div>
 
 <div id="knowledgeList" class="grid"></div>
 
 </div>
 </section>
-
 </div>
 
 
 <!-- BHAKTI -->
-<div id="page-bhakti" class="page">
 
+<div id="page-bhakti" class="page">
 <section>
 <div class="container">
 
 <div class="section-head">
-
 <div>
 <h2>🙏 Bhakti & Spiritual</h2>
 <p>भक्ति, सकारात्मक विचार और आध्यात्मिक ज्ञान।</p>
 </div>
-
 </div>
 
 <div id="bhaktiList" class="grid"></div>
 
 </div>
 </section>
-
 </div>
 
 
 <!-- VIDEOS -->
-<div id="page-videos" class="page">
 
+<div id="page-videos" class="page">
 <section>
 <div class="container">
 
 <div class="section-head">
-
 <div>
 <h2>🎬 Videos</h2>
-<p>YouTube और video content।</p>
+<p>YouTube और video content.</p>
 </div>
-
 </div>
 
 <div id="videoList" class="grid"></div>
 
 </div>
 </section>
-
 </div>
 
 
 <!-- BLOG -->
-<div id="page-blog" class="page">
 
+<div id="page-blog" class="page">
 <section>
 <div class="container">
 
 <div class="section-head">
-
 <div>
 <h2>📝 Blog</h2>
-<p>Gaming, technology, AI, knowledge और useful articles।</p>
+<p>Gaming, technology, AI, knowledge और useful articles.</p>
 </div>
-
-<button class="btn btn-primary" onclick="openAdmin()">
-+ नया Blog
-</button>
-
 </div>
 
 <div id="blogList" class="grid"></div>
 
 </div>
 </section>
-
 </div>
 
 
 <!-- SEARCH -->
-<div id="page-search" class="page">
 
+<div id="page-search" class="page">
 <section>
 <div class="container">
 
 <div class="section-head">
-
 <div>
 <h2>🔎 Search Results</h2>
 <p id="searchText">खोजिए...</p>
 </div>
-
 </div>
 
 <div id="searchResults" class="grid"></div>
 
 </div>
 </section>
-
 </div>
 
 </main>
 
 
 <!-- FOOTER -->
+
 <footer>
 
 <div class="container footer-grid">
 
 <div>
-
 <div class="brand">
-
-<div class="brand-logo">
-🎮
-</div>
-
+<div class="brand-logo">🎮</div>
 <div>
 GAMEZONE ARENA
-<small>
-Play sharp. Rise fast.
-</small>
+<small>Play sharp. Rise fast.</small>
+</div>
 </div>
 
-</div>
-
-<p style="color:var(--muted);margin-top:15px;">
+<p style="margin-top:15px">
 Gaming, news, technology, entertainment, knowledge
 और useful content का एक platform।
 </p>
-
 </div>
 
+<div>
+<h3>Explore</h3>
+<button onclick="showPage('games')">Games</button>
+<button onclick="showPage('quiz')">Quiz</button>
+<button onclick="showPage('challenge')">Daily Challenge</button>
+<button onclick="showPage('leaderboard')">Leaderboard</button>
+</div>
 
 <div>
-
-<h3>Explore</h3>
-
-<button onclick="showPage('games')">Games</button>
+<h3>Content</h3>
 <button onclick="showPage('news')">News</button>
 <button onclick="showPage('technology')">Technology</button>
 <button onclick="showPage('jokes')">Jokes</button>
-
-</div>
-
-
-<div>
-
-<h3>More</h3>
-
 <button onclick="showPage('shayari')">Shayari</button>
-<button onclick="showPage('knowledge')">Knowledge</button>
-<button onclick="showPage('bhakti')">Bhakti</button>
-<button onclick="showPage('entertainment')">Entertainment</button>
-<button onclick="showPage('videos')">Videos</button>
-<button onclick="showPage('blog')">Blog</button>
-
 </div>
 
-
 <div>
-
 <h3>Website</h3>
-
 <button onclick="openInfo('about')">About</button>
 <button onclick="openInfo('contact')">Contact</button>
 <button onclick="openInfo('privacy')">Privacy</button>
 <button onclick="openInfo('terms')">Terms</button>
 <button onclick="openInfo('disclaimer')">Disclaimer</button>
-<button onclick="openAdmin()">Content Admin</button>
-
 </div>
 
 </div>
 
 <div class="copyright">
-
 © <span id="year"></span>
 GAMEZONE ARENA. All rights reserved.
-
 </div>
 
 </footer>
 
 
 <!-- GENERAL MODAL -->
+
 <div class="modal" id="mainModal">
 
 <div class="modal-box">
 
-<button
-class="modal-close"
-onclick="closeModal()">
-✕
-</button>
+<button class="modal-close"
+onclick="closeModal()">✕</button>
 
 <div id="modalContent"></div>
 
@@ -1350,142 +1439,8 @@ onclick="closeModal()">
 </div>
 
 
-<!-- ADMIN MODAL -->
-<div class="modal" id="adminModal">
-
-<div class="modal-box">
-
-<button
-class="modal-close"
-onclick="closeAdmin()">
-✕
-</button>
-
-<h2>⚙️ Content Admin</h2>
-
-<div class="admin-note" style="margin:15px 0;color:var(--muted);">
-
-यह browser-local admin है।
-यहाँ जो content जोड़ेंगे वह इसी browser में save होगा।
-Public automatic publishing के लिए GitHub Actions +
-auto-content.json system इस्तेमाल होगा।
-
-</div>
-
-<div class="form-group">
-
-<label>Content Type</label>
-
-<select id="adminType" class="form-control">
-
-<option value="news">News</option>
-<option value="technology">Technology</option>
-<option value="joke">Joke</option>
-<option value="shayari">Shayari</option>
-<option value="knowledge">Knowledge</option>
-<option value="entertainment">Entertainment</option>
-<option value="bhakti">Bhakti</option>
-<option value="blog">Blog</option>
-<option value="video">Video</option>
-
-</select>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Title</label>
-
-<input
-id="adminTitle"
-class="form-control"
-placeholder="Title..."
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>Category</label>
-
-<input
-id="adminCategory"
-class="form-control"
-placeholder="Category..."
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>Content / Text</label>
-
-<textarea
-id="adminContent"
-class="form-control"
-placeholder="अपना content यहाँ लिखें..."
-></textarea>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Image URL</label>
-
-<input
-id="adminImage"
-class="form-control"
-placeholder="https://..."
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>YouTube / Video URL</label>
-
-<input
-id="adminVideo"
-class="form-control"
-placeholder="https://www.youtube.com/..."
->
-
-</div>
-
-
-<div style="display:flex;gap:10px;flex-wrap:wrap;">
-
-<button
-class="btn btn-primary"
-onclick="saveAdminContent()">
-Save Content
-</button>
-
-<button
-class="btn btn-secondary"
-onclick="clearAdminForm()">
-Clear
-</button>
-
-</div>
-
-
-<div
-id="adminItems"
-class="admin-list">
-</div>
-
-</div>
-
-</div>
-
-
 <!-- TOAST -->
+
 <div id="toast" class="toast"></div>
 
 
@@ -1493,22 +1448,25 @@ class="admin-list">
 
 /* =========================================================
    GAMEZONE ARENA
-   COMPLETE AUTOMATIC CONTENT WEBSITE SYSTEM
+   WEBSITE + PWA + BROWSER GAMES + QUIZ + XP
+   EXISTING CONTENT SYSTEM PRESERVED
    ========================================================= */
 
 const AUTO_CONTENT_URL =
-  "./content/auto-content.json?v=" + Date.now();
+ "./content/auto-content.json?v=" + Date.now();
 
 const AUTO_REFRESH_MS = 5 * 60 * 1000;
 
-let automaticContent = [];
-let localContent = [];
+let automaticContent=[];
+let localContent=[];
+let currentPage="home";
 
-let currentPage = "home";
+let deferredInstallPrompt=null;
 
-let currentFilter = {
-  type:null,
-  category:"All"
+let player={
+ xp:Number(localStorage.getItem("gamezone_xp")||0),
+ streak:Number(localStorage.getItem("gamezone_streak")||0),
+ badges:Number(localStorage.getItem("gamezone_badges")||0)
 };
 
 
@@ -1518,34 +1476,196 @@ let currentFilter = {
 
 function escapeHTML(value){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+ return String(value??"")
+ .replace(/&/g,"&amp;")
+ .replace(/</g,"&lt;")
+ .replace(/>/g,"&gt;")
+ .replace(/"/g,"&quot;")
+ .replace(/'/g,"&#039;");
 
 }
 
 
 /* =========================================================
-   DATE HELPERS
+   XP SYSTEM
    ========================================================= */
 
-function formatDate(value){
+function savePlayer(){
 
-  if(!value) return "";
+ localStorage.setItem(
+  "gamezone_xp",
+  player.xp
+ );
 
-  const date = new Date(value);
+ localStorage.setItem(
+  "gamezone_streak",
+  player.streak
+ );
 
-  if(Number.isNaN(date.getTime())){
-    return escapeHTML(value);
+ localStorage.setItem(
+  "gamezone_badges",
+  player.badges
+ );
+
+ updatePlayerUI();
+ renderLeaderboard();
+
+}
+
+
+function addXP(amount,reason=""){
+
+ amount=Number(amount)||0;
+
+ if(amount<=0)return;
+
+ player.xp+=amount;
+
+ if(player.xp>=100 && player.badges<1)
+  player.badges=1;
+
+ if(player.xp>=500 && player.badges<2)
+  player.badges=2;
+
+ if(player.xp>=1000 && player.badges<3)
+  player.badges=3;
+
+ savePlayer();
+
+ showToast(
+  `⭐ +${amount} XP ${reason ? "— "+reason : ""}`
+ );
+
+}
+
+
+function updatePlayerUI(){
+
+ const xp=document.getElementById("homeXP");
+ const streak=document.getElementById("homeStreak");
+ const badges=document.getElementById("homeBadges");
+
+ if(xp)xp.textContent=player.xp;
+ if(streak)streak.textContent=player.streak;
+ if(badges)badges.textContent=player.badges;
+
+}
+
+
+function updateStreak(){
+
+ const today=
+  new Date().toISOString().slice(0,10);
+
+ const last=
+  localStorage.getItem("gamezone_last_day");
+
+ if(last===today)return;
+
+ const yesterday=
+  new Date(Date.now()-86400000)
+  .toISOString().slice(0,10);
+
+ if(last===yesterday){
+  player.streak++;
+ }else{
+  player.streak=1;
+ }
+
+ localStorage.setItem(
+  "gamezone_last_day",
+  today
+ );
+
+ savePlayer();
+
+}
+
+
+/* =========================================================
+   PWA INSTALL
+   ========================================================= */
+
+window.addEventListener(
+ "beforeinstallprompt",
+ event=>{
+
+  event.preventDefault();
+
+  deferredInstallPrompt=event;
+
+  const btn=
+   document.getElementById("installButton");
+
+  if(btn)btn.style.display="inline-block";
+
+ }
+);
+
+
+async function installPWA(){
+
+ if(!deferredInstallPrompt){
+
+  showToast(
+   "Install option अभी browser से उपलब्ध नहीं है।"
+  );
+
+  return;
+ }
+
+ deferredInstallPrompt.prompt();
+
+ const result=
+  await deferredInstallPrompt.userChoice;
+
+ if(result.outcome==="accepted"){
+  showToast("📱 GAMEZONE install हो रहा है...");
+ }
+
+ deferredInstallPrompt=null;
+
+}
+
+
+window.addEventListener(
+ "appinstalled",
+ ()=>{
+
+  showToast(
+   "✅ GAMEZONE ARENA install हो गया।"
+  );
+
+  const btn=
+   document.getElementById("installButton");
+
+  if(btn)btn.style.display="none";
+
+ }
+);
+
+
+/* =========================================================
+   SERVICE WORKER
+   ========================================================= */
+
+if("serviceWorker" in navigator){
+
+ window.addEventListener(
+  "load",
+  ()=>{
+
+   navigator.serviceWorker
+   .register("./sw.js")
+   .then(()=>{
+    console.log("GAMEZONE service worker active");
+   })
+   .catch(error=>{
+    console.log("SW unavailable",error);
+   });
+
   }
-
-  return date.toLocaleString("hi-IN",{
-    dateStyle:"medium",
-    timeStyle:"short"
-  });
+ );
 
 }
 
@@ -1556,24 +1676,25 @@ function formatDate(value){
 
 function loadLocalContent(){
 
-  try{
+ try{
 
-    const saved =
-      localStorage.getItem("gamezone_local_content");
+  const saved=
+   localStorage.getItem(
+    "gamezone_local_content"
+   );
 
-    localContent =
-      saved ? JSON.parse(saved) : [];
+  localContent=
+   saved ? JSON.parse(saved):[];
 
-    if(!Array.isArray(localContent)){
-      localContent = [];
-    }
+  if(!Array.isArray(localContent))
+   localContent=[];
 
-  }catch(error){
+ }catch(error){
 
-    console.error(error);
-    localContent = [];
+  console.error(error);
+  localContent=[];
 
-  }
+ }
 
 }
 
@@ -1584,234 +1705,200 @@ function loadLocalContent(){
 
 function normalizeItem(item,index=0){
 
-  if(!item || typeof item !== "object"){
-    return null;
-  }
+ if(!item||typeof item!=="object")
+  return null;
 
-  let type =
-    String(
-      item.type ||
-      item.categoryType ||
-      "blog"
-    ).toLowerCase();
+ let type=
+  String(
+   item.type||
+   item.categoryType||
+   "blog"
+  ).toLowerCase();
 
-  const allowed = [
-    "news",
-    "technology",
-    "joke",
-    "shayari",
-    "knowledge",
-    "entertainment",
-    "bhakti",
-    "blog",
-    "video"
-  ];
+ const allowed=[
+  "news",
+  "technology",
+  "joke",
+  "shayari",
+  "knowledge",
+  "entertainment",
+  "bhakti",
+  "blog",
+  "video"
+ ];
 
-  if(!allowed.includes(type)){
-    type = "blog";
-  }
+ if(!allowed.includes(type))
+  type="blog";
 
-  return {
+ return{
 
-    id:
-      item.id ||
-      ("auto-" + Date.now() + "-" + index),
+  id:
+   item.id||
+   ("auto-"+Date.now()+"-"+index),
 
-    type,
+  type,
 
-    title:
-      item.title ||
-      item.headline ||
-      "GAMEZONE ARENA Content",
+  title:
+   item.title||
+   item.headline||
+   "GAMEZONE ARENA Content",
 
-    category:
-      item.category ||
-      type,
+  category:
+   item.category||
+   type,
 
-    content:
-      item.content ||
-      item.description ||
-      item.summary ||
-      "",
+  content:
+   item.content||
+   item.description||
+   item.summary||
+   "",
 
-    image:
-      item.image ||
-      "",
+  image:item.image||"",
 
-    video:
-      item.video ||
-      item.url ||
-      "",
+  video:
+   item.video||
+   item.url||
+   "",
 
-    source:
-      item.source ||
-      item.sourceName ||
-      "",
+  source:
+   item.source||
+   item.sourceName||
+   "",
 
-    sourceUrl:
-      item.sourceUrl ||
-      "",
+  sourceUrl:item.sourceUrl||"",
 
-    publishedAt:
-      item.publishedAt ||
-      item.date ||
-      item.createdAt ||
-      new Date().toISOString(),
+  publishedAt:
+   item.publishedAt||
+   item.date||
+   item.createdAt||
+   new Date().toISOString(),
 
-    generatedAt:
-      item.generatedAt ||
-      item.updatedAt ||
-      item.createdAt ||
-      new Date().toISOString(),
+  generatedAt:
+   item.generatedAt||
+   item.updatedAt||
+   item.createdAt||
+   new Date().toISOString(),
 
-    tags:
-      Array.isArray(item.tags)
-        ? item.tags
-        : []
-
-  };
+  tags:
+   Array.isArray(item.tags)
+    ? item.tags:[]
+ };
 
 }
 
 
 /* =========================================================
-   LOAD AUTOMATIC CONTENT
+   LOAD AUTO CONTENT
    ========================================================= */
 
 async function loadAutoContent(){
 
-  const status =
-    document.getElementById("autoStatus");
+ const status=
+  document.getElementById("autoStatus");
 
-  try{
+ try{
 
-    if(status){
-      status.innerHTML =
-        "⏳ Automatic content update जाँचा जा रहा है...";
+  if(status)
+   status.innerHTML=
+    "⏳ Automatic content update जाँचा जा रहा है...";
+
+  const response=
+   await fetch(
+    AUTO_CONTENT_URL,
+    {cache:"no-store"}
+   );
+
+  if(!response.ok)
+   throw new Error(
+    "HTTP "+response.status
+   );
+
+  const data=
+   await response.json();
+
+  let items=[];
+
+  if(Array.isArray(data))
+   items=data;
+  else if(Array.isArray(data.content))
+   items=data.content;
+  else if(Array.isArray(data.items))
+   items=data.items;
+
+  automaticContent=
+   items
+   .map(normalizeItem)
+   .filter(Boolean)
+   .sort(
+    (a,b)=>
+     new Date(b.publishedAt||b.generatedAt)-
+     new Date(a.publishedAt||a.generatedAt)
+   );
+
+  renderEverything();
+
+  const updateTime=
+   new Date().toLocaleString(
+    "hi-IN",
+    {
+     dateStyle:"medium",
+     timeStyle:"short"
     }
+   );
 
-    const response =
-      await fetch(AUTO_CONTENT_URL,{
-        cache:"no-store"
-      });
+  localStorage.setItem(
+   "gamezone_last_auto_update",
+   updateTime
+  );
 
-    if(!response.ok){
-      throw new Error(
-        "HTTP " + response.status
-      );
-    }
+  if(status)
+   status.innerHTML=
+    "✅ Automatic Content active — "+
+    automaticContent.length+
+    " items loaded.";
 
-    const data =
-      await response.json();
+  updateLastUpdate();
 
-    let items = [];
+ }catch(error){
 
-    if(Array.isArray(data)){
-      items = data;
-    }else if(Array.isArray(data.content)){
-      items = data.content;
-    }else if(Array.isArray(data.items)){
-      items = data.items;
-    }
+  console.error(
+   "Automatic content error:",
+   error
+  );
 
-    automaticContent =
-      items
-        .map(normalizeItem)
-        .filter(Boolean);
+  if(status)
+   status.innerHTML=
+    "⚠️ Automatic JSON अभी उपलब्ध नहीं है।";
 
-    automaticContent.sort(
-      (a,b)=>
-        new Date(b.publishedAt || b.generatedAt) -
-        new Date(a.publishedAt || a.generatedAt)
-    );
+  renderEverything();
 
-    renderEverything();
-
-    const updateTime =
-      new Date().toLocaleString("hi-IN",{
-        dateStyle:"medium",
-        timeStyle:"short"
-      });
-
-    localStorage.setItem(
-      "gamezone_last_auto_update",
-      updateTime
-    );
-
-    if(status){
-
-      status.innerHTML =
-        "✅ Automatic Content active — " +
-        automaticContent.length +
-        " items loaded.";
-
-    }
-
-    updateLastUpdate();
-
-  }catch(error){
-
-    console.error(
-      "Automatic content error:",
-      error
-    );
-
-    if(status){
-
-      status.innerHTML =
-        "⚠️ Automatic JSON अभी उपलब्ध नहीं है। " +
-        "पुराना/local content दिखाया जा रहा है।";
-
-    }
-
-    renderEverything();
-
-  }
+ }
 
 }
 
 
 /* =========================================================
-   ALL CONTENT
+   CONTENT
    ========================================================= */
 
 function allContent(){
 
-  return [
-    ...automaticContent,
-    ...localContent
-  ];
+ return[
+  ...automaticContent,
+  ...localContent
+ ];
 
 }
 
 
-/* =========================================================
-   SORT CONTENT
-   ========================================================= */
-
 function sortedContent(){
 
-  return allContent()
-    .slice()
-    .sort((a,b)=>{
-
-      const da =
-        new Date(
-          a.publishedAt ||
-          a.generatedAt ||
-          0
-        ).getTime();
-
-      const db =
-        new Date(
-          b.publishedAt ||
-          b.generatedAt ||
-          0
-        ).getTime();
-
-      return db - da;
-
-    });
+ return allContent()
+ .slice()
+ .sort((a,b)=>
+  new Date(b.publishedAt||b.generatedAt||0)-
+  new Date(a.publishedAt||a.generatedAt||0)
+ );
 
 }
 
@@ -1822,69 +1909,64 @@ function sortedContent(){
 
 function showPage(page){
 
-  currentPage = page;
+ currentPage=page;
 
-  document
-    .querySelectorAll(".page")
-    .forEach(el=>{
-      el.classList.remove("active");
-    });
+ document
+ .querySelectorAll(".page")
+ .forEach(el=>
+  el.classList.remove("active")
+ );
 
-  const target =
-    document.getElementById(
-      "page-" + page
-    );
+ const target=
+  document.getElementById(
+   "page-"+page
+  );
 
-  if(target){
-    target.classList.add("active");
-  }
+ if(target)
+  target.classList.add("active");
 
-  document
-    .querySelectorAll(".nav-links button")
-    .forEach(button=>{
-      button.classList.remove("active");
-    });
+ document
+ .getElementById("navLinks")
+ ?.classList.remove("show");
 
-  document
-    .getElementById("navLinks")
-    ?.classList.remove("show");
+ window.scrollTo({
+  top:0,
+  behavior:"smooth"
+ });
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+ if(page==="quiz")
+  startQuiz();
+
+ if(page==="leaderboard")
+  renderLeaderboard();
 
 }
 
 
 /* =========================================================
-   MENU
+   MENU / THEME
    ========================================================= */
 
 function toggleMenu(){
 
-  document
-    .getElementById("navLinks")
-    ?.classList.toggle("show");
+ document
+ .getElementById("navLinks")
+ ?.classList.toggle("show");
 
 }
 
 
-/* =========================================================
-   THEME
-   ========================================================= */
-
 function toggleTheme(){
 
-  document.body.classList.toggle("light");
+ document.body.classList.toggle("light");
 
-  const isLight =
-    document.body.classList.contains("light");
+ const light=
+  document.body.classList.contains("light");
 
-  localStorage.setItem(
-    "gamezone_theme",
-    isLight ? "light" : "dark"
-  );
+ localStorage.setItem(
+  "gamezone_theme",
+  light?"light":"dark"
+ );
 
 }
 
@@ -1895,206 +1977,167 @@ function toggleTheme(){
 
 function openSearch(){
 
-  showPage("search");
+ showPage("search");
 
-  setTimeout(()=>{
+ setTimeout(()=>{
 
-    const input =
-      document.getElementById("homeSearch");
+  document
+   .getElementById("homeSearch")
+   ?.focus();
 
-    if(input){
-      input.focus();
-    }
-
-  },100);
+ },100);
 
 }
 
 
 function handleSearchKey(event){
 
-  if(event.key === "Enter"){
-
-    globalSearch(event.target.value);
-
-  }
+ if(event.key==="Enter")
+  globalSearch(event.target.value);
 
 }
 
 
 function globalSearch(query){
 
-  const q =
-    String(query || "")
-      .trim()
-      .toLowerCase();
+ const q=
+  String(query||"")
+  .trim()
+  .toLowerCase();
 
-  showPage("search");
+ showPage("search");
 
-  const text =
-    document.getElementById("searchText");
+ const text=
+  document.getElementById("searchText");
 
-  const results =
-    document.getElementById("searchResults");
+ const results=
+  document.getElementById("searchResults");
 
-  if(text){
+ if(text)
+  text.textContent=
+   q
+   ? `“${query}” के लिए results`
+   :"सभी content";
 
-    text.textContent =
-      q
-        ? `“${query}” के लिए results`
-        : "सभी content";
+ if(!results)return;
 
-  }
+ if(!q){
 
-  if(!results){
-    return;
-  }
+  results.innerHTML=
+   `<div class="empty">
+    Search में कोई शब्द लिखिए।
+   </div>`;
 
-  if(!q){
+  return;
+ }
 
-    results.innerHTML =
-      `<div class="empty">
-        Search में कोई शब्द लिखिए।
-       </div>`;
+ const matches=
+  sortedContent()
+  .filter(item=>{
 
-    return;
+   const haystack=[
+    item.title,
+    item.category,
+    item.content,
+    item.type,
+    ...(item.tags||[])
+   ]
+   .join(" ")
+   .toLowerCase();
 
-  }
+   return haystack.includes(q);
 
-  const matches =
-    sortedContent().filter(item=>{
+  });
 
-      const haystack = [
-        item.title,
-        item.category,
-        item.content,
-        item.type,
-        ...(item.tags || [])
-      ]
-      .join(" ")
-      .toLowerCase();
-
-      return haystack.includes(q);
-
-    });
-
-  if(!matches.length){
-
-    results.innerHTML =
-      `<div class="empty">
-        इस search के लिए कोई content नहीं मिला।
-       </div>`;
-
-    return;
-
-  }
-
-  results.innerHTML =
-    matches
-      .map(renderCard)
-      .join("");
+ results.innerHTML=
+  matches.length
+  ?matches.map(renderCard).join("")
+  :`<div class="empty">
+     इस search के लिए कोई content नहीं मिला।
+    </div>`;
 
 }
 
 
 /* =========================================================
-   CARD RENDER
+   CARD
    ========================================================= */
 
 function renderCard(item){
 
-  const image =
-    item.image
-      ? `<img
-           src="${escapeHTML(item.image)}"
-           alt="${escapeHTML(item.title)}"
-           style="
-             width:100%;
-             border-radius:14px;
-             margin-bottom:14px;
-           "
-           loading="lazy"
-         >`
-      : "";
+ const image=
+  item.image
+  ?`<img
+      src="${escapeHTML(item.image)}"
+      alt="${escapeHTML(item.title)}"
+      style="width:100%;border-radius:14px;margin-bottom:14px"
+      loading="lazy">`
+  :"";
 
-  const source =
-    item.source
-      ? `<div class="source-note">
-           Source: ${escapeHTML(item.source)}
-         </div>`
-      : "";
+ return`
 
-  const videoButton =
-    item.video
-      ? `<button
-           class="small-btn"
-           onclick='openVideo(${JSON.stringify(item.video)})'>
-           🎬 Video
-         </button>`
-      : "";
+ <article class="card">
 
-  return `
+ ${image}
 
-  <article class="card">
+ <span class="badge">
+ ${escapeHTML(item.category||item.type)}
+ </span>
 
-    ${image}
+ <h3>
+ ${escapeHTML(item.title)}
+ </h3>
 
-    <span class="badge">
-      ${escapeHTML(item.category || item.type)}
-    </span>
+ <div class="content-text">
+ ${escapeHTML(item.content)}
+ </div>
 
-    <h3>
-      ${escapeHTML(item.title)}
-    </h3>
+ <div class="content-meta">
+ ${
+  item.publishedAt
+  ?"Published: "+
+   escapeHTML(
+    new Date(item.publishedAt)
+    .toLocaleString("hi-IN")
+   )
+  :""
+ }
+ </div>
 
-    <div class="content-text">
-      ${escapeHTML(item.content)}
-    </div>
+ ${
+  item.source
+  ?`<div class="source-note">
+     Source: ${escapeHTML(item.source)}
+    </div>`
+  :""
+ }
 
-    <div class="content-meta">
+ <div class="card-actions" style="margin-top:14px">
 
-      ${
-        item.publishedAt
-          ? "Published: " +
-            escapeHTML(
-              formatDate(item.publishedAt)
-            )
-          : ""
-      }
+ <button class="small-btn"
+ onclick='openContent(${JSON.stringify(item)})'>
+ Read
+ </button>
 
-    </div>
+ ${
+  item.video
+  ?`<button class="small-btn"
+      onclick='openVideo(${JSON.stringify(item.video)})'>
+      🎬 Video
+     </button>`
+  :""
+ }
 
-    ${source}
+ <button class="small-btn"
+ onclick='shareContent(${JSON.stringify(item.title)},${JSON.stringify(item.content)})'>
+ Share
+ </button>
 
-    <div
-      class="card-actions"
-      style="margin-top:14px;">
+ </div>
 
-      <button
-        class="small-btn"
-        onclick='openContent(${JSON.stringify(item)})'>
-        Read
-      </button>
+ </article>
 
-      ${videoButton}
-
-      <button
-        class="small-btn"
-        onclick='shareContent(${JSON.stringify(item.title)},${JSON.stringify(item.content)})'>
-        Share
-      </button>
-
-      <button
-        class="small-btn"
-        onclick='copyContent(${JSON.stringify(item.content)})'>
-        Copy
-      </button>
-
-    </div>
-
-  </article>
-
-  `;
+ `;
 
 }
 
@@ -2105,142 +2148,102 @@ function renderCard(item){
 
 function renderEverything(){
 
-  renderHomeLatest();
-  renderType("news","newsContent");
-  renderType("technology","technologyContent");
-  renderType("entertainment","entertainmentList");
-  renderType("joke","jokesList");
-  renderType("shayari","shayariList");
-  renderType("knowledge","knowledgeList");
-  renderType("bhakti","bhaktiList");
-  renderType("video","videoList");
-  renderType("blog","blogList");
+ renderHomeLatest();
 
-  renderAdminItems();
+ renderType("news","newsContent");
+ renderType("technology","technologyContent");
+ renderType("entertainment","entertainmentList");
+ renderType("joke","jokesList");
+ renderType("shayari","shayariList");
+ renderType("knowledge","knowledgeList");
+ renderType("bhakti","bhaktiList");
+ renderType("video","videoList");
+ renderType("blog","blogList");
+
+ updatePlayerUI();
 
 }
 
 
 /* =========================================================
-   HOME LATEST
+   CONTENT RENDERERS
    ========================================================= */
 
 function renderHomeLatest(){
 
-  const box =
-    document.getElementById("homeLatest");
+ const box=
+  document.getElementById("homeLatest");
 
-  if(!box) return;
+ if(!box)return;
 
-  const items =
-    sortedContent().slice(0,12);
+ const items=
+  sortedContent().slice(0,12);
 
-  if(!items.length){
-
-    box.innerHTML =
-      `<div class="empty">
-        Automatic content आने का इंतजार है।
-       </div>`;
-
-    return;
-
-  }
-
-  box.innerHTML =
-    items.map(renderCard).join("");
+ box.innerHTML=
+  items.length
+  ?items.map(renderCard).join("")
+  :`<div class="empty">
+     Automatic content आने का इंतजार है।
+    </div>`;
 
 }
 
-
-/* =========================================================
-   RENDER TYPE
-   ========================================================= */
 
 function renderType(type,id){
 
-  const box =
-    document.getElementById(id);
+ const box=
+  document.getElementById(id);
 
-  if(!box) return;
+ if(!box)return;
 
-  const items =
-    sortedContent()
-      .filter(item=>item.type === type);
+ const items=
+  sortedContent()
+  .filter(item=>item.type===type);
 
-  if(!items.length){
-
-    box.innerHTML =
-      `<div class="empty">
-        इस category में अभी नया automatic content नहीं आया।
-       </div>`;
-
-    return;
-
-  }
-
-  box.innerHTML =
-    items.map(renderCard).join("");
+ box.innerHTML=
+  items.length
+  ?items.map(renderCard).join("")
+  :`<div class="empty">
+     इस category में अभी content नहीं है।
+    </div>`;
 
 }
 
 
-/* =========================================================
-   FILTER CONTENT
-   ========================================================= */
-
 function filterContent(type,category,button){
 
-  currentFilter = {
-    type,
-    category
-  };
+ const idMap={
+  joke:"jokesList",
+  shayari:"shayariList",
+  knowledge:"knowledgeList"
+ };
 
-  const idMap = {
-    joke:"jokesList",
-    shayari:"shayariList",
-    knowledge:"knowledgeList"
-  };
+ const box=
+  document.getElementById(idMap[type]);
 
-  const box =
-    document.getElementById(
-      idMap[type]
-    );
+ if(!box)return;
 
-  if(!box) return;
+ let items=
+  sortedContent()
+  .filter(item=>item.type===type);
 
-  document
-    .querySelectorAll(
-      `#page-${type === "joke" ? "jokes" : type} .category-bar button`
-    )
-    .forEach(btn=>{
-      btn.classList.remove("active");
-    });
+ if(category!=="All"){
 
-  if(button){
-    button.classList.add("active");
-  }
+  items=
+   items.filter(item=>
+    String(item.category||"")
+    .toLowerCase()===
+    category.toLowerCase()
+   );
 
-  let items =
-    sortedContent()
-      .filter(item=>item.type === type);
+ }
 
-  if(category !== "All"){
-
-    items =
-      items.filter(item=>
-        String(item.category || "")
-          .toLowerCase() ===
-        category.toLowerCase()
-      );
-
-  }
-
-  box.innerHTML =
-    items.length
-      ? items.map(renderCard).join("")
-      : `<div class="empty">
-           इस category में content नहीं मिला।
-         </div>`;
+ box.innerHTML=
+  items.length
+  ?items.map(renderCard).join("")
+  :`<div class="empty">
+     इस category में content नहीं मिला।
+    </div>`;
 
 }
 
@@ -2251,102 +2254,77 @@ function filterContent(type,category,button){
 
 function openContent(item){
 
-  const modal =
-    document.getElementById("mainModal");
+ const modal=
+  document.getElementById("mainModal");
 
-  const content =
-    document.getElementById("modalContent");
+ const content=
+  document.getElementById("modalContent");
 
-  if(!modal || !content) return;
+ if(!modal||!content)return;
 
-  content.innerHTML = `
+ content.innerHTML=`
 
-    <span class="badge">
-      ${escapeHTML(item.category || item.type)}
-    </span>
+ <span class="badge">
+ ${escapeHTML(item.category||item.type)}
+ </span>
 
-    <h2 style="margin:10px 0 15px;">
-      ${escapeHTML(item.title)}
-    </h2>
+ <h2 style="margin:10px 0 15px">
+ ${escapeHTML(item.title)}
+ </h2>
 
-    ${
-      item.image
-        ? `<img
-             src="${escapeHTML(item.image)}"
-             alt="${escapeHTML(item.title)}"
-             style="
-               width:100%;
-               border-radius:15px;
-               margin-bottom:15px;
-             "
-           >`
-        : ""
-    }
+ ${
+  item.image
+  ?`<img
+      src="${escapeHTML(item.image)}"
+      style="width:100%;border-radius:15px;margin-bottom:15px"
+      alt="${escapeHTML(item.title)}">`
+  :""
+ }
 
-    <div class="content-text">
-      ${escapeHTML(item.content)}
-    </div>
+ <div class="content-text">
+ ${escapeHTML(item.content)}
+ </div>
 
-    ${
-      item.source
-        ? `<div class="source-note">
-             Source: ${escapeHTML(item.source)}
-           </div>`
-        : ""
-    }
+ ${
+  item.source
+  ?`<div class="source-note">
+     Source: ${escapeHTML(item.source)}
+    </div>`
+  :""
+ }
 
-    ${
-      item.publishedAt
-        ? `<div class="content-meta">
-             ${escapeHTML(
-               formatDate(item.publishedAt)
-             )}
-           </div>`
-        : ""
-    }
+ <div class="card-actions" style="margin-top:20px">
 
-    <div
-      class="card-actions"
-      style="margin-top:20px;">
+ ${
+  item.video
+  ?`<button class="btn btn-primary"
+      onclick='openVideo(${JSON.stringify(item.video)})'>
+      🎬 Watch
+     </button>`
+  :""
+ }
 
-      ${
-        item.video
-          ? `<button
-               class="btn btn-primary"
-               onclick='openVideo(${JSON.stringify(item.video)})'>
-               🎬 Watch
-             </button>`
-          : ""
-      }
+ <button class="btn btn-secondary"
+ onclick='shareContent(${JSON.stringify(item.title)},${JSON.stringify(item.content)})'>
+ Share
+ </button>
 
-      <button
-        class="btn btn-secondary"
-        onclick='copyContent(${JSON.stringify(item.content)})'>
-        Copy
-      </button>
+ </div>
+ `;
 
-      <button
-        class="btn btn-secondary"
-        onclick='shareContent(${JSON.stringify(item.title)},${JSON.stringify(item.content)})'>
-        Share
-      </button>
-
-    </div>
-  `;
-
-  modal.classList.add("show");
-  document.body.classList.add("no-scroll");
+ modal.classList.add("show");
+ document.body.classList.add("no-scroll");
 
 }
 
 
 function closeModal(){
 
-  document
-    .getElementById("mainModal")
-    ?.classList.remove("show");
+ document
+ .getElementById("mainModal")
+ ?.classList.remove("show");
 
-  document.body.classList.remove("no-scroll");
+ document.body.classList.remove("no-scroll");
 
 }
 
@@ -2357,92 +2335,72 @@ function closeModal(){
 
 function getYouTubeId(url){
 
-  try{
+ try{
 
-    const u =
-      new URL(url);
+  const u=new URL(url);
 
-    if(
-      u.hostname.includes("youtube.com")
-    ){
+  if(u.hostname.includes("youtube.com"))
+   return u.searchParams.get("v")||
+          u.pathname.split("/").pop();
 
-      return (
-        u.searchParams.get("v") ||
-        u.pathname.split("/").pop()
-      );
+  if(u.hostname.includes("youtu.be"))
+   return u.pathname.slice(1);
 
-    }
+ }catch(error){}
 
-    if(
-      u.hostname.includes("youtu.be")
-    ){
-
-      return u.pathname.slice(1);
-
-    }
-
-  }catch(error){}
-
-  return null;
+ return null;
 
 }
 
 
 function openVideo(url){
 
-  const id =
-    getYouTubeId(url);
+ const modal=
+  document.getElementById("mainModal");
 
-  const modal =
-    document.getElementById("mainModal");
+ const content=
+  document.getElementById("modalContent");
 
-  const content =
-    document.getElementById("modalContent");
+ if(!modal||!content)return;
 
-  if(!modal || !content) return;
+ const id=getYouTubeId(url);
 
-  if(id){
+ if(id){
 
-    content.innerHTML = `
+  content.innerHTML=`
 
-      <h2 style="margin-bottom:15px;">
-        🎬 Video
-      </h2>
+  <h2>🎬 Video</h2>
 
-      <iframe
-        class="media"
-        src="https://www.youtube.com/embed/${encodeURIComponent(id)}"
-        title="GAMEZONE ARENA Video"
-        allowfullscreen>
-      </iframe>
+  <iframe
+   class="media"
+   style="width:100%;aspect-ratio:16/9;border:0;border-radius:15px"
+   src="https://www.youtube.com/embed/${encodeURIComponent(id)}"
+   title="GAMEZONE ARENA Video"
+   allowfullscreen>
+  </iframe>
 
-    `;
+  `;
 
-  }else{
+ }else{
 
-    content.innerHTML = `
+  content.innerHTML=`
 
-      <h2>🎬 Video</h2>
+  <h2>🎬 Video</h2>
 
-      <p style="margin-top:15px;color:var(--muted);">
-        Video URL:
-      </p>
+  <a
+   href="${escapeHTML(url)}"
+   target="_blank"
+   rel="noopener"
+   class="btn btn-primary">
+   Open Video
+  </a>
 
-      <a
-        href="${escapeHTML(url)}"
-        target="_blank"
-        rel="noopener"
-        class="btn btn-primary"
-        style="display:inline-block;margin-top:15px;">
-        Open Video
-      </a>
+  `;
 
-    `;
+ }
 
-  }
-
-  modal.classList.add("show");
-  document.body.classList.add("no-scroll");
+ modal.classList.add("show");
+ document.body.classList.add("no-scroll");
 
 }
 
@@ -2453,124 +2411,1153 @@ function openVideo(url){
 
 function openGame(game){
 
-  const modal =
-    document.getElementById("mainModal");
+ const modal=
+  document.getElementById("mainModal");
 
-  const content =
-    document.getElementById("modalContent");
+ const content=
+  document.getElementById("modalContent");
 
-  if(!modal || !content) return;
+ if(!modal||!content)return;
 
-  content.innerHTML = `
+ if(game==="ludo")
+  renderLudoGame(content);
 
-    <div style="text-align:center;">
+ else if(game==="cricket")
+  renderCricketGame(content);
 
-      <div
-        style="
-          font-size:65px;
-          margin-bottom:10px;
-        ">
-        🎮
-      </div>
+ else if(game==="carrom")
+  renderCarromGame(content);
 
-      <h2>
-        ${escapeHTML(game)}
-      </h2>
+ else if(game==="spin")
+  renderSpinGame(content);
 
-      <p
-        style="
-          margin-top:12px;
-          color:var(--muted);
-        ">
-        GAMEZONE ARENA game
-        selected.
-      </p>
+ else if(game==="racing")
+  renderRacingGame(content);
 
-      <div class="source-note">
+ else if(game==="memory")
+  renderMemoryGame(content);
 
-        Website game buttons अभी
-        app/Play Store destination के लिए
-        तैयार हैं।
+ else if(game==="plazo")
+  renderPlazoGame(content);
 
-        <br><br>
+ else
+  content.innerHTML="<h2>Game unavailable</h2>";
 
-        Virtual coins have no monetary value
-        and cannot be withdrawn.
-
-      </div>
-
-    </div>
-
-  `;
-
-  modal.classList.add("show");
-  document.body.classList.add("no-scroll");
+ modal.classList.add("show");
+ document.body.classList.add("no-scroll");
 
 }
 
 
 /* =========================================================
-   COPY
+   LUDO
+   ========================================================= */
+
+let ludoState={
+ position:0,
+ turn:0
+};
+
+
+function renderLudoGame(content){
+
+ ludoState={
+  position:0,
+  turn:0
+ };
+
+ let cells="";
+
+ for(let r=0;r<15;r++){
+
+  for(let c=0;c<15;c++){
+
+   let cls="ludo-cell";
+
+   if(
+    (r<6&&c<6)
+   )cls+=" ludo-red";
+
+   else if(
+    (r<6&&c>8)
+   )cls+=" ludo-green";
+
+   else if(
+    (r>8&&c<6)
+   )cls+=" ludo-blue";
+
+   else if(
+    (r>8&&c>8)
+   )cls+=" ludo-yellow";
+
+   else if(
+    r===7&&c===7
+   )cls+=" ludo-center";
+
+   else
+    cls+=" ludo-path";
+
+   cells+=
+    `<div class="${cls}" id="ludo-${r}-${c}"></div>`;
+
+  }
+
+ }
+
+ content.innerHTML=`
+
+ <h2>🎲 Ludo — Browser Version</h2>
+
+ <p style="color:var(--muted);margin:8px 0 15px">
+ Free human-style browser Ludo foundation.
+ </p>
+
+ <div class="ludo-board">
+ ${cells}
+ </div>
+
+ <div class="game-screen"
+ style="min-height:180px">
+
+ <div id="ludoDice" class="big-number">🎲</div>
+
+ <button class="btn btn-primary"
+ onclick="rollLudoDice()">
+ Roll Dice
+ </button>
+
+ <div id="ludoMessage"
+ class="game-message">
+ Dice roll करके token आगे बढ़ाएँ।
+ </div>
+
+ </div>
+
+ `;
+
+}
+
+
+function rollLudoDice(){
+
+ const dice=
+  Math.floor(Math.random()*6)+1;
+
+ const diceEl=
+  document.getElementById("ludoDice");
+
+ const message=
+  document.getElementById("ludoMessage");
+
+ if(diceEl)
+  diceEl.textContent=dice;
+
+ ludoState.position+=dice;
+
+ if(ludoState.position>=56){
+
+  ludoState.position=56;
+
+  if(message)
+   message.textContent=
+    "🏆 Home reached! +25 XP";
+
+  addXP(25,"Ludo");
+
+ }else{
+
+  if(message)
+   message.textContent=
+    `आपने ${dice} चलाया। Position: ${ludoState.position}`;
+
+  addXP(2,"Ludo move");
+
+ }
+
+}
+
+
+/* =========================================================
+   CRICKET
+   ========================================================= */
+
+function renderCricketGame(content){
+
+ content.innerHTML=`
+
+ <h2>🏏 Quick Cricket</h2>
+
+ <div class="game-screen">
+
+ <div id="cricketScore"
+ class="big-number">
+ 0
+ </div>
+
+ <p class="game-message">
+ Ball खेलिए और ज्यादा runs बनाने की कोशिश करें।
+ </p>
+
+ <button class="btn btn-primary"
+ onclick="hitCricket()">
+ 🏏 Hit
+ </button>
+
+ <button class="btn btn-secondary"
+ onclick="resetCricket()">
+ Reset
+ </button>
+
+ </div>
+
+ `;
+
+ window.cricketRuns=0;
+ window.cricketBalls=0;
+
+}
+
+
+function hitCricket(){
+
+ if(window.cricketBalls>=6){
+
+  showToast(
+   `🏏 Innings finished: ${window.cricketRuns} runs`
+  );
+
+  return;
+
+ }
+
+ const outcomes=[0,1,2,4,6];
+
+ const run=
+  outcomes[
+   Math.floor(Math.random()*outcomes.length)
+  ];
+
+ window.cricketRuns+=run;
+ window.cricketBalls++;
+
+ const el=
+  document.getElementById("cricketScore");
+
+ if(el)
+  el.textContent=
+   `${window.cricketRuns} / ${window.cricketBalls}`;
+
+ addXP(run===6?8:2,"Cricket");
+
+}
+
+
+/* =========================================================
+   CARROM
+   ========================================================= */
+
+function renderCarromGame(content){
+
+ content.innerHTML=`
+
+ <h2>🎯 Mini Carrom</h2>
+
+ <div class="game-screen">
+
+ <div class="carrom-board">
+
+ <div class="pocket p1"></div>
+ <div class="pocket p2"></div>
+ <div class="pocket p3"></div>
+ <div class="pocket p4"></div>
+
+ <div class="carrom-center"></div>
+
+ <div class="coin black" id="carromCoin">
+ ●
+ </div>
+
+ </div>
+
+ <button class="btn btn-primary"
+ onclick="shootCarrom()">
+ 🎯 Shoot
+ </button>
+
+ <div id="carromMessage"
+ class="game-message">
+ Coin को pocket में भेजने की कोशिश करें।
+ </div>
+
+ </div>
+
+ `;
+
+}
+
+
+function shootCarrom(){
+
+ const success=
+  Math.random()>.45;
+
+ const message=
+  document.getElementById(
+   "carromMessage"
+  );
+
+ if(success){
+
+  if(message)
+   message.textContent=
+    "🎯 Coin pocket! +10 XP";
+
+  addXP(10,"Carrom");
+
+ }else{
+
+  if(message)
+   message.textContent=
+    "Miss! फिर कोशिश करें।";
+
+  addXP(1,"Carrom");
+
+ }
+
+}
+
+
+/* =========================================================
+   SPIN
+   ========================================================= */
+
+let spinAngle=0;
+
+
+function renderSpinGame(content){
+
+ content.innerHTML=`
+
+ <h2>🎡 XP Spin</h2>
+
+ <div class="game-screen">
+
+ <div id="spinWheel"
+ class="spin-wheel">
+ ⭐
+ </div>
+
+ <button class="btn btn-primary"
+ onclick="spinWheel()">
+ Spin
+ </button>
+
+ <div id="spinMessage"
+ class="game-message">
+ यह केवल virtual XP है। कोई cash value नहीं।
+ </div>
+
+ </div>
+
+ `;
+
+}
+
+
+function spinWheel(){
+
+ spinAngle+=
+  360*3+
+  Math.floor(Math.random()*360);
+
+ const wheel=
+  document.getElementById(
+   "spinWheel"
+  );
+
+ if(wheel)
+  wheel.style.transform=
+   `rotate(${spinAngle}deg)`;
+
+ const rewards=[
+  5,10,15,20,25
+ ];
+
+ const reward=
+  rewards[
+   Math.floor(Math.random()*rewards.length)
+  ];
+
+ setTimeout(()=>{
+
+  const msg=
+   document.getElementById(
+    "spinMessage"
+   );
+
+  if(msg)
+   msg.textContent=
+    `⭐ आपको ${reward} XP मिले।`;
+
+  addXP(reward,"Spin");
+
+ },2100);
+
+}
+
+
+/* =========================================================
+   RACING
+   ========================================================= */
+
+let raceTimer=null;
+let racePosition=50;
+
+
+function renderRacingGame(content){
+
+ content.innerHTML=`
+
+ <h2>🏎️ Mini Racing</h2>
+
+ <div class="game-screen">
+
+ <div class="race-track"
+ id="raceTrack">
+
+ <div id="raceCar"
+ class="car">
+ 🏎️
+ </div>
+
+ </div>
+
+ <div class="game-message">
+ Keyboard: ← → या नीचे दिए buttons.
+ </div>
+
+ <div class="card-actions">
+
+ <button class="btn btn-secondary"
+ onclick="moveCar(-10)">
+ ◀
+ </button>
+
+ <button class="btn btn-primary"
+ onclick="startRace()">
+ 🏁 Start
+ </button>
+
+ <button class="btn btn-secondary"
+ onclick="moveCar(10)">
+ ▶
+ </button>
+
+ </div>
+
+ <div id="raceMessage"
+ class="game-message">
+ Start दबाएँ।
+ </div>
+
+ </div>
+
+ `;
+
+ racePosition=50;
+
+}
+
+
+function moveCar(amount){
+
+ racePosition+=amount;
+
+ racePosition=
+  Math.max(10,Math.min(90,racePosition));
+
+ const car=
+  document.getElementById("raceCar");
+
+ if(car)
+  car.style.left=
+   racePosition+"%";
+
+}
+
+
+function startRace(){
+
+ clearInterval(raceTimer);
+
+ const track=
+  document.getElementById("raceTrack");
+
+ const message=
+  document.getElementById("raceMessage");
+
+ if(!track)return;
+
+ const obstacle=
+  document.createElement("div");
+
+ obstacle.className="obstacle";
+ obstacle.textContent="🚧";
+ obstacle.style.left=
+  Math.floor(10+Math.random()*80)+"%";
+
+ track.appendChild(obstacle);
+
+ let top=-50;
+
+ raceTimer=
+  setInterval(()=>{
+
+   top+=7;
+   obstacle.style.top=top+"px";
+
+   if(top>300){
+
+    clearInterval(raceTimer);
+    obstacle.remove();
+
+    if(message)
+     message.textContent=
+      "🏁 Race complete! +15 XP";
+
+    addXP(15,"Racing");
+
+   }
+
+  },100);
+
+}
+
+
+/* =========================================================
+   MEMORY MATCH
+   ========================================================= */
+
+let memoryOpen=[];
+let memoryDone=0;
+
+
+function renderMemoryGame(content){
+
+ const icons=[
+  "🍎","🍎",
+  "🚗","🚗",
+  "⚽","⚽",
+  "🎮","🎮",
+  "⭐","⭐",
+  "🔥","🔥",
+  "🐱","🐱",
+  "🏆","🏆"
+ ];
+
+ icons.sort(()=>Math.random()-.5);
+
+ memoryOpen=[];
+ memoryDone=0;
+
+ content.innerHTML=`
+
+ <h2>🧠 Memory Match</h2>
+
+ <div class="game-screen">
+
+ <div class="memory-grid">
+
+ ${icons.map((icon,index)=>
+  `<button
+   class="memory-card"
+   data-icon="${icon}"
+   onclick="memoryClick(this)">
+   ${icon}
+   </button>`
+ ).join("")}
+
+ </div>
+
+ <div id="memoryMessage"
+ class="game-message">
+ सभी pairs खोजें।
+ </div>
+
+ </div>
+
+ `;
+
+}
+
+
+function memoryClick(card){
+
+ if(
+  card.classList.contains("open")||
+  card.classList.contains("done")||
+  memoryOpen.length>=2
+ )return;
+
+ card.classList.add("open");
+ memoryOpen.push(card);
+
+ if(memoryOpen.length===2){
+
+  const[a,b]=memoryOpen;
+
+  if(a.dataset.icon===b.dataset.icon){
+
+   a.classList.add("done");
+   b.classList.add("done");
+
+   memoryDone++;
+   memoryOpen=[];
+
+   addXP(8,"Memory");
+
+   if(memoryDone===8){
+
+    document.getElementById(
+     "memoryMessage"
+    ).textContent=
+     "🏆 Memory complete!";
+
+   }
+
+  }else{
+
+   setTimeout(()=>{
+
+    a.classList.remove("open");
+    b.classList.remove("open");
+    memoryOpen=[];
+
+   },650);
+
+  }
+
+ }
+
+}
+
+
+/* =========================================================
+   PLAZO CHALLENGE
+   ========================================================= */
+
+function renderPlazoGame(content){
+
+ let number=
+  Math.floor(10+Math.random()*90);
+
+ content.innerHTML=`
+
+ <h2>🧩 Plazo Challenge</h2>
+
+ <div class="game-screen">
+
+ <div class="big-number">
+ ${number}
+ </div>
+
+ <p class="game-message">
+ इस number का double बताइए।
+ </p>
+
+ <input
+ id="plazoAnswer"
+ class="form-control"
+ type="number"
+ placeholder="Answer">
+
+ <button class="btn btn-primary"
+ onclick="checkPlazo(${number})">
+ Check
+ </button>
+
+ <div id="plazoMessage"></div>
+
+ </div>
+
+ `;
+
+}
+
+
+function checkPlazo(number){
+
+ const answer=
+  Number(
+   document.getElementById(
+    "plazoAnswer"
+   )?.value
+  );
+
+ const message=
+  document.getElementById(
+   "plazoMessage"
+  );
+
+ if(answer===number*2){
+
+  message.innerHTML=
+   `<div class="game-message">
+    ✅ Correct! +20 XP
+    </div>`;
+
+  addXP(20,"Challenge");
+
+ }else{
+
+  message.innerHTML=
+   `<div class="game-message">
+    ❌ Try again.
+    </div>`;
+
+ }
+
+}
+
+
+/* =========================================================
+   DAILY CHALLENGE
+   ========================================================= */
+
+function playDailyChallenge(){
+
+ showPage("challenge");
+
+ const area=
+  document.getElementById(
+   "challengeArea"
+  );
+
+ if(!area)return;
+
+ const number=
+  Math.floor(5+Math.random()*20);
+
+ area.innerHTML=`
+
+ <div class="big-number">
+ ${number}
+ </div>
+
+ <h2>
+ Quick Math Challenge
+ </h2>
+
+ <p class="game-message">
+ ${number} × 2 कितना होगा?
+ </p>
+
+ <input
+ id="dailyAnswer"
+ class="form-control"
+ type="number"
+ placeholder="Answer"
+ style="max-width:300px">
+
+ <button class="btn btn-primary"
+ onclick="checkDailyChallenge(${number})">
+ Submit
+ </button>
+
+ <div id="dailyResult"></div>
+
+ `;
+
+}
+
+
+function checkDailyChallenge(number){
+
+ const answer=
+  Number(
+   document.getElementById(
+    "dailyAnswer"
+   )?.value
+  );
+
+ const result=
+  document.getElementById(
+   "dailyResult"
+  );
+
+ if(answer===number*2){
+
+  result.innerHTML=
+   `<div class="game-message">
+    🏆 Correct! +25 XP
+    </div>`;
+
+  addXP(25,"Daily Challenge");
+
+ }else{
+
+  result.innerHTML=
+   `<div class="game-message">
+    ❌ गलत answer. फिर कोशिश करें।
+    </div>`;
+
+ }
+
+}
+
+
+/* =========================================================
+   QUIZ
+   ========================================================= */
+
+const quizQuestions=[
+
+ {
+  q:"भारत की राजधानी क्या है?",
+  options:["मुंबई","नई दिल्ली","कोलकाता","चेन्नई"],
+  answer:1
+ },
+
+ {
+  q:"सूर्य किस प्रकार का पिंड है?",
+  options:["ग्रह","उपग्रह","तारा","धूमकेतु"],
+  answer:2
+ },
+
+ {
+  q:"भारत का राष्ट्रीय पशु कौन है?",
+  options:["शेर","बाघ","हाथी","मोर"],
+  answer:1
+ },
+
+ {
+  q:"पानी का रासायनिक सूत्र क्या है?",
+  options:["CO2","O2","H2O","NaCl"],
+  answer:2
+ },
+
+ {
+  q:"पृथ्वी किसके चारों ओर घूमती है?",
+  options:["चंद्रमा","सूर्य","मंगल","शुक्र"],
+  answer:1
+ },
+
+ {
+  q:"Computer का मुख्य processing भाग कौन सा है?",
+  options:["CPU","Mouse","Keyboard","Speaker"],
+  answer:0
+ },
+
+ {
+  q:"भारत में कितने क्रिकेट खिलाड़ी एक टीम में मैदान पर होते हैं?",
+  options:["9","10","11","12"],
+  answer:2
+ },
+
+ {
+  q:"इंटरनेट पर website खोलने के लिए सामान्यतः क्या उपयोग होता है?",
+  options:["Browser","Calculator","Camera","Gallery"],
+  answer:0
+ },
+
+ {
+  q:"चंद्रमा पृथ्वी का क्या है?",
+  options:["तारा","ग्रह","उपग्रह","धूमकेतु"],
+  answer:2
+ },
+
+ {
+  q:"भारत का राष्ट्रीय फूल कौन सा है?",
+  options:["गुलाब","कमल","सूरजमुखी","चमेली"],
+  answer:1
+ }
+
+];
+
+let quizState={
+ index:0,
+ score:0,
+ xp:0,
+ answered:false
+};
+
+
+function startQuiz(){
+
+ quizState={
+  index:0,
+  score:0,
+  xp:0,
+  answered:false
+ };
+
+ renderQuiz();
+
+}
+
+
+function renderQuiz(){
+
+ const area=
+  document.getElementById(
+   "quizArea"
+  );
+
+ if(!area)return;
+
+ if(quizState.index>=quizQuestions.length){
+
+  area.innerHTML=`
+
+  <div class="game-screen">
+
+  <div class="big-number">
+  🏆
+  </div>
+
+  <h2>
+  Quiz Complete
+  </h2>
+
+  <p class="game-message">
+  Score: ${quizState.score}/10
+  <br>
+  Quiz XP: ${quizState.xp}
+  </p>
+
+  <button class="btn btn-primary"
+  onclick="startQuiz()">
+  Play Again
+  </button>
+
+  </div>
+
+  `;
+
+  addXP(
+   quizState.xp,
+   "Quiz Complete"
+  );
+
+  return;
+
+ }
+
+ const q=
+  quizQuestions[quizState.index];
+
+ document.getElementById(
+  "quizNumber"
+ ).textContent=
+  quizState.index+1;
+
+ document.getElementById(
+  "quizScore"
+ ).textContent=
+  quizState.score;
+
+ document.getElementById(
+  "quizXP"
+ ).textContent=
+  quizState.xp;
+
+ area.innerHTML=`
+
+ <div class="quiz-question">
+ ${escapeHTML(q.q)}
+ </div>
+
+ <div class="quiz-options">
+
+ ${q.options.map(
+  (option,i)=>
+  `<button
+   class="quiz-option"
+   onclick="answerQuiz(${i})">
+   ${escapeHTML(option)}
+   </button>`
+ ).join("")}
+
+ </div>
+
+ <div id="quizFeedback"
+ class="game-message"
+ style="margin-top:15px">
+ Question ${quizState.index+1} of 10
+ </div>
+
+ `;
+
+}
+
+
+function answerQuiz(index){
+
+ if(quizState.answered)return;
+
+ quizState.answered=true;
+
+ const q=
+  quizQuestions[quizState.index];
+
+ const buttons=
+  document.querySelectorAll(
+   ".quiz-option"
+  );
+
+ buttons.forEach(
+  (button,i)=>{
+
+   if(i===q.answer)
+    button.classList.add("correct");
+
+   if(i===index&&i!==q.answer)
+    button.classList.add("wrong");
+
+   button.disabled=true;
+
+  }
+ );
+
+ if(index===q.answer){
+
+  quizState.score++;
+  quizState.xp+=5;
+
+  document.getElementById(
+   "quizFeedback"
+  ).textContent=
+   "✅ Correct! +5 XP";
+
+ }else{
+
+  document.getElementById(
+   "quizFeedback"
+  ).textContent=
+   "❌ Wrong answer";
+
+ }
+
+ setTimeout(()=>{
+
+  quizState.index++;
+  quizState.answered=false;
+  renderQuiz();
+
+ },900);
+
+}
+
+
+/* =========================================================
+   LEADERBOARD
+   ========================================================= */
+
+function renderLeaderboard(){
+
+ const box=
+  document.getElementById(
+   "leaderboardList"
+  );
+
+ if(!box)return;
+
+ const saved=
+  JSON.parse(
+   localStorage.getItem(
+    "gamezone_leaderboard"
+   )||"[]"
+  );
+
+ let list=[
+  ...saved,
+  {
+   name:"You",
+   xp:player.xp
+  }
+ ];
+
+ list.sort(
+  (a,b)=>b.xp-a.xp
+ );
+
+ list=
+  list.slice(0,10);
+
+ box.innerHTML=`
+
+ <div class="card">
+
+ ${list.map(
+  (item,i)=>
+  `<div
+   style="
+    display:flex;
+    justify-content:space-between;
+    padding:13px;
+    border-bottom:1px solid var(--border);
+   ">
+
+   <strong>
+   ${i+1}. ${escapeHTML(item.name)}
+   </strong>
+
+   <span style="color:var(--green)">
+   ${item.xp} XP
+   </span>
+
+   </div>`
+ ).join("")}
+
+ </div>
+
+ `;
+
+}
+
+
+/* =========================================================
+   COPY / SHARE
    ========================================================= */
 
 async function copyContent(text){
 
-  try{
+ try{
 
-    await navigator.clipboard.writeText(
-      String(text || "")
-    );
+  await navigator.clipboard.writeText(
+   String(text||"")
+  );
 
-    showToast("✅ Content copied");
+  showToast("✅ Content copied");
 
-  }catch(error){
+ }catch(error){
 
-    showToast(
-      "Copy नहीं हो पाया।"
-    );
+  showToast("Copy नहीं हो पाया।");
 
-  }
+ }
 
 }
 
 
-/* =========================================================
-   SHARE
-   ========================================================= */
-
 async function shareContent(title,text){
 
-  const shareData = {
+ const data={
+  title:String(
+   title||"GAMEZONE ARENA"
+  ),
+  text:String(text||"")
+ };
 
-    title:
-      String(title || "GAMEZONE ARENA"),
+ try{
 
-    text:
-      String(text || "")
+  if(navigator.share)
+   await navigator.share(data);
+  else
+   await copyContent(
+    `${data.title}\n\n${data.text}`
+   );
 
-  };
-
-  try{
-
-    if(navigator.share){
-
-      await navigator.share(
-        shareData
-      );
-
-    }else{
-
-      await copyContent(
-        `${shareData.title}\n\n${shareData.text}`
-      );
-
-    }
-
-  }catch(error){
-
-    console.log(error);
-
-  }
+ }catch(error){}
 
 }
 
@@ -2581,294 +3568,58 @@ async function shareContent(title,text){
 
 function openInfo(type){
 
-  const modal =
-    document.getElementById("mainModal");
+ const modal=
+  document.getElementById("mainModal");
 
-  const content =
-    document.getElementById("modalContent");
+ const content=
+  document.getElementById("modalContent");
 
-  if(!modal || !content) return;
+ const info={
 
-  const info = {
+  about:[
+   "About GAMEZONE ARENA",
+   "GAMEZONE ARENA एक free gaming, quiz, entertainment, knowledge और useful-content platform है।"
+  ],
 
-    about:{
+  contact:[
+   "Contact",
+   "Official contact information यहाँ उपलब्ध कराई जा सकती है।"
+  ],
 
-      title:"About GAMEZONE ARENA",
+  privacy:[
+   "Privacy",
+   "GAMEZONE ARENA visitors की privacy का सम्मान करता है। Website पर Google AdSense और अन्य third-party services का उपयोग हो सकता है।"
+  ],
 
-      text:
-      "GAMEZONE ARENA एक gaming, news, technology, entertainment और useful-content platform है।"
+  terms:[
+   "Terms",
+   "GAMEZONE ARENA के games free-to-play हैं। XP और virtual rewards का कोई monetary value नहीं है और इन्हें cash में withdraw नहीं किया जा सकता।"
+  ],
 
-    },
-
-    contact:{
-
-      title:"Contact",
-
-      text:
-      "Contact information website के official contact section में उपलब्ध कराई जा सकती है।"
-
-    },
-
-    privacy:{
-
-      title:"Privacy",
-
-      text:
-      "GAMEZONE ARENA visitors की privacy का सम्मान करता है। Website पर third-party services जैसे Google AdSense और video platforms उपयोग हो सकते हैं।"
-
-    },
-
-    terms:{
-
-      title:"Terms",
-
-      text:
-      "GAMEZONE ARENA का content informational और entertainment purpose के लिए है। Games में virtual coins का कोई monetary value नहीं है।"
-
-    },
-
-    disclaimer:{
-
-      title:"Disclaimer",
-
-      text:
-      "Automatic news summaries उपलब्ध source context पर आधारित हो सकती हैं। किसी भी महत्वपूर्ण निर्णय से पहले मूल source की जाँच करें।"
-
-    }
-
-  };
-
-  const selected =
-    info[type] || info.about;
-
-  content.innerHTML = `
-
-    <h2>
-      ${escapeHTML(selected.title)}
-    </h2>
-
-    <p
-      style="
-        margin-top:18px;
-        color:var(--muted);
-      ">
-      ${escapeHTML(selected.text)}
-    </p>
-
-  `;
-
-  modal.classList.add("show");
-  document.body.classList.add("no-scroll");
-
-}
-
-
-/* =========================================================
-   ADMIN
-   ========================================================= */
-
-function openAdmin(){
-
-  document
-    .getElementById("adminModal")
-    ?.classList.add("show");
-
-  document.body.classList.add("no-scroll");
-
-  renderAdminItems();
-
-}
-
-
-function closeAdmin(){
-
-  document
-    .getElementById("adminModal")
-    ?.classList.remove("show");
-
-  document.body.classList.remove("no-scroll");
-
-}
-
-
-function clearAdminForm(){
-
-  [
-    "adminTitle",
-    "adminCategory",
-    "adminContent",
-    "adminImage",
-    "adminVideo"
+  disclaimer:[
+   "Disclaimer",
+   "Automatic content available sources पर आधारित हो सकता है। महत्वपूर्ण निर्णय से पहले मूल source की जाँच करें।"
   ]
-  .forEach(id=>{
 
-    const el =
-      document.getElementById(id);
+ };
 
-    if(el){
-      el.value = "";
-    }
+ const selected=
+  info[type]||info.about;
 
-  });
+ content.innerHTML=`
 
-}
+ <h2>
+ ${escapeHTML(selected[0])}
+ </h2>
 
+ <p style="margin-top:18px;color:var(--muted)">
+ ${escapeHTML(selected[1])}
+ </p>
 
-function saveAdminContent(){
+ `;
 
-  const type =
-    document.getElementById("adminType")?.value;
-
-  const title =
-    document.getElementById("adminTitle")?.value.trim();
-
-  const category =
-    document.getElementById("adminCategory")?.value.trim();
-
-  const content =
-    document.getElementById("adminContent")?.value.trim();
-
-  const image =
-    document.getElementById("adminImage")?.value.trim();
-
-  const video =
-    document.getElementById("adminVideo")?.value.trim();
-
-  if(!title || !content){
-
-    showToast(
-      "Title और content जरूरी है।"
-    );
-
-    return;
-
-  }
-
-  const item = {
-
-    id:
-      "local-" +
-      Date.now(),
-
-    type:
-      type || "blog",
-
-    title,
-
-    category:
-      category || type,
-
-    content,
-
-    image,
-
-    video,
-
-    source:"Local Admin",
-
-    publishedAt:
-      new Date().toISOString(),
-
-    generatedAt:
-      new Date().toISOString(),
-
-    tags:[]
-
-  };
-
-  localContent.unshift(item);
-
-  localStorage.setItem(
-    "gamezone_local_content",
-    JSON.stringify(localContent)
-  );
-
-  clearAdminForm();
-
-  renderEverything();
-
-  renderAdminItems();
-
-  showToast(
-    "✅ Content saved"
-  );
-
-}
-
-
-function renderAdminItems(){
-
-  const box =
-    document.getElementById("adminItems");
-
-  if(!box) return;
-
-  if(!localContent.length){
-
-    box.innerHTML =
-      `<div class="empty">
-        Local content अभी खाली है।
-       </div>`;
-
-    return;
-
-  }
-
-  box.innerHTML =
-    localContent
-      .map(item=>`
-
-        <div class="admin-item">
-
-          <div>
-
-            <strong>
-              ${escapeHTML(item.title)}
-            </strong>
-
-            <div
-              style="
-                color:var(--muted);
-                font-size:12px;
-              ">
-              ${escapeHTML(item.type)}
-            </div>
-
-          </div>
-
-          <button
-            class="small-btn"
-            onclick='deleteLocalContent(${JSON.stringify(item.id)})'>
-            Delete
-          </button>
-
-        </div>
-
-      `)
-      .join("");
-
-}
-
-
-function deleteLocalContent(id){
-
-  localContent =
-    localContent.filter(
-      item=>item.id !== id
-    );
-
-  localStorage.setItem(
-    "gamezone_local_content",
-    JSON.stringify(localContent)
-  );
-
-  renderEverything();
-
-  renderAdminItems();
-
-  showToast(
-    "Content deleted"
-  );
+ modal.classList.add("show");
+ document.body.classList.add("no-scroll");
 
 }
 
@@ -2877,151 +3628,126 @@ function deleteLocalContent(id){
    TOAST
    ========================================================= */
 
-let toastTimer = null;
+let toastTimer=null;
 
 function showToast(message){
 
-  const toast =
-    document.getElementById("toast");
+ const toast=
+  document.getElementById("toast");
 
-  if(!toast) return;
+ if(!toast)return;
 
-  toast.textContent =
-    message;
+ toast.textContent=message;
+ toast.classList.add("show");
 
-  toast.classList.add("show");
+ clearTimeout(toastTimer);
 
-  clearTimeout(toastTimer);
-
-  toastTimer =
-    setTimeout(()=>{
-
-      toast.classList.remove("show");
-
-    },2500);
+ toastTimer=
+  setTimeout(
+   ()=>toast.classList.remove("show"),
+   2500
+  );
 
 }
 
 
 /* =========================================================
-   AUTO UPDATE STATUS
+   AUTO STATUS
    ========================================================= */
 
 function updateLastUpdate(){
 
-  const el =
-    document.getElementById(
-      "autoLastUpdate"
-    );
+ const el=
+  document.getElementById(
+   "autoLastUpdate"
+  );
 
-  if(!el) return;
+ if(!el)return;
 
-  const saved =
-    localStorage.getItem(
-      "gamezone_last_auto_update"
-    );
+ const saved=
+  localStorage.getItem(
+   "gamezone_last_auto_update"
+  );
 
-  if(saved){
-
-    el.textContent =
-      "Last automatic check: " +
-      saved;
-
-  }
+ if(saved)
+  el.textContent=
+   "Last automatic check: "+saved;
 
 }
 
 
-/* =========================================================
-   09:15 IST COUNTDOWN
-   ========================================================= */
-
 function getNext0915(){
 
-  const now =
-    new Date();
+ const now=new Date();
 
-  const target =
-    new Date(now);
+ const target=new Date(now);
 
-  target.setHours(9,15,0,0);
+ target.setHours(9,15,0,0);
 
-  if(target <= now){
+ if(target<=now)
+  target.setDate(
+   target.getDate()+1
+  );
 
-    target.setDate(
-      target.getDate()+1
-    );
-
-  }
-
-  return target;
+ return target;
 
 }
 
 
 function updateCountdown(){
 
-  const el =
-    document.getElementById(
-      "autoCountdown"
-    );
+ const el=
+  document.getElementById(
+   "autoCountdown"
+  );
 
-  if(!el) return;
+ if(!el)return;
 
-  const target =
-    getNext0915();
+ const diff=
+  getNext0915().getTime()-
+  Date.now();
 
-  const diff =
-    target.getTime() -
-    Date.now();
+ if(diff<=0){
 
-  if(diff <= 0){
+  el.textContent=
+   "Automatic update चल रहा है...";
 
-    el.textContent =
-      "Automatic update चल रहा है...";
+  return;
 
-    return;
+ }
 
-  }
+ const total=
+  Math.floor(diff/1000);
 
-  const totalSeconds =
-    Math.floor(diff / 1000);
+ const hours=
+  Math.floor(total/3600);
 
-  const hours =
-    Math.floor(
-      totalSeconds / 3600
-    );
+ const minutes=
+  Math.floor(
+   (total%3600)/60
+  );
 
-  const minutes =
-    Math.floor(
-      (totalSeconds % 3600) / 60
-    );
+ const seconds=
+  total%60;
 
-  const seconds =
-    totalSeconds % 60;
-
-  el.textContent =
-    `अगला automatic update लगभग ${hours} घंटे ${minutes} मिनट ${seconds} सेकंड में।`;
+ el.textContent=
+  `अगला automatic update लगभग ${hours} घंटे ${minutes} मिनट ${seconds} सेकंड में।`;
 
 }
 
 
 /* =========================================================
-   KEYBOARD / MODAL
+   KEYBOARD
    ========================================================= */
 
 document.addEventListener(
-  "keydown",
-  event=>{
+ "keydown",
+ event=>{
 
-    if(event.key === "Escape"){
+  if(event.key==="Escape")
+   closeModal();
 
-      closeModal();
-      closeAdmin();
-
-    }
-
-  }
+ }
 );
 
 
@@ -3031,46 +3757,42 @@ document.addEventListener(
 
 function startup(){
 
-  document.getElementById("year").textContent =
-    new Date().getFullYear();
+ document.getElementById(
+  "year"
+ ).textContent=
+  new Date().getFullYear();
 
-  loadLocalContent();
+ loadLocalContent();
 
-  const savedTheme =
-    localStorage.getItem(
-      "gamezone_theme"
-    );
+ updateStreak();
 
-  if(savedTheme === "light"){
-
-    document.body.classList.add("light");
-
-  }
-
-  renderEverything();
-
-  loadAutoContent();
-
-  updateCountdown();
-
-  updateLastUpdate();
-
-  setInterval(
-    updateCountdown,
-    1000
+ const savedTheme=
+  localStorage.getItem(
+   "gamezone_theme"
   );
 
-  setInterval(
-    loadAutoContent,
-    AUTO_REFRESH_MS
-  );
+ if(savedTheme==="light")
+  document.body.classList.add("light");
+
+ renderEverything();
+
+ loadAutoContent();
+
+ updateCountdown();
+ updateLastUpdate();
+
+ setInterval(
+  updateCountdown,
+  1000
+ );
+
+ setInterval(
+  loadAutoContent,
+  AUTO_REFRESH_MS
+ );
 
 }
 
-
-/* =========================================================
-   START
-   ========================================================= */
 
 startup();
 
