@@ -197,29 +197,77 @@ section{padding:28px 0}
 }
 
 .daily-box{
-  min-height:130px;
+  min-height:150px;
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
   text-align:center;
+  transition:opacity .25s ease,transform .25s ease;
+}
+
+.daily-box.content-changing{
+  opacity:.35;
+  transform:scale(.985);
 }
 
 .daily-type{
   color:var(--gold);
   font-weight:900;
+  font-size:17px;
 }
 
 .daily-text{
   font-size:20px;
   max-width:900px;
   line-height:1.5;
+  margin-top:5px;
 }
 
 .daily-date{
   margin-top:8px;
   color:var(--muted);
   font-size:12px;
+}
+
+.daily-step{
+  margin-top:5px;
+  color:#8e9ab5;
+  font-size:11px;
+}
+
+.auto-content-card{
+  position:relative;
+  overflow:hidden;
+  min-height:185px;
+  transition:opacity .3s ease,transform .3s ease;
+}
+
+.auto-content-card.content-changing{
+  opacity:.35;
+  transform:translateY(4px);
+}
+
+.auto-content-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  color:var(--gold);
+  font-size:12px;
+  font-weight:900;
+  margin-bottom:8px;
+}
+
+.auto-content-text{
+  color:#dce3f2;
+  line-height:1.55;
+  min-height:58px;
+}
+
+.auto-content-step{
+  color:#77839c;
+  font-size:11px;
+  margin-top:12px;
 }
 
 .adbox{
@@ -317,17 +365,6 @@ footer{
 
 /* ==========================================================
    LUDO
-   PLAYER INDEX LOCK:
-   0 = RED
-   1 = GREEN
-   2 = BLUE
-   3 = YELLOW
-
-   SCREEN POSITION LOCK:
-   TOP LEFT     = RED
-   TOP RIGHT    = GREEN
-   BOTTOM LEFT  = BLUE
-   BOTTOM RIGHT = YELLOW
    ========================================================== */
 
 .ludo-player-select{
@@ -385,14 +422,6 @@ footer{
   gap:12px;
   padding:0 4px;
 }
-
-/* ==========================================================
-   DICE POSITION LOCKED
-   TOP LEFT     = RED
-   TOP RIGHT    = GREEN
-   BOTTOM LEFT  = BLUE
-   BOTTOM RIGHT = YELLOW
-   ========================================================== */
 
 .ludo-top-dice .ludo-seat-red{
   grid-column:1;
@@ -520,8 +549,6 @@ footer{
   background:linear-gradient(145deg,#7bc0ff,#2a83d8);
 }
 
-/* DICE */
-
 .dice-owner{
   font-size:13px;
   font-weight:1000;
@@ -585,8 +612,6 @@ footer{
 .die-grid i.on{
   background:#111;
 }
-
-/* REAL LUDO PAWN */
 
 .ludo-token{
   position:absolute;
@@ -960,7 +985,7 @@ textarea{
 
     <div class="section-title">
       <h2>📅 Daily Content</h2>
-      <p>हर दिन नया automatic content</p>
+      <p>हर दिन automatic content • step-by-step update</p>
     </div>
 
     <div id="dailyContent" class="card daily-box"></div>
@@ -976,6 +1001,7 @@ textarea{
       <span class="chip">🧠 Knowledge</span>
       <span class="chip">🤖 AI</span>
       <span class="chip">😂 Jokes</span>
+      <span class="chip">🎮 Gaming</span>
       <span class="chip">📝 Blogs</span>
     </div>
 
@@ -1055,45 +1081,65 @@ textarea{
   <div class="container">
 
     <div class="section-title">
-      <h2>📚 Knowledge & Content</h2>
-      <p>Knowledge, Bhakti, Blogs और AI Generator</p>
+      <h2>📚 Automatic Knowledge & Content</h2>
+      <p>Content अपने आप step-by-step बदलता रहेगा</p>
     </div>
 
-    <div class="grid">
+    <div id="automaticContentGrid" class="grid">
 
-      <div class="card">
-        <h3>🧠 Knowledge / Gyan</h3>
-        <p>
-          रोजमर्रा की जानकारी और सामान्य ज्ञान।
+      <div class="card auto-content-card" data-auto-category="knowledge">
+        <div class="auto-content-badge">🧠 Knowledge / Gyan</div>
+        <h3 id="autoKnowledgeTitle">आज का ज्ञान</h3>
+        <p id="autoKnowledgeText" class="auto-content-text">
+          Automatic content loading...
         </p>
+        <div id="autoKnowledgeStep" class="auto-content-step">
+          Automatic Content
+        </div>
       </div>
 
-      <div class="card">
-        <h3>🙏 Bhakti</h3>
-        <p>
-          सकारात्मक और devotional content।
+      <div class="card auto-content-card" data-auto-category="bhakti">
+        <div class="auto-content-badge">🙏 Bhakti</div>
+        <h3 id="autoBhaktiTitle">आज की सकारात्मक सोच</h3>
+        <p id="autoBhaktiText" class="auto-content-text">
+          Automatic content loading...
         </p>
+        <div id="autoBhaktiStep" class="auto-content-step">
+          Automatic Content
+        </div>
       </div>
 
-      <div class="card">
-        <h3>🎵 Bhajan & Kirtan</h3>
-        <p>
-          भजन और कीर्तन content।
+      <div class="card auto-content-card" data-auto-category="bhajan">
+        <div class="auto-content-badge">🎵 Bhajan & Kirtan</div>
+        <h3 id="autoBhajanTitle">आज का भक्ति विचार</h3>
+        <p id="autoBhajanText" class="auto-content-text">
+          Automatic content loading...
         </p>
+        <div id="autoBhajanStep" class="auto-content-step">
+          Automatic Content
+        </div>
       </div>
 
-      <div class="card">
-        <h3>📝 Blogs</h3>
-        <p>
-          Gaming, technology और apps से जुड़े topics।
+      <div class="card auto-content-card" data-auto-category="blog">
+        <div class="auto-content-badge">📝 Blogs</div>
+        <h3 id="autoBlogTitle">आज का Blog</h3>
+        <p id="autoBlogText" class="auto-content-text">
+          Automatic content loading...
         </p>
+        <div id="autoBlogStep" class="auto-content-step">
+          Automatic Content
+        </div>
       </div>
 
-      <div class="card">
-        <h3>🤖 AI Generator</h3>
-        <p>
-          Local template-based content generator।
+      <div class="card auto-content-card" data-auto-category="ai">
+        <div class="auto-content-badge">🤖 AI</div>
+        <h3 id="autoAITitle">आज का AI Tip</h3>
+        <p id="autoAIText" class="auto-content-text">
+          Automatic content loading...
         </p>
+        <div id="autoAIStep" class="auto-content-step">
+          Automatic Content
+        </div>
       </div>
 
       <div class="card">
@@ -1243,8 +1289,6 @@ textarea{
 
   <div class="ludo-stage">
 
-    <!-- RED + GREEN ABOVE BOARD -->
-
     <div class="ludo-top-dice">
 
       <div class="ludo-dice-seat ludo-seat-red">
@@ -1287,8 +1331,6 @@ textarea{
 
     </div>
 
-    <!-- BOARD CENTER -->
-
     <div class="ludo-board-wrap">
 
       <div id="ludoBoard"
@@ -1306,11 +1348,7 @@ textarea{
 
     </div>
 
-    <!-- BLUE + YELLOW BELOW BOARD -->
-
     <div class="ludo-bottom-dice">
-
-      <!-- LOCKED: BLUE = BOTTOM LEFT = PLAYER 2 -->
 
       <div class="ludo-dice-seat ludo-seat-blue">
 
@@ -1330,8 +1368,6 @@ textarea{
         </div>
 
       </div>
-
-      <!-- LOCKED: YELLOW = BOTTOM RIGHT = PLAYER 3 -->
 
       <div class="ludo-dice-seat ludo-seat-yellow">
 
@@ -1966,7 +2002,7 @@ document.addEventListener(
 
 
 /* ==========================================================
-   DAILY AUTOMATIC CONTENT
+   AUTOMATIC CONTENT ENGINE
    ========================================================== */
 
 const automaticDailyContent=[
@@ -2093,6 +2129,71 @@ const automaticDailyContent=[
 
 ];
 
+/*
+  अलग-अलग CONTENT CARDS के लिए automatic data.
+  यह local/template based है।
+  किसी बाहरी paid API की जरूरत नहीं है।
+*/
+
+const automaticContentCards={
+
+  knowledge:{
+    title:"आज का ज्ञान",
+    texts:[
+      "रोज़ थोड़ी learning लंबे समय में बड़ी skill बन सकती है।",
+      "Practice और सही जानकारी किसी भी skill को मजबूत बना सकती है।",
+      "एक नई चीज़ रोज़ सीखने से knowledge धीरे-धीरे बढ़ती है।",
+      "सही सवाल पूछना learning की अच्छी शुरुआत है।",
+      "छोटे-छोटे सुधार लगातार किए जाएँ तो अच्छा result मिल सकता है।"
+    ]
+  },
+
+  bhakti:{
+    title:"आज की सकारात्मक सोच",
+    texts:[
+      "विश्वास, शांति और अच्छे कर्म जीवन को बेहतर दिशा दे सकते हैं।",
+      "हर दिन सकारात्मक सोच के साथ शुरुआत करने की कोशिश करें।",
+      "अच्छे विचार और अच्छे कर्म मन को सकारात्मक बनाए रखने में मदद करते हैं।",
+      "कुछ समय शांत मन और अच्छे विचारों के लिए जरूर निकालें।",
+      "धैर्य और विश्वास के साथ अपने अच्छे कर्म जारी रखें।"
+    ]
+  },
+
+  bhajan:{
+    title:"आज का भक्ति विचार",
+    texts:[
+      "भक्ति संगीत मन को शांत करने का सुंदर माध्यम हो सकता है।",
+      "भजन और कीर्तन के साथ कुछ समय सकारात्मक विचारों में बिताएँ।",
+      "संगीत और भक्ति के शांत वातावरण से मन को सुकून मिल सकता है।",
+      "आज कुछ समय अच्छे विचार और शांत संगीत के लिए रखें।",
+      "भक्ति के साथ सकारात्मकता और शांति को जीवन में जगह दें।"
+    ]
+  },
+
+  blog:{
+    title:"आज का Blog",
+    texts:[
+      "एक अच्छी gaming website में simple design और clear navigation जरूरी होते हैं।",
+      "Games के साथ useful content users को बेहतर digital experience दे सकता है।",
+      "Mobile users के लिए fast loading और आसान controls बहुत महत्वपूर्ण होते हैं।",
+      "Gaming content को छोटे और साफ sections में दिखाने से navigation आसान होता है।",
+      "Regular content updates website को fresh रखने में मदद कर सकते हैं।"
+    ]
+  },
+
+  ai:{
+    title:"आज का AI Tip",
+    texts:[
+      "AI को साफ और specific instruction देने से output को बेहतर बनाया जा सकता है।",
+      "एक बड़े काम को छोटे prompts में बाँटना आसान result दे सकता है।",
+      "AI से जवाब लेते समय अपना goal साफ लिखना उपयोगी होता है।",
+      "AI को context देने से generated content आपकी जरूरत के करीब आ सकता है।",
+      "AI एक tool है; final result को उपयोग करने से पहले खुद check करना अच्छा रहता है।"
+    ]
+  }
+
+};
+
 function dayNumber(){
 
   const now=new Date();
@@ -2109,6 +2210,11 @@ function dayNumber(){
   );
 
 }
+
+/*
+  Daily item:
+  दिन बदलने पर category/text बदलता है।
+*/
 
 function getAutomaticDailyItem(){
 
@@ -2150,28 +2256,177 @@ function formatDailyDate(){
 
 }
 
+/*
+  Daily Content render.
+*/
+
 function renderDaily(){
 
-  const item=
-    getAutomaticDailyItem();
+  const box=$("dailyContent");
 
-  $("dailyContent").innerHTML=`
+  if(!box)return;
 
-    <div class="daily-type">
-      ${item.type}
-    </div>
+  box.classList.add("content-changing");
 
-    <div class="daily-text">
-      ${item.text}
-    </div>
+  setTimeout(()=>{
 
-    <div class="daily-date">
-      📅 ${formatDailyDate()} • Automatic Daily Content
-    </div>
+    const item=
+      getAutomaticDailyItem();
 
-  `;
+    box.innerHTML=`
+
+      <div class="daily-type">
+        ${item.type}
+      </div>
+
+      <div class="daily-text">
+        ${item.text}
+      </div>
+
+      <div class="daily-date">
+        📅 ${formatDailyDate()} • Automatic Daily Content
+      </div>
+
+      <div class="daily-step">
+        🔄 Daily content automatically updated
+      </div>
+
+    `;
+
+    box.classList.remove("content-changing");
+
+  },180);
 
 }
+
+/*
+  Content cards को step-by-step automatic बदलना.
+  हर card का अपना content sequence है।
+*/
+
+let automaticContentStep=0;
+
+function renderAutomaticContent(){
+
+  const cards=
+    Object.keys(
+      automaticContentCards
+    );
+
+  cards.forEach((key,index)=>{
+
+    const data=
+      automaticContentCards[key];
+
+    const text=
+      data.texts[
+        (
+          automaticContentStep+
+          index
+        )%
+        data.texts.length
+      ];
+
+    const titleEl=
+      $("auto"+
+        key.charAt(0).toUpperCase()+
+        key.slice(1)+
+        "Title"
+      );
+
+    const textEl=
+      $("auto"+
+        key.charAt(0).toUpperCase()+
+        key.slice(1)+
+        "Text"
+      );
+
+    const stepEl=
+      $("auto"+
+        key.charAt(0).toUpperCase()+
+        key.slice(1)+
+        "Step"
+      );
+
+    const card=
+      document.querySelector(
+        '[data-auto-category="'+
+        key+
+        '"]'
+      );
+
+    if(card){
+      card.classList.add(
+        "content-changing"
+      );
+    }
+
+    setTimeout(()=>{
+
+      if(titleEl)
+        titleEl.textContent=
+          data.title;
+
+      if(textEl)
+        textEl.textContent=
+          text;
+
+      if(stepEl)
+        stepEl.textContent=
+          "🔄 Automatic • Step "+
+          (automaticContentStep+1);
+
+      if(card){
+        card.classList.remove(
+          "content-changing"
+        );
+      }
+
+    },180+index*60);
+
+  });
+
+  automaticContentStep++;
+
+}
+
+/*
+  Daily + content cards का automatic refresh.
+  हर 30 सेकंड content cards step बदलेंगे।
+  Daily section midnight पर भी refresh होगा।
+*/
+
+let automaticContentTimer=null;
+
+function startAutomaticContent(){
+
+  renderDaily();
+
+  automaticContentStep=0;
+
+  renderAutomaticContent();
+
+  if(automaticContentTimer){
+    clearInterval(
+      automaticContentTimer
+    );
+  }
+
+  automaticContentTimer=
+    setInterval(
+      ()=>{
+
+        renderAutomaticContent();
+
+      },
+      30000
+    );
+
+}
+
+/*
+  Midnight पर Daily Content को नया day content देना.
+*/
 
 function scheduleDailyRefresh(){
 
@@ -2194,15 +2449,27 @@ function scheduleDailyRefresh(){
 
   setTimeout(
     ()=>{
+
       renderDaily();
+
+      /*
+        नया दिन आने पर content sequence
+        फिर से नए step से शुरू होगा।
+      */
+
+      automaticContentStep=0;
+
+      renderAutomaticContent();
+
       scheduleDailyRefresh();
+
     },
     delay
   );
 
 }
 
-renderDaily();
+startAutomaticContent();
 
 scheduleDailyRefresh();
 
@@ -2210,22 +2477,6 @@ scheduleDailyRefresh();
 /* ==========================================================
    LUDO
    ========================================================== */
-
-/*
-  PLAYER INDEX MAPPING — LOCKED:
-
-  RED    = 0
-  GREEN  = 1
-  BLUE   = 2
-  YELLOW = 3
-
-  SCREEN — LOCKED:
-
-  TOP LEFT     = RED
-  TOP RIGHT    = GREEN
-  BOTTOM LEFT  = BLUE
-  BOTTOM RIGHT = YELLOW
-*/
 
 const LUDO_PLAYERS=[
 
@@ -2307,15 +2558,6 @@ const ludoLanes={
 
 };
 
-/*
-  HOME POSITION LOCK:
-
-  RED    = TOP LEFT
-  GREEN  = TOP RIGHT
-  BLUE   = BOTTOM LEFT
-  YELLOW = BOTTOM RIGHT
-*/
-
 const ludoHomes={
 
   red:[
@@ -2350,8 +2592,6 @@ let ludoBusy=false;
 let ludoGameStarted=false;
 let ludoSixCount=0;
 let ludoPendingDice=null;
-
-/* DICE ANIMATION CONTROL */
 
 let ludoDiceTimer=null;
 let ludoDiceRollId=0;
@@ -2540,12 +2780,6 @@ function tokenCoord(playerIndex,tokenIndex){
     player.tokens[tokenIndex];
 
   if(progress<0){
-
-    /*
-      IMPORTANT:
-      Home is always selected from
-      the player's own locked color.
-    */
 
     return ludoHomes[
       player.key
@@ -2917,14 +3151,6 @@ function setLudoPlayers(
 
 }
 
-/*
-  FIXED LUDO DICE ROLL
-
-  One final value is generated.
-  Animation only shows temporary faces.
-  Sound is not repeatedly stacked.
-*/
-
 function rollLudo(playerIndex){
 
   getAudio();
@@ -2961,10 +3187,6 @@ function rollLudo(playerIndex){
 
   let ticks=0;
 
-  /*
-    Final result is decided only once.
-  */
-
   const finalValue=
     1+
     Math.floor(
@@ -2999,11 +3221,6 @@ function rollLudo(playerIndex){
           die,
           previewValue
         );
-
-        /*
-          Small rolling tick sound.
-          Full diceSound only once at the end.
-        */
 
         tone(
           220+(ticks%6)*35,
@@ -5722,6 +5939,21 @@ drawWheel();
 updateCoins();
 
 startQuiz();
+
+/*
+  Automatic content को initialization के बाद
+  एक बार फिर render किया जाता है ताकि page खुलते
+  ही सभी cards में content दिखाई दे।
+*/
+
+setTimeout(
+  ()=>{
+    automaticContentStep=0;
+    renderDaily();
+    renderAutomaticContent();
+  },
+  250
+);
 
 </script>
 
