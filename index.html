@@ -326,12 +326,6 @@ footer{
   outline:3px solid var(--gold);
 }
 
-/*
-  बिल्कुल vertical Ludo arrangement:
-  TOP = Green + Yellow
-  CENTER = 15x15 Ludo board
-  BOTTOM = Red + Blue
-*/
 .ludo-stage{
   width:min(700px,100%);
   margin:auto;
@@ -419,7 +413,6 @@ footer{
 .home-dot.yellow{background:#f6c900}
 .home-dot.blue{background:#318de2}
 
-/* CENTER LUDO HOME / BALL */
 .ludo-center-home{
   position:absolute;
   z-index:100;
@@ -468,6 +461,7 @@ footer{
 }
 
 /* DICE */
+
 .ludo-dice-seat{
   display:flex;
   flex-direction:column;
@@ -540,16 +534,18 @@ footer{
   background:#111;
 }
 
-/* REAL LUDO PAWN */
+/* REAL LUDO PAWN
+   थोड़ा छोटा रखा गया है */
+
 .ludo-token{
   position:absolute;
   z-index:200;
-  width:78%;
-  height:78%;
-  max-width:34px;
-  max-height:34px;
-  min-width:14px;
-  min-height:14px;
+  width:70%;
+  height:70%;
+  max-width:30px;
+  max-height:30px;
+  min-width:12px;
+  min-height:12px;
   transform:translate(-50%,-50%);
   border:2px solid rgba(0,0,0,.65);
   border-radius:50% 50% 45% 45%;
@@ -811,6 +807,11 @@ textarea{
   .ludo-center-home{
     border-width:3px;
   }
+
+  .ludo-token{
+    max-width:26px;
+    max-height:26px;
+  }
 }
 </style>
 </head>
@@ -834,7 +835,6 @@ textarea{
   </button>
 </header>
 
-
 <main>
 
 <section id="home" class="hero">
@@ -854,13 +854,11 @@ textarea{
   </div>
 </section>
 
-
 <section>
   <div class="container">
     <div class="adbox">Advertisement</div>
   </div>
 </section>
-
 
 <section id="daily">
   <div class="container">
@@ -888,7 +886,6 @@ textarea{
 
   </div>
 </section>
-
 
 <section id="games">
   <div class="container">
@@ -958,7 +955,6 @@ textarea{
     </div>
   </div>
 </section>
-
 
 <section id="content">
   <div class="container">
@@ -1035,7 +1031,6 @@ textarea{
   </div>
 </section>
 
-
 <section id="qa">
   <div class="container">
 
@@ -1078,7 +1073,6 @@ textarea{
   </div>
 </section>
 
-
 <section id="about">
   <div class="container">
     <div class="card">
@@ -1099,7 +1093,6 @@ textarea{
 
 </main>
 
-
 <footer>
   <strong>GAMEZONE ARENA</strong>
 
@@ -1109,7 +1102,6 @@ textarea{
     Virtual coins have no monetary value and cannot be withdrawn.
   </div>
 </footer>
-
 
 <!-- ==========================================================
      LUDO MODAL
@@ -1154,10 +1146,10 @@ textarea{
 
   </div>
 
-
   <div class="ludo-stage">
 
     <!-- TWO DICE ABOVE THE BOARD -->
+
     <div class="ludo-top-dice">
 
       <div class="ludo-dice-seat">
@@ -1178,7 +1170,6 @@ textarea{
         </div>
 
       </div>
-
 
       <div class="ludo-dice-seat">
 
@@ -1201,8 +1192,8 @@ textarea{
 
     </div>
 
-
     <!-- BIG 15x15 LUDO BOARD IN CENTER -->
+
     <div class="ludo-board-wrap">
 
       <div id="ludoBoard"
@@ -1220,8 +1211,8 @@ textarea{
 
     </div>
 
-
     <!-- TWO DICE BELOW THE BOARD -->
+
     <div class="ludo-bottom-dice">
 
       <div class="ludo-dice-seat">
@@ -1242,7 +1233,6 @@ textarea{
         </div>
 
       </div>
-
 
       <div class="ludo-dice-seat">
 
@@ -1267,7 +1257,6 @@ textarea{
 
   </div>
 
-
   <div class="ludo-status">
     🎲 6 आने पर गोटी Home से बाहर निकलेगी।
     गोटी हर खाने पर एक-एक step चलेगी।
@@ -1275,7 +1264,6 @@ textarea{
 
 </div>
 </div>
-
 
 <!-- ==========================================================
      CARROM
@@ -1296,7 +1284,6 @@ textarea{
 
   </div>
 
-
   <div class="carrom-layout">
 
     <div class="carrom-wrap">
@@ -1306,7 +1293,6 @@ textarea{
         height="700">
       </canvas>
     </div>
-
 
     <div class="carrom-info">
 
@@ -1357,7 +1343,6 @@ textarea{
 </div>
 </div>
 
-
 <!-- ==========================================================
      RACING
      ========================================================== -->
@@ -1376,7 +1361,6 @@ textarea{
     </button>
 
   </div>
-
 
   <div class="race-layout">
 
@@ -1400,7 +1384,6 @@ textarea{
 
       </div>
 
-
       <button
         class="btn"
         onclick="startRace()">
@@ -1409,15 +1392,12 @@ textarea{
 
     </div>
 
-
     <canvas
       id="raceCanvas"
       width="360"
       height="640">
     </canvas>
 
-
-    <!-- LEFT / RIGHT -->
     <div class="steering">
 
       <button
@@ -1434,7 +1414,6 @@ textarea{
 
     </div>
 
-
     <div
       id="raceStatus"
       class="ludo-status">
@@ -1445,7 +1424,6 @@ textarea{
 
 </div>
 </div>
-
 
 <!-- ==========================================================
      SPIN
@@ -1465,7 +1443,6 @@ textarea{
     </button>
 
   </div>
-
 
   <div class="spin-layout">
 
@@ -1498,7 +1475,6 @@ textarea{
 </div>
 </div>
 
-
 <!-- ==========================================================
      QUIZ
      ========================================================== -->
@@ -1525,7 +1501,6 @@ textarea{
 
 </div>
 </div>
-
 
 <script>
 
@@ -1567,6 +1542,8 @@ function closeGame(id){
 
   $(id).classList.remove("open");
 
+  getAudio();
+
   if(id==="raceModal"){
     stopRace();
   }
@@ -1583,6 +1560,7 @@ document.querySelectorAll(".modal").forEach(modal=>{
 
     if(e.target===modal){
       modal.classList.remove("open");
+      getAudio();
     }
 
   });
@@ -1606,7 +1584,11 @@ function getAudio(){
 
     if(!AC) return null;
 
-    audioCtx=new AC();
+    try{
+      audioCtx=new AC();
+    }catch(e){
+      return null;
+    }
   }
 
   if(audioCtx.state==="suspended"){
@@ -1636,7 +1618,7 @@ function tone(
     osc.frequency.value=freq;
 
     gain.gain.setValueAtTime(
-      volume,
+      Math.max(.0001,volume),
       ctx.currentTime
     );
 
@@ -1659,6 +1641,8 @@ function tone(
 
 function diceSound(){
 
+  getAudio();
+
   tone(260,.05,"square",.04);
 
   setTimeout(
@@ -1673,11 +1657,37 @@ function diceSound(){
 
 }
 
+/* हर एक Ludo step का sound */
 function stepSound(){
+
+  getAudio();
+
   tone(155,.045,"triangle",.035);
+
+}
+
+/* Home से बाहर निकलने का अलग sound */
+function ludoExitSound(){
+
+  getAudio();
+
+  tone(360,.06,"sine",.045);
+
+  setTimeout(
+    ()=>tone(520,.09,"sine",.05),
+    65
+  );
+
+  setTimeout(
+    ()=>tone(700,.12,"sine",.045),
+    130
+  );
+
 }
 
 function captureSound(){
+
+  getAudio();
 
   tone(180,.08,"sawtooth",.045);
 
@@ -1688,7 +1698,24 @@ function captureSound(){
 
 }
 
+function finishSound(){
+
+  getAudio();
+
+  [523,659,784].forEach(
+    (f,i)=>{
+      setTimeout(
+        ()=>tone(f,.11,"sine",.05),
+        i*90
+      );
+    }
+  );
+
+}
+
 function winSound(){
+
+  getAudio();
 
   [523,659,784,1046].forEach(
     (f,i)=>{
@@ -1703,6 +1730,8 @@ function winSound(){
 
 function correctSound(){
 
+  getAudio();
+
   tone(660,.09,"sine",.05);
 
   setTimeout(
@@ -1714,6 +1743,8 @@ function correctSound(){
 
 function wrongSound(){
 
+  getAudio();
+
   tone(180,.12,"sawtooth",.05);
 
   setTimeout(
@@ -1724,14 +1755,24 @@ function wrongSound(){
 }
 
 function carSteerSound(){
+
+  getAudio();
+
   tone(180,.035,"square",.03);
+
 }
 
 function carMoveSound(){
+
+  getAudio();
+
   tone(70,.025,"sawtooth",.012);
+
 }
 
 function carCrashSound(){
+
+  getAudio();
 
   tone(70,.18,"sawtooth",.06);
 
@@ -1742,7 +1783,33 @@ function carCrashSound(){
 
 }
 
+/* Carrom के लिए अलग strike sound */
+function carromStrikeSound(){
+
+  getAudio();
+
+  tone(125,.09,"sawtooth",.04);
+
+  setTimeout(
+    ()=>tone(220,.055,"triangle",.025),
+    45
+  );
+
+}
+
+/* Carrom coin collision sound */
+function carromHitSound(){
+
+  getAudio();
+
+  tone(280,.035,"triangle",.025);
+
+}
+
+/* Pocket sound */
 function pocketSound(){
+
+  getAudio();
 
   tone(760,.08,"sine",.045);
 
@@ -1754,10 +1821,16 @@ function pocketSound(){
 }
 
 function spinSound(){
+
+  getAudio();
+
   tone(330,.035,"square",.035);
+
 }
 
 function spinWinSound(){
+
+  getAudio();
 
   [440,550,660,880].forEach(
     (f,i)=>{
@@ -1770,6 +1843,9 @@ function spinWinSound(){
 
 }
 
+/*
+  Browser audio unlock.
+*/
 document.addEventListener(
   "pointerdown",
   ()=>{
@@ -1916,10 +1992,6 @@ const LUDO_PLAYERS=[
 
 ];
 
-
-/*
-  Standard-style 52 path.
-*/
 const ludoPath=[
 
   [6,1],[6,2],[6,3],[6,4],[6,5],
@@ -1948,7 +2020,6 @@ const ludoPath=[
 
 ];
 
-
 const ludoLanes={
 
   red:[
@@ -1972,7 +2043,6 @@ const ludoLanes={
   ]
 
 };
-
 
 const ludoHomes={
 
@@ -1998,7 +2068,6 @@ const ludoHomes={
 
 };
 
-
 /*
   Safe cells.
   1 और 8 भी safe हैं।
@@ -2007,7 +2076,6 @@ const safePathIndexes=new Set([
   0,1,8,13,21,26,34,39,47
 ]);
 
-
 let ludoPlayerCount=3;
 let ludoTurn=0;
 let ludoBusy=false;
@@ -2015,14 +2083,12 @@ let ludoGameStarted=false;
 let ludoSixCount=0;
 let ludoPendingDice=null;
 
-
 let ludoState=LUDO_PLAYERS.map(
   p=>({
     ...p,
     tokens:[-1,-1,-1,-1]
   })
 );
-
 
 function sameCoord(a,b){
 
@@ -2033,7 +2099,6 @@ function sameCoord(a,b){
 
 }
 
-
 function pathIndexAt(row,col){
 
   return ludoPath.findIndex(
@@ -2042,7 +2107,6 @@ function pathIndexAt(row,col){
   );
 
 }
-
 
 function pathColor(index){
 
@@ -2054,13 +2118,11 @@ function pathColor(index){
   return null;
 }
 
-
 function drawLudoBoard(){
 
   const board=$("ludoBoard");
 
   board.innerHTML="";
-
 
   for(let r=0;r<15;r++){
 
@@ -2070,11 +2132,6 @@ function drawLudoBoard(){
         document.createElement("div");
 
       cell.className="ludo-cell";
-
-
-      /*
-        Four 6x6 yards.
-      */
 
       if(r<6 && c<6)
         cell.classList.add("ludo-yard-red");
@@ -2087,11 +2144,6 @@ function drawLudoBoard(){
 
       if(r>8 && c<6)
         cell.classList.add("ludo-yard-blue");
-
-
-      /*
-        Path.
-      */
 
       const pi=
         pathIndexAt(r,c);
@@ -2123,11 +2175,6 @@ function drawLudoBoard(){
 
       }
 
-
-      /*
-        Home lanes.
-      */
-
       Object.entries(ludoLanes)
         .forEach(([color,lane])=>{
 
@@ -2148,11 +2195,6 @@ function drawLudoBoard(){
 
         });
 
-
-      /*
-        Center 3x3.
-      */
-
       if(
         r>=6 && r<=8 &&
         c>=6 && c<=8
@@ -2163,21 +2205,14 @@ function drawLudoBoard(){
 
       }
 
-
       board.appendChild(cell);
 
     }
 
   }
 
-
-  /*
-    Home dots.
-  */
-
   const allCells=
     board.querySelectorAll(".ludo-cell");
-
 
   Object.entries(ludoHomes)
     .forEach(([color,positions])=>{
@@ -2207,7 +2242,6 @@ function drawLudoBoard(){
 
 }
 
-
 function tokenCoord(playerIndex,tokenIndex){
 
   const player=
@@ -2215,11 +2249,6 @@ function tokenCoord(playerIndex,tokenIndex){
 
   const progress=
     player.tokens[tokenIndex];
-
-
-  /*
-    -1 = Home
-  */
 
   if(progress<0){
 
@@ -2229,11 +2258,6 @@ function tokenCoord(playerIndex,tokenIndex){
 
   }
 
-
-  /*
-    0–51 = main track
-  */
-
   if(progress<=51){
 
     const pathIndex=
@@ -2242,11 +2266,6 @@ function tokenCoord(playerIndex,tokenIndex){
     return ludoPath[pathIndex];
 
   }
-
-
-  /*
-    52–57 = home lane
-  */
 
   const laneIndex=
     progress-52;
@@ -2262,13 +2281,11 @@ function tokenCoord(playerIndex,tokenIndex){
 
   }
 
-
   return ludoLanes[
     player.key
   ][5];
 
 }
-
 
 function tokenBoardPosition(
   playerIndex,
@@ -2293,7 +2310,6 @@ function tokenBoardPosition(
 
 }
 
-
 function ludoCanMoveToken(
   playerIndex,
   tokenIndex,
@@ -2305,24 +2321,13 @@ function ludoCanMoveToken(
       playerIndex
     ].tokens[tokenIndex];
 
-
-  /*
-    HOME से बाहर केवल 6।
-  */
-
   if(progress===-1){
     return dice===6;
   }
 
-
-  /*
-    Finish beyond 57 नहीं।
-  */
-
   return progress+dice<=57;
 
 }
-
 
 function availableTokens(
   playerIndex,
@@ -2351,10 +2356,8 @@ function availableTokens(
 
 }
 
+/* Dice face renderer */
 
-/*
-  Dice face renderer.
-*/
 function renderDie(el,value){
 
   const patterns={
@@ -2397,7 +2400,6 @@ function renderDie(el,value){
 
 }
 
-
 function updateLudoDice(){
 
   LUDO_PLAYERS.forEach(
@@ -2428,24 +2430,13 @@ function updateLudoDice(){
 
 }
 
-
 function updateLudoTurn(){
 
   const player=
     ludoState[ludoTurn];
 
-
-  /*
-    Main status.
-  */
-
   $("ludoStatus").textContent=
     player.name+" की चाल";
-
-
-  /*
-    Turn text ONLY around the player's dice.
-  */
 
   LUDO_PLAYERS.forEach(
     p=>{
@@ -2460,7 +2451,6 @@ function updateLudoTurn(){
     }
   );
 
-
   const activeLabel=
     $("turn-"+player.key);
 
@@ -2471,11 +2461,6 @@ function updateLudoTurn(){
 
   }
 
-
-  /*
-    Central ball follows current player.
-  */
-
   const ball=
     $("ludoCenterBall");
 
@@ -2485,13 +2470,11 @@ function updateLudoTurn(){
 
   ball.textContent="●";
 
-
   updateLudoDice();
 
   renderLudoTokens();
 
 }
-
 
 function renderLudoTokens(){
 
@@ -2502,7 +2485,6 @@ function renderLudoTokens(){
     .forEach(
       e=>e.remove()
     );
-
 
   for(
     let pi=0;
@@ -2521,7 +2503,6 @@ function renderLudoTokens(){
         "ludo-token "+
         ludoState[pi].key;
 
-
       const pos=
         tokenBoardPosition(
           pi,
@@ -2534,7 +2515,6 @@ function renderLudoTokens(){
       token.style.top=
         pos.top+"%";
 
-
       const canMove=
         !ludoBusy &&
         pi===ludoTurn &&
@@ -2545,7 +2525,6 @@ function renderLudoTokens(){
           ludoPendingDice
         );
 
-
       if(canMove){
 
         token.classList.add(
@@ -2554,10 +2533,11 @@ function renderLudoTokens(){
 
       }
 
-
       token.addEventListener(
         "click",
         ()=>{
+
+          getAudio();
 
           if(canMove){
 
@@ -2571,7 +2551,6 @@ function renderLudoTokens(){
         }
       );
 
-
       board.appendChild(token);
 
     }
@@ -2579,7 +2558,6 @@ function renderLudoTokens(){
   }
 
 }
-
 
 function initLudo(){
 
@@ -2599,9 +2577,7 @@ function initLudo(){
   ludoPendingDice=null;
   ludoGameStarted=true;
 
-
   drawLudoBoard();
-
 
   LUDO_PLAYERS.forEach(
     p=>{
@@ -2614,16 +2590,17 @@ function initLudo(){
     }
   );
 
-
   updateLudoTurn();
 
 }
-
 
 function setLudoPlayers(
   count,
   button
 ){
+
+  getAudio();
+  tone(420,.05,"square",.025);
 
   ludoPlayerCount=count;
 
@@ -2643,20 +2620,22 @@ function setLudoPlayers(
 
 }
 
-
+/*
+  Dice roll
+*/
 function rollLudo(playerIndex){
+
+  getAudio();
 
   if(!ludoGameStarted)return;
   if(ludoBusy)return;
   if(playerIndex!==ludoTurn)return;
   if(playerIndex>=ludoPlayerCount)return;
 
-
   ludoBusy=true;
   ludoPendingDice=null;
 
   updateLudoDice();
-
 
   const player=
     ludoState[playerIndex];
@@ -2664,9 +2643,7 @@ function rollLudo(playerIndex){
   const die=
     $("dice-"+player.key);
 
-
   let ticks=0;
-
 
   const anim=
     setInterval(()=>{
@@ -2682,7 +2659,6 @@ function rollLudo(playerIndex){
       diceSound();
 
       ticks++;
-
 
       if(ticks>=8){
 
@@ -2710,7 +2686,6 @@ function rollLudo(playerIndex){
 
 }
 
-
 async function finishLudoRoll(
   playerIndex,
   dice
@@ -2719,9 +2694,8 @@ async function finishLudoRoll(
   const player=
     ludoState[playerIndex];
 
-
+  getAudio();
   diceSound();
-
 
   const possible=
     availableTokens(
@@ -2729,16 +2703,13 @@ async function finishLudoRoll(
       dice
     );
 
-
   if(possible.length===0){
 
     $("ludoStatus").textContent=
       player.name+
       " की चाल — कोई गोटी नहीं चल सकती";
 
-
     await wait(650);
-
 
     if(dice===6){
 
@@ -2767,7 +2738,6 @@ async function finishLudoRoll(
 
     }
 
-
     ludoSixCount=0;
 
     ludoBusy=false;
@@ -2777,7 +2747,6 @@ async function finishLudoRoll(
     return;
 
   }
-
 
   /*
     One legal pawn:
@@ -2796,7 +2765,6 @@ async function finishLudoRoll(
 
   }
 
-
   /*
     Multiple legal pawns:
     player selects blinking pawn.
@@ -2810,12 +2778,10 @@ async function finishLudoRoll(
     player.name+
     " की चाल — चमकती गोटी चुनें";
 
-
   renderLudoTokens();
   updateLudoDice();
 
 }
-
 
 async function moveSelectedToken(
   playerIndex,
@@ -2843,9 +2809,7 @@ async function moveSelectedToken(
 
   }
 
-
   ludoPendingDice=null;
-
 
   await animateLudoToken(
     playerIndex,
@@ -2855,7 +2819,13 @@ async function moveSelectedToken(
 
 }
 
+/*
+  Ludo token animation.
 
+  IMPORTANT:
+  Home -> Start is a visible separate action.
+  After that, normal dice movement is step-by-step.
+*/
 async function animateLudoToken(
   playerIndex,
   tokenIndex,
@@ -2865,10 +2835,10 @@ async function animateLudoToken(
   const player=
     ludoState[playerIndex];
 
-
   ludoBusy=true;
   updateLudoDice();
 
+  let movedFromHome=false;
 
   /*
     SIX:
@@ -2886,32 +2856,24 @@ async function animateLudoToken(
 
     }
 
-
-    /*
-      बाहर निकलने वाला पहला step
-      visibly render होगा।
-    */
-
     player.tokens[tokenIndex]=0;
 
     renderLudoTokens();
 
-    stepSound();
+    /*
+      अलग Home Exit sound
+    */
+    ludoExitSound();
 
-    await wait(280);
+    await wait(320);
+
+    movedFromHome=true;
 
   }else{
 
     /*
-      मुख्य सुधार:
-      Dice 5 आया तो:
-      step 1
-      step 2
-      step 3
-      step 4
-      step 5
-
-      एक साथ jump नहीं।
+      Dice जितना है,
+      उतने ही अलग-अलग steps।
     */
 
     for(
@@ -2932,9 +2894,40 @@ async function animateLudoToken(
 
   }
 
+  /*
+    अगर goti Home से निकली है,
+    उसी 6 को normal 6-step movement
+    नहीं माना जाएगा।
+    यह standard Ludo-style exit है।
+  */
+
+  /*
+    Finish check.
+    progress 57 = final home.
+  */
+
+  const reachedFinish=
+    player.tokens[tokenIndex]>=57;
+
+  if(reachedFinish){
+
+    finishSound();
+
+    renderLudoTokens();
+
+    await wait(220);
+
+  }
 
   /*
     Capture after movement.
+
+    केवल तभी capture होगा जब उसी
+    path cell पर opponent की exactly
+    एक goti हो।
+
+    2 या उससे ज्यादा opponent goti
+    = block/double = capture नहीं।
   */
 
   const captured=
@@ -2947,13 +2940,11 @@ async function animateLudoToken(
 
     captureSound();
 
-    await wait(150);
+    await wait(180);
 
   }
 
-
   renderLudoTokens();
-
 
   /*
     Win.
@@ -2963,7 +2954,6 @@ async function animateLudoToken(
     player.tokens.filter(
       p=>p>=57
     ).length>=4;
-
 
   if(won){
 
@@ -2980,41 +2970,74 @@ async function animateLudoToken(
 
   }
 
-
   /*
-    Six = extra turn.
+    Extra turn:
+    1. Six
+    2. Successful capture
+    3. Finish/Home
   */
 
-  if(dice===6){
+  if(
+    dice===6 ||
+    captured ||
+    reachedFinish
+  ){
 
-    ludoSixCount++;
+    /*
+      Six count सिर्फ consecutive six के लिए।
+      Capture/finish पर six-count reset रहेगा
+      क्योंकि नया bonus action six-chain नहीं है।
+    */
 
+    if(dice===6){
 
-    if(ludoSixCount>=3){
+      ludoSixCount++;
+
+      if(ludoSixCount>=3){
+
+        ludoSixCount=0;
+
+        ludoBusy=false;
+
+        nextLudoTurn();
+
+        return;
+
+      }
+
+    }else{
 
       ludoSixCount=0;
 
-      ludoBusy=false;
-
-      nextLudoTurn();
-
-      return;
-
     }
-
 
     ludoBusy=false;
 
+    let reason="";
+
+    if(dice===6 && captured){
+      reason="6 + Capture";
+    }else if(dice===6 && reachedFinish){
+      reason="6 + Finish";
+    }else if(captured){
+      reason="Capture";
+    }else if(reachedFinish){
+      reason="Finish";
+    }else{
+      reason="6";
+    }
+
     $("ludoStatus").textContent=
       player.name+
-      " की चाल — 6 आया, फिर से Roll करें";
+      " की चाल — "+
+      reason+
+      ", फिर से Roll करें";
 
     updateLudoTurn();
 
     return;
 
   }
-
 
   ludoSixCount=0;
 
@@ -3024,7 +3047,14 @@ async function animateLudoToken(
 
 }
 
-
+/*
+  Capture logic:
+  - safe cell पर capture नहीं
+  - home lane में capture नहीं
+  - opponent की EXACTLY ONE goti हो तो capture
+  - 2 या ज्यादा opponent goti हों तो block/double
+    और कोई capture नहीं
+*/
 function captureLudo(
   playerIndex,
   tokenIndex
@@ -3036,7 +3066,6 @@ function captureLudo(
   const progress=
     player.tokens[tokenIndex];
 
-
   if(
     progress<0 ||
     progress>51
@@ -3046,11 +3075,9 @@ function captureLudo(
 
   }
 
-
   const pathIndex=
     (player.start+
       progress)%52;
-
 
   if(
     safePathIndexes.has(
@@ -3062,9 +3089,12 @@ function captureLudo(
 
   }
 
+  /*
+    पहले सभी opponent goti गिनें
+    जो उसी path cell पर हैं।
+  */
 
-  let captured=false;
-
+  const opponents=[];
 
   for(
     let i=0;
@@ -3074,32 +3104,31 @@ function captureLudo(
 
     if(i===playerIndex)continue;
 
+    const op=
+      ludoState[i];
 
     for(let t=0;t<4;t++){
-
-      const op=
-        ludoState[i];
 
       const opProgress=
         op.tokens[t];
 
-
       if(
         opProgress<0 ||
         opProgress>51
-      )continue;
-
+      ){
+        continue;
+      }
 
       const opPath=
         (op.start+
           opProgress)%52;
 
-
       if(opPath===pathIndex){
 
-        op.tokens[t]=-1;
-
-        captured=true;
+        opponents.push({
+          playerIndex:i,
+          tokenIndex:t
+        });
 
       }
 
@@ -3107,11 +3136,27 @@ function captureLudo(
 
   }
 
+  /*
+    Double/block को नहीं काटना।
+  */
+  if(opponents.length!==1){
 
-  return captured;
+    return false;
+
+  }
+
+  const target=
+    opponents[0];
+
+  ludoState[
+    target.playerIndex
+  ].tokens[
+    target.tokenIndex
+  ]=-1;
+
+  return true;
 
 }
-
 
 function nextLudoTurn(){
 
@@ -3135,7 +3180,6 @@ const carromCanvas=
 
 const carromCtx=
   carromCanvas.getContext("2d");
-
 
 const carrom={
 
@@ -3167,8 +3211,9 @@ const carrom={
 
 };
 
-
 function resetCarrom(){
+
+  getAudio();
 
   carrom.active=true;
 
@@ -3192,7 +3237,6 @@ function resetCarrom(){
 
   carrom.coins=[];
 
-
   carrom.coins.push({
 
     x:350,
@@ -3204,7 +3248,6 @@ function resetCarrom(){
     vy:0
 
   });
-
 
   for(let i=0;i<20;i++){
 
@@ -3241,18 +3284,15 @@ function resetCarrom(){
 
   }
 
-
   $("carromTurnLabel").textContent=
     "आपकी चाल";
 
   $("carromPowerText").textContent=
     "0%";
 
-
   drawCarrom();
 
 }
-
 
 function canvasPoint(
   canvas,
@@ -3276,7 +3316,6 @@ function canvasPoint(
 
 }
 
-
 function updateCarromAim(point){
 
   const dx=
@@ -3287,13 +3326,10 @@ function updateCarromAim(point){
     point.y-
     carrom.strikerY;
 
-
   const dist=
     Math.hypot(dx,dy);
 
-
   if(dist<4)return;
-
 
   carrom.angle=
     Math.atan2(dy,dx);
@@ -3304,17 +3340,14 @@ function updateCarromAim(point){
       dist
     );
 
-
   $("carromPowerText").textContent=
     Math.round(
       carrom.power/220*100
     )+"%";
 
-
   drawCarrom();
 
 }
-
 
 function shootCarrom(){
 
@@ -3326,6 +3359,7 @@ function shootCarrom(){
   if(carrom.power<10)
     return;
 
+  getAudio();
 
   const speed=
     Math.min(
@@ -3333,7 +3367,6 @@ function shootCarrom(){
       carrom.power*.12
     )*
     carrom.speedMultiplier;
-
 
   carrom.strikerVX=
     Math.cos(
@@ -3347,22 +3380,16 @@ function shootCarrom(){
     )*
     speed;
 
-
   carrom.moving=true;
 
-
-  tone(
-    120,
-    .12,
-    "sawtooth",
-    .035
-  );
-
+  /*
+    Strong striker sound.
+  */
+  carromStrikeSound();
 
   carromLoop();
 
 }
-
 
 function carromLoop(){
 
@@ -3374,7 +3401,6 @@ function carromLoop(){
 
   }
 
-
   updateCarromPhysics();
 
   drawCarrom();
@@ -3385,11 +3411,9 @@ function carromLoop(){
 
 }
 
-
 function updateCarromPhysics(){
 
   let movingSomething=false;
-
 
   if(
     Math.abs(carrom.strikerVX)>.05 ||
@@ -3409,15 +3433,15 @@ function updateCarromPhysics(){
 
   }
 
-
   const min=55;
   const max=645;
-
 
   if(carrom.strikerX<min){
 
     carrom.strikerX=min;
     carrom.strikerVX*=-.82;
+
+    carromHitSound();
 
   }
 
@@ -3426,12 +3450,16 @@ function updateCarromPhysics(){
     carrom.strikerX=max;
     carrom.strikerVX*=-.82;
 
+    carromHitSound();
+
   }
 
   if(carrom.strikerY<min){
 
     carrom.strikerY=min;
     carrom.strikerVY*=-.82;
+
+    carromHitSound();
 
   }
 
@@ -3440,8 +3468,9 @@ function updateCarromPhysics(){
     carrom.strikerY=max;
     carrom.strikerVY*=-.82;
 
-  }
+    carromHitSound();
 
+  }
 
   carrom.coins.forEach(
     coin=>{
@@ -3460,7 +3489,6 @@ function updateCarromPhysics(){
         movingSomething=true;
 
       }
-
 
       if(coin.x<55){
 
@@ -3493,7 +3521,6 @@ function updateCarromPhysics(){
     }
   );
 
-
   /*
     Striker → coin collision.
   */
@@ -3516,7 +3543,6 @@ function updateCarromPhysics(){
         coin.r+
         carrom.strikerR;
 
-
       if(
         dist>0 &&
         dist<minDist
@@ -3524,7 +3550,6 @@ function updateCarromPhysics(){
 
         const nx=dx/dist;
         const ny=dy/dist;
-
 
         const rvx=
           carrom.strikerVX-
@@ -3534,11 +3559,9 @@ function updateCarromPhysics(){
           carrom.strikerVY-
           coin.vy;
 
-
         const speedAlong=
           rvx*nx+
           rvy*ny;
-
 
         if(speedAlong>0){
 
@@ -3557,12 +3580,10 @@ function updateCarromPhysics(){
           coin.vy+=
             ny*impulse;
 
-          tone(
-            280,
-            .035,
-            "triangle",
-            .02
-          );
+          /*
+            Coin hit sound.
+          */
+          carromHitSound();
 
         }
 
@@ -3570,7 +3591,6 @@ function updateCarromPhysics(){
 
     }
   );
-
 
   /*
     Pockets.
@@ -3582,7 +3602,6 @@ function updateCarromPhysics(){
     [42,658],
     [658,658]
   ];
-
 
   carrom.coins=
     carrom.coins.filter(
@@ -3597,7 +3616,6 @@ function updateCarromPhysics(){
               )<30
           );
 
-
         if(pocketed){
 
           pocketSound();
@@ -3606,12 +3624,10 @@ function updateCarromPhysics(){
 
         }
 
-
         return true;
 
       }
     );
-
 
   /*
     End of movement.
@@ -3631,9 +3647,7 @@ function updateCarromPhysics(){
         ? 600
         : 100;
 
-
     drawCarrom();
-
 
     if(carrom.turn==="player"){
 
@@ -3641,7 +3655,6 @@ function updateCarromPhysics(){
 
       $("carromTurnLabel").textContent=
         "Computer की चाल";
-
 
       setTimeout(
         computerCarromShot,
@@ -3669,7 +3682,6 @@ function updateCarromPhysics(){
 
 }
 
-
 function drawCarrom(){
 
   const ctx=carromCtx;
@@ -3681,13 +3693,11 @@ function drawCarrom(){
     700
   );
 
-
   ctx.fillStyle="#d7a05b";
 
   ctx.fillRect(
     0,0,700,700
   );
-
 
   ctx.strokeStyle="#5e351b";
   ctx.lineWidth=14;
@@ -3696,7 +3706,6 @@ function drawCarrom(){
     18,18,664,664
   );
 
-
   ctx.strokeStyle="#8b592e";
   ctx.lineWidth=3;
 
@@ -3704,14 +3713,12 @@ function drawCarrom(){
     48,48,604,604
   );
 
-
   const pockets=[
     [42,42],
     [658,42],
     [42,658],
     [658,658]
   ];
-
 
   pockets.forEach(p=>{
 
@@ -3731,7 +3738,6 @@ function drawCarrom(){
 
   });
 
-
   ctx.beginPath();
 
   ctx.arc(
@@ -3747,7 +3753,6 @@ function drawCarrom(){
 
   ctx.stroke();
 
-
   ctx.beginPath();
 
   ctx.arc(
@@ -3760,10 +3765,8 @@ function drawCarrom(){
 
   ctx.stroke();
 
-
   ctx.strokeStyle="#743e1d";
   ctx.lineWidth=4;
-
 
   ctx.beginPath();
 
@@ -3772,14 +3775,12 @@ function drawCarrom(){
 
   ctx.stroke();
 
-
   ctx.beginPath();
 
   ctx.moveTo(130,100);
   ctx.lineTo(570,100);
 
   ctx.stroke();
-
 
   /*
     Aim.
@@ -3802,14 +3803,12 @@ function drawCarrom(){
       10,8
     ]);
 
-
     ctx.beginPath();
 
     ctx.moveTo(
       carrom.strikerX,
       carrom.strikerY
     );
-
 
     ctx.lineTo(
 
@@ -3821,13 +3820,11 @@ function drawCarrom(){
 
     );
 
-
     ctx.stroke();
 
     ctx.restore();
 
   }
-
 
   /*
     Coins.
@@ -3856,7 +3853,6 @@ function drawCarrom(){
 
       ctx.stroke();
 
-
       if(coin.queen){
 
         ctx.beginPath();
@@ -3877,10 +3873,8 @@ function drawCarrom(){
     }
   );
 
-
   /*
     BIG STRIKER
-    visibly moves.
   */
 
   ctx.beginPath();
@@ -3905,10 +3899,11 @@ function drawCarrom(){
 
 }
 
-
 carromCanvas.addEventListener(
   "pointerdown",
   e=>{
+
+    getAudio();
 
     if(carrom.turn!=="player")
       return;
@@ -3932,7 +3927,6 @@ carromCanvas.addEventListener(
   }
 );
 
-
 carromCanvas.addEventListener(
   "pointermove",
   e=>{
@@ -3949,7 +3943,6 @@ carromCanvas.addEventListener(
 
   }
 );
-
 
 carromCanvas.addEventListener(
   "pointerup",
@@ -3972,11 +3965,21 @@ carromCanvas.addEventListener(
   }
 );
 
+carromCanvas.addEventListener(
+  "pointercancel",
+  e=>{
+
+    carrom.dragging=false;
+
+  }
+);
 
 $("carromSpeed")
   .addEventListener(
     "input",
     e=>{
+
+      getAudio();
 
       carrom.speedMultiplier=
         Number(e.target.value);
@@ -3985,9 +3988,10 @@ $("carromSpeed")
         carrom.speedMultiplier.toFixed(1)+
         "×";
 
+      tone(300,.025,"triangle",.018);
+
     }
   );
-
 
 function computerCarromShot(){
 
@@ -4000,14 +4004,13 @@ function computerCarromShot(){
   if(carrom.moving)
     return;
 
+  getAudio();
 
   carrom.strikerX=350;
   carrom.strikerY=100;
 
-
   const target=
     carrom.coins[0];
-
 
   if(!target){
 
@@ -4022,7 +4025,6 @@ function computerCarromShot(){
 
   }
 
-
   const dx=
     target.x-
     carrom.strikerX;
@@ -4031,12 +4033,10 @@ function computerCarromShot(){
     target.y-
     carrom.strikerY;
 
-
   carrom.angle=
     Math.atan2(dy,dx);
 
   carrom.power=150;
-
 
   const speed=
     Math.min(
@@ -4044,7 +4044,6 @@ function computerCarromShot(){
       carrom.power*.12
     )*
     carrom.speedMultiplier;
-
 
   carrom.strikerVX=
     Math.cos(
@@ -4056,16 +4055,9 @@ function computerCarromShot(){
       carrom.angle
     )*speed;
 
-
   carrom.moving=true;
 
-  tone(
-    110,
-    .12,
-    "sawtooth",
-    .03
-  );
-
+  carromStrikeSound();
 
   carromLoop();
 
@@ -4081,7 +4073,6 @@ const raceCanvas=
 
 const raceCtx=
   raceCanvas.getContext("2d");
-
 
 const race={
 
@@ -4109,7 +4100,6 @@ const race={
 
 };
 
-
 function resetRaceState(){
 
   race.score=0;
@@ -4123,7 +4113,6 @@ function resetRaceState(){
   race.obstacles=[];
 
   race.speed=race.baseSpeed;
-
 
   for(let i=0;i<5;i++){
 
@@ -4146,7 +4135,6 @@ function resetRaceState(){
 
 }
 
-
 function startRace(){
 
   stopRace();
@@ -4162,10 +4150,8 @@ function startRace(){
 
   race.running=true;
 
-
   $("raceStatus").textContent=
     "🏁 Race चल रही है — Left / Right दबाएँ";
-
 
   tone(
     440,
@@ -4184,15 +4170,16 @@ function startRace(){
     100
   );
 
-
   raceLoop();
 
 }
 
-
 function stopRace(){
 
   race.running=false;
+
+  race.left=false;
+  race.right=false;
 
   if(race.raf){
 
@@ -4206,11 +4193,9 @@ function stopRace(){
 
 }
 
-
 function drawRace(){
 
   const ctx=raceCtx;
-
 
   ctx.clearRect(
     0,
@@ -4219,13 +4204,11 @@ function drawRace(){
     640
   );
 
-
   ctx.fillStyle="#7cc8f5";
 
   ctx.fillRect(
     0,0,360,180
   );
-
 
   ctx.fillStyle="#2d9a48";
 
@@ -4233,13 +4216,11 @@ function drawRace(){
     0,180,360,460
   );
 
-
   ctx.fillStyle="#30343b";
 
   ctx.fillRect(
     55,0,250,640
   );
-
 
   ctx.fillStyle="#f7e7a3";
 
@@ -4251,9 +4232,7 @@ function drawRace(){
     297,0,8,640
   );
 
-
   ctx.fillStyle="#f5f5f5";
-
 
   for(
     let y=-80+race.roadOffset;
@@ -4270,7 +4249,6 @@ function drawRace(){
 
   }
 
-
   race.obstacles.forEach(
     o=>{
 
@@ -4286,7 +4264,6 @@ function drawRace(){
     }
   );
 
-
   drawRaceCar(
     ctx,
     race.carX,
@@ -4296,7 +4273,6 @@ function drawRace(){
     "#ffd54a",
     true
   );
-
 
   ctx.fillStyle="#fff";
 
@@ -4312,7 +4288,6 @@ function drawRace(){
 
 }
 
-
 function drawRaceCar(
   ctx,
   x,
@@ -4327,7 +4302,6 @@ function drawRaceCar(
 
   ctx.translate(x,y);
 
-
   ctx.fillStyle=
     "rgba(0,0,0,.3)";
 
@@ -4337,7 +4311,6 @@ function drawRaceCar(
     w,
     h
   );
-
 
   ctx.fillStyle=color;
 
@@ -4353,7 +4326,6 @@ function drawRaceCar(
 
   ctx.fill();
 
-
   ctx.fillStyle="#182536";
 
   ctx.beginPath();
@@ -4367,7 +4339,6 @@ function drawRaceCar(
   );
 
   ctx.fill();
-
 
   ctx.fillStyle="#fff";
 
@@ -4384,7 +4355,6 @@ function drawRaceCar(
     w*.18,
     6
   );
-
 
   ctx.fillStyle="#111";
 
@@ -4416,7 +4386,6 @@ function drawRaceCar(
     h*.22
   );
 
-
   if(player){
 
     ctx.strokeStyle="#fff";
@@ -4427,17 +4396,14 @@ function drawRaceCar(
 
   }
 
-
   ctx.restore();
 
 }
-
 
 function raceLoop(){
 
   if(!race.running)
     return;
-
 
   race.speed=
     Math.min(
@@ -4446,14 +4412,11 @@ function raceLoop(){
       race.score/450
     );
 
-
   race.roadOffset+=
     race.speed;
 
-
   race.score+=
     race.speed*.08;
-
 
   /*
     LEFT / RIGHT
@@ -4463,23 +4426,29 @@ function raceLoop(){
 
     race.carX-=5.5;
 
-    carSteerSound();
+    /*
+      Steering sound को हर frame नहीं,
+      थोड़े interval पर ही play करेंगे।
+    */
+    if(
+      Math.floor(race.score*10)%8===0
+    ){
+      carSteerSound();
+    }
 
   }
-
 
   if(race.right){
 
     race.carX+=5.5;
 
-    carSteerSound();
+    if(
+      Math.floor(race.score*10)%8===0
+    ){
+      carSteerSound();
+    }
 
   }
-
-
-  /*
-    Keep car on road.
-  */
 
   race.carX=
     Math.max(
@@ -4490,7 +4459,6 @@ function raceLoop(){
       )
     );
 
-
   race.obstacles.forEach(
     o=>{
 
@@ -4498,7 +4466,6 @@ function raceLoop(){
 
     }
   );
-
 
   race.obstacles.forEach(
     o=>{
@@ -4517,7 +4484,6 @@ function raceLoop(){
 
     }
   );
-
 
   /*
     Collision.
@@ -4562,11 +4528,6 @@ function raceLoop(){
 
   }
 
-
-  /*
-    Engine sound at low volume.
-  */
-
   if(
     Math.floor(race.score)%18===0
   ){
@@ -4575,9 +4536,7 @@ function raceLoop(){
 
   }
 
-
   drawRace();
-
 
   race.raf=
     requestAnimationFrame(
@@ -4585,7 +4544,6 @@ function raceLoop(){
     );
 
 }
-
 
 /*
   LEFT BUTTON
@@ -4595,12 +4553,13 @@ function leftStart(e){
 
   e.preventDefault();
 
+  getAudio();
+
   race.left=true;
 
   carSteerSound();
 
 }
-
 
 function leftStop(e){
 
@@ -4609,7 +4568,6 @@ function leftStop(e){
   race.left=false;
 
 }
-
 
 $("leftBtn").addEventListener(
   "pointerdown",
@@ -4631,7 +4589,6 @@ $("leftBtn").addEventListener(
   leftStop
 );
 
-
 /*
   RIGHT BUTTON
 */
@@ -4640,12 +4597,13 @@ function rightStart(e){
 
   e.preventDefault();
 
+  getAudio();
+
   race.right=true;
 
   carSteerSound();
 
 }
-
 
 function rightStop(e){
 
@@ -4654,7 +4612,6 @@ function rightStop(e){
   race.right=false;
 
 }
-
 
 $("rightBtn").addEventListener(
   "pointerdown",
@@ -4676,7 +4633,6 @@ $("rightBtn").addEventListener(
   rightStop
 );
 
-
 /*
   Keyboard.
 */
@@ -4685,15 +4641,30 @@ document.addEventListener(
   "keydown",
   e=>{
 
-    if(e.key==="ArrowLeft")
+    if(e.key==="ArrowLeft"){
+
+      getAudio();
+
+      if(!race.left)
+        carSteerSound();
+
       race.left=true;
 
-    if(e.key==="ArrowRight")
+    }
+
+    if(e.key==="ArrowRight"){
+
+      getAudio();
+
+      if(!race.right)
+        carSteerSound();
+
       race.right=true;
+
+    }
 
   }
 );
-
 
 document.addEventListener(
   "keyup",
@@ -4708,11 +4679,12 @@ document.addEventListener(
   }
 );
 
-
 $("raceSpeed")
   .addEventListener(
     "input",
     e=>{
+
+      getAudio();
 
       race.baseSpeed=
         Number(e.target.value);
@@ -4720,9 +4692,10 @@ $("raceSpeed")
       $("raceSpeedValue").textContent=
         race.baseSpeed;
 
+      tone(300,.025,"triangle",.018);
+
     }
   );
-
 
 resetRaceState();
 drawRace();
@@ -4738,13 +4711,11 @@ const spinCanvas=
 const spinCtx=
   spinCanvas.getContext("2d");
 
-
 let coins=1000;
 
 let spinAngle=0;
 
 let spinning=false;
-
 
 const spinSegments=[
 
@@ -4759,14 +4730,12 @@ const spinSegments=[
 
 ];
 
-
 function updateCoins(){
 
   $("coinDisplay").textContent=
     coins;
 
 }
-
 
 function drawWheel(){
 
@@ -4779,11 +4748,9 @@ function drawWheel(){
     0,0,w,h
   );
 
-
   const cx=250;
   const cy=250;
   const r=215;
-
 
   ctx.save();
 
@@ -4796,18 +4763,15 @@ function drawWheel(){
     spinAngle
   );
 
-
   const slice=
     Math.PI*2/
     spinSegments.length;
-
 
   spinSegments.forEach(
     (seg,i)=>{
 
       const a=
         i*slice;
-
 
       ctx.beginPath();
 
@@ -4825,7 +4789,6 @@ function drawWheel(){
 
       ctx.closePath();
 
-
       ctx.fillStyle=
         i%2===0
           ? "#f5b92e"
@@ -4833,13 +4796,11 @@ function drawWheel(){
 
       ctx.fill();
 
-
       ctx.strokeStyle="#111";
 
       ctx.lineWidth=3;
 
       ctx.stroke();
-
 
       ctx.save();
 
@@ -4865,13 +4826,7 @@ function drawWheel(){
     }
   );
 
-
   ctx.restore();
-
-
-  /*
-    Center.
-  */
 
   ctx.beginPath();
 
@@ -4887,7 +4842,6 @@ function drawWheel(){
 
   ctx.fill();
 
-
   ctx.beginPath();
 
   ctx.arc(
@@ -4901,11 +4855,6 @@ function drawWheel(){
   ctx.fillStyle="#ffd54a";
 
   ctx.fill();
-
-
-  /*
-    Pointer.
-  */
 
   ctx.beginPath();
 
@@ -4932,7 +4881,6 @@ function drawWheel(){
 
 }
 
-
 function spinWheel(){
 
   if(spinning)return;
@@ -4946,7 +4894,6 @@ function spinWheel(){
   $("spinResult").textContent=
     "🎡 Wheel घूम रहा है...";
 
-
   const startAngle=
     spinAngle;
 
@@ -4955,14 +4902,12 @@ function spinWheel(){
     (5+
       Math.random()*4);
 
-
   const startTime=
     performance.now();
 
   const duration=4200;
 
   let lastTick=-1;
-
 
   function animate(now){
 
@@ -4975,7 +4920,6 @@ function spinWheel(){
         elapsed/duration
       );
 
-
     const ease=
       1-
       Math.pow(
@@ -4983,22 +4927,18 @@ function spinWheel(){
         3
       );
 
-
     spinAngle=
       startAngle+
       totalRotation*ease;
-
 
     const slice=
       Math.PI*2/
       spinSegments.length;
 
-
     const tick=
       Math.floor(
         spinAngle/slice
       );
-
 
     if(
       tick!==lastTick
@@ -5010,9 +4950,7 @@ function spinWheel(){
 
     }
 
-
     drawWheel();
-
 
     if(t<1){
 
@@ -5032,7 +4970,6 @@ function spinWheel(){
         )%
         (Math.PI*2);
 
-
       const pointerAngle=
         (
           Math.PI*1.5-
@@ -5041,7 +4978,6 @@ function spinWheel(){
         )%
         (Math.PI*2);
 
-
       const index=
         Math.floor(
           pointerAngle/
@@ -5049,26 +4985,21 @@ function spinWheel(){
         )%
         spinSegments.length;
 
-
       const reward=
         spinSegments[
           index
         ].value;
 
-
       coins+=reward;
 
       updateCoins();
-
 
       $("spinResult").textContent=
         "🎉 आपको "+
         reward+
         " virtual coins मिले!";
 
-
       spinWinSound();
-
 
       spinning=false;
 
@@ -5078,13 +5009,11 @@ function spinWheel(){
 
   }
 
-
   requestAnimationFrame(
     animate
   );
 
 }
-
 
 drawWheel();
 updateCoins();
@@ -5230,11 +5159,9 @@ const quizBank=[
 
 ];
 
-
 let quizQuestions=[];
 let quizIndex=0;
 let quizScore=0;
-
 
 function shuffle(array){
 
@@ -5244,8 +5171,9 @@ function shuffle(array){
 
 }
 
-
 function startQuiz(){
+
+  getAudio();
 
   quizQuestions=
     shuffle(
@@ -5260,12 +5188,10 @@ function startQuiz(){
 
 }
 
-
 function renderQuizQuestion(){
 
   const area=
     $("quizArea");
-
 
   if(
     quizIndex>=
@@ -5303,12 +5229,10 @@ function renderQuizQuestion(){
 
   }
 
-
   const q=
     quizQuestions[
       quizIndex
     ];
-
 
   area.innerHTML=`
 
@@ -5346,17 +5270,18 @@ function renderQuizQuestion(){
 
 }
 
-
 function answerQuiz(index){
+
+  getAudio();
 
   const q=
     quizQuestions[
       quizIndex
     ];
 
-
   /*
     Correct / wrong sound.
+    AudioContext resume पहले होगा।
   */
 
   if(index===q.a){
@@ -5371,13 +5296,25 @@ function answerQuiz(index){
 
   }
 
+  /*
+    थोड़ी देर के लिए options disable करें,
+    ताकि एक सवाल पर double click से
+    दो answers न लगें।
+  */
+
+  document
+    .querySelectorAll(".quiz-option")
+    .forEach(
+      button=>{
+        button.disabled=true;
+      }
+    );
 
   quizIndex++;
 
-
   setTimeout(
     renderQuizQuestion,
-    280
+    320
   );
 
 }
@@ -5389,6 +5326,8 @@ function answerQuiz(index){
 
 function generateContent(){
 
+  getAudio();
+
   const type=
     $("aiType").value;
 
@@ -5396,9 +5335,7 @@ function generateContent(){
     $("aiTopic").value.trim() ||
     "GAMEZONE ARENA";
 
-
   let result="";
-
 
   if(type==="shayari"){
 
@@ -5412,7 +5349,6 @@ function generateContent(){
 
   }
 
-
   if(type==="dialogue"){
 
     result=
@@ -5423,7 +5359,6 @@ function generateContent(){
 अपना खेल नहीं छोड़ता।"`;
 
   }
-
 
   if(type==="joke"){
 
@@ -5438,7 +5373,6 @@ ${topic} शुरू किया और खिलाड़ी बोला:
 
   }
 
-
   if(type==="motivation"){
 
     result=
@@ -5450,7 +5384,6 @@ ${topic} में शुरुआत छोटी हो सकती है,
 आज एक step आगे बढ़ाइए।`;
 
   }
-
 
   if(type==="gaming"){
 
@@ -5465,7 +5398,6 @@ Keep practicing.
 Rise fast. 🚀`;
 
   }
-
 
   $("aiResult").textContent=
     result;
@@ -5489,7 +5421,6 @@ let deferredInstallPrompt=null;
 const installBtn=
   $("installBtn");
 
-
 window.addEventListener(
   "beforeinstallprompt",
   e=>{
@@ -5500,7 +5431,6 @@ window.addEventListener(
 
   }
 );
-
 
 installBtn.addEventListener(
   "click",
@@ -5531,7 +5461,6 @@ installBtn.addEventListener(
 
   }
 );
-
 
 window.addEventListener(
   "appinstalled",
