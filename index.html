@@ -212,6 +212,14 @@ section{padding:28px 0}
 
 .daily-text{
   font-size:20px;
+  max-width:900px;
+  line-height:1.5;
+}
+
+.daily-date{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:12px;
 }
 
 .adbox{
@@ -309,13 +317,13 @@ footer{
 
 /* ==========================================================
    LUDO
-   PLAYER INDEX:
+   PLAYER INDEX LOCK:
    0 = RED
    1 = GREEN
    2 = BLUE
    3 = YELLOW
 
-   SCREEN:
+   SCREEN POSITION LOCK:
    TOP LEFT     = RED
    TOP RIGHT    = GREEN
    BOTTOM LEFT  = BLUE
@@ -952,7 +960,7 @@ textarea{
 
     <div class="section-title">
       <h2>📅 Daily Content</h2>
-      <p>हर दिन नया content</p>
+      <p>हर दिन नया automatic content</p>
     </div>
 
     <div id="dailyContent" class="card daily-box"></div>
@@ -1302,6 +1310,8 @@ textarea{
 
     <div class="ludo-bottom-dice">
 
+      <!-- LOCKED: BLUE = BOTTOM LEFT = PLAYER 2 -->
+
       <div class="ludo-dice-seat ludo-seat-blue">
 
         <div class="dice-owner"
@@ -1320,6 +1330,8 @@ textarea{
         </div>
 
       </div>
+
+      <!-- LOCKED: YELLOW = BOTTOM RIGHT = PLAYER 3 -->
 
       <div class="ludo-dice-seat ludo-seat-yellow">
 
@@ -1639,6 +1651,10 @@ function closeGame(id){
     carrom.active=false;
   }
 
+  if(id==="ludoModal"){
+    stopLudoDiceRoll();
+  }
+
 }
 
 document.querySelectorAll(".modal").forEach(modal=>{
@@ -1646,8 +1662,23 @@ document.querySelectorAll(".modal").forEach(modal=>{
   modal.addEventListener("click",e=>{
 
     if(e.target===modal){
+
       modal.classList.remove("open");
+
       getAudio();
+
+      if(modal.id==="ludoModal"){
+        stopLudoDiceRoll();
+      }
+
+      if(modal.id==="raceModal"){
+        stopRace();
+      }
+
+      if(modal.id==="carromModal"){
+        carrom.active=false;
+      }
+
     }
 
   });
@@ -1935,69 +1966,129 @@ document.addEventListener(
 
 
 /* ==========================================================
-   DAILY
+   DAILY AUTOMATIC CONTENT
    ========================================================== */
 
-const dailyItems=[
+const automaticDailyContent=[
 
   {
-    type:"🧠 Knowledge",
-    text:"छोटी-सी रोज की सीख समय के साथ बड़ी skill बन सकती है।"
+    type:"📰 News",
+    texts:[
+      "आज का GAMEZONE update: gaming और entertainment content को रोज़ नए तरीके से दिखाया जा रहा है।",
+      "आज का update: GAMEZONE ARENA में games के साथ daily entertainment content भी उपलब्ध है।",
+      "आज का gaming update: नए दिन के साथ Daily Content अपने आप बदलता है।",
+      "आज का GAMEZONE update: रोज़ का नया content सीधे Daily section में देखें।"
+    ]
   },
 
   {
     type:"❤️ Shayari",
-    text:"मेहनत की राह पर जो चलता है, मंज़िल उसका इंतज़ार करती है।"
+    texts:[
+      "मेहनत की राह पर जो चलता है, मंज़िल उसका इंतज़ार करती है।",
+      "हौसले की उड़ान रखो, सपनों को पहचान रखो।",
+      "आज की मेहनत कल की पहचान बनेगी, बस कोशिश जारी रखनी है।",
+      "छोटे कदम भी मंज़िल तक ले जाते हैं, बस रास्ते में रुकना नहीं।"
+    ]
   },
 
   {
     type:"🎬 Dialogue",
-    text:"खेल वही मज़ेदार है जिसमें अगली चाल के लिए दिल तैयार रहे।"
-  },
-
-  {
-    type:"🙏 Bhakti",
-    text:"विश्वास रखिए, अच्छे कर्म कभी व्यर्थ नहीं जाते।"
-  },
-
-  {
-    type:"😂 Joke",
-    text:"Game शुरू किया और बोला — बस एक match! 😄"
-  },
-
-  {
-    type:"🎮 Gaming",
-    text:"Practice बढ़ाइए, timing सुधारिए और अगली चाल सोचिए।"
-  },
-
-  {
-    type:"🤖 AI",
-    text:"सही सवाल पूछना अच्छे AI result की शुरुआत है।"
-  },
-
-  {
-    type:"📝 Blog",
-    text:"Simple controls और fast response gaming experience को बेहतर बनाते हैं।"
-  },
-
-  {
-    type:"🎵 Bhajan",
-    text:"सकारात्मक विचारों को जीवन में जगह दीजिए।"
-  },
-
-  {
-    type:"🎶 Kirtan",
-    text:"कीर्तन और संगीत मन को शांत करने का माध्यम हो सकते हैं।"
+    texts:[
+      "खेल वही मज़ेदार है जिसमें अगली चाल के लिए दिल तैयार रहे।",
+      "मेरी चाल छोटी हो सकती है, लेकिन game plan बड़ा है।",
+      "Match अभी बाकी है, इसलिए कोशिश अभी बाकी है।",
+      "असली खिलाड़ी हार से नहीं, कोशिश छोड़ने से हारता है।"
+    ]
   },
 
   {
     type:"📹 Vlog",
-    text:"आज का छोटा gaming moment आपकी अगली बड़ी याद बन सकता है।"
+    texts:[
+      "आज का छोटा gaming moment आपकी अगली बड़ी याद बन सकता है।",
+      "आज के vlog में एक नया game, एक नई चाल और एक नया अनुभव।",
+      "Gaming session शुरू कीजिए और आज का अपना best moment याद रखिए।",
+      "आज का digital moment छोटा हो सकता है, लेकिन मज़ा बड़ा हो सकता है।"
+    ]
   },
 
   {
-    type:"📰 News",
-    text:"GAMEZONE ARENA में gaming और entertainment content बढ़ाया जा रहा है।"
+    type:"🙏 Bhakti",
+    texts:[
+      "विश्वास रखिए, अच्छे कर्म कभी व्यर्थ नहीं जाते।",
+      "शांति, विश्वास और अच्छे कर्म जीवन को बेहतर दिशा देते हैं।",
+      "हर दिन सकारात्मक सोच और अच्छे कर्म के साथ शुरू करें।",
+      "मन में विश्वास और कर्म में ईमानदारी रखें।"
+    ]
+  },
+
+  {
+    type:"🎵 Bhajan",
+    texts:[
+      "सकारात्मक विचारों को जीवन में जगह दीजिए।",
+      "भक्ति और संगीत मन को शांत करने का सुंदर माध्यम हो सकते हैं।",
+      "आज कुछ समय सकारात्मक भजन और अच्छे विचारों के लिए रखें।",
+      "संगीत के साथ मन को शांति और सकारात्मकता की ओर ले जाएँ।"
+    ]
+  },
+
+  {
+    type:"🎶 Kirtan",
+    texts:[
+      "कीर्तन और संगीत मन को शांत करने का माध्यम हो सकते हैं।",
+      "भक्ति संगीत के साथ कुछ पल शांति और सकारात्मकता के लिए रखें।",
+      "कीर्तन का संगीत वातावरण में सकारात्मक भाव ला सकता है।",
+      "आज का समय अच्छे विचारों और शांत मन के साथ बिताइए।"
+    ]
+  },
+
+  {
+    type:"🧠 Knowledge",
+    texts:[
+      "छोटी-सी रोज की सीख समय के साथ बड़ी skill बन सकती है।",
+      "नई चीज़ रोज़ थोड़ा सीखना लंबे समय में बड़ा फायदा दे सकता है।",
+      "Practice और learning लगातार जारी रखने से skill बेहतर होती है।",
+      "सही जानकारी और लगातार अभ्यास किसी भी skill को मजबूत बना सकते हैं।"
+    ]
+  },
+
+  {
+    type:"🤖 AI",
+    texts:[
+      "AI से अच्छा result पाने के लिए साफ़ और सही सवाल पूछना जरूरी है।",
+      "AI को बेहतर instruction देने से output को अपनी जरूरत के अनुसार बनाया जा सकता है।",
+      "AI एक tool है; सही idea और सही instruction result को बेहतर बनाते हैं।",
+      "आज का AI tip: छोटा, साफ़ और specific prompt लिखकर शुरुआत करें।"
+    ]
+  },
+
+  {
+    type:"😂 Joke",
+    texts:[
+      "Game शुरू किया और बोला — बस एक match! 😄",
+      "Player: आज जल्दी सोऊँगा। Game: पहले एक आखिरी match! 😂",
+      "Game शुरू होने से पहले: 5 मिनट। Game खत्म होने पर: अरे सुबह कैसे हो गई? 😄",
+      "Player बोला — सिर्फ एक round। Game बोला — ठीक है, देखते हैं! 😂"
+    ]
+  },
+
+  {
+    type:"🎮 Gaming",
+    texts:[
+      "Practice बढ़ाइए, timing सुधारिए और अगली चाल सोचिए।",
+      "अच्छा gaming experience practice, timing और smart decisions से बनता है।",
+      "हर match में एक नई strategy आज़माइए और अपना game बेहतर कीजिए।",
+      "सही timing और शांत दिमाग gaming में बहुत काम आते हैं।"
+    ]
+  },
+
+  {
+    type:"📝 Blog",
+    texts:[
+      "Simple controls और fast response gaming experience को बेहतर बनाते हैं।",
+      "एक अच्छे game में clear controls और आसान interface जरूरी होते हैं।",
+      "Gaming website में games के साथ useful content भी users को ज्यादा समय तक जोड़ सकता है।",
+      "Simple design और clear navigation किसी भी digital experience को आसान बनाते हैं।"
+    ]
   }
 
 ];
@@ -2007,7 +2098,11 @@ function dayNumber(){
   const now=new Date();
 
   const start=
-    new Date(now.getFullYear(),0,0);
+    new Date(
+      now.getFullYear(),
+      0,
+      0
+    );
 
   return Math.floor(
     (now-start)/86400000
@@ -2015,12 +2110,50 @@ function dayNumber(){
 
 }
 
+function getAutomaticDailyItem(){
+
+  const day=
+    dayNumber();
+
+  const categoryIndex=
+    day%automaticDailyContent.length;
+
+  const category=
+    automaticDailyContent[
+      categoryIndex
+    ];
+
+  const textIndex=
+    Math.floor(
+      day/automaticDailyContent.length
+    )%category.texts.length;
+
+  return {
+    type:category.type,
+    text:category.texts[textIndex]
+  };
+
+}
+
+function formatDailyDate(){
+
+  const now=new Date();
+
+  return now.toLocaleDateString(
+    "hi-IN",
+    {
+      day:"numeric",
+      month:"long",
+      year:"numeric"
+    }
+  );
+
+}
+
 function renderDaily(){
 
   const item=
-    dailyItems[
-      dayNumber()%dailyItems.length
-    ];
+    getAutomaticDailyItem();
 
   $("dailyContent").innerHTML=`
 
@@ -2032,11 +2165,46 @@ function renderDaily(){
       ${item.text}
     </div>
 
+    <div class="daily-date">
+      📅 ${formatDailyDate()} • Automatic Daily Content
+    </div>
+
   `;
 
 }
 
+function scheduleDailyRefresh(){
+
+  const now=new Date();
+
+  const next=new Date(now);
+
+  next.setHours(
+    24,
+    0,
+    0,
+    0
+  );
+
+  const delay=
+    Math.max(
+      1000,
+      next-now+500
+    );
+
+  setTimeout(
+    ()=>{
+      renderDaily();
+      scheduleDailyRefresh();
+    },
+    delay
+  );
+
+}
+
 renderDaily();
+
+scheduleDailyRefresh();
 
 
 /* ==========================================================
@@ -2044,11 +2212,19 @@ renderDaily();
    ========================================================== */
 
 /*
-  PLAYER INDEX MAPPING:
+  PLAYER INDEX MAPPING — LOCKED:
+
   RED    = 0
   GREEN  = 1
   BLUE   = 2
   YELLOW = 3
+
+  SCREEN — LOCKED:
+
+  TOP LEFT     = RED
+  TOP RIGHT    = GREEN
+  BOTTOM LEFT  = BLUE
+  BOTTOM RIGHT = YELLOW
 */
 
 const LUDO_PLAYERS=[
@@ -2131,6 +2307,15 @@ const ludoLanes={
 
 };
 
+/*
+  HOME POSITION LOCK:
+
+  RED    = TOP LEFT
+  GREEN  = TOP RIGHT
+  BLUE   = BOTTOM LEFT
+  YELLOW = BOTTOM RIGHT
+*/
+
 const ludoHomes={
 
   red:[
@@ -2143,14 +2328,14 @@ const ludoHomes={
     [4,10],[4,13]
   ],
 
-  yellow:[
-    [10,10],[10,13],
-    [13,10],[13,13]
-  ],
-
   blue:[
     [10,1],[10,4],
     [13,1],[13,4]
+  ],
+
+  yellow:[
+    [10,10],[10,13],
+    [13,10],[13,13]
   ]
 
 };
@@ -2166,12 +2351,33 @@ let ludoGameStarted=false;
 let ludoSixCount=0;
 let ludoPendingDice=null;
 
+/* DICE ANIMATION CONTROL */
+
+let ludoDiceTimer=null;
+let ludoDiceRollId=0;
+
 let ludoState=LUDO_PLAYERS.map(
   p=>({
     ...p,
     tokens:[-1,-1,-1,-1]
   })
 );
+
+function stopLudoDiceRoll(){
+
+  ludoDiceRollId++;
+
+  if(ludoDiceTimer){
+
+    clearInterval(
+      ludoDiceTimer
+    );
+
+    ludoDiceTimer=null;
+
+  }
+
+}
 
 function sameCoord(a,b){
 
@@ -2334,6 +2540,12 @@ function tokenCoord(playerIndex,tokenIndex){
     player.tokens[tokenIndex];
 
   if(progress<0){
+
+    /*
+      IMPORTANT:
+      Home is always selected from
+      the player's own locked color.
+    */
 
     return ludoHomes[
       player.key
@@ -2644,6 +2856,8 @@ function renderLudoTokens(){
 
 function initLudo(){
 
+  stopLudoDiceRoll();
+
   ludoState=
     LUDO_PLAYERS.map(
       p=>({
@@ -2703,6 +2917,14 @@ function setLudoPlayers(
 
 }
 
+/*
+  FIXED LUDO DICE ROLL
+
+  One final value is generated.
+  Animation only shows temporary faces.
+  Sound is not repeatedly stacked.
+*/
+
 function rollLudo(playerIndex){
 
   getAudio();
@@ -2711,6 +2933,8 @@ function rollLudo(playerIndex){
   if(ludoBusy)return;
   if(playerIndex!==ludoTurn)return;
   if(playerIndex>=ludoPlayerCount)return;
+
+  stopLudoDiceRoll();
 
   ludoBusy=true;
   ludoPendingDice=null;
@@ -2727,32 +2951,45 @@ function rollLudo(playerIndex){
 
     ludoBusy=false;
     updateLudoDice();
+
     return;
 
   }
 
+  const rollId=
+    ++ludoDiceRollId;
+
   let ticks=0;
 
-  const anim=
-    setInterval(()=>{
+  /*
+    Final result is decided only once.
+  */
 
-      const value=
-        1+
-        Math.floor(
-          Math.random()*6
-        );
+  const finalValue=
+    1+
+    Math.floor(
+      Math.random()*6
+    );
 
-      renderDie(die,value);
+  ludoDiceTimer=
+    setInterval(
+      ()=>{
 
-      diceSound();
+        if(rollId!==ludoDiceRollId){
 
-      ticks++;
+          clearInterval(
+            ludoDiceTimer
+          );
 
-      if(ticks>=8){
+          ludoDiceTimer=null;
 
-        clearInterval(anim);
+          return;
 
-        const finalValue=
+        }
+
+        ticks++;
+
+        const previewValue=
           1+
           Math.floor(
             Math.random()*6
@@ -2760,17 +2997,54 @@ function rollLudo(playerIndex){
 
         renderDie(
           die,
-          finalValue
+          previewValue
         );
 
-        finishLudoRoll(
-          playerIndex,
-          finalValue
+        /*
+          Small rolling tick sound.
+          Full diceSound only once at the end.
+        */
+
+        tone(
+          220+(ticks%6)*35,
+          .035,
+          "square",
+          .018
         );
 
-      }
+        if(ticks>=8){
 
-    },80);
+          clearInterval(
+            ludoDiceTimer
+          );
+
+          ludoDiceTimer=null;
+
+          renderDie(
+            die,
+            finalValue
+          );
+
+          diceSound();
+
+          setTimeout(
+            ()=>{
+              if(rollId!==ludoDiceRollId)return;
+
+              finishLudoRoll(
+                playerIndex,
+                finalValue
+              );
+
+            },
+            120
+          );
+
+        }
+
+      },
+      85
+    );
 
 }
 
@@ -2783,7 +3057,6 @@ async function finishLudoRoll(
     ludoState[playerIndex];
 
   getAudio();
-  diceSound();
 
   const possible=
     availableTokens(
@@ -2909,8 +3182,6 @@ async function animateLudoToken(
   ludoBusy=true;
   updateLudoDice();
 
-  let movedFromHome=false;
-
   if(
     player.tokens[tokenIndex]===-1
   ){
@@ -2931,8 +3202,6 @@ async function animateLudoToken(
     ludoExitSound();
 
     await wait(320);
-
-    movedFromHome=true;
 
   }else{
 
