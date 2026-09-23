@@ -309,16 +309,17 @@ footer{
 
 /* ==========================================================
    LUDO
-   CORRECT DICE ORDER:
+   PLAYER INDEX:
    0 = RED
    1 = GREEN
    2 = BLUE
    3 = YELLOW
 
    SCREEN:
-   TOP    = RED + GREEN
-   BOARD  = CENTER
-   BOTTOM = YELLOW + BLUE
+   TOP LEFT     = RED
+   TOP RIGHT    = GREEN
+   BOTTOM LEFT  = BLUE
+   BOTTOM RIGHT = YELLOW
    ========================================================== */
 
 .ludo-player-select{
@@ -378,13 +379,11 @@ footer{
 }
 
 /* ==========================================================
-   DICE POSITION IS EXPLICITLY LOCKED
+   DICE POSITION LOCKED
    TOP LEFT     = RED
    TOP RIGHT    = GREEN
-   BOTTOM LEFT  = YELLOW
-   BOTTOM RIGHT = BLUE
-
-   DOM order is NOT used for player identity.
+   BOTTOM LEFT  = BLUE
+   BOTTOM RIGHT = YELLOW
    ========================================================== */
 
 .ludo-top-dice .ludo-seat-red{
@@ -397,12 +396,12 @@ footer{
   grid-row:1;
 }
 
-.ludo-bottom-dice .ludo-seat-yellow{
+.ludo-bottom-dice .ludo-seat-blue{
   grid-column:1;
   grid-row:1;
 }
 
-.ludo-bottom-dice .ludo-seat-blue{
+.ludo-bottom-dice .ludo-seat-yellow{
   grid-column:2;
   grid-row:1;
 }
@@ -1299,28 +1298,9 @@ textarea{
 
     </div>
 
-    <!-- YELLOW + BLUE BELOW BOARD -->
+    <!-- BLUE + YELLOW BELOW BOARD -->
 
     <div class="ludo-bottom-dice">
-
-      <div class="ludo-dice-seat ludo-seat-yellow">
-
-        <div class="dice-owner"
-          style="color:var(--yellow)">
-          YELLOW
-        </div>
-
-        <button
-          id="dice-yellow"
-          class="ludo-die yellow"
-          onclick="rollLudo(3)">
-        </button>
-
-        <div id="turn-yellow"
-          class="turn-small">
-        </div>
-
-      </div>
 
       <div class="ludo-dice-seat ludo-seat-blue">
 
@@ -1336,6 +1316,25 @@ textarea{
         </button>
 
         <div id="turn-blue"
+          class="turn-small">
+        </div>
+
+      </div>
+
+      <div class="ludo-dice-seat ludo-seat-yellow">
+
+        <div class="dice-owner"
+          style="color:var(--yellow)">
+          YELLOW
+        </div>
+
+        <button
+          id="dice-yellow"
+          class="ludo-die yellow"
+          onclick="rollLudo(3)">
+        </button>
+
+        <div id="turn-yellow"
           class="turn-small">
         </div>
 
@@ -2045,14 +2044,11 @@ renderDaily();
    ========================================================== */
 
 /*
-  IMPORTANT PLAYER INDEX MAPPING:
+  PLAYER INDEX MAPPING:
   RED    = 0
   GREEN  = 1
   BLUE   = 2
   YELLOW = 3
-
-  यह order जानबूझकर नहीं बदला गया है।
-  Dice DOM IDs भी player key से सीधे जुड़े हैं।
 */
 
 const LUDO_PLAYERS=[
@@ -2443,10 +2439,6 @@ function availableTokens(
 
 }
 
-/*
-  Dice face is rendered into the exact element
-  belonging to the exact player.
-*/
 function renderDie(el,value){
 
   if(!el)return;
@@ -2491,16 +2483,6 @@ function renderDie(el,value){
 
 }
 
-/*
-  Dice are updated by player key:
-  red  -> dice-red
-  green -> dice-green
-  blue -> dice-blue
-  yellow -> dice-yellow
-
-  इसलिए DOM order बदलने पर भी dice गलत player
-  के स्थान पर नहीं जाएगा।
-*/
 function updateLudoDice(){
 
   LUDO_PLAYERS.forEach(
@@ -2680,9 +2662,6 @@ function initLudo(){
 
   drawLudoBoard();
 
-  /*
-    Each initial die is assigned by its own player key.
-  */
   LUDO_PLAYERS.forEach(
     p=>{
 
@@ -2738,14 +2717,6 @@ function rollLudo(playerIndex){
 
   updateLudoDice();
 
-  /*
-    IMPORTANT:
-    The player index remains:
-    RED=0, GREEN=1, BLUE=2, YELLOW=3.
-
-    The actual dice element is found from player.key,
-    so the roll can never be sent to another colour's die.
-  */
   const player=
     ludoState[playerIndex];
 
