@@ -1,1014 +1,818 @@
 <!doctype html>
 <html lang="hi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#070A13">
-  <meta name="description" content="GAMEZONE ARENA — Play sharp. Rise fast.">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="manifest" href="./manifest.json">
-
-  <!-- EXISTING ADSENSE CODE — UNCHANGED -->
-  <script async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5348301935438016"
-    crossorigin="anonymous"></script>
-
-  <title>GAMEZONE ARENA — Play sharp. Rise fast.</title>
-
-  <style>
-    :root{
-      --bg:#070A13;
-      --panel:#101626;
-      --panel2:#151d31;
-      --text:#f7f9ff;
-      --muted:#aeb7cc;
-      --gold:#ffd54a;
-      --gold2:#ff9d00;
-      --green:#20e39a;
-      --red:#ff5364;
-      --blue:#4da3ff;
-      --yellow:#ffd83d;
-      --purple:#a86cff;
-      --line:rgba(255,255,255,.10);
-      --shadow:0 14px 40px rgba(0,0,0,.35);
-    }
-
-    *{box-sizing:border-box}
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      margin:0;
-      background:
-        radial-gradient(circle at 20% 0%,rgba(77,163,255,.12),transparent 30%),
-        radial-gradient(circle at 90% 10%,rgba(168,108,255,.10),transparent 30%),
-        var(--bg);
-      color:var(--text);
-      font-family:Arial,Helvetica,sans-serif;
-      line-height:1.55;
-    }
-
-    button,input{
-      font:inherit;
-    }
-
-    button{
-      cursor:pointer;
-    }
-
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      display:flex;
-      align-items:center;
-      gap:14px;
-      padding:12px 18px;
-      background:rgba(7,10,19,.94);
-      border-bottom:1px solid var(--line);
-      backdrop-filter:blur(14px);
-    }
-
-    .brand{
-      font-weight:900;
-      font-size:18px;
-      letter-spacing:.5px;
-      white-space:nowrap;
-    }
-
-    nav{
-      display:flex;
-      gap:8px;
-      overflow:auto;
-      flex:1;
-    }
-
-    nav a{
-      padding:8px 11px;
-      border-radius:10px;
-      color:var(--muted);
-      white-space:nowrap;
-    }
-
-    nav a:hover{
-      background:var(--panel2);
-      color:var(--text);
-    }
-
-    .install-btn,
-    .btn{
-      border:0;
-      border-radius:12px;
-      padding:10px 15px;
-      color:#111;
-      font-weight:900;
-      background:linear-gradient(135deg,var(--gold),var(--gold2));
-      box-shadow:0 8px 22px rgba(255,157,0,.18);
-    }
-
-    .install-btn{
-      white-space:nowrap;
-    }
-
-    .btn.secondary{
-      color:var(--text);
-      background:var(--panel2);
-      border:1px solid var(--line);
-      box-shadow:none;
-    }
-
-    .btn.green{
-      color:#07140e;
-      background:var(--green);
-    }
-
-    .btn.red{
-      color:white;
-      background:var(--red);
-    }
-
-    .container{
-      width:min(1180px,94%);
-      margin:auto;
-    }
-
-    .hero{
-      padding:65px 0 45px;
-      text-align:center;
-    }
-
-    .hero h1{
-      margin:0 0 8px;
-      font-size:clamp(35px,7vw,70px);
-      font-weight:1000;
-      letter-spacing:-2px;
-    }
-
-    .hero h1 span{
-      color:var(--gold);
-    }
-
-    .tagline{
-      font-size:20px;
-      color:var(--muted);
-    }
-
-    .hero p{
-      max-width:760px;
-      margin:18px auto;
-      color:#c8d0e2;
-    }
-
-    section{
-      padding:28px 0;
-    }
-
-    .section-title{
-      text-align:center;
-      margin-bottom:20px;
-    }
-
-    .section-title h2{
-      margin:0 0 5px;
-      font-size:30px;
-    }
-
-    .section-title p{
-      margin:0;
-      color:var(--muted);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:16px;
-    }
-
-    .card{
-      background:linear-gradient(145deg,var(--panel),var(--panel2));
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:20px;
-      box-shadow:var(--shadow);
-    }
-
-    .game-card{
-      min-height:190px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
-
-    .game-icon{
-      font-size:44px;
-    }
-
-    .game-card h3{
-      margin:8px 0 3px;
-    }
-
-    .game-card p{
-      color:var(--muted);
-      margin:0 0 14px;
-    }
-
-    .chips{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-
-    .chip{
-      border:1px solid var(--line);
-      background:var(--panel2);
-      padding:7px 11px;
-      border-radius:999px;
-      cursor:pointer;
-    }
-
-    .daily-box{
-      min-height:130px;
-      text-align:center;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
-
-    .daily-type{
-      color:var(--gold);
-      font-weight:900;
-    }
-
-    .daily-text{
-      font-size:20px;
-      margin-top:8px;
-    }
-
-    .adbox{
-      min-height:90px;
-      border:1px dashed rgba(255,255,255,.18);
-      border-radius:14px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#778096;
-      margin:20px 0;
-    }
-
-    .qa{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-    }
-
-    .qa .card{
-      min-height:140px;
-    }
-
-    footer{
-      margin-top:35px;
-      padding:30px 15px;
-      text-align:center;
-      color:var(--muted);
-      border-top:1px solid var(--line);
-    }
-
-    .legal{
-      margin-top:10px;
-      color:#8f98ac;
-      font-size:13px;
-    }
-
-    /* MODALS */
-
-    .modal{
-      display:none;
-      position:fixed;
-      inset:0;
-      z-index:2000;
-      padding:15px;
-      background:rgba(0,0,0,.78);
-      overflow:auto;
-    }
-
-    .modal.open{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .modal-box{
-      width:min(1100px,100%);
-      max-height:96vh;
-      overflow:auto;
-      background:#0d1424;
-      border:1px solid var(--line);
-      border-radius:22px;
-      box-shadow:0 25px 80px rgba(0,0,0,.55);
-      padding:18px;
-      position:relative;
-    }
-
-    .modal-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:14px;
-    }
-
-    .modal-head h2{
-      margin:0;
-    }
-
-    .close{
-      width:42px;
-      height:42px;
-      border:1px solid var(--line);
-      border-radius:12px;
-      background:var(--panel2);
-      color:white;
-      font-size:22px;
-    }
-
-    .game-toolbar{
-      display:flex;
-      flex-wrap:wrap;
-      gap:9px;
-      align-items:center;
-      margin-bottom:15px;
-    }
-
-    .range-wrap{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 11px;
-      background:var(--panel2);
-      border:1px solid var(--line);
-      border-radius:12px;
-    }
-
-    input[type="range"]{
-      accent-color:var(--gold);
-    }
-
-    /* =========================
-       LUDO
-       ========================= */
-
-    .ludo-intro{
-      text-align:center;
-      color:var(--muted);
-      margin-bottom:12px;
-    }
-
-    .ludo-player-select{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-bottom:16px;
-    }
-
-    .ludo-player-select button.active{
-      outline:3px solid var(--gold);
-      transform:translateY(-1px);
-    }
-
-    /*
-      पूरा Ludo table:
-      चारों dice बाहरी चार दिशाओं में,
-      असली 15x15 board बिल्कुल बीच में।
-    */
-    .ludo-stage{
-      display:grid;
-      grid-template-columns:minmax(70px,110px) minmax(280px,620px) minmax(70px,110px);
-      grid-template-rows:auto minmax(280px,620px) auto;
-      gap:10px;
-      align-items:center;
-      justify-content:center;
-      width:100%;
-      margin:auto;
-    }
-
-    .ludo-dice-seat{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:5px;
-      min-width:68px;
-    }
-
-    .ludo-dice-seat.top{
-      grid-column:2;
-      grid-row:1;
-    }
-
-    .ludo-dice-seat.left{
-      grid-column:1;
-      grid-row:2;
-    }
-
-    .ludo-dice-seat.right{
-      grid-column:3;
-      grid-row:2;
-    }
-
-    .ludo-dice-seat.bottom{
-      grid-column:2;
-      grid-row:3;
-    }
-
-    .dice-owner{
-      font-size:12px;
-      font-weight:900;
-    }
-
-    .turn-small{
-      font-size:11px;
-      min-height:17px;
-      color:var(--gold);
-      font-weight:900;
-      text-align:center;
-      white-space:nowrap;
-    }
-
-    .ludo-die{
-      width:66px;
-      height:66px;
-      padding:7px;
-      border-radius:14px;
-      background:#fff;
-      border:4px solid #333;
-      box-shadow:0 7px 18px rgba(0,0,0,.35);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      transition:.15s;
-    }
-
-    .ludo-die:disabled{
-      opacity:.72;
-      cursor:not-allowed;
-    }
-
-    .ludo-die.active{
-      transform:scale(1.08);
-      box-shadow:0 0 0 4px var(--gold),0 10px 25px rgba(0,0,0,.4);
-    }
-
-    .ludo-die.red{
-      border-color:var(--red);
-    }
-
-    .ludo-die.green{
-      border-color:var(--green);
-    }
-
-    .ludo-die.yellow{
-      border-color:var(--yellow);
-    }
-
-    .ludo-die.blue{
-      border-color:var(--blue);
-    }
-
-    .die-grid{
-      width:100%;
-      height:100%;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      grid-template-rows:repeat(3,1fr);
-      gap:2px;
-    }
-
-    .die-grid i{
-      width:10px;
-      height:10px;
-      border-radius:50%;
-      background:transparent;
-      justify-self:center;
-      align-self:center;
-    }
-
-    .die-grid i.on{
-      background:#111;
-      box-shadow:inset 0 1px 1px rgba(255,255,255,.4);
-    }
-
-    /* central board is the main item */
-    .ludo-board-wrap{
-      grid-column:2;
-      grid-row:2;
-      position:relative;
-      width:100%;
-      aspect-ratio:1/1;
-      max-width:620px;
-      margin:auto;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .ludo-board{
-      width:100%;
-      height:100%;
-      aspect-ratio:1/1;
-      display:grid;
-      grid-template-columns:repeat(15,1fr);
-      grid-template-rows:repeat(15,1fr);
-      background:#f7f7f7;
-      border:7px solid #171717;
-      border-radius:5px;
-      overflow:hidden;
-      box-shadow:0 15px 40px rgba(0,0,0,.45);
-      position:relative;
-    }
-
-    .ludo-cell{
-      position:relative;
-      border:1px solid rgba(20,20,20,.24);
-      min-width:0;
-      min-height:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#fff;
-    }
-
-    .ludo-yard-red{
-      background:#ef5364;
-    }
-
-    .ludo-yard-green{
-      background:#23d895;
-    }
-
-    .ludo-yard-yellow{
-      background:#ffd83d;
-    }
-
-    .ludo-yard-blue{
-      background:#4da3ff;
-    }
-
-    .ludo-yard-inner{
-      width:74%;
-      height:74%;
-      background:#fff;
-      border-radius:7px;
-      border:3px solid rgba(0,0,0,.18);
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      grid-template-rows:1fr 1fr;
-      gap:7px;
-      padding:7px;
-    }
-
-    .home-dot{
-      border-radius:50%;
-      border:2px solid rgba(0,0,0,.22);
-      box-shadow:inset 0 2px 4px rgba(0,0,0,.12);
-    }
-
-    .home-dot.red{background:#ff5364}
-    .home-dot.green{background:#20e39a}
-    .home-dot.yellow{background:#ffd54a}
-    .home-dot.blue{background:#4da3ff}
-
-    .path-red{
-      background:#ffe3e7;
-    }
-
-    .path-green{
-      background:#ddfff2;
-    }
-
-    .path-yellow{
-      background:#fff7cf;
-    }
-
-    .path-blue{
-      background:#dceeff;
-    }
-
-    .center-cell{
-      background:#fff;
-    }
-
-    .center-triangle{
-      position:absolute;
-      inset:0;
-      overflow:hidden;
-    }
-
-    .tri{
-      position:absolute;
-      width:0;
-      height:0;
-      border-style:solid;
-    }
-
-    .tri.red{
-      left:0;
-      top:0;
-      border-width:0 50% 50% 0;
-      border-color:transparent #ef5364 transparent transparent;
-    }
-
-    .tri.green{
-      right:0;
-      top:0;
-      border-width:0 0 50% 50%;
-      border-color:transparent transparent #20e39a transparent;
-    }
-
-    .tri.yellow{
-      right:0;
-      bottom:0;
-      border-width:50% 0 0 50%;
-      border-color:transparent transparent transparent #ffd83d;
-    }
-
-    .tri.blue{
-      left:0;
-      bottom:0;
-      border-width:50% 50% 0 0;
-      border-color:#4da3ff transparent transparent transparent;
-    }
-
-    /*
-      बीच का बड़ा Ludo home/ball:
-      board के बिल्कुल center में।
-    */
-    .ludo-center-home{
-      position:absolute;
-      left:50%;
-      top:50%;
-      width:22%;
-      height:22%;
-      transform:translate(-50%,-50%);
-      z-index:30;
-      background:#fff;
-      border:5px solid #171717;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow:0 8px 20px rgba(0,0,0,.35);
-      overflow:hidden;
-    }
-
-    .ludo-center-ball{
-      width:62%;
-      height:62%;
-      border-radius:50%;
-      background:linear-gradient(145deg,#ffd54a,#ff9d00);
-      border:4px solid #1c1c1c;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:clamp(17px,3vw,30px);
-      font-weight:1000;
-      color:#111;
-      box-shadow:inset 0 4px 8px rgba(255,255,255,.45);
-      transition:.2s;
-    }
-
-    .ludo-center-ball.red{
-      background:linear-gradient(145deg,#ff7b88,#e62e45);
-    }
-
-    .ludo-center-ball.green{
-      background:linear-gradient(145deg,#64f2bd,#11b979);
-    }
-
-    .ludo-center-ball.yellow{
-      background:linear-gradient(145deg,#fff06e,#f1b900);
-    }
-
-    .ludo-center-ball.blue{
-      background:linear-gradient(145deg,#7bc0ff,#287fd2);
-    }
-
-    .ludo-token{
-      position:absolute;
-      width:78%;
-      height:78%;
-      max-width:32px;
-      max-height:32px;
-      min-width:14px;
-      min-height:14px;
-      border-radius:50% 50% 45% 45%;
-      border:2px solid rgba(0,0,0,.65);
-      z-index:50;
-      transform:translate(-50%,-50%);
-      cursor:pointer;
-      box-shadow:
-        inset 0 4px 4px rgba(255,255,255,.55),
-        0 3px 5px rgba(0,0,0,.35);
-    }
-
-    .ludo-token::before{
-      content:"";
-      position:absolute;
-      left:22%;
-      top:-25%;
-      width:56%;
-      height:56%;
-      border-radius:50%;
-      background:inherit;
-      border:2px solid rgba(0,0,0,.55);
-    }
-
-    .ludo-token::after{
-      content:"";
-      position:absolute;
-      left:31%;
-      bottom:-5%;
-      width:38%;
-      height:25%;
-      border-radius:0 0 50% 50%;
-      background:rgba(0,0,0,.20);
-    }
-
-    .ludo-token.red{background:#ef334c}
-    .ludo-token.green{background:#16c98b}
-    .ludo-token.yellow{background:#f6c900}
-    .ludo-token.blue{background:#318de2}
-
-    .ludo-token.movable{
-      animation:ludoPulse .7s infinite alternate;
-      box-shadow:0 0 0 3px #fff,0 0 0 6px var(--gold),0 4px 8px rgba(0,0,0,.35);
-    }
-
-    @keyframes ludoPulse{
-      from{transform:translate(-50%,-50%) scale(1)}
-      to{transform:translate(-50%,-50%) scale(1.13)}
-    }
-
-    .ludo-status{
-      text-align:center;
-      min-height:28px;
-      margin:10px 0;
-      color:var(--gold);
-      font-weight:900;
-    }
-
-    .ludo-rules{
-      color:var(--muted);
-      text-align:center;
-      font-size:13px;
-      margin-top:10px;
-    }
-
-    @media(max-width:650px){
-      .ludo-stage{
-        grid-template-columns:58px minmax(250px,1fr) 58px;
-        grid-template-rows:76px minmax(250px,1fr) 76px;
-        gap:4px;
-      }
-
-      .ludo-die{
-        width:52px;
-        height:52px;
-        padding:5px;
-        border-width:3px;
-      }
-
-      .ludo-token{
-        max-width:25px;
-        max-height:25px;
-      }
-
-      .ludo-board{
-        border-width:4px;
-      }
-
-      .ludo-center-home{
-        border-width:3px;
-      }
-    }
-
-    /* =========================
-       CARROM
-       ========================= */
-
-    .carrom-layout{
-      display:grid;
-      grid-template-columns:minmax(280px,650px) 280px;
-      gap:18px;
-      justify-content:center;
-      align-items:start;
-    }
-
-    .carrom-wrap{
-      width:100%;
-      background:#c58b4a;
-      padding:14px;
-      border-radius:12px;
-      box-shadow:var(--shadow);
-      border:5px solid #5e351b;
-    }
-
-    #carromCanvas{
-      display:block;
-      width:100%;
-      height:auto;
-      aspect-ratio:1/1;
-      background:#d9a45e;
-      border:4px solid #5e351b;
-      touch-action:none;
-    }
-
-    .carrom-info{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-
-    .carrom-stat{
-      padding:12px;
-      background:var(--panel2);
-      border:1px solid var(--line);
-      border-radius:12px;
-    }
-
-    .aim-help{
-      color:var(--muted);
-      font-size:13px;
-    }
-
-    @media(max-width:800px){
-      .carrom-layout{
-        grid-template-columns:1fr;
-      }
-    }
-
-    /* =========================
-       RACING
-       ========================= */
-
-    .race-layout{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:12px;
-    }
-
-    #raceCanvas{
-      width:min(360px,92vw);
-      height:auto;
-      aspect-ratio:360/640;
-      background:#18202d;
-      border:5px solid #202b3e;
-      border-radius:18px;
-      touch-action:none;
-    }
-
-    .race-controls{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-    }
-
-    .steering{
-      display:flex;
-      justify-content:center;
-      gap:15px;
-    }
-
-    .steer-btn{
-      width:90px;
-      height:55px;
-      border:1px solid var(--line);
-      border-radius:14px;
-      background:var(--panel2);
-      color:white;
-      font-size:25px;
-      font-weight:900;
-      touch-action:none;
-      user-select:none;
-    }
-
-    .steer-btn:active{
-      background:#25334d;
-      transform:scale(.96);
-    }
-
-    /* SPIN */
-
-    .spin-layout{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:15px;
-    }
-
-    #spinCanvas{
-      width:min(360px,88vw);
-      height:auto;
-      aspect-ratio:1/1;
-      border-radius:50%;
-      background:#111827;
-    }
-
-    .coin-display{
-      color:var(--gold);
-      font-weight:900;
-      font-size:18px;
-    }
-
-    /* QUIZ */
-
-    .quiz-card{
-      max-width:700px;
-      margin:auto;
-    }
-
-    .quiz-options{
-      display:grid;
-      gap:10px;
-      margin-top:15px;
-    }
-
-    .quiz-option{
-      text-align:left;
-      color:white;
-      background:var(--panel2);
-      border:1px solid var(--line);
-      padding:13px;
-      border-radius:12px;
-    }
-
-    .quiz-option:hover{
-      border-color:var(--gold);
-    }
-
-    .quiz-progress{
-      color:var(--muted);
-      margin-bottom:8px;
-    }
-
-    /* AI */
-
-    .ai-form{
-      display:grid;
-      gap:10px;
-      max-width:750px;
-      margin:auto;
-    }
-
-    textarea,
-    select,
-    input[type="text"]{
-      width:100%;
-      background:#0a1020;
-      color:white;
-      border:1px solid var(--line);
-      border-radius:12px;
-      padding:12px;
-      outline:none;
-    }
-
-    textarea{
-      min-height:120px;
-      resize:vertical;
-    }
-
-    .ai-result{
-      white-space:pre-wrap;
-      margin-top:12px;
-      color:#e8edf9;
-    }
-
-    @media(max-width:700px){
-      header{
-        flex-wrap:wrap;
-      }
-
-      nav{
-        order:3;
-        width:100%;
-      }
-
-      .qa{
-        grid-template-columns:1fr;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070A13">
+<meta name="description" content="GAMEZONE ARENA — Play sharp. Rise fast.">
+<link rel="manifest" href="./manifest.json">
+
+<!-- EXISTING ADSENSE — UNCHANGED -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5348301935438016"
+crossorigin="anonymous"></script>
+
+<title>GAMEZONE ARENA — Play sharp. Rise fast.</title>
+
+<style>
+:root{
+  --bg:#070A13;
+  --panel:#101626;
+  --panel2:#151d31;
+  --text:#f7f9ff;
+  --muted:#aeb7cc;
+  --gold:#ffd54a;
+  --gold2:#ff9d00;
+  --green:#20e39a;
+  --red:#ff5364;
+  --blue:#4da3ff;
+  --yellow:#ffd83d;
+  --purple:#a86cff;
+  --line:rgba(255,255,255,.10);
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(77,163,255,.12),transparent 30%),
+    radial-gradient(circle at 90% 10%,rgba(168,108,255,.10),transparent 30%),
+    var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+button,input,select,textarea{font:inherit}
+
+button{cursor:pointer}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:12px 18px;
+  background:rgba(7,10,19,.95);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(14px);
+}
+
+.brand{
+  font-size:18px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+nav{
+  display:flex;
+  gap:7px;
+  overflow:auto;
+  flex:1;
+}
+
+nav a{
+  padding:8px 10px;
+  border-radius:10px;
+  color:var(--muted);
+  white-space:nowrap;
+}
+
+nav a:hover{
+  background:var(--panel2);
+  color:white;
+}
+
+.btn,
+.install-btn{
+  border:0;
+  border-radius:12px;
+  padding:10px 15px;
+  font-weight:900;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#111;
+}
+
+.btn.secondary{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  color:white;
+}
+
+.container{
+  width:min(1180px,94%);
+  margin:auto;
+}
+
+.hero{
+  padding:65px 0 45px;
+  text-align:center;
+}
+
+.hero h1{
+  margin:0;
+  font-size:clamp(36px,7vw,70px);
+  font-weight:1000;
+}
+
+.hero h1 span{color:var(--gold)}
+
+.tagline{
+  color:var(--muted);
+  font-size:20px;
+}
+
+.hero p{
+  max-width:760px;
+  margin:18px auto;
+  color:#c8d0e2;
+}
+
+section{padding:28px 0}
+
+.section-title{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.section-title h2{
+  margin:0 0 5px;
+  font-size:30px;
+}
+
+.section-title p{
+  color:var(--muted);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+}
+
+.card{
+  background:linear-gradient(145deg,var(--panel),var(--panel2));
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:20px;
+}
+
+.game-card{
+  min-height:190px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.game-icon{font-size:44px}
+
+.game-card h3{
+  margin:8px 0 3px;
+}
+
+.game-card p{
+  color:var(--muted);
+  margin:0 0 14px;
+}
+
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.chip{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  padding:7px 11px;
+  border-radius:999px;
+}
+
+.daily-box{
+  min-height:130px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+}
+
+.daily-type{
+  color:var(--gold);
+  font-weight:900;
+}
+
+.daily-text{
+  font-size:20px;
+}
+
+.adbox{
+  min-height:90px;
+  border:1px dashed rgba(255,255,255,.18);
+  border-radius:14px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#778096;
+}
+
+.qa{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+footer{
+  text-align:center;
+  padding:30px 15px;
+  color:var(--muted);
+  border-top:1px solid var(--line);
+  margin-top:30px;
+}
+
+.legal{
+  margin-top:10px;
+  font-size:13px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  background:rgba(0,0,0,.80);
+  padding:15px;
+  overflow:auto;
+}
+
+.modal.open{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-box{
+  width:min(1100px,100%);
+  max-height:96vh;
+  overflow:auto;
+  background:#0d1424;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:18px;
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.modal-head h2{margin:0}
+
+.close{
+  width:42px;
+  height:42px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--panel2);
+  color:white;
+  font-size:22px;
+}
+
+.ludo-status{
+  text-align:center;
+  min-height:28px;
+  color:var(--gold);
+  font-weight:900;
+  margin:10px 0;
+}
+
+.range-wrap{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  padding:8px 11px;
+  border-radius:12px;
+}
+
+/* ==========================================================
+   LUDO
+   BOARD ALWAYS CENTER
+   2 DICE TOP + 2 DICE BOTTOM
+   ========================================================== */
+
+.ludo-player-select{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:12px 0;
+}
+
+.ludo-player-select .active{
+  outline:3px solid var(--gold);
+}
+
+/*
+  बिल्कुल vertical Ludo arrangement:
+  TOP = Green + Yellow
+  CENTER = 15x15 Ludo board
+  BOTTOM = Red + Blue
+*/
+.ludo-stage{
+  width:min(700px,100%);
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:auto auto auto;
+  gap:12px;
+  align-items:center;
+  justify-items:center;
+}
+
+.ludo-top-dice{
+  grid-column:1/3;
+  grid-row:1;
+  width:100%;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+}
+
+.ludo-bottom-dice{
+  grid-column:1/3;
+  grid-row:3;
+  width:100%;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+}
+
+.ludo-board-wrap{
+  grid-column:1/3;
+  grid-row:2;
+  width:min(620px,100%);
+  aspect-ratio:1/1;
+  position:relative;
+  margin:auto;
+}
+
+.ludo-board{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:repeat(15,1fr);
+  grid-template-rows:repeat(15,1fr);
+  background:#fff;
+  border:7px solid #151515;
+  border-radius:6px;
+  overflow:hidden;
+  box-shadow:0 15px 40px rgba(0,0,0,.5);
+}
+
+.ludo-cell{
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border:1px solid rgba(0,0,0,.20);
+  background:#fff;
+}
+
+.ludo-yard-red{background:#ef5364}
+.ludo-yard-green{background:#20e39a}
+.ludo-yard-yellow{background:#ffd83d}
+.ludo-yard-blue{background:#4da3ff}
+
+.path-red{background:#ffe0e5}
+.path-green{background:#ddfff2}
+.path-yellow{background:#fff5c4}
+.path-blue{background:#dceeff}
+
+.center-cell{
+  background:#fff!important;
+}
+
+.home-dot{
+  width:70%;
+  height:70%;
+  border-radius:50%;
+  border:2px solid rgba(0,0,0,.3);
+  box-shadow:inset 0 3px 5px rgba(0,0,0,.15);
+}
+
+.home-dot.red{background:#ef334c}
+.home-dot.green{background:#16c98b}
+.home-dot.yellow{background:#f6c900}
+.home-dot.blue{background:#318de2}
+
+/* CENTER LUDO HOME / BALL */
+.ludo-center-home{
+  position:absolute;
+  z-index:100;
+  left:50%;
+  top:50%;
+  width:22%;
+  height:22%;
+  transform:translate(-50%,-50%);
+  background:white;
+  border:5px solid #171717;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 22px rgba(0,0,0,.4);
+}
+
+.ludo-center-ball{
+  width:64%;
+  height:64%;
+  border-radius:50%;
+  background:linear-gradient(145deg,#ffd54a,#ff9d00);
+  border:4px solid #171717;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:25px;
+  color:#111;
+  font-weight:1000;
+}
+
+.ludo-center-ball.red{
+  background:linear-gradient(145deg,#ff7787,#e72e46);
+}
+
+.ludo-center-ball.green{
+  background:linear-gradient(145deg,#6af2bf,#11b979);
+}
+
+.ludo-center-ball.yellow{
+  background:linear-gradient(145deg,#fff06d,#efb800);
+}
+
+.ludo-center-ball.blue{
+  background:linear-gradient(145deg,#7bc0ff,#2a83d8);
+}
+
+/* DICE */
+.ludo-dice-seat{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+}
+
+.dice-owner{
+  font-size:13px;
+  font-weight:1000;
+}
+
+.turn-small{
+  min-height:18px;
+  color:var(--gold);
+  font-size:12px;
+  font-weight:900;
+  text-align:center;
+  white-space:nowrap;
+}
+
+.ludo-die{
+  width:68px;
+  height:68px;
+  padding:7px;
+  background:white;
+  border:4px solid #333;
+  border-radius:14px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 7px 18px rgba(0,0,0,.35);
+}
+
+.ludo-die.red{border-color:var(--red)}
+.ludo-die.green{border-color:var(--green)}
+.ludo-die.yellow{border-color:var(--yellow)}
+.ludo-die.blue{border-color:var(--blue)}
+
+.ludo-die.active{
+  transform:scale(1.08);
+  box-shadow:
+    0 0 0 4px var(--gold),
+    0 10px 25px rgba(0,0,0,.4);
+}
+
+.ludo-die:disabled{
+  opacity:.72;
+}
+
+.die-grid{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:repeat(3,1fr);
+}
+
+.die-grid i{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  justify-self:center;
+  align-self:center;
+  background:transparent;
+}
+
+.die-grid i.on{
+  background:#111;
+}
+
+/* REAL LUDO PAWN */
+.ludo-token{
+  position:absolute;
+  z-index:200;
+  width:78%;
+  height:78%;
+  max-width:34px;
+  max-height:34px;
+  min-width:14px;
+  min-height:14px;
+  transform:translate(-50%,-50%);
+  border:2px solid rgba(0,0,0,.65);
+  border-radius:50% 50% 45% 45%;
+  cursor:pointer;
+  box-shadow:
+    inset 0 4px 4px rgba(255,255,255,.6),
+    0 3px 6px rgba(0,0,0,.4);
+}
+
+.ludo-token:before{
+  content:"";
+  position:absolute;
+  width:55%;
+  height:55%;
+  left:22%;
+  top:-28%;
+  border-radius:50%;
+  background:inherit;
+  border:2px solid rgba(0,0,0,.55);
+}
+
+.ludo-token:after{
+  content:"";
+  position:absolute;
+  width:38%;
+  height:22%;
+  left:31%;
+  bottom:-3%;
+  background:rgba(0,0,0,.22);
+  border-radius:0 0 50% 50%;
+}
+
+.ludo-token.red{background:#ef334c}
+.ludo-token.green{background:#16c98b}
+.ludo-token.yellow{background:#f6c900}
+.ludo-token.blue{background:#318de2}
+
+.ludo-token.movable{
+  animation:pawnPulse .65s infinite alternate;
+  box-shadow:
+    0 0 0 3px white,
+    0 0 0 6px var(--gold),
+    0 4px 8px rgba(0,0,0,.4);
+}
+
+@keyframes pawnPulse{
+  from{transform:translate(-50%,-50%) scale(1)}
+  to{transform:translate(-50%,-50%) scale(1.14)}
+}
+
+/* ================= CARROM ================= */
+
+.carrom-layout{
+  display:grid;
+  grid-template-columns:minmax(280px,650px) 280px;
+  gap:18px;
+  justify-content:center;
+}
+
+.carrom-wrap{
+  background:#c58b4a;
+  padding:14px;
+  border:5px solid #5e351b;
+  border-radius:12px;
+}
+
+#carromCanvas{
+  width:100%;
+  height:auto;
+  display:block;
+  aspect-ratio:1/1;
+  background:#d9a45e;
+  border:4px solid #5e351b;
+  touch-action:none;
+}
+
+.carrom-info{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.carrom-stat{
+  padding:12px;
+  border:1px solid var(--line);
+  background:var(--panel2);
+  border-radius:12px;
+}
+
+.aim-help{
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* ================= RACING ================= */
+
+.race-layout{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+}
+
+#raceCanvas{
+  width:min(360px,92vw);
+  height:auto;
+  aspect-ratio:360/640;
+  border:5px solid #202b3e;
+  border-radius:18px;
+  background:#18202d;
+}
+
+.race-controls{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+}
+
+.steering{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+}
+
+.steer-btn{
+  width:100px;
+  height:58px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:var(--panel2);
+  color:white;
+  font-size:20px;
+  font-weight:1000;
+  user-select:none;
+  touch-action:none;
+}
+
+.steer-btn:active{
+  transform:scale(.95);
+  background:#293750;
+}
+
+/* ================= SPIN ================= */
+
+.spin-layout{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:15px;
+}
+
+#spinCanvas{
+  width:min(360px,88vw);
+  height:auto;
+  aspect-ratio:1/1;
+  border-radius:50%;
+}
+
+.coin-display{
+  color:var(--gold);
+  font-size:18px;
+  font-weight:900;
+}
+
+/* ================= QUIZ ================= */
+
+.quiz-card{
+  max-width:700px;
+  margin:auto;
+}
+
+.quiz-progress{
+  color:var(--muted);
+}
+
+.quiz-options{
+  display:grid;
+  gap:10px;
+  margin-top:15px;
+}
+
+.quiz-option{
+  text-align:left;
+  color:white;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  padding:13px;
+  border-radius:12px;
+}
+
+.quiz-option:hover{
+  border-color:var(--gold);
+}
+
+/* ================= AI ================= */
+
+.ai-form{
+  display:grid;
+  gap:10px;
+}
+
+textarea,
+select,
+input[type="text"]{
+  width:100%;
+  background:#0a1020;
+  color:white;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:12px;
+}
+
+textarea{
+  min-height:120px;
+}
+
+.ai-result{
+  white-space:pre-wrap;
+  margin-top:12px;
+}
+
+@media(max-width:800px){
+  .carrom-layout{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:700px){
+
+  header{
+    flex-wrap:wrap;
+  }
+
+  nav{
+    order:3;
+    width:100%;
+  }
+
+  .qa{
+    grid-template-columns:1fr;
+  }
+
+  .ludo-die{
+    width:54px;
+    height:54px;
+    padding:5px;
+    border-width:3px;
+  }
+
+  .ludo-stage{
+    gap:7px;
+  }
+
+  .ludo-board{
+    border-width:4px;
+  }
+
+  .ludo-center-home{
+    border-width:3px;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -1025,252 +829,280 @@
     <a href="#about">About</a>
   </nav>
 
-  <button id="installBtn" class="install-btn" type="button">
+  <button id="installBtn" class="install-btn">
     📲 Install App
   </button>
 </header>
 
+
 <main>
 
-  <section id="home" class="hero">
-    <div class="container">
-      <h1>GAMEZONE <span>ARENA</span></h1>
-      <div class="tagline">Play sharp. Rise fast.</div>
+<section id="home" class="hero">
+  <div class="container">
+    <h1>GAMEZONE <span>ARENA</span></h1>
+    <div class="tagline">Play sharp. Rise fast.</div>
+
+    <p>
+      Play Ludo, Carrom, Racing, Spin and Quick Quiz
+      with GAMEZONE ARENA.
+    </p>
+
+    <button class="btn"
+      onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">
+      🎮 Play Games
+    </button>
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+    <div class="adbox">Advertisement</div>
+  </div>
+</section>
+
+
+<section id="daily">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>📅 Daily Content</h2>
+      <p>हर दिन नया content</p>
+    </div>
+
+    <div id="dailyContent" class="card daily-box"></div>
+
+    <div class="chips" style="justify-content:center;margin-top:15px">
+      <span class="chip">📰 News</span>
+      <span class="chip">❤️ Shayari</span>
+      <span class="chip">🎬 Dialogues</span>
+      <span class="chip">📹 Vlogs</span>
+      <span class="chip">🙏 Bhakti</span>
+      <span class="chip">🎵 Bhajan</span>
+      <span class="chip">🎶 Kirtan</span>
+      <span class="chip">🧠 Knowledge</span>
+      <span class="chip">🤖 AI</span>
+      <span class="chip">😂 Jokes</span>
+      <span class="chip">📝 Blogs</span>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="games">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>🎮 Games</h2>
+      <p>अपना game चुनिए</p>
+    </div>
+
+    <div class="grid">
+
+      <div class="card game-card">
+        <div>
+          <div class="game-icon">🎲</div>
+          <h3>Ludo</h3>
+          <p>15×15 board, multiplayer और step-by-step goti.</p>
+        </div>
+        <button class="btn" onclick="openGame('ludoModal')">
+          Play Ludo
+        </button>
+      </div>
+
+      <div class="card game-card">
+        <div>
+          <div class="game-icon">🏵️</div>
+          <h3>Carrom</h3>
+          <p>Striker aim, speed और computer turn.</p>
+        </div>
+        <button class="btn" onclick="openGame('carromModal')">
+          Play Carrom
+        </button>
+      </div>
+
+      <div class="card game-card">
+        <div>
+          <div class="game-icon">🏎️</div>
+          <h3>Car Racing</h3>
+          <p>Speed control और Left / Right steering.</p>
+        </div>
+        <button class="btn" onclick="openGame('raceModal')">
+          Race
+        </button>
+      </div>
+
+      <div class="card game-card">
+        <div>
+          <div class="game-icon">🎡</div>
+          <h3>Spin</h3>
+          <p>Virtual coins के साथ wheel spin.</p>
+        </div>
+        <button class="btn" onclick="openGame('spinModal')">
+          Spin
+        </button>
+      </div>
+
+      <div class="card game-card">
+        <div>
+          <div class="game-icon">🧠</div>
+          <h3>Quick Quiz</h3>
+          <p>Random questions और sound feedback.</p>
+        </div>
+        <button class="btn" onclick="openGame('quizModal')">
+          Start Quiz
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section id="content">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>📚 Knowledge & Content</h2>
+      <p>Knowledge, Bhakti, Blogs और AI Generator</p>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>🧠 Knowledge / Gyan</h3>
+        <p>
+          रोजमर्रा की जानकारी और सामान्य ज्ञान।
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🙏 Bhakti</h3>
+        <p>
+          सकारात्मक और devotional content।
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🎵 Bhajan & Kirtan</h3>
+        <p>
+          भजन और कीर्तन content।
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>📝 Blogs</h3>
+        <p>
+          Gaming, technology और apps से जुड़े topics।
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🤖 AI Generator</h3>
+        <p>
+          Local template-based content generator।
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🤖 Content Generator</h3>
+
+        <div class="ai-form">
+
+          <select id="aiType">
+            <option value="shayari">Shayari</option>
+            <option value="dialogue">Dialogue</option>
+            <option value="joke">Joke</option>
+            <option value="motivation">Motivation</option>
+            <option value="gaming">Gaming Post</option>
+          </select>
+
+          <input id="aiTopic"
+            type="text"
+            placeholder="Topic लिखें">
+
+          <button class="btn" onclick="generateContent()">
+            ✨ Generate
+          </button>
+
+          <div id="aiResult" class="ai-result"></div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section id="qa">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>❓ Question & Answer</h2>
+      <p>GAMEZONE ARENA के बारे में</p>
+    </div>
+
+    <div class="qa">
+
+      <div class="card">
+        <h3>क्या coins real money हैं?</h3>
+        <p>
+          नहीं। Virtual coins gaming features के लिए हैं।
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>क्या coins withdraw हो सकते हैं?</h3>
+        <p>
+          नहीं। Virtual coins have no monetary value and cannot be withdrawn.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>क्या Racing में steering है?</h3>
+        <p>
+          हाँ। Left और Right controls हैं।
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>क्या games में sound है?</h3>
+        <p>
+          हाँ। Interactive actions में sound feedback दिया गया है।
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section id="about">
+  <div class="container">
+    <div class="card">
+      <h2>ℹ️ About GAMEZONE ARENA</h2>
 
       <p>
-        Play Ludo, Carrom, Racing, Spin and Quick Quiz with a clean,
-        mobile-friendly GAMEZONE ARENA experience.
+        GAMEZONE ARENA एक gaming और entertainment platform है
+        जिसमें casual games, daily content, quizzes और digital
+        experiences शामिल हैं।
       </p>
 
-      <button class="btn" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">
-        🎮 Play Games
-      </button>
+      <p>
+        Play sharp. Rise fast.
+      </p>
     </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="adbox">Advertisement</div>
-    </div>
-  </section>
-
-  <section id="daily">
-    <div class="container">
-      <div class="section-title">
-        <h2>📅 Daily Content</h2>
-        <p>हर दिन नया content</p>
-      </div>
-
-      <div id="dailyContent" class="card daily-box"></div>
-
-      <div class="chips" style="margin-top:15px;justify-content:center">
-        <span class="chip">📰 News</span>
-        <span class="chip">❤️ Shayari</span>
-        <span class="chip">🎬 Dialogues</span>
-        <span class="chip">📹 Vlogs</span>
-        <span class="chip">🙏 Bhakti</span>
-        <span class="chip">🎵 Bhajan</span>
-        <span class="chip">🎶 Kirtan</span>
-        <span class="chip">🧠 Knowledge</span>
-        <span class="chip">🤖 AI</span>
-        <span class="chip">😂 Jokes</span>
-        <span class="chip">📝 Blogs</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="games">
-    <div class="container">
-      <div class="section-title">
-        <h2>🎮 Games</h2>
-        <p>अपना game चुनिए</p>
-      </div>
-
-      <div class="grid">
-
-        <div class="card game-card">
-          <div>
-            <div class="game-icon">🎲</div>
-            <h3>Ludo</h3>
-            <p>15×15 board, multiplayer और step-by-step goti movement.</p>
-          </div>
-          <button class="btn" onclick="openGame('ludoModal')">Play Ludo</button>
-        </div>
-
-        <div class="card game-card">
-          <div>
-            <div class="game-icon">🏵️</div>
-            <h3>Carrom</h3>
-            <p>Striker aim, adjustable speed और computer turn.</p>
-          </div>
-          <button class="btn" onclick="openGame('carromModal')">Play Carrom</button>
-        </div>
-
-        <div class="card game-card">
-          <div>
-            <div class="game-icon">🏎️</div>
-            <h3>Car Racing</h3>
-            <p>Speed control और Left / Right steering.</p>
-          </div>
-          <button class="btn" onclick="openGame('raceModal')">Race</button>
-        </div>
-
-        <div class="card game-card">
-          <div>
-            <div class="game-icon">🎡</div>
-            <h3>Spin</h3>
-            <p>Virtual coins के साथ wheel spin.</p>
-          </div>
-          <button class="btn" onclick="openGame('spinModal')">Spin</button>
-        </div>
-
-        <div class="card game-card">
-          <div>
-            <div class="game-icon">🧠</div>
-            <h3>Quick Quiz</h3>
-            <p>Random questions और score.</p>
-          </div>
-          <button class="btn" onclick="openGame('quizModal')">Start Quiz</button>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="content">
-    <div class="container">
-      <div class="section-title">
-        <h2>📚 Knowledge & Content</h2>
-        <p>Knowledge, Bhakti, Blogs और AI Generator</p>
-      </div>
-
-      <div class="grid">
-
-        <div class="card">
-          <h3>🧠 Knowledge / Gyan</h3>
-          <p>
-            रोजमर्रा की जानकारी, सामान्य ज्ञान और technology से जुड़ी
-            छोटी-छोटी उपयोगी बातें।
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>🙏 Bhakti</h3>
-          <p>
-            भक्ति विचार, सकारात्मक संदेश और आध्यात्मिक प्रेरणा।
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>🎵 Bhajan & Kirtan</h3>
-          <p>
-            भजन और कीर्तन के लिए devotional content section।
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>📝 Blogs</h3>
-          <p>
-            Gaming, technology, apps और सामान्य जानकारी से जुड़े blog topics।
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>🤖 AI Generator</h3>
-          <p>
-            Local template-based generator से ideas और short content बनाइए।
-          </p>
-          <button class="btn secondary" onclick="document.getElementById('aiBox').scrollIntoView({behavior:'smooth'})">
-            Open AI
-          </button>
-        </div>
-
-        <div id="aiBox" class="card">
-          <h3>🤖 Content Generator</h3>
-
-          <div class="ai-form">
-            <select id="aiType">
-              <option value="shayari">Shayari</option>
-              <option value="dialogue">Dialogue</option>
-              <option value="joke">Joke</option>
-              <option value="motivation">Motivation</option>
-              <option value="gaming">Gaming Post</option>
-            </select>
-
-            <input id="aiTopic" type="text" placeholder="Topic लिखें">
-
-            <button class="btn" onclick="generateContent()">
-              ✨ Generate
-            </button>
-
-            <div id="aiResult" class="ai-result"></div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="qa">
-    <div class="container">
-      <div class="section-title">
-        <h2>❓ Question & Answer</h2>
-        <p>GAMEZONE ARENA के बारे में</p>
-      </div>
-
-      <div class="qa">
-        <div class="card">
-          <h3>क्या coins real money हैं?</h3>
-          <p>
-            नहीं। GAMEZONE ARENA में virtual coins का उपयोग gaming features
-            के लिए है।
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>क्या coins withdraw हो सकते हैं?</h3>
-          <p>
-            नहीं। Virtual coins have no monetary value and cannot be withdrawn.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>क्या Ludo में AI है?</h3>
-          <p>
-            Ludo का मुख्य multiplayer mode human players के लिए बनाया गया है।
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>क्या Racing में steering है?</h3>
-          <p>
-            हाँ। Left और Right controls से car को दोनों तरफ move किया जा सकता है।
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="container">
-      <div class="card">
-        <h2>ℹ️ About GAMEZONE ARENA</h2>
-        <p>
-          GAMEZONE ARENA एक gaming और entertainment platform है जिसमें
-          casual games, daily content, quizzes और अन्य digital experiences
-          शामिल हैं।
-        </p>
-        <p>
-          हमारा उद्देश्य simple, fast और enjoyable gaming experience देना है।
-        </p>
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 
 </main>
 
+
 <footer>
   <strong>GAMEZONE ARENA</strong>
+
   <div>Play sharp. Rise fast.</div>
 
   <div class="legal">
@@ -1279,372 +1111,646 @@
 </footer>
 
 
-<!-- =========================================================
+<!-- ==========================================================
      LUDO MODAL
-     ========================================================= -->
+     ========================================================== -->
 
 <div id="ludoModal" class="modal">
-  <div class="modal-box">
 
-    <div class="modal-head">
-      <h2>🎲 GAMEZONE LUDO</h2>
-      <button class="close" onclick="closeGame('ludoModal')">×</button>
-    </div>
+<div class="modal-box">
 
-    <div class="ludo-intro">
-      HUMAN MULTIPLAYER LUDO • 15×15 BOARD
-    </div>
+  <div class="modal-head">
+    <h2>🎲 GAMEZONE LUDO</h2>
 
-    <div class="ludo-player-select">
-      <button class="btn secondary" data-players="2" onclick="setLudoPlayers(2,this)">
-        2 Players
-      </button>
+    <button class="close"
+      onclick="closeGame('ludoModal')">
+      ×
+    </button>
+  </div>
 
-      <button class="btn secondary active" data-players="3" onclick="setLudoPlayers(3,this)">
-        3 Players
-      </button>
+  <div class="ludo-status" id="ludoStatus">
+    Red की चाल
+  </div>
 
-      <button class="btn secondary" data-players="4" onclick="setLudoPlayers(4,this)">
-        4 Players
-      </button>
-    </div>
+  <div class="ludo-player-select">
 
-    <div class="ludo-status" id="ludoStatus">
-      Red की चाल
-    </div>
+    <button
+      class="btn secondary"
+      onclick="setLudoPlayers(2,this)">
+      2 Players
+    </button>
 
-    <div class="ludo-stage">
+    <button
+      class="btn secondary active"
+      onclick="setLudoPlayers(3,this)">
+      3 Players
+    </button>
 
-      <!-- GREEN DICE -->
-      <div class="ludo-dice-seat top">
-        <div class="dice-owner" style="color:var(--green)">GREEN</div>
-        <button id="dice-green" class="ludo-die green" onclick="rollLudo(1)" aria-label="Green dice"></button>
-        <div id="turn-green" class="turn-small"></div>
-      </div>
+    <button
+      class="btn secondary"
+      onclick="setLudoPlayers(4,this)">
+      4 Players
+    </button>
 
-      <!-- BLUE DICE -->
-      <div class="ludo-dice-seat left">
-        <div class="dice-owner" style="color:var(--blue)">BLUE</div>
-        <button id="dice-blue" class="ludo-die blue" onclick="rollLudo(3)" aria-label="Blue dice"></button>
-        <div id="turn-blue" class="turn-small"></div>
-      </div>
+  </div>
 
-      <!-- ORIGINAL 15x15 LUDO BOARD IN CENTER -->
-      <div class="ludo-board-wrap">
-        <div id="ludoBoard" class="ludo-board"></div>
 
-        <div class="ludo-center-home">
-          <div id="ludoCenterBall" class="ludo-center-ball">
-            🎲
-          </div>
+  <div class="ludo-stage">
+
+    <!-- TWO DICE ABOVE THE BOARD -->
+    <div class="ludo-top-dice">
+
+      <div class="ludo-dice-seat">
+
+        <div class="dice-owner"
+          style="color:var(--green)">
+          GREEN
         </div>
+
+        <button
+          id="dice-green"
+          class="ludo-die green"
+          onclick="rollLudo(1)">
+        </button>
+
+        <div id="turn-green"
+          class="turn-small">
+        </div>
+
       </div>
 
-      <!-- YELLOW DICE -->
-      <div class="ludo-dice-seat right">
-        <div class="dice-owner" style="color:var(--yellow)">YELLOW</div>
-        <button id="dice-yellow" class="ludo-die yellow" onclick="rollLudo(2)" aria-label="Yellow dice"></button>
-        <div id="turn-yellow" class="turn-small"></div>
-      </div>
 
-      <!-- RED DICE -->
-      <div class="ludo-dice-seat bottom">
-        <div class="dice-owner" style="color:var(--red)">RED</div>
-        <button id="dice-red" class="ludo-die red" onclick="rollLudo(0)" aria-label="Red dice"></button>
-        <div id="turn-red" class="turn-small"></div>
+      <div class="ludo-dice-seat">
+
+        <div class="dice-owner"
+          style="color:var(--yellow)">
+          YELLOW
+        </div>
+
+        <button
+          id="dice-yellow"
+          class="ludo-die yellow"
+          onclick="rollLudo(2)">
+        </button>
+
+        <div id="turn-yellow"
+          class="turn-small">
+        </div>
+
       </div>
 
     </div>
 
-    <div class="ludo-rules">
-      🎲 6 आने पर गोटी बाहर आ सकती है • ⭐ Safe cells •
-      गोटी हर खाने पर एक-एक step चलेगी
+
+    <!-- BIG 15x15 LUDO BOARD IN CENTER -->
+    <div class="ludo-board-wrap">
+
+      <div id="ludoBoard"
+        class="ludo-board">
+      </div>
+
+      <div class="ludo-center-home">
+
+        <div id="ludoCenterBall"
+          class="ludo-center-ball">
+          ●
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- TWO DICE BELOW THE BOARD -->
+    <div class="ludo-bottom-dice">
+
+      <div class="ludo-dice-seat">
+
+        <div class="dice-owner"
+          style="color:var(--red)">
+          RED
+        </div>
+
+        <button
+          id="dice-red"
+          class="ludo-die red"
+          onclick="rollLudo(0)">
+        </button>
+
+        <div id="turn-red"
+          class="turn-small">
+        </div>
+
+      </div>
+
+
+      <div class="ludo-dice-seat">
+
+        <div class="dice-owner"
+          style="color:var(--blue)">
+          BLUE
+        </div>
+
+        <button
+          id="dice-blue"
+          class="ludo-die blue"
+          onclick="rollLudo(3)">
+        </button>
+
+        <div id="turn-blue"
+          class="turn-small">
+        </div>
+
+      </div>
+
     </div>
 
   </div>
+
+
+  <div class="ludo-status">
+    🎲 6 आने पर गोटी Home से बाहर निकलेगी।
+    गोटी हर खाने पर एक-एक step चलेगी।
+  </div>
+
+</div>
 </div>
 
 
-<!-- =========================================================
-     CARROM MODAL
-     ========================================================= -->
+<!-- ==========================================================
+     CARROM
+     ========================================================== -->
 
 <div id="carromModal" class="modal">
-  <div class="modal-box">
 
-    <div class="modal-head">
-      <h2>🏵️ GAMEZONE CARROM</h2>
-      <button class="close" onclick="closeGame('carromModal')">×</button>
-    </div>
+<div class="modal-box">
 
-    <div class="carrom-layout">
+  <div class="modal-head">
 
-      <div class="carrom-wrap">
-        <canvas id="carromCanvas" width="700" height="700"></canvas>
-      </div>
+    <h2>🏵️ GAMEZONE CARROM</h2>
 
-      <div class="carrom-info">
-
-        <div class="carrom-stat">
-          <strong id="carromTurnLabel">आपकी चाल</strong>
-        </div>
-
-        <div class="range-wrap">
-          <label for="carromSpeed">Speed</label>
-          <input id="carromSpeed" type="range" min=".7" max="2.5" step=".1" value="1.6">
-          <span id="carromSpeedValue">1.6×</span>
-        </div>
-
-        <div class="carrom-stat">
-          <strong>Power</strong>
-          <div id="carromPowerText">0%</div>
-        </div>
-
-        <div class="aim-help">
-          Striker से जिस दिशा में मारना है, उसी दिशा में board पर
-          finger/mouse से drag करके shot करें।
-        </div>
-
-        <button class="btn secondary" onclick="resetCarrom()">
-          🔄 Restart Carrom
-        </button>
-
-      </div>
-    </div>
+    <button class="close"
+      onclick="closeGame('carromModal')">
+      ×
+    </button>
 
   </div>
-</div>
 
 
-<!-- =========================================================
-     RACING MODAL
-     ========================================================= -->
+  <div class="carrom-layout">
 
-<div id="raceModal" class="modal">
-  <div class="modal-box">
-
-    <div class="modal-head">
-      <h2>🏎️ CAR RACING</h2>
-      <button class="close" onclick="closeGame('raceModal')">×</button>
+    <div class="carrom-wrap">
+      <canvas
+        id="carromCanvas"
+        width="700"
+        height="700">
+      </canvas>
     </div>
 
-    <div class="race-layout">
 
-      <div class="race-controls">
+    <div class="carrom-info">
 
-        <div class="range-wrap">
-          <label for="raceSpeed">Speed</label>
-          <input id="raceSpeed" type="range" min="4" max="12" step="1" value="7">
-          <span id="raceSpeedValue">7</span>
-        </div>
-
-        <!-- START / RESTART BUTTON -->
-        <button class="btn" onclick="startRace()">
-          ▶ Start / Restart
-        </button>
-
+      <div class="carrom-stat">
+        <strong id="carromTurnLabel">
+          आपकी चाल
+        </strong>
       </div>
 
-      <canvas id="raceCanvas" width="360" height="640"></canvas>
+      <div class="range-wrap">
+        <label>Speed</label>
 
-      <div class="steering">
-        <button id="leftBtn" class="steer-btn">⬅️</button>
-        <button id="rightBtn" class="steer-btn">➡️</button>
+        <input
+          id="carromSpeed"
+          type="range"
+          min=".7"
+          max="2.5"
+          step=".1"
+          value="1.6">
+
+        <span id="carromSpeedValue">
+          1.6×
+        </span>
       </div>
 
-      <div id="raceStatus" class="ludo-status">
-        Start / Restart दबाकर race शुरू करें
+      <div class="carrom-stat">
+        Power:
+        <strong id="carromPowerText">
+          0%
+        </strong>
       </div>
 
-    </div>
-
-  </div>
-</div>
-
-
-<!-- =========================================================
-     SPIN MODAL
-     ========================================================= -->
-
-<div id="spinModal" class="modal">
-  <div class="modal-box">
-
-    <div class="modal-head">
-      <h2>🎡 SPIN</h2>
-      <button class="close" onclick="closeGame('spinModal')">×</button>
-    </div>
-
-    <div class="spin-layout">
-
-      <div class="coin-display">
-        🪙 Coins: <span id="coinDisplay">1000</span>
+      <div class="aim-help">
+        Finger को striker से जिस दिशा में ले जाएँ,
+        striker उसी direction में आगे जाएगा।
       </div>
 
-      <canvas id="spinCanvas" width="500" height="500"></canvas>
-
-      <div id="spinResult" class="ludo-status">
-        Spin करें
-      </div>
-
-      <button class="btn" id="spinButton" onclick="spinWheel()">
-        🎡 SPIN
+      <button
+        class="btn secondary"
+        onclick="resetCarrom()">
+        🔄 Restart Carrom
       </button>
 
     </div>
 
   </div>
+
+</div>
 </div>
 
 
-<!-- =========================================================
-     QUIZ MODAL
-     ========================================================= -->
+<!-- ==========================================================
+     RACING
+     ========================================================== -->
 
-<div id="quizModal" class="modal">
-  <div class="modal-box">
+<div id="raceModal" class="modal">
 
-    <div class="modal-head">
-      <h2>🧠 QUICK QUIZ</h2>
-      <button class="close" onclick="closeGame('quizModal')">×</button>
-    </div>
+<div class="modal-box">
 
-    <div id="quizArea" class="quiz-card"></div>
+  <div class="modal-head">
+
+    <h2>🏎️ CAR RACING</h2>
+
+    <button class="close"
+      onclick="closeGame('raceModal')">
+      ×
+    </button>
 
   </div>
+
+
+  <div class="race-layout">
+
+    <div class="race-controls">
+
+      <div class="range-wrap">
+
+        <label>Speed</label>
+
+        <input
+          id="raceSpeed"
+          type="range"
+          min="4"
+          max="12"
+          step="1"
+          value="7">
+
+        <span id="raceSpeedValue">
+          7
+        </span>
+
+      </div>
+
+
+      <button
+        class="btn"
+        onclick="startRace()">
+        ▶ Start / Restart
+      </button>
+
+    </div>
+
+
+    <canvas
+      id="raceCanvas"
+      width="360"
+      height="640">
+    </canvas>
+
+
+    <!-- LEFT / RIGHT -->
+    <div class="steering">
+
+      <button
+        id="leftBtn"
+        class="steer-btn">
+        ⬅️ LEFT
+      </button>
+
+      <button
+        id="rightBtn"
+        class="steer-btn">
+        RIGHT ➡️
+      </button>
+
+    </div>
+
+
+    <div
+      id="raceStatus"
+      class="ludo-status">
+      ▶ Start / Restart दबाएँ
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+
+<!-- ==========================================================
+     SPIN
+     ========================================================== -->
+
+<div id="spinModal" class="modal">
+
+<div class="modal-box">
+
+  <div class="modal-head">
+
+    <h2>🎡 SPIN</h2>
+
+    <button class="close"
+      onclick="closeGame('spinModal')">
+      ×
+    </button>
+
+  </div>
+
+
+  <div class="spin-layout">
+
+    <div class="coin-display">
+      🪙 Coins:
+      <span id="coinDisplay">1000</span>
+    </div>
+
+    <canvas
+      id="spinCanvas"
+      width="500"
+      height="500">
+    </canvas>
+
+    <div
+      id="spinResult"
+      class="ludo-status">
+      Spin करें
+    </div>
+
+    <button
+      id="spinButton"
+      class="btn"
+      onclick="spinWheel()">
+      🎡 SPIN
+    </button>
+
+  </div>
+
+</div>
+</div>
+
+
+<!-- ==========================================================
+     QUIZ
+     ========================================================== -->
+
+<div id="quizModal" class="modal">
+
+<div class="modal-box">
+
+  <div class="modal-head">
+
+    <h2>🧠 QUICK QUIZ</h2>
+
+    <button class="close"
+      onclick="closeGame('quizModal')">
+      ×
+    </button>
+
+  </div>
+
+  <div
+    id="quizArea"
+    class="quiz-card">
+  </div>
+
+</div>
 </div>
 
 
 <script>
-/* ============================================================
-   BASIC UTILITIES
-   ============================================================ */
+
+/* ==========================================================
+   BASIC
+   ========================================================== */
 
 const $ = id => document.getElementById(id);
 
 function wait(ms){
-  return new Promise(resolve => setTimeout(resolve,ms));
+  return new Promise(resolve=>setTimeout(resolve,ms));
 }
 
 function openGame(id){
+
   $(id).classList.add("open");
 
-  if(id === "ludoModal"){
+  getAudio();
+
+  if(id==="ludoModal"){
     initLudo();
   }
 
-  if(id === "carromModal"){
+  if(id==="carromModal"){
     resetCarrom();
   }
 
-  if(id === "raceModal"){
+  if(id==="raceModal"){
     drawRace();
   }
 
-  if(id === "spinModal"){
+  if(id==="spinModal"){
     drawWheel();
   }
+
 }
 
 function closeGame(id){
+
   $(id).classList.remove("open");
 
-  if(id === "raceModal"){
+  if(id==="raceModal"){
     stopRace();
   }
 
-  if(id === "carromModal"){
-    carrom.active = false;
+  if(id==="carromModal"){
+    carrom.active=false;
   }
+
 }
 
 document.querySelectorAll(".modal").forEach(modal=>{
+
   modal.addEventListener("click",e=>{
-    if(e.target === modal){
+
+    if(e.target===modal){
       modal.classList.remove("open");
     }
+
   });
+
 });
 
 
-/* ============================================================
+/* ==========================================================
    SOUND ENGINE
-   ============================================================ */
+   ========================================================== */
 
-let audioCtx = null;
+let audioCtx=null;
 
 function getAudio(){
+
   if(!audioCtx){
-    const AC = window.AudioContext || window.webkitAudioContext;
+
+    const AC =
+      window.AudioContext ||
+      window.webkitAudioContext;
 
     if(!AC) return null;
 
-    audioCtx = new AC();
+    audioCtx=new AC();
   }
 
-  if(audioCtx.state === "suspended"){
+  if(audioCtx.state==="suspended"){
     audioCtx.resume().catch(()=>{});
   }
 
   return audioCtx;
 }
 
-function tone(freq=440,duration=.08,type="sine",volume=.045){
-  const ctx = getAudio();
-  if(!ctx) return;
+function tone(
+  freq=440,
+  duration=.08,
+  type="sine",
+  volume=.045
+){
+
+  const ctx=getAudio();
+
+  if(!ctx)return;
 
   try{
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
 
-    osc.type = type;
-    osc.frequency.value = freq;
+    const osc=ctx.createOscillator();
+    const gain=ctx.createGain();
 
-    gain.gain.setValueAtTime(volume,ctx.currentTime);
+    osc.type=type;
+    osc.frequency.value=freq;
+
+    gain.gain.setValueAtTime(
+      volume,
+      ctx.currentTime
+    );
+
     gain.gain.exponentialRampToValueAtTime(
       .0001,
-      ctx.currentTime + duration
+      ctx.currentTime+duration
     );
 
     osc.connect(gain);
     gain.connect(ctx.destination);
 
     osc.start();
-    osc.stop(ctx.currentTime + duration);
+    osc.stop(
+      ctx.currentTime+duration
+    );
+
   }catch(e){}
+
 }
 
 function diceSound(){
-  tone(250,.06,"square",.04);
-  setTimeout(()=>tone(390,.08,"square",.04),55);
-  setTimeout(()=>tone(520,.10,"square",.04),110);
+
+  tone(260,.05,"square",.04);
+
+  setTimeout(
+    ()=>tone(390,.06,"square",.04),
+    50
+  );
+
+  setTimeout(
+    ()=>tone(530,.09,"square",.04),
+    100
+  );
+
 }
 
 function stepSound(){
-  tone(150,.045,"triangle",.035);
+  tone(155,.045,"triangle",.035);
 }
 
 function captureSound(){
+
   tone(180,.08,"sawtooth",.045);
-  setTimeout(()=>tone(90,.13,"sawtooth",.035),70);
+
+  setTimeout(
+    ()=>tone(90,.13,"sawtooth",.035),
+    70
+  );
+
 }
 
 function winSound(){
-  [523,659,784,1046].forEach((f,i)=>{
-    setTimeout(()=>tone(f,.18,"sine",.055),i*110);
-  });
+
+  [523,659,784,1046].forEach(
+    (f,i)=>{
+      setTimeout(
+        ()=>tone(f,.17,"sine",.055),
+        i*110
+      );
+    }
+  );
+
+}
+
+function correctSound(){
+
+  tone(660,.09,"sine",.05);
+
+  setTimeout(
+    ()=>tone(880,.13,"sine",.05),
+    90
+  );
+
+}
+
+function wrongSound(){
+
+  tone(180,.12,"sawtooth",.05);
+
+  setTimeout(
+    ()=>tone(120,.16,"sawtooth",.04),
+    100
+  );
+
 }
 
 function carSteerSound(){
-  tone(180,.035,"square",.025);
+  tone(180,.035,"square",.03);
 }
 
 function carMoveSound(){
-  tone(75,.035,"sawtooth",.012);
+  tone(70,.025,"sawtooth",.012);
 }
 
 function carCrashSound(){
-  tone(70,.18,"sawtooth",.05);
-  setTimeout(()=>tone(45,.20,"sawtooth",.04),90);
+
+  tone(70,.18,"sawtooth",.06);
+
+  setTimeout(
+    ()=>tone(45,.20,"sawtooth",.05),
+    90
+  );
+
+}
+
+function pocketSound(){
+
+  tone(760,.08,"sine",.045);
+
+  setTimeout(
+    ()=>tone(1100,.10,"sine",.04),
+    70
+  );
+
 }
 
 function spinSound(){
@@ -1652,747 +1758,1167 @@ function spinSound(){
 }
 
 function spinWinSound(){
-  [440,550,660,880].forEach((f,i)=>{
-    setTimeout(()=>tone(f,.10,"sine",.04),i*90);
-  });
+
+  [440,550,660,880].forEach(
+    (f,i)=>{
+      setTimeout(
+        ()=>tone(f,.10,"sine",.045),
+        i*90
+      );
+    }
+  );
+
 }
 
-function pocketSound(){
-  tone(760,.08,"sine",.04);
-  setTimeout(()=>tone(1100,.10,"sine",.035),70);
-}
+document.addEventListener(
+  "pointerdown",
+  ()=>{
+    getAudio();
+  },
+  {once:true}
+);
 
-document.addEventListener("pointerdown",()=>{
-  getAudio();
-},{once:true});
 
+/* ==========================================================
+   DAILY
+   ========================================================== */
 
-/* ============================================================
-   DAILY CONTENT
-   ============================================================ */
+const dailyItems=[
 
-const dailyItems = [
   {
     type:"🧠 Knowledge",
-    text:"छोटी-सी रोज की सीख भी समय के साथ बड़ी skill बन सकती है।"
+    text:"छोटी-सी रोज की सीख समय के साथ बड़ी skill बन सकती है।"
   },
+
   {
     type:"❤️ Shayari",
     text:"मेहनत की राह पर जो चलता है, मंज़िल उसका इंतज़ार करती है।"
   },
+
   {
     type:"🎬 Dialogue",
-    text:"खेल वही मज़ेदार है, जिसमें अगली चाल के लिए दिल तैयार रहे।"
+    text:"खेल वही मज़ेदार है जिसमें अगली चाल के लिए दिल तैयार रहे।"
   },
+
   {
     type:"🙏 Bhakti",
     text:"विश्वास रखिए, अच्छे कर्म कभी व्यर्थ नहीं जाते।"
   },
+
   {
     type:"😂 Joke",
-    text:"Game शुरू करने से पहले खिलाड़ी बोलता है — बस एक match! 😄"
+    text:"Game शुरू किया और बोला — बस एक match! 😄"
   },
+
   {
     type:"🎮 Gaming",
-    text:"Practice बढ़ाइए, timing सुधारिए और अपनी अगली चाल सोचिए।"
+    text:"Practice बढ़ाइए, timing सुधारिए और अगली चाल सोचिए।"
   },
+
   {
     type:"🤖 AI",
-    text:"AI एक tool है; सही सवाल पूछना अच्छे परिणाम की शुरुआत है।"
+    text:"सही सवाल पूछना अच्छे AI result की शुरुआत है।"
   },
+
   {
     type:"📝 Blog",
-    text:"Mobile gaming में simple controls और fast response experience को बेहतर बनाते हैं।"
+    text:"Simple controls और fast response gaming experience को बेहतर बनाते हैं।"
   },
+
   {
     type:"🎵 Bhajan",
-    text:"भक्ति में मन लगाइए और सकारात्मक विचारों को जीवन में जगह दीजिए।"
+    text:"सकारात्मक विचारों को जीवन में जगह दीजिए।"
   },
+
   {
     type:"🎶 Kirtan",
-    text:"संगीत और कीर्तन मन को शांत करने का एक सुंदर माध्यम हो सकते हैं।"
+    text:"कीर्तन और संगीत मन को शांत करने का माध्यम हो सकते हैं।"
   },
+
   {
     type:"📹 Vlog",
-    text:"आज का छोटा gaming moment भी आपकी अगली बड़ी याद बन सकता है।"
+    text:"आज का छोटा gaming moment आपकी अगली बड़ी याद बन सकता है।"
   },
+
   {
     type:"📰 News",
-    text:"GAMEZONE ARENA में daily entertainment और gaming content लगातार बढ़ाया जा रहा है।"
+    text:"GAMEZONE ARENA में gaming और entertainment content बढ़ाया जा रहा है।"
   }
+
 ];
 
 function dayNumber(){
-  const now = new Date();
-  const start = new Date(now.getFullYear(),0,0);
-  return Math.floor((now-start)/86400000);
+
+  const now=new Date();
+
+  const start=
+    new Date(now.getFullYear(),0,0);
+
+  return Math.floor(
+    (now-start)/86400000
+  );
+
 }
 
 function renderDaily(){
-  const item = dailyItems[dayNumber()%dailyItems.length];
 
-  $("dailyContent").innerHTML = `
-    <div class="daily-type">${item.type}</div>
-    <div class="daily-text">${item.text}</div>
+  const item=
+    dailyItems[
+      dayNumber()%dailyItems.length
+    ];
+
+  $("dailyContent").innerHTML=`
+
+    <div class="daily-type">
+      ${item.type}
+    </div>
+
+    <div class="daily-text">
+      ${item.text}
+    </div>
+
   `;
+
 }
 
 renderDaily();
 
 
-/* ============================================================
-   LUDO — ORIGINAL 15 x 15 BOARD
-   ============================================================ */
+/* ==========================================================
+   LUDO
+   ========================================================== */
 
-const LUDO_PLAYERS = [
+const LUDO_PLAYERS=[
+
   {
     key:"red",
     name:"Red",
-    start:0,
-    color:"#ef334c"
+    start:0
   },
+
   {
     key:"green",
     name:"Green",
-    start:13,
-    color:"#16c98b"
+    start:13
   },
+
   {
     key:"yellow",
     name:"Yellow",
-    start:26,
-    color:"#f6c900"
+    start:26
   },
+
   {
     key:"blue",
     name:"Blue",
-    start:39,
-    color:"#318de2"
+    start:39
   }
+
 ];
 
+
 /*
-  52-square standard-style outer path.
-  Coordinates are row,column in 15x15 board.
+  Standard-style 52 path.
 */
-const ludoPath = [
+const ludoPath=[
+
   [6,1],[6,2],[6,3],[6,4],[6,5],
+
   [5,6],[4,6],[3,6],[2,6],[1,6],
+
   [0,6],[0,7],[0,8],
+
   [1,8],[2,8],[3,8],[4,8],[5,8],
+
   [6,9],[6,10],[6,11],[6,12],[6,13],[6,14],
-  [7,14],[8,14],[8,13],[8,12],[8,11],[8,10],[8,9],
+
+  [7,14],
+
+  [8,14],[8,13],[8,12],[8,11],[8,10],[8,9],
+
   [9,8],[10,8],[11,8],[12,8],[13,8],
+
   [14,8],[14,7],[14,6],
+
   [13,6],[12,6],[11,6],[10,6],[9,6],
+
   [8,5],[8,4],[8,3],[8,2],[8,1],[8,0],
+
   [7,0],[6,0]
+
 ];
 
-/*
-  Home lanes.
-*/
-const ludoLanes = {
+
+const ludoLanes={
+
   red:[
-    [7,1],[7,2],[7,3],[7,4],[7,5],[7,6]
+    [7,1],[7,2],[7,3],
+    [7,4],[7,5],[7,6]
   ],
+
   green:[
-    [1,7],[2,7],[3,7],[4,7],[5,7],[6,7]
+    [1,7],[2,7],[3,7],
+    [4,7],[5,7],[6,7]
   ],
+
   yellow:[
-    [7,13],[7,12],[7,11],[7,10],[7,9],[7,8]
+    [7,13],[7,12],[7,11],
+    [7,10],[7,9],[7,8]
   ],
+
   blue:[
-    [13,7],[12,7],[11,7],[10,7],[9,7],[8,7]
+    [13,7],[12,7],[11,7],
+    [10,7],[9,7],[8,7]
   ]
+
 };
 
-/*
-  Four home-yard positions.
-*/
-const ludoHomes = {
+
+const ludoHomes={
+
   red:[
-    [1,1],[1,4],[4,1],[4,4]
+    [1,1],[1,4],
+    [4,1],[4,4]
   ],
+
   green:[
-    [1,10],[1,13],[4,10],[4,13]
+    [1,10],[1,13],
+    [4,10],[4,13]
   ],
+
   yellow:[
-    [10,10],[10,13],[13,10],[13,13]
+    [10,10],[10,13],
+    [13,10],[13,13]
   ],
+
   blue:[
-    [10,1],[10,4],[13,1],[13,4]
+    [10,1],[10,4],
+    [13,1],[13,4]
   ]
+
 };
 
+
 /*
-  Safe stars include 1 and 8 as requested.
+  Safe cells.
+  1 और 8 भी safe हैं।
 */
-const safePathIndexes = new Set([
+const safePathIndexes=new Set([
   0,1,8,13,21,26,34,39,47
 ]);
 
-let ludoPlayerCount = 3;
-let ludoTurn = 0;
-let ludoBusy = false;
-let ludoGameStarted = false;
-let ludoSixCount = 0;
 
-let ludoState = LUDO_PLAYERS.map(p=>({
-  ...p,
-  tokens:[-1,-1,-1,-1]
-}));
+let ludoPlayerCount=3;
+let ludoTurn=0;
+let ludoBusy=false;
+let ludoGameStarted=false;
+let ludoSixCount=0;
+let ludoPendingDice=null;
 
-function createLudoCell(row,col){
-  const cell = document.createElement("div");
-  cell.className = "ludo-cell";
-  cell.dataset.row = row;
-  cell.dataset.col = col;
-  return cell;
+
+let ludoState=LUDO_PLAYERS.map(
+  p=>({
+    ...p,
+    tokens:[-1,-1,-1,-1]
+  })
+);
+
+
+function sameCoord(a,b){
+
+  return a &&
+    b &&
+    a[0]===b[0] &&
+    a[1]===b[1];
+
 }
 
-function isSameCoord(a,b){
-  return a && b && a[0] === b[0] && a[1] === b[1];
+
+function pathIndexAt(row,col){
+
+  return ludoPath.findIndex(
+    p=>p[0]===row &&
+       p[1]===col
+  );
+
 }
 
-function getPathIndexAt(row,col){
-  return ludoPath.findIndex(p=>p[0]===row && p[1]===col);
-}
 
-function ludoColorForPath(index){
-  if(index === 0) return "red";
-  if(index === 13) return "green";
-  if(index === 26) return "yellow";
-  if(index === 39) return "blue";
+function pathColor(index){
+
+  if(index===0)return"red";
+  if(index===13)return"green";
+  if(index===26)return"yellow";
+  if(index===39)return"blue";
+
   return null;
 }
 
+
 function drawLudoBoard(){
-  const board = $("ludoBoard");
-  board.innerHTML = "";
+
+  const board=$("ludoBoard");
+
+  board.innerHTML="";
+
 
   for(let r=0;r<15;r++){
+
     for(let c=0;c<15;c++){
 
-      const cell = createLudoCell(r,c);
+      const cell=
+        document.createElement("div");
+
+      cell.className="ludo-cell";
+
 
       /*
-        6x6 home yards.
+        Four 6x6 yards.
       */
-      if(r<6 && c<6){
+
+      if(r<6 && c<6)
         cell.classList.add("ludo-yard-red");
-      }
 
-      if(r<6 && c>8){
+      if(r<6 && c>8)
         cell.classList.add("ludo-yard-green");
-      }
 
-      if(r>8 && c>8){
+      if(r>8 && c>8)
         cell.classList.add("ludo-yard-yellow");
-      }
 
-      if(r>8 && c<6){
+      if(r>8 && c<6)
         cell.classList.add("ludo-yard-blue");
-      }
+
 
       /*
-        Yard inner areas.
+        Path.
       */
-      if(
-        (r<6 && c<6) ||
-        (r<6 && c>8) ||
-        (r>8 && c>8) ||
-        (r>8 && c<6)
-      ){
-        const inYard =
-          (r===1 || r===4) &&
-          (c===1 || c===4);
 
-        const inGreen =
-          (r===1 || r===4) &&
-          (c===10 || c===13);
+      const pi=
+        pathIndexAt(r,c);
 
-        const inYellow =
-          (r===10 || r===13) &&
-          (c===10 || c===13);
+      if(pi>=0){
 
-        const inBlue =
-          (r===10 || r===13) &&
-          (c===1 || c===4);
+        cell.classList.add(
+          "path-"+(
+            pathColor(pi)||"red"
+          )
+        );
 
-        if(inYard || inGreen || inYellow || inBlue){
-          cell.style.background =
-            inYard ? "#ef5364" :
-            inGreen ? "#20e39a" :
-            inYellow ? "#ffd83d" :
-            "#4da3ff";
-        }
-      }
+        if(safePathIndexes.has(pi)){
 
-      const pathIndex = getPathIndexAt(r,c);
+          const star=
+            document.createElement("span");
 
-      if(pathIndex >= 0){
-        cell.classList.add("path-"+(ludoColorForPath(pathIndex) || "red"));
+          star.textContent="★";
 
-        if(safePathIndexes.has(pathIndex)){
-          const star = document.createElement("span");
-          star.textContent = "★";
-          star.style.fontSize = "clamp(9px,1.7vw,18px)";
-          star.style.color = "#222";
-          star.style.opacity = ".75";
+          star.style.fontSize=
+            "clamp(9px,1.8vw,18px)";
+
+          star.style.color="#222";
+
+          star.style.opacity=".75";
+
           cell.appendChild(star);
         }
+
       }
 
+
       /*
-        Six home-lane squares.
+        Home lanes.
       */
-      Object.entries(ludoLanes).forEach(([color,lane])=>{
-        lane.forEach(pos=>{
-          if(isSameCoord(pos,[r,c])){
-            cell.classList.add("path-"+color);
-          }
+
+      Object.entries(ludoLanes)
+        .forEach(([color,lane])=>{
+
+          lane.forEach(pos=>{
+
+            if(
+              pos[0]===r &&
+              pos[1]===c
+            ){
+
+              cell.classList.add(
+                "path-"+color
+              );
+
+            }
+
+          });
+
         });
-      });
+
 
       /*
         Center 3x3.
       */
-      if(r>=6 && r<=8 && c>=6 && c<=8){
-        cell.className = "ludo-cell center-cell";
+
+      if(
+        r>=6 && r<=8 &&
+        c>=6 && c<=8
+      ){
+
+        cell.className=
+          "ludo-cell center-cell";
+
       }
 
+
       board.appendChild(cell);
+
     }
+
   }
 
-  /*
-    Draw colored center triangles.
-  */
-  const centerCells = board.querySelectorAll(".center-cell");
-
-  centerCells.forEach(cell=>{
-    cell.style.background = "#fff";
-  });
 
   /*
-    Home yard circles.
+    Home dots.
   */
-  const cells = board.querySelectorAll(".ludo-cell");
 
-  function indexCell(r,c){
-    return r*15+c;
-  }
+  const allCells=
+    board.querySelectorAll(".ludo-cell");
 
-  const homes = [
-    {color:"red", positions:ludoHomes.red},
-    {color:"green", positions:ludoHomes.green},
-    {color:"yellow", positions:ludoHomes.yellow},
-    {color:"blue", positions:ludoHomes.blue}
-  ];
 
-  homes.forEach(group=>{
-    group.positions.forEach((pos)=>{
-      const cell = cells[indexCell(pos[0],pos[1])];
+  Object.entries(ludoHomes)
+    .forEach(([color,positions])=>{
 
-      if(!cell) return;
+      positions.forEach(pos=>{
 
-      const dot = document.createElement("div");
-      dot.className = "home-dot "+group.color;
+        const cell=
+          allCells[
+            pos[0]*15+pos[1]
+          ];
 
-      cell.innerHTML = "";
-      cell.appendChild(dot);
+        if(!cell)return;
+
+        const dot=
+          document.createElement("div");
+
+        dot.className=
+          "home-dot "+color;
+
+        cell.innerHTML="";
+
+        cell.appendChild(dot);
+
+      });
+
     });
-  });
+
 }
 
-function getLudoTokenCoord(playerIndex,tokenIndex){
-  const player = ludoState[playerIndex];
-  const progress = player.tokens[tokenIndex];
 
-  if(progress < 0){
-    return ludoHomes[player.key][tokenIndex];
-  }
+function tokenCoord(playerIndex,tokenIndex){
 
-  if(progress <= 51){
-    const pathIndex = (player.start + progress) % 52;
-    return ludoPath[pathIndex];
-  }
+  const player=
+    ludoState[playerIndex];
 
-  const laneIndex = progress - 52;
+  const progress=
+    player.tokens[tokenIndex];
 
-  if(laneIndex >= 0 && laneIndex < 6){
-    return ludoLanes[player.key][laneIndex];
-  }
 
   /*
-    Finished token stays at last lane position.
+    -1 = Home
   */
-  return ludoLanes[player.key][5];
+
+  if(progress<0){
+
+    return ludoHomes[
+      player.key
+    ][tokenIndex];
+
+  }
+
+
+  /*
+    0–51 = main track
+  */
+
+  if(progress<=51){
+
+    const pathIndex=
+      (player.start+progress)%52;
+
+    return ludoPath[pathIndex];
+
+  }
+
+
+  /*
+    52–57 = home lane
+  */
+
+  const laneIndex=
+    progress-52;
+
+  if(
+    laneIndex>=0 &&
+    laneIndex<6
+  ){
+
+    return ludoLanes[
+      player.key
+    ][laneIndex];
+
+  }
+
+
+  return ludoLanes[
+    player.key
+  ][5];
+
 }
 
-function getTokenPositionForBoard(playerIndex,tokenIndex){
-  const coord = getLudoTokenCoord(playerIndex,tokenIndex);
 
-  if(!coord) return null;
+function tokenBoardPosition(
+  playerIndex,
+  tokenIndex
+){
 
-  const row = coord[0];
-  const col = coord[1];
+  const coord=
+    tokenCoord(
+      playerIndex,
+      tokenIndex
+    );
 
   return {
-    left:((col+.5)/15)*100,
-    top:((row+.5)/15)*100
+
+    left:
+      ((coord[1]+.5)/15)*100,
+
+    top:
+      ((coord[0]+.5)/15)*100
+
   };
+
 }
 
-function getPathIndexForToken(playerIndex,tokenIndex){
-  const progress = ludoState[playerIndex].tokens[tokenIndex];
 
-  if(progress < 0 || progress > 51) return -1;
+function ludoCanMoveToken(
+  playerIndex,
+  tokenIndex,
+  dice
+){
 
-  return (
-    ludoState[playerIndex].start + progress
-  ) % 52;
+  const progress=
+    ludoState[
+      playerIndex
+    ].tokens[tokenIndex];
+
+
+  /*
+    HOME से बाहर केवल 6।
+  */
+
+  if(progress===-1){
+    return dice===6;
+  }
+
+
+  /*
+    Finish beyond 57 नहीं।
+  */
+
+  return progress+dice<=57;
+
 }
+
+
+function availableTokens(
+  playerIndex,
+  dice
+){
+
+  const arr=[];
+
+  for(let i=0;i<4;i++){
+
+    if(
+      ludoCanMoveToken(
+        playerIndex,
+        i,
+        dice
+      )
+    ){
+
+      arr.push(i);
+
+    }
+
+  }
+
+  return arr;
+
+}
+
+
+/*
+  Dice face renderer.
+*/
+function renderDie(el,value){
+
+  const patterns={
+
+    1:[4],
+
+    2:[0,8],
+
+    3:[0,4,8],
+
+    4:[0,2,6,8],
+
+    5:[0,2,4,6,8],
+
+    6:[0,2,3,5,6,8]
+
+  };
+
+  const active=
+    patterns[value]||patterns[1];
+
+  el.innerHTML=`
+
+    <span class="die-grid">
+
+      ${Array.from(
+        {length:9},
+        (_,i)=>`
+          <i class="${
+            active.includes(i)
+            ? "on"
+            : ""
+          }"></i>
+        `
+      ).join("")}
+
+    </span>
+
+  `;
+
+}
+
+
+function updateLudoDice(){
+
+  LUDO_PLAYERS.forEach(
+    (p,i)=>{
+
+      const die=
+        $("dice-"+p.key);
+
+      if(!die)return;
+
+      const usable=
+        i<ludoPlayerCount;
+
+      die.disabled=
+        !usable ||
+        ludoBusy ||
+        i!==ludoTurn;
+
+      die.classList.toggle(
+        "active",
+        usable &&
+        i===ludoTurn &&
+        !ludoBusy
+      );
+
+    }
+  );
+
+}
+
+
+function updateLudoTurn(){
+
+  const player=
+    ludoState[ludoTurn];
+
+
+  /*
+    Main status.
+  */
+
+  $("ludoStatus").textContent=
+    player.name+" की चाल";
+
+
+  /*
+    Turn text ONLY around the player's dice.
+  */
+
+  LUDO_PLAYERS.forEach(
+    p=>{
+
+      const label=
+        $("turn-"+p.key);
+
+      if(!label)return;
+
+      label.textContent="";
+
+    }
+  );
+
+
+  const activeLabel=
+    $("turn-"+player.key);
+
+  if(activeLabel){
+
+    activeLabel.textContent=
+      player.name+" की चाल";
+
+  }
+
+
+  /*
+    Central ball follows current player.
+  */
+
+  const ball=
+    $("ludoCenterBall");
+
+  ball.className=
+    "ludo-center-ball "+
+    player.key;
+
+  ball.textContent="●";
+
+
+  updateLudoDice();
+
+  renderLudoTokens();
+
+}
+
 
 function renderLudoTokens(){
-  const board = $("ludoBoard");
 
-  board.querySelectorAll(".ludo-token").forEach(t=>t.remove());
+  const board=$("ludoBoard");
 
-  for(let pi=0;pi<ludoPlayerCount;pi++){
+  board
+    .querySelectorAll(".ludo-token")
+    .forEach(
+      e=>e.remove()
+    );
 
-    const player = ludoState[pi];
+
+  for(
+    let pi=0;
+    pi<ludoPlayerCount;
+    pi++
+  ){
 
     for(let ti=0;ti<4;ti++){
 
-      const token = document.createElement("button");
-      token.type = "button";
-      token.className = "ludo-token "+player.key;
-      token.title = player.name+" goti";
+      const token=
+        document.createElement("button");
 
-      const pos = getTokenPositionForBoard(pi,ti);
+      token.type="button";
 
-      if(!pos) continue;
+      token.className=
+        "ludo-token "+
+        ludoState[pi].key;
 
-      token.style.left = pos.left+"%";
-      token.style.top = pos.top+"%";
 
-      /*
-        No numbers on original-style pawns.
-      */
+      const pos=
+        tokenBoardPosition(
+          pi,
+          ti
+        );
 
-      const canMove =
+      token.style.left=
+        pos.left+"%";
+
+      token.style.top=
+        pos.top+"%";
+
+
+      const canMove=
         !ludoBusy &&
-        ludoGameStarted &&
-        pi === ludoTurn &&
-        ludoCanMoveToken(pi,ti);
+        pi===ludoTurn &&
+        ludoPendingDice!==null &&
+        ludoCanMoveToken(
+          pi,
+          ti,
+          ludoPendingDice
+        );
+
 
       if(canMove){
-        token.classList.add("movable");
+
+        token.classList.add(
+          "movable"
+        );
+
       }
 
-      token.addEventListener("click",()=>{
-        if(canMove){
-          moveSelectedLudoToken(pi,ti);
+
+      token.addEventListener(
+        "click",
+        ()=>{
+
+          if(canMove){
+
+            moveSelectedToken(
+              pi,
+              ti
+            );
+
+          }
+
         }
-      });
+      );
+
 
       board.appendChild(token);
+
     }
+
   }
+
 }
 
-function renderDie(el,value){
-  const patterns = {
-    1:[4],
-    2:[0,8],
-    3:[0,4,8],
-    4:[0,2,6,8],
-    5:[0,2,4,6,8],
-    6:[0,2,3,5,6,8]
-  };
-
-  const active = patterns[value] || patterns[1];
-
-  el.innerHTML = `
-    <span class="die-grid">
-      ${Array.from({length:9},(_,i)=>
-        `<i class="${active.includes(i) ? "on" : ""}"></i>`
-      ).join("")}
-    </span>
-  `;
-}
-
-function setAllDiceDisabled(){
-  LUDO_PLAYERS.forEach((p,i)=>{
-    const el = $("dice-"+p.key);
-
-    if(!el) return;
-
-    el.disabled =
-      !ludoGameStarted ||
-      ludoBusy ||
-      i >= ludoPlayerCount ||
-      i !== ludoTurn;
-
-    el.classList.toggle(
-      "active",
-      ludoGameStarted &&
-      i === ludoTurn &&
-      !ludoBusy
-    );
-  });
-}
-
-function updateLudoTurnUI(){
-  const player = ludoState[ludoTurn];
-
-  $("ludoStatus").textContent =
-    player.name+" की चाल";
-
-  LUDO_PLAYERS.forEach((p,i)=>{
-    const label = $("turn-"+p.key);
-    if(!label) return;
-
-    label.textContent =
-      i === ludoTurn && i < ludoPlayerCount
-        ? player.name+" की चाल"
-        : "";
-  });
-
-  const ball = $("ludoCenterBall");
-
-  ball.className = "ludo-center-ball "+player.key;
-  ball.textContent = "●";
-
-  setAllDiceDisabled();
-}
 
 function initLudo(){
-  if(!ludoGameStarted){
-    ludoState = LUDO_PLAYERS.map(p=>({
-      ...p,
-      tokens:[-1,-1,-1,-1]
-    }));
 
-    ludoTurn = 0;
-    ludoBusy = false;
-    ludoSixCount = 0;
-    ludoGameStarted = true;
-  }
+  ludoState=
+    LUDO_PLAYERS.map(
+      p=>({
+        ...p,
+        tokens:[
+          -1,-1,-1,-1
+        ]
+      })
+    );
+
+  ludoTurn=0;
+  ludoBusy=false;
+  ludoSixCount=0;
+  ludoPendingDice=null;
+  ludoGameStarted=true;
+
 
   drawLudoBoard();
 
-  LUDO_PLAYERS.forEach(p=>{
-    renderDie($("dice-"+p.key),1);
-  });
 
-  renderLudoTokens();
-  updateLudoTurnUI();
+  LUDO_PLAYERS.forEach(
+    p=>{
+
+      renderDie(
+        $("dice-"+p.key),
+        1
+      );
+
+    }
+  );
+
+
+  updateLudoTurn();
+
 }
 
-function setLudoPlayers(count,button){
-  ludoPlayerCount = count;
 
-  document.querySelectorAll(".ludo-player-select button")
-    .forEach(b=>b.classList.remove("active"));
+function setLudoPlayers(
+  count,
+  button
+){
 
-  if(button) button.classList.add("active");
+  ludoPlayerCount=count;
 
-  ludoGameStarted = false;
+  document
+    .querySelectorAll(
+      ".ludo-player-select button"
+    )
+    .forEach(
+      b=>b.classList.remove("active")
+    );
+
+  if(button){
+    button.classList.add("active");
+  }
+
   initLudo();
 
-  $("ludoStatus").textContent = "Red की चाल";
 }
 
-function ludoCanMoveToken(playerIndex,tokenIndex,dice){
-  const player = ludoState[playerIndex];
-  const progress = player.tokens[tokenIndex];
-
-  /*
-    Home token can leave only on six.
-  */
-  if(progress === -1){
-    return dice === 6;
-  }
-
-  /*
-    Normal movement.
-  */
-  return progress + dice <= 57;
-}
-
-function availableLudoTokens(playerIndex,dice){
-  const result = [];
-
-  for(let ti=0;ti<4;ti++){
-    if(ludoCanMoveToken(playerIndex,ti,dice)){
-      result.push(ti);
-    }
-  }
-
-  return result;
-}
 
 function rollLudo(playerIndex){
-  if(!ludoGameStarted) return;
-  if(ludoBusy) return;
-  if(playerIndex !== ludoTurn) return;
-  if(playerIndex >= ludoPlayerCount) return;
 
-  ludoBusy = true;
-  setAllDiceDisabled();
+  if(!ludoGameStarted)return;
+  if(ludoBusy)return;
+  if(playerIndex!==ludoTurn)return;
+  if(playerIndex>=ludoPlayerCount)return;
 
-  const player = ludoState[playerIndex];
-  const die = $("dice-"+player.key);
 
-  /*
-    Dice animation.
-  */
-  let ticks = 0;
+  ludoBusy=true;
+  ludoPendingDice=null;
 
-  const animation = setInterval(()=>{
-    const temp = 1 + Math.floor(Math.random()*6);
-    renderDie(die,temp);
-    diceSound();
+  updateLudoDice();
 
-    ticks++;
 
-    if(ticks >= 7){
-      clearInterval(animation);
+  const player=
+    ludoState[playerIndex];
 
-      const value = 1 + Math.floor(Math.random()*6);
+  const die=
+    $("dice-"+player.key);
+
+
+  let ticks=0;
+
+
+  const anim=
+    setInterval(()=>{
+
+      const value=
+        1+
+        Math.floor(
+          Math.random()*6
+        );
+
       renderDie(die,value);
 
-      finishLudoRoll(playerIndex,value);
-    }
-  },80);
+      diceSound();
+
+      ticks++;
+
+
+      if(ticks>=8){
+
+        clearInterval(anim);
+
+        const finalValue=
+          1+
+          Math.floor(
+            Math.random()*6
+          );
+
+        renderDie(
+          die,
+          finalValue
+        );
+
+        finishLudoRoll(
+          playerIndex,
+          finalValue
+        );
+
+      }
+
+    },80);
+
 }
 
-async function finishLudoRoll(playerIndex,dice){
-  const player = ludoState[playerIndex];
+
+async function finishLudoRoll(
+  playerIndex,
+  dice
+){
+
+  const player=
+    ludoState[playerIndex];
+
 
   diceSound();
 
-  $("ludoStatus").textContent =
-    player.name+" की चाल — Dice: "+dice;
 
-  const possible = availableLudoTokens(playerIndex,dice);
+  const possible=
+    availableTokens(
+      playerIndex,
+      dice
+    );
 
-  if(possible.length === 0){
 
-    ludoBusy = true;
+  if(possible.length===0){
+
+    $("ludoStatus").textContent=
+      player.name+
+      " की चाल — कोई गोटी नहीं चल सकती";
+
 
     await wait(650);
 
-    if(dice === 6){
+
+    if(dice===6){
+
       ludoSixCount++;
 
-      if(ludoSixCount >= 3){
-        ludoSixCount = 0;
-        ludoBusy = false;
+      if(ludoSixCount>=3){
+
+        ludoSixCount=0;
+
+        ludoBusy=false;
+
         nextLudoTurn();
+
         return;
       }
 
-      ludoBusy = false;
-      updateLudoTurnUI();
+      ludoBusy=false;
+
+      $("ludoStatus").textContent=
+        player.name+
+        " की चाल — फिर से Dice Roll करें";
+
+      updateLudoTurn();
+
       return;
+
     }
 
-    ludoSixCount = 0;
-    ludoBusy = false;
+
+    ludoSixCount=0;
+
+    ludoBusy=false;
+
     nextLudoTurn();
+
     return;
+
   }
 
+
   /*
-    If only one legal token exists,
-    move automatically.
+    One legal pawn:
+    automatically step-by-step.
   */
-  if(possible.length === 1){
-    await animateLudoToken(playerIndex,possible[0],dice);
+
+  if(possible.length===1){
+
+    await animateLudoToken(
+      playerIndex,
+      possible[0],
+      dice
+    );
+
     return;
+
   }
 
-  /*
-    More than one legal token:
-    let player choose a pawn.
-  */
-  ludoBusy = false;
 
-  $("ludoStatus").textContent =
-    player.name+" की चाल — अपनी चमकती गोटी चुनें";
+  /*
+    Multiple legal pawns:
+    player selects blinking pawn.
+  */
+
+  ludoPendingDice=dice;
+
+  ludoBusy=false;
+
+  $("ludoStatus").textContent=
+    player.name+
+    " की चाल — चमकती गोटी चुनें";
+
 
   renderLudoTokens();
-  updateLudoTurnUI();
+  updateLudoDice();
 
-  /*
-    Store pending dice.
-  */
-  ludoPendingDice = dice;
 }
 
-let ludoPendingDice = null;
 
-async function moveSelectedLudoToken(playerIndex,tokenIndex){
+async function moveSelectedToken(
+  playerIndex,
+  tokenIndex
+){
 
-  if(ludoBusy) return;
-  if(playerIndex !== ludoTurn) return;
+  if(ludoBusy)return;
 
-  const dice = ludoPendingDice;
+  if(playerIndex!==ludoTurn)return;
 
-  if(!dice) return;
+  const dice=
+    ludoPendingDice;
 
-  if(!ludoCanMoveToken(playerIndex,tokenIndex,dice)){
+  if(dice===null)return;
+
+  if(
+    !ludoCanMoveToken(
+      playerIndex,
+      tokenIndex,
+      dice
+    )
+  ){
+
     return;
+
   }
 
-  ludoPendingDice = null;
+
+  ludoPendingDice=null;
+
 
   await animateLudoToken(
     playerIndex,
     tokenIndex,
     dice
   );
+
 }
 
-async function animateLudoToken(playerIndex,tokenIndex,dice){
 
-  const player = ludoState[playerIndex];
+async function animateLudoToken(
+  playerIndex,
+  tokenIndex,
+  dice
+){
 
-  ludoBusy = true;
-  setAllDiceDisabled();
+  const player=
+    ludoState[playerIndex];
+
+
+  ludoBusy=true;
+  updateLudoDice();
+
 
   /*
-    Six से home से बाहर।
+    SIX:
+    Home → starting square.
   */
-  if(player.tokens[tokenIndex] === -1){
 
-    if(dice === 6){
+  if(
+    player.tokens[tokenIndex]===-1
+  ){
 
-      player.tokens[tokenIndex] = 0;
+    if(dice!==6){
 
-      renderLudoTokens();
-
-      stepSound();
-
-      await wait(260);
-
-    }else{
-      ludoBusy = false;
+      ludoBusy=false;
       return;
+
     }
+
+
+    /*
+      बाहर निकलने वाला पहला step
+      visibly render होगा।
+    */
+
+    player.tokens[tokenIndex]=0;
+
+    renderLudoTokens();
+
+    stepSound();
+
+    await wait(280);
 
   }else{
 
     /*
-      IMPORTANT:
-      हर step अलग-अलग render होगा।
-      4 आया तो 1, फिर 2, फिर 3, फिर 4।
+      मुख्य सुधार:
+      Dice 5 आया तो:
+      step 1
+      step 2
+      step 3
+      step 4
+      step 5
+
+      एक साथ jump नहीं।
     */
-    for(let step=1;step<=dice;step++){
+
+    for(
+      let step=1;
+      step<=dice;
+      step++
+    ){
 
       player.tokens[tokenIndex]++;
 
@@ -2400,179 +2926,275 @@ async function animateLudoToken(playerIndex,tokenIndex,dice){
 
       stepSound();
 
-      await wait(230);
+      await wait(240);
+
     }
+
   }
+
 
   /*
-    Capture.
+    Capture after movement.
   */
-  const captured = captureLudo(
-    playerIndex,
-    tokenIndex
-  );
+
+  const captured=
+    captureLudo(
+      playerIndex,
+      tokenIndex
+    );
 
   if(captured){
+
     captureSound();
+
     await wait(150);
+
   }
+
 
   renderLudoTokens();
 
-  /*
-    Check win.
-  */
-  const finished =
-    player.tokens.filter(p=>p >= 57).length >= 4;
 
-  if(finished){
+  /*
+    Win.
+  */
+
+  const won=
+    player.tokens.filter(
+      p=>p>=57
+    ).length>=4;
+
+
+  if(won){
+
     winSound();
 
-    $("ludoStatus").textContent =
-      "🏆 "+player.name+" जीत गया!";
+    $("ludoStatus").textContent=
+      "🏆 "+
+      player.name+
+      " जीत गया!";
 
-    ludoBusy = true;
-
-    setTimeout(()=>{
-      ludoBusy = false;
-    },1000);
+    ludoBusy=true;
 
     return;
+
   }
 
+
   /*
-    Six gives another turn.
+    Six = extra turn.
   */
-  if(dice === 6){
+
+  if(dice===6){
 
     ludoSixCount++;
 
-    if(ludoSixCount >= 3){
-      ludoSixCount = 0;
-      ludoBusy = false;
+
+    if(ludoSixCount>=3){
+
+      ludoSixCount=0;
+
+      ludoBusy=false;
+
       nextLudoTurn();
+
       return;
+
     }
 
-    ludoBusy = false;
 
-    $("ludoStatus").textContent =
-      player.name+" की चाल — 6 आया, फिर से Dice Roll करें";
+    ludoBusy=false;
 
-    updateLudoTurnUI();
+    $("ludoStatus").textContent=
+      player.name+
+      " की चाल — 6 आया, फिर से Roll करें";
+
+    updateLudoTurn();
 
     return;
+
   }
 
-  ludoSixCount = 0;
 
-  ludoBusy = false;
+  ludoSixCount=0;
+
+  ludoBusy=false;
 
   nextLudoTurn();
+
 }
 
-function captureLudo(playerIndex,tokenIndex){
 
-  const player = ludoState[playerIndex];
+function captureLudo(
+  playerIndex,
+  tokenIndex
+){
 
-  const progress = player.tokens[tokenIndex];
+  const player=
+    ludoState[playerIndex];
 
-  if(progress < 0 || progress > 51){
+  const progress=
+    player.tokens[tokenIndex];
+
+
+  if(
+    progress<0 ||
+    progress>51
+  ){
+
     return false;
+
   }
 
-  const pathIndex =
-    (player.start + progress) % 52;
 
-  if(safePathIndexes.has(pathIndex)){
+  const pathIndex=
+    (player.start+
+      progress)%52;
+
+
+  if(
+    safePathIndexes.has(
+      pathIndex
+    )
+  ){
+
     return false;
+
   }
 
-  let captured = false;
 
-  for(let i=0;i<ludoPlayerCount;i++){
+  let captured=false;
 
-    if(i === playerIndex) continue;
 
-    const opponent = ludoState[i];
+  for(
+    let i=0;
+    i<ludoPlayerCount;
+    i++
+  ){
+
+    if(i===playerIndex)continue;
+
 
     for(let t=0;t<4;t++){
 
-      const opProgress = opponent.tokens[t];
+      const op=
+        ludoState[i];
 
-      if(opProgress < 0 || opProgress > 51){
-        continue;
+      const opProgress=
+        op.tokens[t];
+
+
+      if(
+        opProgress<0 ||
+        opProgress>51
+      )continue;
+
+
+      const opPath=
+        (op.start+
+          opProgress)%52;
+
+
+      if(opPath===pathIndex){
+
+        op.tokens[t]=-1;
+
+        captured=true;
+
       }
 
-      const opPath =
-        (opponent.start + opProgress) % 52;
-
-      if(opPath === pathIndex){
-
-        opponent.tokens[t] = -1;
-
-        captured = true;
-      }
     }
+
   }
 
+
   return captured;
+
 }
+
 
 function nextLudoTurn(){
 
-  ludoTurn =
-    (ludoTurn + 1) % ludoPlayerCount;
+  ludoTurn=
+    (ludoTurn+1)%
+    ludoPlayerCount;
 
-  ludoPendingDice = null;
+  ludoPendingDice=null;
 
-  updateLudoTurnUI();
-  renderLudoTokens();
+  updateLudoTurn();
+
 }
 
 
-/* ============================================================
+/* ==========================================================
    CARROM
-   ============================================================ */
+   ========================================================== */
 
-const carromCanvas = $("carromCanvas");
-const carromCtx = carromCanvas.getContext("2d");
+const carromCanvas=
+  $("carromCanvas");
 
-const carrom = {
+const carromCtx=
+  carromCanvas.getContext("2d");
+
+
+const carrom={
+
   active:true,
+
   dragging:false,
+
   strikerX:350,
+
   strikerY:600,
+
   strikerVX:0,
+
   strikerVY:0,
+
   strikerR:24,
+
   angle:-Math.PI/2,
+
   power:0,
+
   speedMultiplier:1.6,
+
   coins:[],
+
   turn:"player",
+
   moving:false
+
 };
+
 
 function resetCarrom(){
 
-  carrom.active = true;
-  carrom.dragging = false;
-  carrom.strikerX = 350;
-  carrom.strikerY = 600;
-  carrom.strikerVX = 0;
-  carrom.strikerVY = 0;
-  carrom.angle = -Math.PI/2;
-  carrom.power = 0;
-  carrom.turn = "player";
-  carrom.moving = false;
+  carrom.active=true;
 
-  carrom.coins = [];
+  carrom.dragging=false;
 
-  /*
-    Queen.
-  */
+  carrom.strikerX=350;
+
+  carrom.strikerY=600;
+
+  carrom.strikerVX=0;
+
+  carrom.strikerVY=0;
+
+  carrom.angle=-Math.PI/2;
+
+  carrom.power=0;
+
+  carrom.turn="player";
+
+  carrom.moving=false;
+
+  carrom.coins=[];
+
+
   carrom.coins.push({
+
     x:350,
     y:350,
     r:15,
@@ -2580,323 +3202,380 @@ function resetCarrom(){
     queen:true,
     vx:0,
     vy:0
+
   });
 
-  /*
-    20 coins.
-  */
-  const radius = 54;
 
   for(let i=0;i<20;i++){
 
-    const a =
+    const a=
       (Math.PI*2/20)*i;
 
-    const ring =
-      i < 10 ? 55 : 105;
+    const ring=
+      i<10 ? 55 : 105;
 
     carrom.coins.push({
-      x:350 + Math.cos(a)*ring,
-      y:350 + Math.sin(a)*ring,
+
+      x:
+        350+
+        Math.cos(a)*ring,
+
+      y:
+        350+
+        Math.sin(a)*ring,
+
       r:13,
-      color:i%2===0 ? "#f5f1e8" : "#171717",
+
+      color:
+        i%2===0
+          ? "#f5f1e8"
+          : "#171717",
+
       queen:false,
+
       vx:0,
+
       vy:0
+
     });
+
   }
 
-  $("carromTurnLabel").textContent = "आपकी चाल";
-  $("carromPowerText").textContent = "0%";
+
+  $("carromTurnLabel").textContent=
+    "आपकी चाल";
+
+  $("carromPowerText").textContent=
+    "0%";
+
 
   drawCarrom();
+
 }
 
-function canvasPoint(canvas,event){
 
-  const rect = canvas.getBoundingClientRect();
+function canvasPoint(
+  canvas,
+  event
+){
+
+  const rect=
+    canvas.getBoundingClientRect();
 
   return {
-    x:(event.clientX-rect.left)*
+
+    x:
+      (event.clientX-rect.left)*
       (canvas.width/rect.width),
 
-    y:(event.clientY-rect.top)*
+    y:
+      (event.clientY-rect.top)*
       (canvas.height/rect.height)
+
   };
+
 }
+
 
 function updateCarromAim(point){
 
-  const dx =
-    point.x - carrom.strikerX;
+  const dx=
+    point.x-
+    carrom.strikerX;
 
-  const dy =
-    point.y - carrom.strikerY;
+  const dy=
+    point.y-
+    carrom.strikerY;
 
-  const distance =
+
+  const dist=
     Math.hypot(dx,dy);
 
-  if(distance < 4) return;
 
-  /*
-    IMPORTANT:
-    Aim उसी direction में है जिस direction
-    में finger/mouse board पर जा रहा है।
-  */
-  carrom.angle =
+  if(dist<4)return;
+
+
+  carrom.angle=
     Math.atan2(dy,dx);
 
-  carrom.power =
-    Math.min(220,distance);
+  carrom.power=
+    Math.min(
+      220,
+      dist
+    );
 
-  $("carromPowerText").textContent =
+
+  $("carromPowerText").textContent=
     Math.round(
-      (carrom.power/220)*100
+      carrom.power/220*100
     )+"%";
 
+
   drawCarrom();
+
 }
+
 
 function shootCarrom(){
 
-  if(carrom.moving) return;
-  if(carrom.turn !== "player") return;
+  if(carrom.moving)return;
 
-  if(carrom.power < 10) return;
+  if(carrom.turn!=="player")
+    return;
 
-  /*
-    Striker को वास्तविक velocity दी जाती है।
-  */
-  const speed =
-    Math.min(22,carrom.power*.12)*
+  if(carrom.power<10)
+    return;
+
+
+  const speed=
+    Math.min(
+      22,
+      carrom.power*.12
+    )*
     carrom.speedMultiplier;
 
-  carrom.strikerVX =
-    Math.cos(carrom.angle)*speed;
 
-  carrom.strikerVY =
-    Math.sin(carrom.angle)*speed;
+  carrom.strikerVX=
+    Math.cos(
+      carrom.angle
+    )*
+    speed;
 
-  carrom.moving = true;
+  carrom.strikerVY=
+    Math.sin(
+      carrom.angle
+    )*
+    speed;
 
-  tone(120,.12,"sawtooth",.035);
+
+  carrom.moving=true;
+
+
+  tone(
+    120,
+    .12,
+    "sawtooth",
+    .035
+  );
+
 
   carromLoop();
+
 }
+
 
 function carromLoop(){
 
   if(!carrom.moving){
+
     drawCarrom();
+
     return;
+
   }
 
+
   updateCarromPhysics();
+
   drawCarrom();
 
-  requestAnimationFrame(carromLoop);
+  requestAnimationFrame(
+    carromLoop
+  );
+
 }
+
 
 function updateCarromPhysics(){
 
-  let movingSomething = false;
+  let movingSomething=false;
 
-  /*
-    Striker movement.
-  */
+
   if(
     Math.abs(carrom.strikerVX)>.05 ||
     Math.abs(carrom.strikerVY)>.05
   ){
 
-    carrom.strikerX += carrom.strikerVX;
-    carrom.strikerY += carrom.strikerVY;
+    carrom.strikerX+=
+      carrom.strikerVX;
 
-    carrom.strikerVX *= .985;
-    carrom.strikerVY *= .985;
+    carrom.strikerY+=
+      carrom.strikerVY;
 
-    movingSomething = true;
+    carrom.strikerVX*=.985;
+    carrom.strikerVY*=.985;
+
+    movingSomething=true;
+
   }
 
-  /*
-    Striker walls.
-  */
-  const min = 55;
-  const max = 645;
 
-  if(carrom.strikerX < min){
-    carrom.strikerX = min;
-    carrom.strikerVX *= -.82;
-    tone(90,.035,"square",.025);
+  const min=55;
+  const max=645;
+
+
+  if(carrom.strikerX<min){
+
+    carrom.strikerX=min;
+    carrom.strikerVX*=-.82;
+
   }
 
-  if(carrom.strikerX > max){
-    carrom.strikerX = max;
-    carrom.strikerVX *= -.82;
-    tone(90,.035,"square",.025);
+  if(carrom.strikerX>max){
+
+    carrom.strikerX=max;
+    carrom.strikerVX*=-.82;
+
   }
 
-  if(carrom.strikerY < min){
-    carrom.strikerY = min;
-    carrom.strikerVY *= -.82;
-    tone(90,.035,"square",.025);
+  if(carrom.strikerY<min){
+
+    carrom.strikerY=min;
+    carrom.strikerVY*=-.82;
+
   }
 
-  if(carrom.strikerY > max){
-    carrom.strikerY = max;
-    carrom.strikerVY *= -.82;
-    tone(90,.035,"square",.025);
+  if(carrom.strikerY>max){
+
+    carrom.strikerY=max;
+    carrom.strikerVY*=-.82;
+
   }
 
-  /*
-    Coin movement.
-  */
-  carrom.coins.forEach(coin=>{
 
-    if(
-      Math.abs(coin.vx)>.04 ||
-      Math.abs(coin.vy)>.04
-    ){
+  carrom.coins.forEach(
+    coin=>{
 
-      coin.x += coin.vx;
-      coin.y += coin.vy;
+      if(
+        Math.abs(coin.vx)>.04 ||
+        Math.abs(coin.vy)>.04
+      ){
 
-      coin.vx *= .986;
-      coin.vy *= .986;
+        coin.x+=coin.vx;
+        coin.y+=coin.vy;
 
-      movingSomething = true;
-    }
+        coin.vx*=.986;
+        coin.vy*=.986;
 
-    if(coin.x<55){
-      coin.x=55;
-      coin.vx*=-.82;
-    }
+        movingSomething=true;
 
-    if(coin.x>645){
-      coin.x=645;
-      coin.vx*=-.82;
-    }
-
-    if(coin.y<55){
-      coin.y=55;
-      coin.vy*=-.82;
-    }
-
-    if(coin.y>645){
-      coin.y=645;
-      coin.vy*=-.82;
-    }
-  });
-
-  /*
-    Striker ↔ coins collision.
-  */
-  carrom.coins.forEach(coin=>{
-
-    const dx =
-      coin.x-carrom.strikerX;
-
-    const dy =
-      coin.y-carrom.strikerY;
-
-    const dist =
-      Math.hypot(dx,dy);
-
-    const minDist =
-      coin.r+carrom.strikerR;
-
-    if(dist>0 && dist<minDist){
-
-      const nx=dx/dist;
-      const ny=dy/dist;
-
-      const relativeVx =
-        carrom.strikerVX-coin.vx;
-
-      const relativeVy =
-        carrom.strikerVY-coin.vy;
-
-      const speedAlong =
-        relativeVx*nx+
-        relativeVy*ny;
-
-      if(speedAlong>0){
-
-        const impulse =
-          speedAlong*1.15;
-
-        carrom.strikerVX -= nx*impulse;
-        carrom.strikerVY -= ny*impulse;
-
-        coin.vx += nx*impulse;
-        coin.vy += ny*impulse;
-
-        tone(280,.035,"triangle",.02);
       }
 
-      const overlap =
-        minDist-dist;
 
-      carrom.strikerX -= nx*overlap*.5;
-      carrom.strikerY -= ny*overlap*.5;
+      if(coin.x<55){
 
-      coin.x += nx*overlap*.5;
-      coin.y += ny*overlap*.5;
+        coin.x=55;
+        coin.vx*=-.82;
+
+      }
+
+      if(coin.x>645){
+
+        coin.x=645;
+        coin.vx*=-.82;
+
+      }
+
+      if(coin.y<55){
+
+        coin.y=55;
+        coin.vy*=-.82;
+
+      }
+
+      if(coin.y>645){
+
+        coin.y=645;
+        coin.vy*=-.82;
+
+      }
+
     }
-  });
+  );
+
 
   /*
-    Coin ↔ coin collision.
+    Striker → coin collision.
   */
-  for(let i=0;i<carrom.coins.length;i++){
 
-    for(let j=i+1;j<carrom.coins.length;j++){
+  carrom.coins.forEach(
+    coin=>{
 
-      const a=carrom.coins[i];
-      const b=carrom.coins[j];
+      const dx=
+        coin.x-
+        carrom.strikerX;
 
-      const dx=b.x-a.x;
-      const dy=b.y-a.y;
+      const dy=
+        coin.y-
+        carrom.strikerY;
 
-      const dist=Math.hypot(dx,dy);
+      const dist=
+        Math.hypot(dx,dy);
 
-      const minDist=a.r+b.r;
+      const minDist=
+        coin.r+
+        carrom.strikerR;
 
-      if(dist>0 && dist<minDist){
+
+      if(
+        dist>0 &&
+        dist<minDist
+      ){
 
         const nx=dx/dist;
         const ny=dy/dist;
 
-        const rvx=a.vx-b.vx;
-        const rvy=a.vy-b.vy;
 
-        const rel=rvx*nx+rvy*ny;
+        const rvx=
+          carrom.strikerVX-
+          coin.vx;
 
-        if(rel>0){
+        const rvy=
+          carrom.strikerVY-
+          coin.vy;
 
-          const impulse=rel*.9;
 
-          a.vx-=nx*impulse;
-          a.vy-=ny*impulse;
+        const speedAlong=
+          rvx*nx+
+          rvy*ny;
 
-          b.vx+=nx*impulse;
-          b.vy+=ny*impulse;
+
+        if(speedAlong>0){
+
+          const impulse=
+            speedAlong*1.15;
+
+          carrom.strikerVX-=
+            nx*impulse;
+
+          carrom.strikerVY-=
+            ny*impulse;
+
+          coin.vx+=
+            nx*impulse;
+
+          coin.vy+=
+            ny*impulse;
+
+          tone(
+            280,
+            .035,
+            "triangle",
+            .02
+          );
+
         }
 
-        const overlap=minDist-dist;
-
-        a.x-=nx*overlap*.5;
-        a.y-=ny*overlap*.5;
-
-        b.x+=nx*overlap*.5;
-        b.y+=ny*overlap*.5;
       }
+
     }
-  }
+  );
+
 
   /*
     Pockets.
   */
+
   const pockets=[
     [42,42],
     [658,42],
@@ -2904,29 +3583,40 @@ function updateCarromPhysics(){
     [658,658]
   ];
 
-  carrom.coins =
-    carrom.coins.filter(coin=>{
 
-      const pocketed =
-        pockets.some(p=>
-          Math.hypot(
-            coin.x-p[0],
-            coin.y-p[1]
-          )<30
-        );
+  carrom.coins=
+    carrom.coins.filter(
+      coin=>{
 
-      if(pocketed){
-        pocketSound();
-        return false;
+        const pocketed=
+          pockets.some(
+            p=>
+              Math.hypot(
+                coin.x-p[0],
+                coin.y-p[1]
+              )<30
+          );
+
+
+        if(pocketed){
+
+          pocketSound();
+
+          return false;
+
+        }
+
+
+        return true;
+
       }
+    );
 
-      return true;
-    });
 
   /*
-    जब सब movement खत्म हो,
-    striker वापस baseline पर आता है।
+    End of movement.
   */
+
   if(!movingSomething){
 
     carrom.moving=false;
@@ -2935,20 +3625,23 @@ function updateCarromPhysics(){
     carrom.strikerVY=0;
 
     carrom.strikerX=350;
+
     carrom.strikerY=
-      carrom.turn==="player" ? 600 : 100;
+      carrom.turn==="player"
+        ? 600
+        : 100;
+
 
     drawCarrom();
 
-    /*
-      Player shot के बाद computer turn।
-    */
+
     if(carrom.turn==="player"){
 
       carrom.turn="computer";
 
-      $("carromTurnLabel").textContent =
+      $("carromTurnLabel").textContent=
         "Computer की चाल";
+
 
       setTimeout(
         computerCarromShot,
@@ -2962,46 +3655,56 @@ function updateCarromPhysics(){
       carrom.strikerX=350;
       carrom.strikerY=600;
 
-      $("carromTurnLabel").textContent =
+      $("carromTurnLabel").textContent=
         "आपकी चाल";
 
-      $("carromPowerText").textContent="0%";
+      $("carromPowerText").textContent=
+        "0%";
 
       drawCarrom();
+
     }
+
   }
+
 }
+
 
 function drawCarrom(){
 
   const ctx=carromCtx;
 
   ctx.clearRect(
-    0,0,
-    carromCanvas.width,
-    carromCanvas.height
+    0,
+    0,
+    700,
+    700
   );
 
-  /*
-    Board.
-  */
+
   ctx.fillStyle="#d7a05b";
-  ctx.fillRect(0,0,700,700);
+
+  ctx.fillRect(
+    0,0,700,700
+  );
+
 
   ctx.strokeStyle="#5e351b";
   ctx.lineWidth=14;
-  ctx.strokeRect(18,18,664,664);
 
-  /*
-    Inner square.
-  */
+  ctx.strokeRect(
+    18,18,664,664
+  );
+
+
   ctx.strokeStyle="#8b592e";
   ctx.lineWidth=3;
-  ctx.strokeRect(48,48,604,604);
 
-  /*
-    Pockets.
-  */
+  ctx.strokeRect(
+    48,48,604,604
+  );
+
+
   const pockets=[
     [42,42],
     [658,42],
@@ -3009,45 +3712,79 @@ function drawCarrom(){
     [658,658]
   ];
 
+
   pockets.forEach(p=>{
+
     ctx.beginPath();
-    ctx.arc(p[0],p[1],27,0,Math.PI*2);
+
+    ctx.arc(
+      p[0],
+      p[1],
+      27,
+      0,
+      Math.PI*2
+    );
+
     ctx.fillStyle="#111";
+
     ctx.fill();
+
   });
 
-  /*
-    Center circles.
-  */
+
   ctx.beginPath();
-  ctx.arc(350,350,85,0,Math.PI*2);
+
+  ctx.arc(
+    350,
+    350,
+    85,
+    0,
+    Math.PI*2
+  );
+
   ctx.strokeStyle="#7c4d28";
   ctx.lineWidth=3;
+
   ctx.stroke();
+
 
   ctx.beginPath();
-  ctx.arc(350,350,55,0,Math.PI*2);
+
+  ctx.arc(
+    350,
+    350,
+    55,
+    0,
+    Math.PI*2
+  );
+
   ctx.stroke();
 
-  /*
-    Baseline.
-  */
+
   ctx.strokeStyle="#743e1d";
   ctx.lineWidth=4;
 
+
   ctx.beginPath();
+
   ctx.moveTo(130,600);
   ctx.lineTo(570,600);
+
   ctx.stroke();
+
 
   ctx.beginPath();
+
   ctx.moveTo(130,100);
   ctx.lineTo(570,100);
+
   ctx.stroke();
 
+
   /*
-    Aim line.
+    Aim.
   */
+
   if(
     carrom.turn==="player" &&
     !carrom.moving &&
@@ -3056,70 +3793,98 @@ function drawCarrom(){
 
     ctx.save();
 
-    ctx.strokeStyle="rgba(255,255,255,.75)";
+    ctx.strokeStyle=
+      "rgba(255,255,255,.75)";
+
     ctx.lineWidth=3;
-    ctx.setLineDash([10,8]);
+
+    ctx.setLineDash([
+      10,8
+    ]);
+
 
     ctx.beginPath();
+
     ctx.moveTo(
       carrom.strikerX,
       carrom.strikerY
     );
 
+
     ctx.lineTo(
+
       carrom.strikerX+
       Math.cos(carrom.angle)*220,
+
       carrom.strikerY+
       Math.sin(carrom.angle)*220
+
     );
+
 
     ctx.stroke();
 
     ctx.restore();
+
   }
+
 
   /*
     Coins.
   */
-  carrom.coins.forEach(coin=>{
 
-    ctx.beginPath();
-    ctx.arc(
-      coin.x,
-      coin.y,
-      coin.r,
-      0,
-      Math.PI*2
-    );
-
-    ctx.fillStyle=coin.color;
-    ctx.fill();
-
-    ctx.strokeStyle="#4a2d18";
-    ctx.lineWidth=2;
-    ctx.stroke();
-
-    if(coin.queen){
+  carrom.coins.forEach(
+    coin=>{
 
       ctx.beginPath();
+
       ctx.arc(
         coin.x,
         coin.y,
-        coin.r*.45,
+        coin.r,
         0,
         Math.PI*2
       );
 
-      ctx.strokeStyle="#fff";
+      ctx.fillStyle=
+        coin.color;
+
+      ctx.fill();
+
+      ctx.strokeStyle="#4a2d18";
       ctx.lineWidth=2;
+
       ctx.stroke();
+
+
+      if(coin.queen){
+
+        ctx.beginPath();
+
+        ctx.arc(
+          coin.x,
+          coin.y,
+          coin.r*.45,
+          0,
+          Math.PI*2
+        );
+
+        ctx.strokeStyle="#fff";
+        ctx.stroke();
+
+      }
+
     }
-  });
+  );
+
 
   /*
-    BIG STRIKER — visibly moves forward.
+    BIG STRIKER
+    visibly moves.
   */
+
   ctx.beginPath();
+
   ctx.arc(
     carrom.strikerX,
     carrom.strikerY,
@@ -3129,242 +3894,372 @@ function drawCarrom(){
   );
 
   ctx.fillStyle="#f4f4f4";
+
   ctx.fill();
 
   ctx.strokeStyle="#222";
+
   ctx.lineWidth=4;
+
   ctx.stroke();
 
-  ctx.beginPath();
-  ctx.arc(
-    carrom.strikerX,
-    carrom.strikerY,
-    9,
-    0,
-    Math.PI*2
-  );
-
-  ctx.fillStyle="#b0b0b0";
-  ctx.fill();
 }
 
-carromCanvas.addEventListener("pointerdown",e=>{
 
-  if(carrom.turn!=="player") return;
-  if(carrom.moving) return;
+carromCanvas.addEventListener(
+  "pointerdown",
+  e=>{
 
-  carrom.dragging=true;
+    if(carrom.turn!=="player")
+      return;
 
-  carromCanvas.setPointerCapture(e.pointerId);
+    if(carrom.moving)
+      return;
 
-  updateCarromAim(
-    canvasPoint(carromCanvas,e)
+    carrom.dragging=true;
+
+    carromCanvas.setPointerCapture(
+      e.pointerId
+    );
+
+    updateCarromAim(
+      canvasPoint(
+        carromCanvas,
+        e
+      )
+    );
+
+  }
+);
+
+
+carromCanvas.addEventListener(
+  "pointermove",
+  e=>{
+
+    if(!carrom.dragging)
+      return;
+
+    updateCarromAim(
+      canvasPoint(
+        carromCanvas,
+        e
+      )
+    );
+
+  }
+);
+
+
+carromCanvas.addEventListener(
+  "pointerup",
+  e=>{
+
+    if(!carrom.dragging)
+      return;
+
+    carrom.dragging=false;
+
+    updateCarromAim(
+      canvasPoint(
+        carromCanvas,
+        e
+      )
+    );
+
+    shootCarrom();
+
+  }
+);
+
+
+$("carromSpeed")
+  .addEventListener(
+    "input",
+    e=>{
+
+      carrom.speedMultiplier=
+        Number(e.target.value);
+
+      $("carromSpeedValue").textContent=
+        carrom.speedMultiplier.toFixed(1)+
+        "×";
+
+    }
   );
-});
 
-carromCanvas.addEventListener("pointermove",e=>{
-
-  if(!carrom.dragging) return;
-
-  updateCarromAim(
-    canvasPoint(carromCanvas,e)
-  );
-});
-
-carromCanvas.addEventListener("pointerup",e=>{
-
-  if(!carrom.dragging) return;
-
-  carrom.dragging=false;
-
-  updateCarromAim(
-    canvasPoint(carromCanvas,e)
-  );
-
-  shootCarrom();
-});
-
-carromCanvas.addEventListener("pointercancel",()=>{
-  carrom.dragging=false;
-});
-
-$("carromSpeed").addEventListener("input",e=>{
-
-  carrom.speedMultiplier =
-    Number(e.target.value);
-
-  $("carromSpeedValue").textContent =
-    carrom.speedMultiplier.toFixed(1)+"×";
-});
 
 function computerCarromShot(){
 
-  if(!carrom.active) return;
-  if(carrom.turn!=="computer") return;
-  if(carrom.moving) return;
+  if(!carrom.active)
+    return;
+
+  if(carrom.turn!=="computer")
+    return;
+
+  if(carrom.moving)
+    return;
+
 
   carrom.strikerX=350;
   carrom.strikerY=100;
 
-  /*
-    Find nearest remaining coin.
-  */
-  const target =
-    carrom.coins.find(c=>!c.queen) ||
+
+  const target=
     carrom.coins[0];
+
 
   if(!target){
 
     carrom.turn="player";
+
     carrom.strikerY=600;
 
-    $("carromTurnLabel").textContent =
+    $("carromTurnLabel").textContent=
       "आपकी चाल";
 
     return;
+
   }
 
-  const dx =
-    target.x-carrom.strikerX;
 
-  const dy =
-    target.y-carrom.strikerY;
+  const dx=
+    target.x-
+    carrom.strikerX;
 
-  carrom.angle =
+  const dy=
+    target.y-
+    carrom.strikerY;
+
+
+  carrom.angle=
     Math.atan2(dy,dx);
 
   carrom.power=150;
 
-  const speed =
-    Math.min(20,carrom.power*.12)*
+
+  const speed=
+    Math.min(
+      20,
+      carrom.power*.12
+    )*
     carrom.speedMultiplier;
 
-  carrom.strikerVX =
-    Math.cos(carrom.angle)*speed;
 
-  carrom.strikerVY =
-    Math.sin(carrom.angle)*speed;
+  carrom.strikerVX=
+    Math.cos(
+      carrom.angle
+    )*speed;
+
+  carrom.strikerVY=
+    Math.sin(
+      carrom.angle
+    )*speed;
+
 
   carrom.moving=true;
 
-  tone(110,.12,"sawtooth",.03);
+  tone(
+    110,
+    .12,
+    "sawtooth",
+    .03
+  );
+
 
   carromLoop();
+
 }
 
 
-/* ============================================================
-   CAR RACING
-   ============================================================ */
+/* ==========================================================
+   RACING
+   ========================================================== */
 
-const raceCanvas = $("raceCanvas");
-const raceCtx = raceCanvas.getContext("2d");
+const raceCanvas=
+  $("raceCanvas");
 
-const race = {
+const raceCtx=
+  raceCanvas.getContext("2d");
+
+
+const race={
+
   running:false,
+
   raf:null,
+
   baseSpeed:7,
+
   speed:7,
+
   score:0,
+
   carX:180,
+
   carY:540,
+
   roadOffset:0,
+
   obstacles:[],
+
   left:false,
+
   right:false
+
 };
+
 
 function resetRaceState(){
 
   race.score=0;
+
   race.carX=180;
+
   race.carY=540;
+
   race.roadOffset=0;
+
   race.obstacles=[];
+
   race.speed=race.baseSpeed;
+
 
   for(let i=0;i<5;i++){
 
     race.obstacles.push({
-      x:90+Math.random()*180,
-      y:-i*170-100,
+
+      x:
+        90+
+        Math.random()*180,
+
+      y:
+        -i*170-100,
+
       w:42,
+
       h:75
+
     });
+
   }
+
 }
+
 
 function startRace(){
 
   stopRace();
 
-  race.baseSpeed =
-    Number($("raceSpeed").value);
+  getAudio();
+
+  race.baseSpeed=
+    Number(
+      $("raceSpeed").value
+    );
 
   resetRaceState();
 
   race.running=true;
 
-  $("raceStatus").textContent =
-    "🏁 Race चल रही है — Left / Right से car चलाएँ";
 
-  tone(440,.08,"square",.035);
-  setTimeout(()=>tone(660,.12,"square",.035),100);
+  $("raceStatus").textContent=
+    "🏁 Race चल रही है — Left / Right दबाएँ";
+
+
+  tone(
+    440,
+    .08,
+    "square",
+    .04
+  );
+
+  setTimeout(
+    ()=>tone(
+      660,
+      .12,
+      "square",
+      .04
+    ),
+    100
+  );
+
 
   raceLoop();
+
 }
+
 
 function stopRace(){
 
   race.running=false;
 
   if(race.raf){
-    cancelAnimationFrame(race.raf);
+
+    cancelAnimationFrame(
+      race.raf
+    );
+
     race.raf=null;
+
   }
+
 }
+
 
 function drawRace(){
 
   const ctx=raceCtx;
 
+
   ctx.clearRect(
-    0,0,
-    raceCanvas.width,
-    raceCanvas.height
+    0,
+    0,
+    360,
+    640
   );
 
-  /*
-    Sky.
-  */
+
   ctx.fillStyle="#7cc8f5";
-  ctx.fillRect(0,0,360,180);
 
-  /*
-    Grass.
-  */
+  ctx.fillRect(
+    0,0,360,180
+  );
+
+
   ctx.fillStyle="#2d9a48";
-  ctx.fillRect(0,180,360,460);
 
-  /*
-    Road.
-  */
+  ctx.fillRect(
+    0,180,360,460
+  );
+
+
   ctx.fillStyle="#30343b";
-  ctx.fillRect(55,0,250,640);
 
-  /*
-    Road edges.
-  */
+  ctx.fillRect(
+    55,0,250,640
+  );
+
+
   ctx.fillStyle="#f7e7a3";
-  ctx.fillRect(55,0,8,640);
-  ctx.fillRect(297,0,8,640);
 
-  /*
-    Center dashed line.
-  */
+  ctx.fillRect(
+    55,0,8,640
+  );
+
+  ctx.fillRect(
+    297,0,8,640
+  );
+
+
   ctx.fillStyle="#f5f5f5";
 
-  for(let y=-80+race.roadOffset;y<640;y+=100){
+
+  for(
+    let y=-80+race.roadOffset;
+    y<640;
+    y+=100
+  ){
 
     ctx.fillRect(
       176,
@@ -3372,25 +4267,26 @@ function drawRace(){
       8,
       55
     );
+
   }
 
-  /*
-    Obstacles.
-  */
-  race.obstacles.forEach(o=>{
-    drawRaceCar(
-      ctx,
-      o.x,
-      o.y,
-      o.w,
-      o.h,
-      "#b51f3b"
-    );
-  });
 
-  /*
-    Player car.
-  */
+  race.obstacles.forEach(
+    o=>{
+
+      drawRaceCar(
+        ctx,
+        o.x,
+        o.y,
+        o.w,
+        o.h,
+        "#b51f3b"
+      );
+
+    }
+  );
+
+
   drawRaceCar(
     ctx,
     race.carX,
@@ -3401,17 +4297,21 @@ function drawRace(){
     true
   );
 
-  /*
-    Score.
-  */
+
   ctx.fillStyle="#fff";
-  ctx.font="bold 20px Arial";
+
+  ctx.font=
+    "bold 20px Arial";
+
   ctx.fillText(
-    "Score: "+Math.floor(race.score),
+    "Score: "+
+    Math.floor(race.score),
     15,
     30
   );
+
 }
+
 
 function drawRaceCar(
   ctx,
@@ -3427,10 +4327,10 @@ function drawRaceCar(
 
   ctx.translate(x,y);
 
-  /*
-    shadow
-  */
-  ctx.fillStyle="rgba(0,0,0,.3)";
+
+  ctx.fillStyle=
+    "rgba(0,0,0,.3)";
+
   ctx.fillRect(
     -w/2+4,
     -h/2+5,
@@ -3438,12 +4338,11 @@ function drawRaceCar(
     h
   );
 
-  /*
-    body
-  */
+
   ctx.fillStyle=color;
 
   ctx.beginPath();
+
   ctx.roundRect(
     -w/2,
     -h/2,
@@ -3451,14 +4350,14 @@ function drawRaceCar(
     h,
     10
   );
+
   ctx.fill();
 
-  /*
-    windshield
-  */
+
   ctx.fillStyle="#182536";
 
   ctx.beginPath();
+
   ctx.roundRect(
     -w*.29,
     -h*.22,
@@ -3466,11 +4365,10 @@ function drawRaceCar(
     h*.25,
     5
   );
+
   ctx.fill();
 
-  /*
-    rear/front lights
-  */
+
   ctx.fillStyle="#fff";
 
   ctx.fillRect(
@@ -3487,9 +4385,7 @@ function drawRaceCar(
     6
   );
 
-  /*
-    wheels
-  */
+
   ctx.fillStyle="#111";
 
   ctx.fillRect(
@@ -3520,51 +4416,72 @@ function drawRaceCar(
     h*.22
   );
 
+
   if(player){
 
     ctx.strokeStyle="#fff";
+
     ctx.lineWidth=3;
+
     ctx.stroke();
 
   }
 
+
   ctx.restore();
+
 }
+
 
 function raceLoop(){
 
-  if(!race.running) return;
+  if(!race.running)
+    return;
 
-  race.speed =
+
+  race.speed=
     Math.min(
       15,
       race.baseSpeed+
       race.score/450
     );
 
-  race.roadOffset +=
+
+  race.roadOffset+=
     race.speed;
 
-  race.score +=
+
+  race.score+=
     race.speed*.08;
 
+
   /*
-    LEFT / RIGHT steering.
+    LEFT / RIGHT
   */
+
   if(race.left){
-    race.carX -= 5.5;
-    carMoveSound();
+
+    race.carX-=5.5;
+
+    carSteerSound();
+
   }
 
+
   if(race.right){
-    race.carX += 5.5;
-    carMoveSound();
+
+    race.carX+=5.5;
+
+    carSteerSound();
+
   }
+
 
   /*
     Keep car on road.
   */
-  race.carX =
+
+  race.carX=
     Math.max(
       82,
       Math.min(
@@ -3573,149 +4490,264 @@ function raceLoop(){
       )
     );
 
-  /*
-    Move obstacles.
-  */
-  race.obstacles.forEach(o=>{
-    o.y += race.speed;
-  });
 
-  /*
-    Recycle obstacles.
-  */
-  race.obstacles.forEach(o=>{
+  race.obstacles.forEach(
+    o=>{
 
-    if(o.y>700){
+      o.y+=race.speed;
 
-      o.y=-100-Math.random()*180;
-      o.x=85+Math.random()*190;
     }
-  });
+  );
+
+
+  race.obstacles.forEach(
+    o=>{
+
+      if(o.y>700){
+
+        o.y=
+          -100-
+          Math.random()*180;
+
+        o.x=
+          85+
+          Math.random()*190;
+
+      }
+
+    }
+  );
+
 
   /*
     Collision.
   */
-  for(const o of race.obstacles){
+
+  for(
+    const o of race.obstacles
+  ){
 
     if(
-      Math.abs(o.x-race.carX)<
-        (o.w+48)/2 &&
-      Math.abs(o.y-race.carY)<
-        (o.h+82)/2
+
+      Math.abs(
+        o.x-race.carX
+      )<
+      (o.w+48)/2
+
+      &&
+
+      Math.abs(
+        o.y-race.carY
+      )<
+      (o.h+82)/2
+
     ){
 
       carCrashSound();
 
       race.running=false;
 
-      $("raceStatus").textContent =
+      $("raceStatus").textContent=
         "💥 Crash! Score: "+
-        Math.floor(race.score)+
+        Math.floor(
+          race.score
+        )+
         " — Restart दबाएँ";
 
       drawRace();
 
       return;
+
     }
+
   }
+
+
+  /*
+    Engine sound at low volume.
+  */
+
+  if(
+    Math.floor(race.score)%18===0
+  ){
+
+    carMoveSound();
+
+  }
+
 
   drawRace();
 
-  race.raf =
-    requestAnimationFrame(raceLoop);
+
+  race.raf=
+    requestAnimationFrame(
+      raceLoop
+    );
+
 }
 
-function setRaceSteering(side,value){
-
-  race[side]=value;
-
-  if(value){
-    carSteerSound();
-  }
-}
-
-$("leftBtn").addEventListener("pointerdown",()=>{
-  setRaceSteering("left",true);
-});
-
-$("leftBtn").addEventListener("pointerup",()=>{
-  setRaceSteering("left",false);
-});
-
-$("leftBtn").addEventListener("pointercancel",()=>{
-  setRaceSteering("left",false);
-});
-
-$("leftBtn").addEventListener("pointerleave",()=>{
-  setRaceSteering("left",false);
-});
-
-$("rightBtn").addEventListener("pointerdown",()=>{
-  setRaceSteering("right",true);
-});
-
-$("rightBtn").addEventListener("pointerup",()=>{
-  setRaceSteering("right",false);
-});
-
-$("rightBtn").addEventListener("pointercancel",()=>{
-  setRaceSteering("right",false);
-});
-
-$("rightBtn").addEventListener("pointerleave",()=>{
-  setRaceSteering("right",false);
-});
 
 /*
-  Keyboard steering भी।
+  LEFT BUTTON
 */
-document.addEventListener("keydown",e=>{
 
-  if(e.key==="ArrowLeft"){
-    race.left=true;
+function leftStart(e){
+
+  e.preventDefault();
+
+  race.left=true;
+
+  carSteerSound();
+
+}
+
+
+function leftStop(e){
+
+  if(e)e.preventDefault();
+
+  race.left=false;
+
+}
+
+
+$("leftBtn").addEventListener(
+  "pointerdown",
+  leftStart
+);
+
+$("leftBtn").addEventListener(
+  "pointerup",
+  leftStop
+);
+
+$("leftBtn").addEventListener(
+  "pointercancel",
+  leftStop
+);
+
+$("leftBtn").addEventListener(
+  "pointerleave",
+  leftStop
+);
+
+
+/*
+  RIGHT BUTTON
+*/
+
+function rightStart(e){
+
+  e.preventDefault();
+
+  race.right=true;
+
+  carSteerSound();
+
+}
+
+
+function rightStop(e){
+
+  if(e)e.preventDefault();
+
+  race.right=false;
+
+}
+
+
+$("rightBtn").addEventListener(
+  "pointerdown",
+  rightStart
+);
+
+$("rightBtn").addEventListener(
+  "pointerup",
+  rightStop
+);
+
+$("rightBtn").addEventListener(
+  "pointercancel",
+  rightStop
+);
+
+$("rightBtn").addEventListener(
+  "pointerleave",
+  rightStop
+);
+
+
+/*
+  Keyboard.
+*/
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(e.key==="ArrowLeft")
+      race.left=true;
+
+    if(e.key==="ArrowRight")
+      race.right=true;
+
   }
+);
 
-  if(e.key==="ArrowRight"){
-    race.right=true;
+
+document.addEventListener(
+  "keyup",
+  e=>{
+
+    if(e.key==="ArrowLeft")
+      race.left=false;
+
+    if(e.key==="ArrowRight")
+      race.right=false;
+
   }
-});
+);
 
-document.addEventListener("keyup",e=>{
 
-  if(e.key==="ArrowLeft"){
-    race.left=false;
-  }
+$("raceSpeed")
+  .addEventListener(
+    "input",
+    e=>{
 
-  if(e.key==="ArrowRight"){
-    race.right=false;
-  }
-});
+      race.baseSpeed=
+        Number(e.target.value);
 
-$("raceSpeed").addEventListener("input",e=>{
+      $("raceSpeedValue").textContent=
+        race.baseSpeed;
 
-  race.baseSpeed =
-    Number(e.target.value);
+    }
+  );
 
-  $("raceSpeedValue").textContent =
-    race.baseSpeed;
-});
 
 resetRaceState();
 drawRace();
 
 
-/* ============================================================
-   SPIN WHEEL
-   ============================================================ */
+/* ==========================================================
+   SPIN
+   ========================================================== */
 
-const spinCanvas=$("spinCanvas");
-const spinCtx=spinCanvas.getContext("2d");
+const spinCanvas=
+  $("spinCanvas");
+
+const spinCtx=
+  spinCanvas.getContext("2d");
+
 
 let coins=1000;
+
 let spinAngle=0;
+
 let spinning=false;
 
+
 const spinSegments=[
+
   {text:"+10",value:10},
   {text:"+20",value:20},
   {text:"+50",value:50},
@@ -3724,120 +4756,213 @@ const spinSegments=[
   {text:"+75",value:75},
   {text:"+15",value:15},
   {text:"+200",value:200}
+
 ];
 
+
 function updateCoins(){
-  $("coinDisplay").textContent=coins;
+
+  $("coinDisplay").textContent=
+    coins;
+
 }
+
 
 function drawWheel(){
 
   const ctx=spinCtx;
-  const w=spinCanvas.width;
-  const h=spinCanvas.height;
 
-  ctx.clearRect(0,0,w,h);
+  const w=500;
+  const h=500;
 
-  const cx=w/2;
-  const cy=h/2;
+  ctx.clearRect(
+    0,0,w,h
+  );
+
+
+  const cx=250;
+  const cy=250;
   const r=215;
+
 
   ctx.save();
 
-  ctx.translate(cx,cy);
-  ctx.rotate(spinAngle);
+  ctx.translate(
+    cx,
+    cy
+  );
 
-  const slice =
-    Math.PI*2/spinSegments.length;
+  ctx.rotate(
+    spinAngle
+  );
 
-  spinSegments.forEach((seg,i)=>{
 
-    const a=i*slice;
+  const slice=
+    Math.PI*2/
+    spinSegments.length;
 
-    ctx.beginPath();
-    ctx.moveTo(0,0);
-    ctx.arc(
-      0,0,
-      r,
-      a,
-      a+slice
-    );
-    ctx.closePath();
 
-    ctx.fillStyle =
-      i%2===0
-        ? "#f5b92e"
-        : "#4da3ff";
+  spinSegments.forEach(
+    (seg,i)=>{
 
-    ctx.fill();
+      const a=
+        i*slice;
 
-    ctx.strokeStyle="#111";
-    ctx.lineWidth=3;
-    ctx.stroke();
 
-    ctx.save();
+      ctx.beginPath();
 
-    ctx.rotate(
-      a+slice/2
-    );
+      ctx.moveTo(
+        0,0
+      );
 
-    ctx.fillStyle="#111";
-    ctx.font="bold 22px Arial";
-    ctx.textAlign="center";
-    ctx.fillText(
-      seg.text,
-      r*.62,
-      8
-    );
+      ctx.arc(
+        0,
+        0,
+        r,
+        a,
+        a+slice
+      );
 
-    ctx.restore();
-  });
+      ctx.closePath();
+
+
+      ctx.fillStyle=
+        i%2===0
+          ? "#f5b92e"
+          : "#4da3ff";
+
+      ctx.fill();
+
+
+      ctx.strokeStyle="#111";
+
+      ctx.lineWidth=3;
+
+      ctx.stroke();
+
+
+      ctx.save();
+
+      ctx.rotate(
+        a+slice/2
+      );
+
+      ctx.fillStyle="#111";
+
+      ctx.font=
+        "bold 22px Arial";
+
+      ctx.textAlign="center";
+
+      ctx.fillText(
+        seg.text,
+        r*.62,
+        8
+      );
+
+      ctx.restore();
+
+    }
+  );
+
 
   ctx.restore();
+
 
   /*
     Center.
   */
-  ctx.beginPath();
-  ctx.arc(cx,cy,42,0,Math.PI*2);
-  ctx.fillStyle="#111";
-  ctx.fill();
 
   ctx.beginPath();
-  ctx.arc(cx,cy,25,0,Math.PI*2);
-  ctx.fillStyle="#ffd54a";
+
+  ctx.arc(
+    cx,
+    cy,
+    42,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fillStyle="#111";
+
   ctx.fill();
+
+
+  ctx.beginPath();
+
+  ctx.arc(
+    cx,
+    cy,
+    25,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fillStyle="#ffd54a";
+
+  ctx.fill();
+
 
   /*
     Pointer.
   */
+
   ctx.beginPath();
-  ctx.moveTo(cx,20);
-  ctx.lineTo(cx-16,2);
-  ctx.lineTo(cx+16,2);
+
+  ctx.moveTo(
+    cx,
+    20
+  );
+
+  ctx.lineTo(
+    cx-16,
+    2
+  );
+
+  ctx.lineTo(
+    cx+16,
+    2
+  );
+
   ctx.closePath();
 
   ctx.fillStyle="#ef5364";
+
   ctx.fill();
+
 }
+
 
 function spinWheel(){
 
-  if(spinning) return;
+  if(spinning)return;
+
+  getAudio();
 
   spinning=true;
 
   $("spinButton").disabled=true;
-  $("spinResult").textContent="🎡 Wheel घूम रहा है...";
 
-  const startAngle=spinAngle;
-  const totalRotation =
-    Math.PI*2*(5+Math.random()*4);
+  $("spinResult").textContent=
+    "🎡 Wheel घूम रहा है...";
 
-  const startTime=performance.now();
+
+  const startAngle=
+    spinAngle;
+
+  const totalRotation=
+    Math.PI*2*
+    (5+
+      Math.random()*4);
+
+
+  const startTime=
+    performance.now();
+
   const duration=4200;
 
-  let lastTick=0;
+  let lastTick=-1;
+
 
   function animate(now){
 
@@ -3850,122 +4975,204 @@ function spinWheel(){
         elapsed/duration
       );
 
-    /*
-      Smooth slow-down.
-    */
+
     const ease=
-      1-Math.pow(1-t,3);
+      1-
+      Math.pow(
+        1-t,
+        3
+      );
+
 
     spinAngle=
       startAngle+
       totalRotation*ease;
 
+
+    const slice=
+      Math.PI*2/
+      spinSegments.length;
+
+
     const tick=
       Math.floor(
-        spinAngle/(Math.PI*2/spinSegments.length)
+        spinAngle/slice
       );
 
-    if(tick!==lastTick){
+
+    if(
+      tick!==lastTick
+    ){
+
       lastTick=tick;
+
       spinSound();
+
     }
+
 
     drawWheel();
 
+
     if(t<1){
 
-      requestAnimationFrame(animate);
+      requestAnimationFrame(
+        animate
+      );
 
     }else{
 
-      const slice=
-        Math.PI*2/
-        spinSegments.length;
-
       const normalized=
-        ((spinAngle%(Math.PI*2))+
-          Math.PI*2)%
-          (Math.PI*2);
+        (
+          (
+            spinAngle%
+            (Math.PI*2)
+          )+
+          Math.PI*2
+        )%
+        (Math.PI*2);
 
-      /*
-        Pointer top = angle -PI/2.
-      */
+
       const pointerAngle=
-        (Math.PI*1.5-normalized+
-          Math.PI*2)%
-          (Math.PI*2);
+        (
+          Math.PI*1.5-
+          normalized+
+          Math.PI*2
+        )%
+        (Math.PI*2);
+
 
       const index=
         Math.floor(
-          pointerAngle/slice
+          pointerAngle/
+          slice
         )%
         spinSegments.length;
 
+
       const reward=
-        spinSegments[index].value;
+        spinSegments[
+          index
+        ].value;
+
 
       coins+=reward;
 
       updateCoins();
 
-      $("spinResult").textContent =
-        "🎉 आपको "+reward+
+
+      $("spinResult").textContent=
+        "🎉 आपको "+
+        reward+
         " virtual coins मिले!";
+
 
       spinWinSound();
 
+
       spinning=false;
+
       $("spinButton").disabled=false;
+
     }
+
   }
 
-  requestAnimationFrame(animate);
+
+  requestAnimationFrame(
+    animate
+  );
+
 }
+
 
 drawWheel();
 updateCoins();
 
 
-/* ============================================================
+/* ==========================================================
    QUIZ
-   ============================================================ */
+   ========================================================== */
 
 const quizBank=[
+
   {
     q:"भारत की राजधानी क्या है?",
-    options:["मुंबई","नई दिल्ली","जयपुर","लखनऊ"],
+    options:[
+      "मुंबई",
+      "नई दिल्ली",
+      "जयपुर",
+      "लखनऊ"
+    ],
     a:1
   },
+
   {
     q:"15×15 किस game के board में इस्तेमाल हो रहा है?",
-    options:["Ludo","Quiz","Spin","Racing"],
+    options:[
+      "Ludo",
+      "Quiz",
+      "Spin",
+      "Racing"
+    ],
     a:0
   },
+
   {
     q:"HTML का उपयोग मुख्य रूप से किसके लिए होता है?",
-    options:["Web page structure","Cooking","Music only","Driving"],
+    options:[
+      "Web page structure",
+      "Cooking",
+      "Music only",
+      "Driving"
+    ],
     a:0
   },
+
   {
     q:"CSS किस चीज़ को style करता है?",
-    options:["Web page","Car engine","Battery","Camera"],
+    options:[
+      "Web page",
+      "Car engine",
+      "Battery",
+      "Camera"
+    ],
     a:0
   },
+
   {
     q:"JavaScript web page में क्या जोड़ सकता है?",
-    options:["Interactivity","Fuel","Tyres","Water"],
+    options:[
+      "Interactivity",
+      "Fuel",
+      "Tyres",
+      "Water"
+    ],
     a:0
   },
+
   {
-    q:"Ludo में dice की maximum सामान्य value क्या है?",
-    options:["4","5","6","10"],
+    q:"Ludo dice की maximum सामान्य value क्या है?",
+    options:[
+      "4",
+      "5",
+      "6",
+      "10"
+    ],
     a:2
   },
+
   {
     q:"Car racing में Left button का काम क्या है?",
-    options:["Car को left move करना","Quiz खोलना","Spin करना","Game बंद करना"],
+    options:[
+      "Car को left move करना",
+      "Quiz खोलना",
+      "Spin करना",
+      "Game बंद करना"
+    ],
     a:0
   },
+
   {
     q:"GAMEZONE ARENA का tagline क्या है?",
     options:[
@@ -3976,6 +5183,7 @@ const quizBank=[
     ],
     a:0
   },
+
   {
     q:"Virtual coins के बारे में सही बात कौन सी है?",
     options:[
@@ -3986,6 +5194,7 @@ const quizBank=[
     ],
     a:2
   },
+
   {
     q:"Carrom में striker किस काम आता है?",
     options:[
@@ -3996,8 +5205,9 @@ const quizBank=[
     ],
     a:0
   },
+
   {
-    q:"PWA का उपयोग किस experience के लिए किया जा सकता है?",
+    q:"PWA किस experience के लिए उपयोग हो सकता है?",
     options:[
       "Web app install experience",
       "Only camera",
@@ -4006,119 +5216,189 @@ const quizBank=[
     ],
     a:0
   },
+
   {
-    q:"Safe Ludo cell पर सामान्यतः क्या दिखाया जा सकता है?",
-    options:["Star","Car","Phone","Camera"],
+    q:"Ludo में safe cell पर क्या दिखाया जा सकता है?",
+    options:[
+      "Star",
+      "Car",
+      "Phone",
+      "Camera"
+    ],
     a:0
   }
+
 ];
+
 
 let quizQuestions=[];
 let quizIndex=0;
 let quizScore=0;
 
+
 function shuffle(array){
+
   return [...array].sort(
     ()=>Math.random()-.5
   );
+
 }
+
 
 function startQuiz(){
 
   quizQuestions=
-    shuffle(quizBank).slice(0,10);
+    shuffle(
+      quizBank
+    ).slice(0,10);
 
   quizIndex=0;
+
   quizScore=0;
 
   renderQuizQuestion();
+
 }
+
 
 function renderQuizQuestion(){
 
-  const area=$("quizArea");
+  const area=
+    $("quizArea");
 
-  if(quizIndex>=quizQuestions.length){
+
+  if(
+    quizIndex>=
+    quizQuestions.length
+  ){
 
     area.innerHTML=`
+
       <div class="card">
-        <h2>🏆 Quiz Complete</h2>
+
+        <h2>
+          🏆 Quiz Complete
+        </h2>
+
         <p>
-          आपका score:
-          <strong>${quizScore}/${quizQuestions.length}</strong>
+          Score:
+          <strong>
+            ${quizScore}/${quizQuestions.length}
+          </strong>
         </p>
 
-        <button class="btn" onclick="startQuiz()">
+        <button
+          class="btn"
+          onclick="startQuiz()">
           🔄 Play Again
         </button>
+
       </div>
+
     `;
 
+    winSound();
+
     return;
+
   }
 
-  const q=quizQuestions[quizIndex];
+
+  const q=
+    quizQuestions[
+      quizIndex
+    ];
+
 
   area.innerHTML=`
+
     <div class="quiz-progress">
-      Question ${quizIndex+1} / ${quizQuestions.length}
+      Question
+      ${quizIndex+1}
+      /
+      ${quizQuestions.length}
     </div>
 
-    <h3>${q.q}</h3>
+    <h3>
+      ${q.q}
+    </h3>
 
     <div class="quiz-options">
-      ${q.options.map((o,i)=>`
-        <button
-          class="quiz-option"
-          onclick="answerQuiz(${i})"
-        >
-          ${String.fromCharCode(65+i)}. ${o}
-        </button>
-      `).join("")}
+
+      ${q.options.map(
+        (o,i)=>`
+
+          <button
+            class="quiz-option"
+            onclick="answerQuiz(${i})">
+
+            ${String.fromCharCode(65+i)}.
+            ${o}
+
+          </button>
+
+        `
+      ).join("")}
+
     </div>
+
   `;
+
 }
+
 
 function answerQuiz(index){
 
-  const q=quizQuestions[quizIndex];
+  const q=
+    quizQuestions[
+      quizIndex
+    ];
+
+
+  /*
+    Correct / wrong sound.
+  */
 
   if(index===q.a){
 
     quizScore++;
 
-    tone(700,.10,"sine",.04);
-    setTimeout(
-      ()=>tone(900,.12,"sine",.04),
-      90
-    );
+    correctSound();
 
   }else{
 
-    tone(160,.12,"sawtooth",.035);
+    wrongSound();
+
   }
+
 
   quizIndex++;
 
+
   setTimeout(
     renderQuizQuestion,
-    220
+    280
   );
+
 }
 
 
-/* ============================================================
-   AI / CONTENT GENERATOR
-   ============================================================ */
+/* ==========================================================
+   CONTENT GENERATOR
+   ========================================================== */
 
 function generateContent(){
 
-  const type=$("aiType").value;
+  const type=
+    $("aiType").value;
+
   const topic=
     $("aiTopic").value.trim() ||
     "GAMEZONE ARENA";
 
+
   let result="";
+
 
   if(type==="shayari"){
 
@@ -4130,7 +5410,10 @@ function generateContent(){
 आज नहीं तो कल मंज़िल मिलेगी,
 बस अपने हौसले को जगाते रहो।`;
 
-  }else if(type==="dialogue"){
+  }
+
+
+  if(type==="dialogue"){
 
     result=
 `🎬 Dialogue
@@ -4139,7 +5422,10 @@ function generateContent(){
 जो मुश्किल चाल देखकर भी
 अपना खेल नहीं छोड़ता।"`;
 
-  }else if(type==="joke"){
+  }
+
+
+  if(type==="joke"){
 
     result=
 `😂 Joke
@@ -4150,7 +5436,10 @@ ${topic} शुरू किया और खिलाड़ी बोला:
 फिर दो घंटे बाद:
 "एक आखिरी match!" 😄`;
 
-  }else if(type==="motivation"){
+  }
+
+
+  if(type==="motivation"){
 
     result=
 `🔥 Motivation
@@ -4160,7 +5449,10 @@ ${topic} में शुरुआत छोटी हो सकती है,
 
 आज एक step आगे बढ़ाइए।`;
 
-  }else if(type==="gaming"){
+  }
+
+
+  if(type==="gaming"){
 
     result=
 `🎮 Gaming Post
@@ -4174,17 +5466,29 @@ Rise fast. 🚀`;
 
   }
 
-  $("aiResult").textContent=result;
+
+  $("aiResult").textContent=
+    result;
+
+  tone(
+    620,
+    .07,
+    "sine",
+    .035
+  );
+
 }
 
 
-/* ============================================================
+/* ==========================================================
    PWA INSTALL
-   ============================================================ */
+   ========================================================== */
 
 let deferredInstallPrompt=null;
 
-const installBtn=$("installBtn");
+const installBtn=
+  $("installBtn");
+
 
 window.addEventListener(
   "beforeinstallprompt",
@@ -4194,10 +5498,9 @@ window.addEventListener(
 
     deferredInstallPrompt=e;
 
-    installBtn.textContent=
-      "📲 Install App";
   }
 );
+
 
 installBtn.addEventListener(
   "click",
@@ -4210,7 +5513,9 @@ installBtn.addEventListener(
       deferredInstallPrompt.prompt();
 
       try{
+
         await deferredInstallPrompt.userChoice;
+
       }catch(e){}
 
       deferredInstallPrompt=null;
@@ -4218,57 +5523,67 @@ installBtn.addEventListener(
     }else{
 
       alert(
-        "अगर Install prompt अभी नहीं दिख रहा है, " +
-        "तो Chrome के ⋮ menu से " +
-        "“Install app” या “Add to Home screen” चुनें।"
+        "Chrome के ⋮ menu से " +
+        "Install app या Add to Home screen चुनें।"
       );
+
     }
+
   }
 );
+
 
 window.addEventListener(
   "appinstalled",
   ()=>{
+
     installBtn.textContent=
       "✅ App Installed";
 
     deferredInstallPrompt=null;
+
   }
 );
 
 
-/* ============================================================
+/* ==========================================================
    SERVICE WORKER
-   ============================================================ */
+   ========================================================== */
 
 if("serviceWorker" in navigator){
 
   window.addEventListener(
     "load",
     ()=>{
+
       navigator.serviceWorker
         .register("./sw.js")
-        .catch(()=>{
-          /*
-            sw.js optional है।
-            SW न होने पर website/game बंद नहीं होगा।
-          */
-        });
+        .catch(
+          ()=>{}
+        );
+
     }
   );
+
 }
 
 
-/* ============================================================
-   INITIAL STATES
-   ============================================================ */
+/* ==========================================================
+   INITIALIZE
+   ========================================================== */
 
 initLudo();
+
 resetCarrom();
+
 resetRaceState();
+
 drawRace();
+
 drawWheel();
+
 updateCoins();
+
 startQuiz();
 
 </script>
