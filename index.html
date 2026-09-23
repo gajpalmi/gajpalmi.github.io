@@ -312,8 +312,8 @@ footer{
    CORRECT DICE ORDER:
    0 = RED
    1 = GREEN
-   2 = YELLOW
-   3 = BLUE
+   2 = BLUE
+   3 = YELLOW
 
    SCREEN:
    TOP    = RED + GREEN
@@ -712,6 +712,7 @@ footer{
 .steering{
   display:flex;
   justify-content:center;
+  align-items:center;
   gap:18px;
 }
 
@@ -731,6 +732,30 @@ footer{
 .steer-btn:active{
   transform:scale(.95);
   background:#293750;
+}
+
+.race-start-btn{
+  min-width:130px;
+  min-height:58px;
+  padding:10px 14px;
+}
+
+@media(max-width:420px){
+
+  .steering{
+    gap:7px;
+  }
+
+  .steer-btn{
+    width:82px;
+  }
+
+  .race-start-btn{
+    min-width:110px;
+    padding:10px 8px;
+    font-size:14px;
+  }
+
 }
 
 /* ================= SPIN ================= */
@@ -1288,7 +1313,7 @@ textarea{
         <button
           id="dice-yellow"
           class="ludo-die yellow"
-          onclick="rollLudo(2)">
+          onclick="rollLudo(3)">
         </button>
 
         <div id="turn-yellow"
@@ -1307,7 +1332,7 @@ textarea{
         <button
           id="dice-blue"
           class="ludo-die blue"
-          onclick="rollLudo(3)">
+          onclick="rollLudo(2)">
         </button>
 
         <div id="turn-blue"
@@ -1447,12 +1472,6 @@ textarea{
 
       </div>
 
-      <button
-        class="btn"
-        onclick="startRace()">
-        ▶ Start / Restart
-      </button>
-
     </div>
 
     <canvas
@@ -1467,6 +1486,12 @@ textarea{
         id="leftBtn"
         class="steer-btn">
         ⬅️ LEFT
+      </button>
+
+      <button
+        class="btn race-start-btn"
+        onclick="startRace()">
+        ▶ Start / Restart
       </button>
 
       <button
@@ -2023,8 +2048,8 @@ renderDaily();
   IMPORTANT PLAYER INDEX MAPPING:
   RED    = 0
   GREEN  = 1
-  YELLOW = 2
-  BLUE   = 3
+  BLUE   = 2
+  YELLOW = 3
 
   यह order जानबूझकर नहीं बदला गया है।
   Dice DOM IDs भी player key से सीधे जुड़े हैं।
@@ -2045,15 +2070,15 @@ const LUDO_PLAYERS=[
   },
 
   {
-    key:"yellow",
-    name:"Yellow",
-    start:26
-  },
-
-  {
     key:"blue",
     name:"Blue",
     start:39
+  },
+
+  {
+    key:"yellow",
+    name:"Yellow",
+    start:26
   }
 
 ];
@@ -2468,10 +2493,10 @@ function renderDie(el,value){
 
 /*
   Dice are updated by player key:
-  red -> dice-red
+  red  -> dice-red
   green -> dice-green
-  yellow -> dice-yellow
   blue -> dice-blue
+  yellow -> dice-yellow
 
   इसलिए DOM order बदलने पर भी dice गलत player
   के स्थान पर नहीं जाएगा।
@@ -2716,7 +2741,7 @@ function rollLudo(playerIndex){
   /*
     IMPORTANT:
     The player index remains:
-    RED=0, GREEN=1, YELLOW=2, BLUE=3.
+    RED=0, GREEN=1, BLUE=2, YELLOW=3.
 
     The actual dice element is found from player.key,
     so the roll can never be sent to another colour's die.
@@ -2929,6 +2954,8 @@ async function animateLudoToken(
     player.tokens[tokenIndex]=0;
 
     renderLudoTokens();
+
+    stepSound();
 
     ludoExitSound();
 
