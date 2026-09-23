@@ -309,9 +309,16 @@ footer{
 
 /* ==========================================================
    LUDO
-   GREEN + YELLOW DICE = TOP
-   BOARD = CENTER
-   RED + BLUE DICE = BOTTOM
+   CORRECT DICE ORDER:
+   0 = RED
+   1 = GREEN
+   2 = YELLOW
+   3 = BLUE
+
+   SCREEN:
+   TOP    = RED + GREEN
+   BOARD  = CENTER
+   BOTTOM = YELLOW + BLUE
    ========================================================== */
 
 .ludo-player-select{
@@ -370,22 +377,27 @@ footer{
   padding:0 4px;
 }
 
-/* IMPORTANT:
-   Dice identity is locked to its own position.
-   TOP: Green left, Yellow right.
-   BOTTOM: Red left, Blue right.
-*/
-.ludo-top-dice .ludo-seat-green{
+/* ==========================================================
+   DICE POSITION IS EXPLICITLY LOCKED
+   TOP LEFT     = RED
+   TOP RIGHT    = GREEN
+   BOTTOM LEFT  = YELLOW
+   BOTTOM RIGHT = BLUE
+
+   DOM order is NOT used for player identity.
+   ========================================================== */
+
+.ludo-top-dice .ludo-seat-red{
   grid-column:1;
   grid-row:1;
 }
 
-.ludo-top-dice .ludo-seat-yellow{
+.ludo-top-dice .ludo-seat-green{
   grid-column:2;
   grid-row:1;
 }
 
-.ludo-bottom-dice .ludo-seat-red{
+.ludo-bottom-dice .ludo-seat-yellow{
   grid-column:1;
   grid-row:1;
 }
@@ -1199,9 +1211,28 @@ textarea{
 
   <div class="ludo-stage">
 
-    <!-- GREEN + YELLOW ABOVE BOARD -->
+    <!-- RED + GREEN ABOVE BOARD -->
 
     <div class="ludo-top-dice">
+
+      <div class="ludo-dice-seat ludo-seat-red">
+
+        <div class="dice-owner"
+          style="color:var(--red)">
+          RED
+        </div>
+
+        <button
+          id="dice-red"
+          class="ludo-die red"
+          onclick="rollLudo(0)">
+        </button>
+
+        <div id="turn-red"
+          class="turn-small">
+        </div>
+
+      </div>
 
       <div class="ludo-dice-seat ludo-seat-green">
 
@@ -1217,25 +1248,6 @@ textarea{
         </button>
 
         <div id="turn-green"
-          class="turn-small">
-        </div>
-
-      </div>
-
-      <div class="ludo-dice-seat ludo-seat-yellow">
-
-        <div class="dice-owner"
-          style="color:var(--yellow)">
-          YELLOW
-        </div>
-
-        <button
-          id="dice-yellow"
-          class="ludo-die yellow"
-          onclick="rollLudo(2)">
-        </button>
-
-        <div id="turn-yellow"
           class="turn-small">
         </div>
 
@@ -1262,24 +1274,24 @@ textarea{
 
     </div>
 
-    <!-- RED + BLUE BELOW BOARD -->
+    <!-- YELLOW + BLUE BELOW BOARD -->
 
     <div class="ludo-bottom-dice">
 
-      <div class="ludo-dice-seat ludo-seat-red">
+      <div class="ludo-dice-seat ludo-seat-yellow">
 
         <div class="dice-owner"
-          style="color:var(--red)">
-          RED
+          style="color:var(--yellow)">
+          YELLOW
         </div>
 
         <button
-          id="dice-red"
-          class="ludo-die red"
-          onclick="rollLudo(0)">
+          id="dice-yellow"
+          class="ludo-die yellow"
+          onclick="rollLudo(2)">
         </button>
 
-        <div id="turn-red"
+        <div id="turn-yellow"
           class="turn-small">
         </div>
 
