@@ -46,7 +46,6 @@ body{
 }
 
 button,input,select,textarea{font:inherit}
-
 button{cursor:pointer}
 
 a{
@@ -331,13 +330,8 @@ footer{
   width:min(700px,100%);
   margin:auto;
   display:grid;
-  grid-template-columns:
-    minmax(0,1fr)
-    minmax(0,1fr);
-  grid-template-rows:
-    auto
-    auto
-    auto;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-rows:auto auto auto;
   gap:14px 12px;
   align-items:center;
   justify-items:center;
@@ -348,9 +342,7 @@ footer{
   grid-row:1;
   width:100%;
   display:grid;
-  grid-template-columns:
-    minmax(0,1fr)
-    minmax(0,1fr);
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
   align-items:center;
   justify-items:center;
   gap:12px;
@@ -371,29 +363,36 @@ footer{
   grid-row:3;
   width:100%;
   display:grid;
-  grid-template-columns:
-    minmax(0,1fr)
-    minmax(0,1fr);
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
   align-items:center;
   justify-items:center;
   gap:12px;
   padding:0 4px;
 }
 
-.ludo-top-dice .ludo-dice-seat:first-child{
+/* IMPORTANT:
+   Dice identity is locked to its own position.
+   TOP: Green left, Yellow right.
+   BOTTOM: Red left, Blue right.
+*/
+.ludo-top-dice .ludo-seat-green{
   grid-column:1;
+  grid-row:1;
 }
 
-.ludo-top-dice .ludo-dice-seat:last-child{
+.ludo-top-dice .ludo-seat-yellow{
   grid-column:2;
+  grid-row:1;
 }
 
-.ludo-bottom-dice .ludo-dice-seat:first-child{
+.ludo-bottom-dice .ludo-seat-red{
   grid-column:1;
+  grid-row:1;
 }
 
-.ludo-bottom-dice .ludo-dice-seat:last-child{
+.ludo-bottom-dice .ludo-seat-blue{
   grid-column:2;
+  grid-row:1;
 }
 
 .ludo-dice-seat{
@@ -826,22 +825,15 @@ textarea{
 
   .ludo-stage{
     width:100%;
-    grid-template-columns:
-      minmax(0,1fr)
-      minmax(0,1fr);
-    grid-template-rows:
-      auto
-      auto
-      auto;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    grid-template-rows:auto auto auto;
     gap:7px 5px;
   }
 
   .ludo-top-dice,
   .ludo-bottom-dice{
     width:100%;
-    grid-template-columns:
-      minmax(0,1fr)
-      minmax(0,1fr);
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
     gap:5px;
     padding:0;
   }
@@ -1211,7 +1203,7 @@ textarea{
 
     <div class="ludo-top-dice">
 
-      <div class="ludo-dice-seat">
+      <div class="ludo-dice-seat ludo-seat-green">
 
         <div class="dice-owner"
           style="color:var(--green)">
@@ -1230,7 +1222,7 @@ textarea{
 
       </div>
 
-      <div class="ludo-dice-seat">
+      <div class="ludo-dice-seat ludo-seat-yellow">
 
         <div class="dice-owner"
           style="color:var(--yellow)">
@@ -1274,7 +1266,7 @@ textarea{
 
     <div class="ludo-bottom-dice">
 
-      <div class="ludo-dice-seat">
+      <div class="ludo-dice-seat ludo-seat-red">
 
         <div class="dice-owner"
           style="color:var(--red)">
@@ -1293,7 +1285,7 @@ textarea{
 
       </div>
 
-      <div class="ludo-dice-seat">
+      <div class="ludo-dice-seat ludo-seat-blue">
 
         <div class="dice-owner"
           style="color:var(--blue)">
@@ -2015,6 +2007,17 @@ renderDaily();
    LUDO
    ========================================================== */
 
+/*
+  IMPORTANT PLAYER INDEX MAPPING:
+  RED    = 0
+  GREEN  = 1
+  YELLOW = 2
+  BLUE   = 3
+
+  यह order जानबूझकर नहीं बदला गया है।
+  Dice DOM IDs भी player key से सीधे जुड़े हैं।
+*/
+
 const LUDO_PLAYERS=[
 
   {
@@ -2403,7 +2406,13 @@ function availableTokens(
 
 }
 
+/*
+  Dice face is rendered into the exact element
+  belonging to the exact player.
+*/
 function renderDie(el,value){
+
+  if(!el)return;
 
   const patterns={
 
@@ -2445,6 +2454,16 @@ function renderDie(el,value){
 
 }
 
+/*
+  Dice are updated by player key:
+  red -> dice-red
+  green -> dice-green
+  yellow -> dice-yellow
+  blue -> dice-blue
+
+  इसलिए DOM order बदलने पर भी dice गलत player
+  के स्थान पर नहीं जाएगा।
+*/
 function updateLudoDice(){
 
   LUDO_PLAYERS.forEach(
@@ -2624,6 +2643,9 @@ function initLudo(){
 
   drawLudoBoard();
 
+  /*
+    Each initial die is assigned by its own player key.
+  */
   LUDO_PLAYERS.forEach(
     p=>{
 
@@ -2679,11 +2701,27 @@ function rollLudo(playerIndex){
 
   updateLudoDice();
 
+  /*
+    IMPORTANT:
+    The player index remains:
+    RED=0, GREEN=1, YELLOW=2, BLUE=3.
+
+    The actual dice element is found from player.key,
+    so the roll can never be sent to another colour's die.
+  */
   const player=
     ludoState[playerIndex];
 
   const die=
     $("dice-"+player.key);
+
+  if(!die){
+
+    ludoBusy=false;
+    updateLudoDice();
+    return;
+
+  }
 
   let ticks=0;
 
