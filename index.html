@@ -310,8 +310,9 @@ footer{
 
 /* ==========================================================
    LUDO
-   BOARD ALWAYS CENTER
-   2 DICE TOP + 2 DICE BOTTOM
+   GREEN + YELLOW DICE = TOP
+   BOARD = CENTER
+   RED + BLUE DICE = BOTTOM
    ========================================================== */
 
 .ludo-player-select{
@@ -330,38 +331,79 @@ footer{
   width:min(700px,100%);
   margin:auto;
   display:grid;
-  grid-template-columns:1fr 1fr;
-  grid-template-rows:auto auto auto;
-  gap:12px;
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(0,1fr);
+  grid-template-rows:
+    auto
+    auto
+    auto;
+  gap:14px 12px;
   align-items:center;
   justify-items:center;
 }
 
 .ludo-top-dice{
-  grid-column:1/3;
+  grid-column:1 / 3;
   grid-row:1;
   width:100%;
-  display:flex;
-  justify-content:space-around;
+  display:grid;
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(0,1fr);
   align-items:center;
-}
-
-.ludo-bottom-dice{
-  grid-column:1/3;
-  grid-row:3;
-  width:100%;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
+  justify-items:center;
+  gap:12px;
+  padding:0 4px;
 }
 
 .ludo-board-wrap{
-  grid-column:1/3;
+  grid-column:1 / 3;
   grid-row:2;
   width:min(620px,100%);
-  aspect-ratio:1/1;
+  aspect-ratio:1 / 1;
   position:relative;
   margin:auto;
+}
+
+.ludo-bottom-dice{
+  grid-column:1 / 3;
+  grid-row:3;
+  width:100%;
+  display:grid;
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(0,1fr);
+  align-items:center;
+  justify-items:center;
+  gap:12px;
+  padding:0 4px;
+}
+
+.ludo-top-dice .ludo-dice-seat:first-child{
+  grid-column:1;
+}
+
+.ludo-top-dice .ludo-dice-seat:last-child{
+  grid-column:2;
+}
+
+.ludo-bottom-dice .ludo-dice-seat:first-child{
+  grid-column:1;
+}
+
+.ludo-bottom-dice .ludo-dice-seat:last-child{
+  grid-column:2;
+}
+
+.ludo-dice-seat{
+  width:100%;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
 }
 
 .ludo-board{
@@ -462,14 +504,6 @@ footer{
 
 /* DICE */
 
-.ludo-dice-seat{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:5px;
-}
-
 .dice-owner{
   font-size:13px;
   font-weight:1000;
@@ -534,8 +568,7 @@ footer{
   background:#111;
 }
 
-/* REAL LUDO PAWN
-   थोड़ा छोटा रखा गया है */
+/* REAL LUDO PAWN */
 
 .ludo-token{
   position:absolute;
@@ -769,9 +802,11 @@ textarea{
 }
 
 @media(max-width:800px){
+
   .carrom-layout{
     grid-template-columns:1fr;
   }
+
 }
 
 @media(max-width:700px){
@@ -789,15 +824,38 @@ textarea{
     grid-template-columns:1fr;
   }
 
+  .ludo-stage{
+    width:100%;
+    grid-template-columns:
+      minmax(0,1fr)
+      minmax(0,1fr);
+    grid-template-rows:
+      auto
+      auto
+      auto;
+    gap:7px 5px;
+  }
+
+  .ludo-top-dice,
+  .ludo-bottom-dice{
+    width:100%;
+    grid-template-columns:
+      minmax(0,1fr)
+      minmax(0,1fr);
+    gap:5px;
+    padding:0;
+  }
+
+  .ludo-dice-seat{
+    min-width:0;
+    width:100%;
+  }
+
   .ludo-die{
     width:54px;
     height:54px;
     padding:5px;
     border-width:3px;
-  }
-
-  .ludo-stage{
-    gap:7px;
   }
 
   .ludo-board{
@@ -812,6 +870,7 @@ textarea{
     max-width:26px;
     max-height:26px;
   }
+
 }
 </style>
 </head>
@@ -1148,7 +1207,7 @@ textarea{
 
   <div class="ludo-stage">
 
-    <!-- TWO DICE ABOVE THE BOARD -->
+    <!-- GREEN + YELLOW ABOVE BOARD -->
 
     <div class="ludo-top-dice">
 
@@ -1192,7 +1251,7 @@ textarea{
 
     </div>
 
-    <!-- BIG 15x15 LUDO BOARD IN CENTER -->
+    <!-- BOARD CENTER -->
 
     <div class="ludo-board-wrap">
 
@@ -1211,7 +1270,7 @@ textarea{
 
     </div>
 
-    <!-- TWO DICE BELOW THE BOARD -->
+    <!-- RED + BLUE BELOW BOARD -->
 
     <div class="ludo-bottom-dice">
 
@@ -1657,7 +1716,6 @@ function diceSound(){
 
 }
 
-/* हर एक Ludo step का sound */
 function stepSound(){
 
   getAudio();
@@ -1666,7 +1724,6 @@ function stepSound(){
 
 }
 
-/* Home से बाहर निकलने का अलग sound */
 function ludoExitSound(){
 
   getAudio();
@@ -1783,7 +1840,6 @@ function carCrashSound(){
 
 }
 
-/* Carrom के लिए अलग strike sound */
 function carromStrikeSound(){
 
   getAudio();
@@ -1797,7 +1853,6 @@ function carromStrikeSound(){
 
 }
 
-/* Carrom coin collision sound */
 function carromHitSound(){
 
   getAudio();
@@ -1806,7 +1861,6 @@ function carromHitSound(){
 
 }
 
-/* Pocket sound */
 function pocketSound(){
 
   getAudio();
@@ -1843,9 +1897,6 @@ function spinWinSound(){
 
 }
 
-/*
-  Browser audio unlock.
-*/
 document.addEventListener(
   "pointerdown",
   ()=>{
@@ -2068,10 +2119,6 @@ const ludoHomes={
 
 };
 
-/*
-  Safe cells.
-  1 और 8 भी safe हैं।
-*/
 const safePathIndexes=new Set([
   0,1,8,13,21,26,34,39,47
 ]);
@@ -2356,8 +2403,6 @@ function availableTokens(
 
 }
 
-/* Dice face renderer */
-
 function renderDie(el,value){
 
   const patterns={
@@ -2620,9 +2665,6 @@ function setLudoPlayers(
 
 }
 
-/*
-  Dice roll
-*/
 function rollLudo(playerIndex){
 
   getAudio();
@@ -2748,11 +2790,6 @@ async function finishLudoRoll(
 
   }
 
-  /*
-    One legal pawn:
-    automatically step-by-step.
-  */
-
   if(possible.length===1){
 
     await animateLudoToken(
@@ -2764,11 +2801,6 @@ async function finishLudoRoll(
     return;
 
   }
-
-  /*
-    Multiple legal pawns:
-    player selects blinking pawn.
-  */
 
   ludoPendingDice=dice;
 
@@ -2819,13 +2851,6 @@ async function moveSelectedToken(
 
 }
 
-/*
-  Ludo token animation.
-
-  IMPORTANT:
-  Home -> Start is a visible separate action.
-  After that, normal dice movement is step-by-step.
-*/
 async function animateLudoToken(
   playerIndex,
   tokenIndex,
@@ -2839,11 +2864,6 @@ async function animateLudoToken(
   updateLudoDice();
 
   let movedFromHome=false;
-
-  /*
-    SIX:
-    Home → starting square.
-  */
 
   if(
     player.tokens[tokenIndex]===-1
@@ -2860,9 +2880,6 @@ async function animateLudoToken(
 
     renderLudoTokens();
 
-    /*
-      अलग Home Exit sound
-    */
     ludoExitSound();
 
     await wait(320);
@@ -2870,11 +2887,6 @@ async function animateLudoToken(
     movedFromHome=true;
 
   }else{
-
-    /*
-      Dice जितना है,
-      उतने ही अलग-अलग steps।
-    */
 
     for(
       let step=1;
@@ -2894,18 +2906,6 @@ async function animateLudoToken(
 
   }
 
-  /*
-    अगर goti Home से निकली है,
-    उसी 6 को normal 6-step movement
-    नहीं माना जाएगा।
-    यह standard Ludo-style exit है।
-  */
-
-  /*
-    Finish check.
-    progress 57 = final home.
-  */
-
   const reachedFinish=
     player.tokens[tokenIndex]>=57;
 
@@ -2918,17 +2918,6 @@ async function animateLudoToken(
     await wait(220);
 
   }
-
-  /*
-    Capture after movement.
-
-    केवल तभी capture होगा जब उसी
-    path cell पर opponent की exactly
-    एक goti हो।
-
-    2 या उससे ज्यादा opponent goti
-    = block/double = capture नहीं।
-  */
 
   const captured=
     captureLudo(
@@ -2945,10 +2934,6 @@ async function animateLudoToken(
   }
 
   renderLudoTokens();
-
-  /*
-    Win.
-  */
 
   const won=
     player.tokens.filter(
@@ -2970,24 +2955,11 @@ async function animateLudoToken(
 
   }
 
-  /*
-    Extra turn:
-    1. Six
-    2. Successful capture
-    3. Finish/Home
-  */
-
   if(
     dice===6 ||
     captured ||
     reachedFinish
   ){
-
-    /*
-      Six count सिर्फ consecutive six के लिए।
-      Capture/finish पर six-count reset रहेगा
-      क्योंकि नया bonus action six-chain नहीं है।
-    */
 
     if(dice===6){
 
@@ -3047,14 +3019,6 @@ async function animateLudoToken(
 
 }
 
-/*
-  Capture logic:
-  - safe cell पर capture नहीं
-  - home lane में capture नहीं
-  - opponent की EXACTLY ONE goti हो तो capture
-  - 2 या ज्यादा opponent goti हों तो block/double
-    और कोई capture नहीं
-*/
 function captureLudo(
   playerIndex,
   tokenIndex
@@ -3088,11 +3052,6 @@ function captureLudo(
     return false;
 
   }
-
-  /*
-    पहले सभी opponent goti गिनें
-    जो उसी path cell पर हैं।
-  */
 
   const opponents=[];
 
@@ -3136,9 +3095,6 @@ function captureLudo(
 
   }
 
-  /*
-    Double/block को नहीं काटना।
-  */
   if(opponents.length!==1){
 
     return false;
@@ -3382,9 +3338,6 @@ function shootCarrom(){
 
   carrom.moving=true;
 
-  /*
-    Strong striker sound.
-  */
   carromStrikeSound();
 
   carromLoop();
@@ -3521,10 +3474,6 @@ function updateCarromPhysics(){
     }
   );
 
-  /*
-    Striker → coin collision.
-  */
-
   carrom.coins.forEach(
     coin=>{
 
@@ -3580,9 +3529,6 @@ function updateCarromPhysics(){
           coin.vy+=
             ny*impulse;
 
-          /*
-            Coin hit sound.
-          */
           carromHitSound();
 
         }
@@ -3591,10 +3537,6 @@ function updateCarromPhysics(){
 
     }
   );
-
-  /*
-    Pockets.
-  */
 
   const pockets=[
     [42,42],
@@ -3628,10 +3570,6 @@ function updateCarromPhysics(){
 
       }
     );
-
-  /*
-    End of movement.
-  */
 
   if(!movingSomething){
 
@@ -3782,10 +3720,6 @@ function drawCarrom(){
 
   ctx.stroke();
 
-  /*
-    Aim.
-  */
-
   if(
     carrom.turn==="player" &&
     !carrom.moving &&
@@ -3825,10 +3759,6 @@ function drawCarrom(){
     ctx.restore();
 
   }
-
-  /*
-    Coins.
-  */
 
   carrom.coins.forEach(
     coin=>{
@@ -3872,10 +3802,6 @@ function drawCarrom(){
 
     }
   );
-
-  /*
-    BIG STRIKER
-  */
 
   ctx.beginPath();
 
@@ -4418,18 +4344,10 @@ function raceLoop(){
   race.score+=
     race.speed*.08;
 
-  /*
-    LEFT / RIGHT
-  */
-
   if(race.left){
 
     race.carX-=5.5;
 
-    /*
-      Steering sound को हर frame नहीं,
-      थोड़े interval पर ही play करेंगे।
-    */
     if(
       Math.floor(race.score*10)%8===0
     ){
@@ -4484,10 +4402,6 @@ function raceLoop(){
 
     }
   );
-
-  /*
-    Collision.
-  */
 
   for(
     const o of race.obstacles
@@ -4545,10 +4459,6 @@ function raceLoop(){
 
 }
 
-/*
-  LEFT BUTTON
-*/
-
 function leftStart(e){
 
   e.preventDefault();
@@ -4589,10 +4499,6 @@ $("leftBtn").addEventListener(
   leftStop
 );
 
-/*
-  RIGHT BUTTON
-*/
-
 function rightStart(e){
 
   e.preventDefault();
@@ -4632,10 +4538,6 @@ $("rightBtn").addEventListener(
   "pointerleave",
   rightStop
 );
-
-/*
-  Keyboard.
-*/
 
 document.addEventListener(
   "keydown",
@@ -5279,11 +5181,6 @@ function answerQuiz(index){
       quizIndex
     ];
 
-  /*
-    Correct / wrong sound.
-    AudioContext resume पहले होगा।
-  */
-
   if(index===q.a){
 
     quizScore++;
@@ -5295,12 +5192,6 @@ function answerQuiz(index){
     wrongSound();
 
   }
-
-  /*
-    थोड़ी देर के लिए options disable करें,
-    ताकि एक सवाल पर double click से
-    दो answers न लगें।
-  */
 
   document
     .querySelectorAll(".quiz-option")
