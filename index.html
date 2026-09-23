@@ -444,8 +444,8 @@ footer{
 
 .ludo-area{
  display:grid;
- grid-template-columns:80px minmax(280px,600px) 80px;
- grid-template-rows:80px minmax(280px,600px) 80px;
+ grid-template-columns:82px minmax(280px,600px) 82px;
+ grid-template-rows:82px minmax(280px,600px) 82px;
  justify-content:center;
  align-items:center;
  gap:8px;
@@ -455,14 +455,16 @@ footer{
  width:70px;
  height:70px;
  border-radius:17px;
- border:2px solid #38435b;
- background:#f8f8f8;
+ border:3px solid #38435b;
+ background:#fff;
  color:#111;
+ padding:10px;
  display:grid;
- place-items:center;
- font-size:32px;
- font-weight:900;
+ grid-template-columns:repeat(3,1fr);
+ grid-template-rows:repeat(3,1fr);
+ gap:4px;
  box-shadow:0 8px 25px rgba(0,0,0,.35);
+ transition:.15s;
 }
 
 .ludo-die.active{
@@ -485,6 +487,21 @@ footer{
 
 .die-blue{
  border-color:#4da3ff;
+}
+
+.die-pip{
+ width:100%;
+ height:100%;
+ max-width:12px;
+ max-height:12px;
+ border-radius:50%;
+ background:#171717;
+ place-self:center;
+ opacity:0;
+}
+
+.die-pip.on{
+ opacity:1;
 }
 
 .die-top{
@@ -620,35 +637,71 @@ footer{
  );
 }
 
+/* PROPER LUDO PAWN */
 .token{
- width:68%;
- height:68%;
- border-radius:50%;
- border:2px solid #fff;
- box-shadow:0 2px 6px rgba(0,0,0,.45);
+ width:78%;
+ height:84%;
  position:absolute;
  z-index:5;
- display:grid;
- place-items:center;
- font-size:10px;
- font-weight:900;
- color:#111;
+ border:0;
+ background:transparent !important;
+ box-shadow:none;
+ padding:0;
+ display:block;
+}
+
+.token:before{
+ content:"";
+ position:absolute;
+ width:43%;
+ height:43%;
+ left:28.5%;
+ top:5%;
+ border-radius:50%;
+ background:var(--pawn-color);
+ border:2px solid rgba(255,255,255,.9);
+ box-shadow:
+  inset -3px -3px 4px rgba(0,0,0,.25),
+  0 2px 5px rgba(0,0,0,.45);
+}
+
+.token:after{
+ content:"";
+ position:absolute;
+ left:13%;
+ bottom:7%;
+ width:74%;
+ height:49%;
+ background:var(--pawn-color);
+ clip-path:polygon(35% 0,65% 0,75% 34%,90% 72%,100% 100%,0 100%,10% 72%,25% 34%);
+ border:2px solid rgba(255,255,255,.9);
+ box-shadow:
+  inset -4px -4px 5px rgba(0,0,0,.22),
+  0 3px 6px rgba(0,0,0,.45);
 }
 
 .token.red{
- background:#ff3347;
+ --pawn-color:#ff3347;
 }
 
 .token.green{
- background:#14d988;
+ --pawn-color:#14d988;
 }
 
 .token.yellow{
- background:#ffe12d;
+ --pawn-color:#ffe12d;
 }
 
 .token.blue{
- background:#3c9cff;
+ --pawn-color:#3c9cff;
+}
+
+.token.finished{
+ transform:scale(.85);
+}
+
+.ludo-token:hover{
+ filter:brightness(1.18);
 }
 
 .ludo-message{
@@ -787,22 +840,54 @@ footer{
 
 .aim-line{
  position:absolute;
- height:2px;
+ height:3px;
  background:#fff;
  transform-origin:left center;
- opacity:.65;
+ opacity:.85;
  z-index:19;
  pointer-events:none;
+ border-radius:3px;
 }
 
 .carrom-info{
  text-align:center;
  color:#d9deea;
  margin:10px;
+ min-height:26px;
 }
 
 .carrom-controls{
  text-align:center;
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:10px;
+ margin-top:12px;
+}
+
+.speed-control{
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ gap:10px;
+ flex-wrap:wrap;
+ margin:12px auto;
+ padding:10px 14px;
+ border:1px solid var(--line);
+ background:#111a2b;
+ border-radius:14px;
+ max-width:520px;
+}
+
+.speed-control input[type="range"]{
+ width:min(300px,70vw);
+ accent-color:var(--gold);
+}
+
+.speed-value{
+ min-width:45px;
+ color:var(--gold);
+ font-weight:900;
 }
 
 /* =========================================================
@@ -839,11 +924,33 @@ footer{
  font-size:25px;
  font-weight:900;
  border:1px solid #35425c;
+ touch-action:none;
 }
 
 .race-controls button:active{
  background:var(--gold);
  color:#111;
+}
+
+.race-settings{
+ margin-top:12px;
+ padding:12px;
+ border:1px solid var(--line);
+ border-radius:15px;
+ background:#111a2b;
+}
+
+.race-speed-row{
+ display:flex;
+ align-items:center;
+ gap:10px;
+ flex-wrap:wrap;
+ justify-content:center;
+}
+
+.race-speed-row input{
+ width:min(280px,70vw);
+ accent-color:var(--gold);
 }
 
 /* =========================================================
@@ -945,6 +1052,30 @@ footer{
 }
 
 /* =========================================================
+   Y2MEDI / CONTENT
+   ========================================================= */
+
+.y2medi-card{
+ background:
+ radial-gradient(circle at 90% 10%,rgba(255,213,74,.12),transparent 30%),
+ linear-gradient(145deg,var(--panel2),var(--panel));
+ border:1px solid var(--line);
+ border-radius:20px;
+ padding:20px;
+}
+
+.y2medi-card h3{
+ margin-top:0;
+}
+
+.y2medi-grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+ gap:14px;
+ margin-top:15px;
+}
+
+/* =========================================================
    TOAST
    ========================================================= */
 
@@ -961,6 +1092,8 @@ footer{
  z-index:5000;
  transition:.3s;
  box-shadow:var(--shadow);
+ max-width:90%;
+ text-align:center;
 }
 
 #toast.show{
@@ -985,12 +1118,19 @@ footer{
  .ludo-area{
   grid-template-columns:55px minmax(240px,1fr) 55px;
   grid-template-rows:55px minmax(240px,1fr) 55px;
+  gap:5px;
  }
 
  .ludo-die{
   width:50px;
   height:50px;
-  font-size:24px;
+  padding:7px;
+  gap:2px;
+ }
+
+ .die-pip{
+  max-width:8px;
+  max-height:8px;
  }
 
  .modal-box{
@@ -1000,6 +1140,11 @@ footer{
  .section-title{
   display:block;
  }
+
+ .carrom-wrap{
+  width:min(96vw,650px);
+ }
+
 }
 </style>
 </head>
@@ -1017,6 +1162,7 @@ footer{
   <nav class="navlinks">
    <button onclick="scrollToId('games')">Games</button>
    <button onclick="scrollToId('daily')">Daily</button>
+   <button onclick="scrollToId('y2medi')">Y2MEDI</button>
    <button onclick="scrollToId('quizSection')">Quiz</button>
    <button onclick="scrollToId('about')">About</button>
   </nav>
@@ -1110,6 +1256,73 @@ footer{
 </section>
 
 <!-- =========================================================
+     Y2MEDI CONTENT
+     ========================================================= -->
+
+<section id="y2medi" class="section container">
+
+ <div class="section-title">
+  <div>
+   <h2>🎬 Y2MEDI Content</h2>
+   <p>Entertainment, media and creative content.</p>
+  </div>
+ </div>
+
+ <div class="y2medi-card">
+
+  <h3>📺 Y2MEDI Entertainment Hub</h3>
+
+  <p>
+   यहाँ gaming के साथ entertainment, videos, dialogues,
+   creative ideas और media-style content को एक जगह explore
+   किया जा सकता है।
+  </p>
+
+  <div class="y2medi-grid">
+
+   <article class="card">
+    <small>Y2MEDI</small>
+    <h3>🎥 Video Ideas</h3>
+    <p>
+     Gaming highlights, challenges और entertainment moments
+     के लिए नए video ideas देखें।
+    </p>
+   </article>
+
+   <article class="card">
+    <small>Y2MEDI</small>
+    <h3>🎭 Dialogues</h3>
+    <p>
+     Gaming और entertainment के लिए short dialogue ideas
+     और creative lines।
+    </p>
+   </article>
+
+   <article class="card">
+    <small>Y2MEDI</small>
+    <h3>🎬 Vlog Ideas</h3>
+    <p>
+     Gaming day, challenge और family entertainment जैसे
+     vlog concepts।
+    </p>
+   </article>
+
+   <article class="card">
+    <small>Y2MEDI</small>
+    <h3>✨ Creative Zone</h3>
+    <p>
+     रोजमर्रा के entertainment और gaming content के लिए
+     नए creative concepts।
+    </p>
+   </article>
+
+  </div>
+
+ </div>
+
+</section>
+
+<!-- =========================================================
      GAMES
      ========================================================= -->
 
@@ -1134,7 +1347,7 @@ footer{
 
    <p>
     15×15 board, four colours, four dice positions,
-    tokens, safe stars and multiplayer play.
+    proper pawns, safe stars and human multiplayer play.
    </p>
 
    <button class="btn" onclick="openGame('ludoModal')">
@@ -1151,7 +1364,7 @@ footer{
 
    <p>
     Proper carrom board, pockets, black/white coins,
-    striker and a clearly visible red Queen.
+    striker, red Queen and Player vs Computer.
    </p>
 
    <button class="btn" onclick="openGame('carromModal')">
@@ -1167,8 +1380,8 @@ footer{
    <h3>Car Racing</h3>
 
    <p>
-    Move your car left and right, avoid traffic
-    and survive as long as possible.
+    Start the race, control your car left and right,
+    adjust speed and avoid traffic.
    </p>
 
    <button class="btn" onclick="openGame('raceModal')">
@@ -1200,7 +1413,8 @@ footer{
    <h3>Quick Quiz</h3>
 
    <p>
-    Question and answer game with score and fresh questions.
+    Question and answer game with score, correct sound
+    and wrong answer sound.
    </p>
 
    <button class="btn" onclick="openGame('quizModal')">
@@ -1267,6 +1481,7 @@ footer{
 
 <!-- =========================================================
      LUDO MODAL
+     HUMAN MULTIPLAYER ONLY
      ========================================================= -->
 
 <div class="modal" id="ludoModal">
@@ -1275,7 +1490,7 @@ footer{
 
   <div class="modal-head">
 
-   <h2>🎲 Ludo Arena</h2>
+   <h2>🎲 Ludo Arena — Human Multiplayer</h2>
 
    <button class="close" onclick="closeGame('ludoModal')">
     ×
@@ -1315,15 +1530,15 @@ footer{
     <button
      id="dieGreen"
      class="ludo-die die-green die-top"
+     aria-label="Green player dice"
      onclick="rollLudo('green')">
-     1
     </button>
 
     <button
      id="dieBlue"
      class="ludo-die die-blue die-left"
+     aria-label="Blue player dice"
      onclick="rollLudo('blue')">
-     1
     </button>
 
     <div id="ludoBoard" class="ludo-board"></div>
@@ -1331,15 +1546,15 @@ footer{
     <button
      id="dieYellow"
      class="ludo-die die-yellow die-right"
+     aria-label="Yellow player dice"
      onclick="rollLudo('yellow')">
-     1
     </button>
 
     <button
      id="dieRed"
      class="ludo-die die-red die-bottom"
+     aria-label="Red player dice"
      onclick="rollLudo('red')">
-     1
     </button>
 
    </div>
@@ -1360,6 +1575,7 @@ footer{
 
 <!-- =========================================================
      CARROM MODAL
+     PLAYER VS COMPUTER
      ========================================================= -->
 
 <div class="modal" id="carromModal">
@@ -1368,7 +1584,7 @@ footer{
 
   <div class="modal-head">
 
-   <h2>🟤 Carrom</h2>
+   <h2>🟤 Carrom — Player vs Computer</h2>
 
    <button class="close" onclick="closeGame('carromModal')">
     ×
@@ -1379,7 +1595,41 @@ footer{
   <div class="game-stage">
 
    <div class="carrom-info" id="carromInfo">
-    Drag the striker to aim and release to shoot.
+    Your turn — striker को जिस दिशा में भेजना है उसी दिशा में drag करें।
+   </div>
+
+   <div class="scorebar">
+
+    <span>
+     👤 Player:
+     <b id="carromPlayerScore">0</b>
+    </span>
+
+    <span>
+     🤖 Computer:
+     <b id="carromComputerScore">0</b>
+    </span>
+
+   </div>
+
+   <div class="speed-control">
+
+    <strong>⚡ Speed</strong>
+
+    <input
+     id="carromSpeed"
+     type="range"
+     min="0.6"
+     max="2.5"
+     step="0.1"
+     value="1.5">
+
+    <span
+     id="carromSpeedValue"
+     class="speed-value">
+     1.5×
+    </span>
+
    </div>
 
    <div class="carrom-wrap" id="carromBoard">
@@ -1463,9 +1713,37 @@ footer{
 
     <div class="race-controls">
 
-     <button id="leftBtn">⬅️</button>
+     <button id="leftBtn" aria-label="Move car left">
+      ⬅️
+     </button>
 
-     <button id="rightBtn">➡️</button>
+     <button id="rightBtn" aria-label="Move car right">
+      ➡️
+     </button>
+
+    </div>
+
+    <div class="race-settings">
+
+     <div class="race-speed-row">
+
+      <strong>🏎️ Speed</strong>
+
+      <input
+       id="raceSpeed"
+       type="range"
+       min="3"
+       max="10"
+       step="0.5"
+       value="5">
+
+      <strong
+       id="raceSpeedValue"
+       style="color:var(--gold)">
+       5×
+      </strong>
+
+     </div>
 
     </div>
 
@@ -1599,12 +1877,17 @@ footer{
 const $ = id => document.getElementById(id);
 
 function scrollToId(id){
+
  const el=$(id);
+
  if(el){
+
   el.scrollIntoView({
    behavior:"smooth"
   });
+
  }
+
 }
 
 function openGame(id){
@@ -1632,6 +1915,7 @@ function openGame(id){
  if(id==="quizModal"){
   newQuiz();
  }
+
 }
 
 function closeGame(id){
@@ -1645,6 +1929,11 @@ function closeGame(id){
  if(id==="raceModal"){
   stopRace();
  }
+
+ if(id==="carromModal"){
+  stopCarrom();
+ }
+
 }
 
 /* =========================================================
@@ -1736,7 +2025,9 @@ function diceSound(){
 }
 
 function stepSound(){
+
  tone(430,.045,"triangle");
+
 }
 
 function captureSound(){
@@ -1803,6 +2094,54 @@ function crashSound(){
  setTimeout(
   ()=>tone(60,.2,"sawtooth"),
   100
+ );
+
+}
+
+/* QUIZ SOUNDS */
+
+function correctAnswerSound(){
+
+ unlockAudio();
+
+ tone(
+  660,
+  .10,
+  "sine",
+  .075
+ );
+
+ setTimeout(
+  ()=>tone(
+   880,
+   .16,
+   "sine",
+   .075
+  ),
+  100
+ );
+
+}
+
+function wrongAnswerSound(){
+
+ unlockAudio();
+
+ tone(
+  180,
+  .14,
+  "sawtooth",
+  .08
+ );
+
+ setTimeout(
+  ()=>tone(
+   110,
+   .20,
+   "sawtooth",
+   .07
+  ),
+  120
  );
 
 }
@@ -2002,7 +2341,7 @@ const dailyData={
   },
   {
    title:"AI + Games",
-   body:"Games में AI का उपयोग कई जगह हो सकता है, जैसे non-player characters, procedural content और testing। GAMEZONE के human multiplayer Ludo में computer opponent की जगह human players रखे जा सकते हैं।"
+   body:"Games में AI का उपयोग कई जगह हो सकता है, जैसे non-player characters, procedural content और testing। GAMEZONE के human multiplayer Ludo में computer opponent की जगह human players रखे गए हैं।"
   },
   {
    title:"AI Learning",
@@ -2205,6 +2544,8 @@ setInterval(
 
 /* =========================================================
    LUDO — 15 x 15
+   HUMAN PLAYERS ONLY
+   NO COMPUTER / NO AI
    ========================================================= */
 
 const ludoPlayers=[
@@ -2386,6 +2727,54 @@ function ludoPlayer(id){
 
  return ludoPlayers.find(
   p=>p.id===id
+ );
+
+}
+
+/* CREATE VISUAL DICE */
+function createDieVisual(el,number=1){
+
+ if(!el)return;
+
+ el.innerHTML="";
+
+ for(let i=0;i<9;i++){
+
+  const pip=document.createElement("span");
+
+  pip.className="die-pip";
+
+  el.appendChild(pip);
+
+ }
+
+ renderDieVisual(el,number);
+
+}
+
+function renderDieVisual(el,number){
+
+ if(!el)return;
+
+ const pattern={
+  1:[4],
+  2:[0,8],
+  3:[0,4,8],
+  4:[0,2,6,8],
+  5:[0,2,4,6,8],
+  6:[0,2,3,5,6,8]
+ };
+
+ const active=
+  pattern[number]||pattern[1];
+
+ [...el.children].forEach(
+  (pip,i)=>{
+   pip.classList.toggle(
+    "on",
+    active.includes(i)
+   );
+  }
  );
 
 }
@@ -2630,16 +3019,17 @@ function renderLudoTokens(){
      document.createElement("button");
 
     t.className=
-     `token ${p.id} ludo-token`;
+     `token ${p.id} ludo-token`+
+     (pos.finished?" finished":"");
 
-    t.textContent=ti+1;
+    /* NO NUMBER INSIDE GOTI */
 
     t.title=
-     `${p.name} token ${ti+1}`;
+     `${p.name} Goti`;
 
     t.setAttribute(
      "aria-label",
-     `${p.name} token ${ti+1}`
+     `${p.name} की गोटी`
     );
 
     t.onclick=
@@ -2730,10 +3120,24 @@ function resetLudo(){
 
  buildLudo();
 
+ ludoPlayers.forEach(
+  p=>{
+   const el=
+    $("die"+
+     p.id.charAt(0).toUpperCase()+
+     p.id.slice(1)
+    );
+
+   if(el){
+    createDieVisual(el,1);
+   }
+  }
+ );
+
  updateDice();
 
  $("ludoMessage").textContent=
-  "1st PLAYER की बारी — dice roll करें।";
+  "1st PLAYER की बारी — अपना dice roll करें।";
 
  document
   .querySelectorAll(
@@ -2810,7 +3214,7 @@ function rollLudo(color){
   );
 
  if(die){
-  die.textContent=roll;
+  renderDieVisual(die,roll);
  }
 
  diceSound();
@@ -2837,8 +3241,8 @@ function rollLudo(color){
 
   $("ludoMessage").textContent=
    roll===6
-    ?"No valid token — roll again."
-    :"No valid move.";
+    ?"No valid token — फिर से dice roll करें।"
+    :"इस roll से कोई valid move नहीं है।";
 
   setTimeout(
    ()=>{
@@ -2864,7 +3268,7 @@ function rollLudo(color){
  }else{
 
   $("ludoMessage").textContent=
-   "Choose a token";
+   "अपनी गोटी चुनें";
 
  }
 
@@ -2927,12 +3331,6 @@ function moveLudoToken(
 
  renderLudoTokens();
 
- if(next===56){
-
-  winSound();
-
- }
-
  const captured=
   captureLudo(
    pi,
@@ -2942,6 +3340,12 @@ function moveLudoToken(
  if(captured){
 
   captureSound();
+
+ }
+
+ if(next===56){
+
+  winSound();
 
  }
 
@@ -2987,7 +3391,7 @@ function moveLudoToken(
    ludoState.rolled=null;
 
    $("ludoMessage").textContent=
-    "🎲 6 आया — फिर से roll करें";
+    "🎲 6 आया — फिर से dice roll करें";
 
    updateDice();
 
@@ -3092,7 +3496,7 @@ function nextLudoTurn(){
   ludoPlayers[
    ludoState.turn
   ].name+
-  " की बारी — dice roll करें।";
+  " की बारी — अपना dice roll करें।";
 
  updateDice();
 
@@ -3100,24 +3504,71 @@ function nextLudoTurn(){
 
 /* =========================================================
    CARROM
+   PLAYER VS COMPUTER
    ========================================================= */
 
 let carrom={
  coins:[],
- score:0,
+ playerScore:0,
+ computerScore:0,
  moving:false,
+ turn:"player",
  strikerX:50,
- strikerY:88
+ strikerY:88,
+ speed:1.5,
+ shotId:0
 };
+
+function updateCarromScore(){
+
+ const p=$("carromPlayerScore");
+ const c=$("carromComputerScore");
+
+ if(p)p.textContent=carrom.playerScore;
+ if(c)c.textContent=carrom.computerScore;
+
+}
+
+function updateCarromSpeed(){
+
+ const input=$("carromSpeed");
+ const value=$("carromSpeedValue");
+
+ if(!input)return;
+
+ carrom.speed=
+  Number(input.value)||1.5;
+
+ if(value){
+
+  value.textContent=
+   carrom.speed.toFixed(1)+"×";
+
+ }
+
+}
+
+$("carromSpeed").addEventListener(
+ "input",
+ updateCarromSpeed
+);
 
 function resetCarrom(){
 
+ stopCarrom();
+
  carrom={
   coins:[],
-  score:0,
+  playerScore:0,
+  computerScore:0,
   moving:false,
+  turn:"player",
   strikerX:50,
-  strikerY:88
+  strikerY:88,
+  speed:Number(
+   $("carromSpeed")?.value||1.5
+  ),
+  shotId:0
  };
 
  const holder=
@@ -3174,10 +3625,28 @@ function resetCarrom(){
   }
  );
 
+ updateCarromSpeed();
+
+ updateCarromScore();
+
  renderCarrom();
 
  $("carromInfo").textContent=
-  "Red Queen center में है — striker को drag करके aim करें और release करें।";
+  "👤 Your turn — striker को जिस दिशा में मारना है उसी दिशा में drag करें।";
+
+}
+
+function stopCarrom(){
+
+ carrom.moving=false;
+
+ carromDragging=false;
+
+ const line=$("aimLine");
+
+ if(line){
+  line.style.display="none";
+ }
 
 }
 
@@ -3250,7 +3719,14 @@ $("striker").addEventListener(
 
   if(carrom.moving)return;
 
+  if(carrom.turn!=="player")return;
+
   carromDragging=true;
+
+  carromPointer={
+   x:carrom.strikerX,
+   y:carrom.strikerY
+  };
 
   try{
    $("striker").setPointerCapture(
@@ -3284,28 +3760,39 @@ $("striker").addEventListener(
    y:y
   };
 
+  /*
+   IMPORTANT:
+   Aim is DIRECT.
+   Pointer आगे = striker आगे उसी direction में।
+   कोई उल्टा calculation नहीं।
+  */
+
   const dx=
-   carrom.strikerX-x;
+   x-carrom.strikerX;
 
   const dy=
-   carrom.strikerY-y;
+   y-carrom.strikerY;
 
-  const line=
-   $("aimLine");
+  const distance=
+   Math.sqrt(
+    dx*dx+
+    dy*dy
+   );
 
   const len=
    Math.min(
-    45,
-    Math.sqrt(
-     dx*dx+dy*dy
-    )*1.4
+    55,
+    distance*1.35
    );
 
   const angle=
    Math.atan2(
-    y-carrom.strikerY,
-    x-carrom.strikerX
+    dy,
+    dx
    )*180/Math.PI;
+
+  const line=
+   $("aimLine");
 
   line.style.left=
    carrom.strikerX+"%";
@@ -3320,7 +3807,9 @@ $("striker").addEventListener(
    "rotate("+angle+"deg)";
 
   line.style.display=
-   "block";
+   distance>.5
+    ?"block"
+    :"none";
 
  }
 );
@@ -3334,32 +3823,61 @@ function releaseCarromPointer(){
  $("aimLine").style.display=
   "none";
 
+ if(carrom.turn!=="player")return;
+
+ /*
+  DIRECT DIRECTION:
+  जहाँ pointer है,
+  striker उसी दिशा में जाएगा।
+ */
+
  const dx=
-  carrom.strikerX-
-  carromPointer.x;
+  carromPointer.x-
+  carrom.strikerX;
 
  const dy=
-  carrom.strikerY-
-  carromPointer.y;
+  carromPointer.y-
+  carrom.strikerY;
+
+ const distance=
+  Math.sqrt(
+   dx*dx+
+   dy*dy
+  );
+
+ if(distance<2){
+
+  $("carromInfo").textContent=
+   "थोड़ा दूर drag करके निशाना लगाएँ।";
+
+  return;
+
+ }
 
  const power=
   Math.min(
-   9,
-   Math.sqrt(
-    dx*dx+dy*dy
-   )/3
+   1,
+   distance/35
   );
 
- if(power>.4){
-
-  shootSound();
-
-  shootCarrom(
-   dx/100*power,
-   dy/100*power
+ const angle=
+  Math.atan2(
+   dy,
+   dx
   );
 
- }
+ const velocity=
+  (.55+
+   power*1.8)*
+   carrom.speed;
+
+ shootSound();
+
+ shootCarrom(
+  Math.cos(angle)*velocity,
+  Math.sin(angle)*velocity,
+  "player"
+ );
 
 }
 
@@ -3373,14 +3891,175 @@ $("striker").addEventListener(
  releaseCarromPointer
 );
 
-function shootCarrom(
+/* CARROM COIN COLLISION */
+function resolveCoinCollisions(){
+
+ const active=
+  carrom.coins.filter(
+   c=>!c.pocketed
+  );
+
+ const radius=2.75;
+
+ for(let i=0;i<active.length;i++){
+
+  for(let j=i+1;j<active.length;j++){
+
+   const a=active[i];
+   const b=active[j];
+
+   let dx=b.x-a.x;
+   let dy=b.y-a.y;
+
+   let d=
+    Math.sqrt(
+     dx*dx+
+     dy*dy
+    );
+
+   const minDist=
+    radius*2;
+
+   if(d===0){
+    dx=.01;
+    dy=.01;
+    d=Math.sqrt(dx*dx+dy*dy);
+   }
+
+   if(d<minDist){
+
+    const nx=dx/d;
+    const ny=dy/d;
+
+    const overlap=
+     minDist-d;
+
+    a.x-=nx*overlap/2;
+    a.y-=ny*overlap/2;
+
+    b.x+=nx*overlap/2;
+    b.y+=ny*overlap/2;
+
+    const rvx=
+     b.vx-a.vx;
+
+    const rvy=
+     b.vy-a.vy;
+
+    const rel=
+     rvx*nx+
+     rvy*ny;
+
+    if(rel<0){
+
+     const impulse=
+      -rel*.72;
+
+     a.vx-=impulse*nx;
+     a.vy-=impulse*ny;
+
+     b.vx+=impulse*nx;
+     b.vy+=impulse*ny;
+
+    }
+
+   }
+
+  }
+
+ }
+
+}
+
+/* STRIKER -> COIN COLLISION */
+function strikerCoinCollision(
+ sx,
+ sy,
  vx,
  vy
+){
+
+ const strikerRadius=3.5;
+ const coinRadius=2.7;
+
+ for(const c of carrom.coins){
+
+  if(c.pocketed)continue;
+
+  const dx=
+   c.x-sx;
+
+  const dy=
+   c.y-sy;
+
+  const d=
+   Math.sqrt(
+    dx*dx+
+    dy*dy
+   );
+
+  const minDist=
+   strikerRadius+
+   coinRadius;
+
+  if(
+   d<minDist&&
+   d>.001
+  ){
+
+   const nx=dx/d;
+   const ny=dy/d;
+
+   const speed=
+    Math.sqrt(
+     vx*vx+
+     vy*vy
+    );
+
+   const hitPower=
+    Math.max(
+     .2,
+     speed
+    );
+
+   c.vx=
+    nx*hitPower*.78;
+
+   c.vy=
+    ny*hitPower*.78;
+
+   c.x=
+    sx+
+    nx*(minDist+.2);
+
+   c.y=
+    sy+
+    ny*(minDist+.2);
+
+   return true;
+
+  }
+
+ }
+
+ return false;
+
+}
+
+function shootCarrom(
+ vx,
+ vy,
+ owner="player"
 ){
 
  if(carrom.moving)return;
 
  carrom.moving=true;
+
+ carrom.turn=owner;
+
+ const shotNumber=
+  ++carrom.shotId;
 
  let sx=
   carrom.strikerX;
@@ -3390,7 +4069,24 @@ function shootCarrom(
 
  let frame=0;
 
+ const originalVx=vx;
+ const originalVy=vy;
+
+ if(owner==="player"){
+
+  $("carromInfo").textContent=
+   "👤 Player shot — coins को pocket करने की कोशिश करें।";
+
+ }else{
+
+  $("carromInfo").textContent=
+   "🤖 Computer खेल रहा है...";
+
+ }
+
  function animate(){
+
+  if(shotNumber!==carrom.shotId)return;
 
   frame++;
 
@@ -3398,22 +4094,21 @@ function shootCarrom(
 
   sy+=vy;
 
-  vx*=.975;
-
-  vy*=.975;
+  vx*=.968;
+  vy*=.968;
 
   if(
-   sx<7||
-   sx>93
+   sx<5||
+   sx>95
   ){
 
-   vx*=-.88;
+   vx*=-.86;
 
    sx=
     Math.max(
-     7,
+     5,
      Math.min(
-      93,
+      95,
       sx
      )
     );
@@ -3421,26 +4116,33 @@ function shootCarrom(
   }
 
   if(
-   sy<7||
-   sy>93
+   sy<5||
+   sy>95
   ){
 
-   vy*=-.88;
+   vy*=-.86;
 
    sy=
     Math.max(
-     7,
+     5,
      Math.min(
-      93,
+      95,
       sy
      )
     );
 
   }
 
-  carrom.strikerX=sx;
+  /*
+   First striker collision.
+  */
 
-  carrom.strikerY=sy;
+  strikerCoinCollision(
+   sx,
+   sy,
+   vx,
+   vy
+  );
 
   carrom.coins.forEach(
    c=>{
@@ -3451,16 +4153,15 @@ function shootCarrom(
 
     c.y+=c.vy||0;
 
-    c.vx*=.96;
-
-    c.vy*=.96;
+    c.vx*=.965;
+    c.vy*=.965;
 
     if(
      c.x<4||
      c.x>96
     ){
 
-     c.vx*=-.8;
+     c.vx*=-.82;
 
      c.x=
       Math.max(
@@ -3478,7 +4179,7 @@ function shootCarrom(
      c.y>96
     ){
 
-     c.vy*=-.8;
+     c.vy*=-.82;
 
      c.y=
       Math.max(
@@ -3491,61 +4192,31 @@ function shootCarrom(
 
     }
 
-    const dx=
-     c.x-sx;
-
-    const dy=
-     c.y-sy;
-
-    const d=
-     Math.sqrt(
-      dx*dx+dy*dy
-     );
-
-    if(
-     d<7&&
-     d>.001
-    ){
-
-     const len=
-      Math.max(
-       .01,
-       Math.sqrt(
-        vx*vx+
-        vy*vy
-       )
-      );
-
-     c.vx=
-      (dx/d)*
-      len*.75;
-
-     c.vy=
-      (dy/d)*
-      len*.75;
-
-    }
-
    }
   );
+
+  resolveCoinCollisions();
 
   checkCarromPockets();
 
   renderCarrom();
+
+  const strikerMoving=
+   Math.abs(vx)+
+   Math.abs(vy)>.035;
 
   const coinsMoving=
    carrom.coins.some(
     c=>
      !c.pocketed&&
      Math.abs(c.vx)+
-     Math.abs(c.vy)>.04
+     Math.abs(c.vy)>.035
    );
 
   if(
-   frame<220&&
+   frame<700&&
    (
-    Math.abs(vx)+
-    Math.abs(vy)>.04||
+    strikerMoving||
     coinsMoving
    )
   ){
@@ -3556,24 +4227,74 @@ function shootCarrom(
 
   }else{
 
-   carrom.moving=false;
-
-   carrom.strikerX=50;
-
-   carrom.strikerY=88;
-
-   carromPointer={
-    x:50,
-    y:50
-   };
-
-   renderCarrom();
+   finishCarromShot(owner);
 
   }
 
  }
 
  animate();
+
+}
+
+function finishCarromShot(owner){
+
+ carrom.moving=false;
+
+ carrom.strikerX=
+  owner==="computer"
+   ?50
+   :50;
+
+ carrom.strikerY=88;
+
+ carromPointer={
+  x:50,
+  y:50
+ };
+
+ renderCarrom();
+
+ const remaining=
+  carrom.coins.filter(
+   c=>!c.pocketed
+  ).length;
+
+ if(!remaining){
+
+  $("carromInfo").textContent=
+   "🎉 सभी coins pocket हो गए!";
+
+  winSound();
+
+  return;
+
+ }
+
+ /*
+  Turn changes after each shot.
+ */
+
+ if(owner==="player"){
+
+  carrom.turn="computer";
+
+  $("carromInfo").textContent=
+   "🤖 अब Computer की बारी...";
+
+  setTimeout(
+   computerCarromShot,
+   850
+  );
+
+ }else{
+
+  carrom.turn="player";
+
+  $("carromInfo").textContent=
+   "👤 आपकी बारी — striker को निशाने की दिशा में drag करें।";
+
+ }
 
 }
 
@@ -3585,6 +4306,8 @@ function checkCarromPockets(){
   [0,100],
   [100,100]
  ];
+
+ let pocketedThisShot=0;
 
  carrom.coins.forEach(
   c=>{
@@ -3602,7 +4325,8 @@ function checkCarromPockets(){
        c.y-p[1];
 
       return Math.sqrt(
-       dx*dx+dy*dy
+       dx*dx+
+       dy*dy
       )<9;
 
      }
@@ -3618,16 +4342,33 @@ function checkCarromPockets(){
 
     c.el.style.display="none";
 
+    pocketedThisShot++;
+
     if(c.type==="queen"){
 
-     carrom.score+=50;
+     if(carrom.turn==="computer"){
 
-     $("carromInfo").textContent=
-      "👑 QUEEN POCKETED! +50";
+      carrom.computerScore+=50;
+
+      $("carromInfo").textContent=
+       "🤖 Computer ने Queen pocket की! +50";
+
+     }else{
+
+      carrom.playerScore+=50;
+
+      $("carromInfo").textContent=
+       "👑 आपने Queen pocket की! +50";
+
+     }
 
     }else{
 
-     carrom.score+=10;
+     if(carrom.turn==="computer"){
+      carrom.computerScore+=10;
+     }else{
+      carrom.playerScore+=10;
+     }
 
     }
 
@@ -3638,6 +4379,8 @@ function checkCarromPockets(){
   }
  );
 
+ updateCarromScore();
+
  const remaining=
   carrom.coins.filter(
    c=>!c.pocketed
@@ -3646,18 +4389,141 @@ function checkCarromPockets(){
  if(!remaining){
 
   $("carromInfo").textContent=
-   "All coins cleared! 🎉 Score: "+
-   carrom.score;
+   "🎉 All coins cleared! Player "+
+   carrom.playerScore+
+   " • Computer "+
+   carrom.computerScore;
 
- }else{
+  winSound();
+
+ }else if(pocketedThisShot>0){
 
   $("carromInfo").textContent=
-   "Score: "+
-   carrom.score+
-   " • Coins left: "+
-   remaining;
+   (carrom.turn==="computer"
+    ?"🤖 Computer"
+    :"👤 Player")+
+   " pocketed "+
+   pocketedThisShot+
+   " coin(s).";
 
  }
+
+}
+
+/* SIMPLE COMPUTER AIM */
+function computerCarromShot(){
+
+ if(carrom.moving)return;
+
+ const active=
+  carrom.coins.filter(
+   c=>!c.pocketed
+  );
+
+ if(!active.length){
+
+  carrom.turn="player";
+
+  return;
+
+ }
+
+ /*
+  Computer striker is bottom.
+  Select a coin and calculate a direct
+  path toward a random suitable pocket.
+ */
+
+ const target=
+  active.find(
+   c=>c.type!=="queen"
+  )||
+  active[0];
+
+ const pockets=[
+  [3,3],
+  [97,3],
+  [3,97],
+  [97,97]
+ ];
+
+ let bestPocket=pockets[0];
+
+ let bestDistance=Infinity;
+
+ pockets.forEach(
+  p=>{
+
+   const dx=
+    p[0]-target.x;
+
+   const dy=
+    p[1]-target.y;
+
+   const d=
+    Math.sqrt(
+     dx*dx+
+     dy*dy
+    );
+
+   if(d<bestDistance){
+
+    bestDistance=d;
+
+    bestPocket=p;
+
+   }
+
+  }
+ );
+
+ /*
+  Computer striker starts bottom.
+  Aim toward target, with a little
+  pocket-directed offset.
+ */
+
+ const sx=50;
+ const sy=88;
+
+ const targetX=
+  target.x+
+  (bestPocket[0]-target.x)*.20;
+
+ const targetY=
+  target.y+
+  (bestPocket[1]-target.y)*.20;
+
+ const dx=
+  targetX-sx;
+
+ const dy=
+  targetY-sy;
+
+ const angle=
+  Math.atan2(
+   dy,
+   dx
+  );
+
+ const velocity=
+  (1.15+
+   Math.min(
+    1.1,
+    Math.sqrt(dx*dx+dy*dy)/70
+   ))*
+   carrom.speed;
+
+ carrom.strikerX=sx;
+ carrom.strikerY=sy;
+
+ shootSound();
+
+ shootCarrom(
+  Math.cos(angle)*velocity,
+  Math.sin(angle)*velocity,
+  "computer"
+ );
 
 }
 
@@ -3676,6 +4542,7 @@ let race={
  carX:180,
  carY:550,
  speed:5,
+ baseSpeed:5,
  score:0,
  obstacles:[],
  roadOffset:0,
@@ -3693,6 +4560,34 @@ let bestScore=
 
 $("raceBest").textContent=
  bestScore;
+
+function updateRaceSpeed(){
+
+ const input=$("raceSpeed");
+ const value=$("raceSpeedValue");
+
+ if(!input)return;
+
+ race.baseSpeed=
+  Number(input.value)||5;
+
+ if(!race.running){
+  race.speed=race.baseSpeed;
+ }
+
+ if(value){
+
+  value.textContent=
+   race.baseSpeed.toFixed(1)+"×";
+
+ }
+
+}
+
+$("raceSpeed").addEventListener(
+ "input",
+ updateRaceSpeed
+);
 
 function drawRace(){
 
@@ -3929,13 +4824,15 @@ function startRace(){
   race.running=false;
  }
 
+ updateRaceSpeed();
+
  race.running=true;
 
  race.carX=180;
 
  race.score=0;
 
- race.speed=5;
+ race.speed=race.baseSpeed;
 
  race.obstacles=[];
 
@@ -3945,6 +4842,8 @@ function startRace(){
   performance.now();
 
  $("raceScore").textContent="0";
+
+ drawRace();
 
  requestAnimationFrame(
   raceLoop
@@ -3991,17 +4890,23 @@ function raceLoop(now){
    )
   );
 
+ /*
+  User selected speed remains the base.
+  A small progression is added as score grows.
+ */
+
+ race.speed=
+  Math.min(
+   14,
+   race.baseSpeed+
+   race.score/700
+  );
+
  race.roadOffset+=
   race.speed*dt;
 
  race.score+=
   .6*dt;
-
- race.speed=
-  Math.min(
-   12,
-   5+race.score/300
-  );
 
  if(
   Math.random()<
@@ -4124,13 +5029,22 @@ function bindHold(
 
  if(!btn)return;
 
- const on=()=>{
+ const on=e=>{
+
+  if(e) e.preventDefault();
+
   race[prop]=true;
+
   unlockAudio();
+
  };
 
- const off=()=>{
+ const off=e=>{
+
+  if(e) e.preventDefault();
+
   race[prop]=false;
+
  };
 
  [
@@ -4141,7 +5055,7 @@ function bindHold(
    btn.addEventListener(
     e,
     on,
-    {passive:true}
+    {passive:false}
    )
  );
 
@@ -4149,13 +5063,15 @@ function bindHold(
   "pointerup",
   "pointercancel",
   "pointerleave",
-  "touchend"
+  "pointerout",
+  "touchend",
+  "touchcancel"
  ].forEach(
   e=>
    btn.addEventListener(
     e,
     off,
-    {passive:true}
+    {passive:false}
    )
  );
 
@@ -4579,13 +5495,9 @@ function answerQuiz(
   quizScore++;
 
   $("quizResult").textContent=
-   "✅ Correct!";
+   "✅ Correct Answer!";
 
-  tone(
-   650,
-   .12,
-   "sine"
-  );
+  correctAnswerSound();
 
  }else{
 
@@ -4594,7 +5506,7 @@ function answerQuiz(
   );
 
   $("quizResult").textContent=
-   "❌ Wrong";
+   "❌ Wrong Answer";
 
   const correctButton=
    $("quizAnswers")
@@ -4610,11 +5522,7 @@ function answerQuiz(
 
   }
 
-  tone(
-   160,
-   .14,
-   "sawtooth"
-  );
+  wrongAnswerSound();
 
  }
 
@@ -4629,7 +5537,7 @@ function answerQuiz(
    renderQuiz();
 
   },
-  900
+  1100
  );
 
 }
@@ -4782,7 +5690,11 @@ document.addEventListener(
 
 buildLudo();
 
+resetLudo();
+
 resetCarrom();
+
+updateRaceSpeed();
 
 drawRace();
 
@@ -4807,6 +5719,14 @@ window.addEventListener(
    ){
 
     stopRace();
+
+   }
+
+   if(
+    e.target.id==="carromModal"
+   ){
+
+    stopCarrom();
 
    }
 
