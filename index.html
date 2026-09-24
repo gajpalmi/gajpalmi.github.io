@@ -11,7 +11,19 @@
 <script async
 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5348301935438016"
 crossorigin="anonymous"></script>
+<!-- GAMEZONE ARENA - GOOGLE ANALYTICS -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R4350DX8L3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
 
+  function gtag(){
+    dataLayer.push(arguments);
+  }
+
+  gtag("js", new Date());
+  gtag("config", "G-R4350DX8L3");
+</script>
+<!-- END GOOGLE ANALYTICS -->
 <title>GAMEZONE ARENA — Play sharp. Rise fast.</title>
 
 <style>
@@ -5954,7 +5966,641 @@ setTimeout(
   },
   250
 );
+/* ==========================================================
+   GAMEZONE ARENA - LIVE AUTO CONTENT
+   Reads: ./content/auto-content.json
+   Old local content remains as fallback.
+   ========================================================== */
 
+(function(){
+
+  const REMOTE_CONTENT_URL =
+    "./content/auto-content.json?v="+Date.now();
+
+  let remoteContent=[];
+  let remoteContentLoaded=false;
+  let remoteContentTimer=null;
+  let remoteRenderStep=0;
+
+  /*
+    पुराने local render functions सुरक्षित रखें।
+    अगर JSON load नहीं होता तो यही पुराने functions चलेंगे।
+  */
+  const localRenderDaily=
+    renderDaily;
+
+  const localRenderAutomaticContent=
+    renderAutomaticContent;
+
+
+  /*
+    Text को सुरक्षित तरीके से string में बदलना।
+  */
+  function safeText(value){
+
+    if(value===null || value===undefined){
+      return "";
+    }
+
+    return String(value).trim();
+
+  }
+
+
+  /*
+    Remote item का मुख्य text।
+  */
+  function getItemText(item){
+
+    return safeText(
+      item.content ||
+      item.text ||
+      item.description ||
+      item.title
+    );
+
+  }
+
+
+  /*
+    किसी item का searchable category/type text।
+  */
+  function getItemCategoryText(item){
+
+    return (
+      safeText(item.type)+" "+
+      safeText(item.category)+" "+
+      safeText(item.title)+" "+
+      safeText(item.content)
+    ).toLowerCase();
+
+  }
+
+
+  /*
+    Category matching.
+  */
+  function matchesCategory(item,key){
+
+    const text=
+      getItemCategoryText(item);
+
+    const rules={
+
+      knowledge:[
+        "knowledge",
+        "ज्ञान",
+        "gyan",
+        "general knowledge",
+        "सामान्य ज्ञान"
+      ],
+
+      bhakti:[
+        "bhakti",
+        "भक्ति",
+        "spiritual",
+        "आध्यात्मिक"
+      ],
+
+      bhajan:[
+        "bhajan",
+        "भजन",
+        "kirtan",
+        "कीर्तन"
+      ],
+
+      blog:[
+        "blog",
+        "ब्लॉग",
+        "blogs"
+      ],
+
+      ai:[
+        "ai",
+        "artificial intelligence",
+        "आर्टिफिशियल इंटेलिजेंस",
+        "कृत्रिम बुद्धिमत्ता"
+      ]
+
+    };
+
+    return (
+      rules[key] || []
+    ).some(
+      word=>text.includes(word.toLowerCase())
+    );
+
+  }
+
+
+  /*
+    JSON से valid items ही रखें।
+  */
+  function cleanRemoteContent(data){
+
+    if(!Array.isArray(data)){
+      return [];
+    }
+
+    return data.filter(
+      item=>{
+        if(!item || typeof item!=="object"){
+          return false;
+        }
+
+        const title=
+          safeText(item.title);
+
+        const content=
+          getItemText(item);
+
+        return Boolean(
+          title || content
+        );
+      }
+    );
+
+  }
+
+
+  /*
+    Live JSON load करें।
+  */
+  async function loadRemoteContent(){
+
+    try{
+
+      const response=
+        await fetch(
+          REMOTE_CONTENT_URL,
+          {
+            cache:"no-store",
+            headers:{
+              "Cache-Control":"no-cache"
+            }
+          }
+        );
+
+      if(!response.ok){
+        throw new Error(
+          "HTTP "+response.status
+        );
+      }
+
+      const data=
+        await response.json();
+
+      const cleaned=
+        cleanRemoteContent(data);
+
+      if(!cleaned.length){
+        throw new Error(
+          "No valid content"
+        );
+      }
+
+      remoteContent=
+        cleaned;
+
+      remoteContentLoaded=
+        true;
+
+      remoteRenderStep=0;
+
+      window.GAMEZONE_REMOTE_CONTENT_STATUS={
+        loaded:true,
+        count:remoteContent.length,
+        loadedAt:new Date().toISOString()
+      };
+
+      /*
+        JSON load होने के तुरंत बाद
+        live content दिखाएँ।
+      */
+      renderDaily();
+      renderAutomaticContent();
+
+    }catch(error){
+
+      /*
+        Error होने पर पुराना local system
+        अपने आप चलता रहेगा।
+      */
+      remoteContentLoaded=
+        false;
+
+      window.GAMEZONE_REMOTE_CONTENT_STATUS={
+        loaded:false,
+        count:0,
+        error:String(error)
+      };
+
+    }
+
+  }
+
+
+  /*
+    Daily Content के लिए एक item चुनना।
+    एक दिन में एक मुख्य remote item रहेगा।
+  */
+  function getRemoteDailyItem(){
+
+    if(!remoteContent.length){
+      return null;
+    }
+
+    const now=
+      new Date();
+
+    const start=
+      new Date(
+        now.getFullYear(),
+        0,
+        0
+      );
+
+    const day=
+      Math.floor(
+        (now-start)/86400000
+      );
+
+    const index=
+      day%remoteContent.length;
+
+    return remoteContent[index];
+
+  }
+
+
+  /*
+    LIVE Daily Content renderer.
+  */
+  function renderRemoteDaily(){
+
+    const box=
+      $("dailyContent");
+
+    if(!box){
+      return;
+    }
+
+    const item=
+      getRemoteDailyItem();
+
+    if(!item){
+      localRenderDaily();
+      return;
+    }
+
+    const type=
+      safeText(
+        item.type ||
+        item.category ||
+        "Daily Content"
+      );
+
+    const text=
+      getItemText(item);
+
+    const title=
+      safeText(item.title);
+
+    box.classList.add(
+      "content-changing"
+    );
+
+    setTimeout(()=>{
+
+      box.innerHTML="";
+
+      const typeEl=
+        document.createElement("div");
+
+      typeEl.className=
+        "daily-type";
+
+      typeEl.textContent=
+        type;
+
+      const titleEl=
+        document.createElement("div");
+
+      titleEl.className=
+        "daily-text";
+
+      titleEl.textContent=
+        title
+          ? title
+          : text;
+
+      if(title && text && title!==text){
+
+        const contentEl=
+          document.createElement("div");
+
+        contentEl.className=
+          "daily-text";
+
+        contentEl.style.fontSize=
+          "16px";
+
+        contentEl.style.marginTop=
+          "10px";
+
+        contentEl.textContent=
+          text;
+
+        box.appendChild(
+          typeEl
+        );
+
+        box.appendChild(
+          titleEl
+        );
+
+        box.appendChild(
+          contentEl
+        );
+
+      }else{
+
+        box.appendChild(
+          typeEl
+        );
+
+        box.appendChild(
+          titleEl
+        );
+
+      }
+
+      const dateEl=
+        document.createElement("div");
+
+      dateEl.className=
+        "daily-date";
+
+      dateEl.textContent=
+        "📅 "+
+        formatDailyDate()+
+        " • Live Automatic Content";
+
+      box.appendChild(
+        dateEl
+      );
+
+      const stepEl=
+        document.createElement("div");
+
+      stepEl.className=
+        "daily-step";
+
+      stepEl.textContent=
+        "🔄 content/auto-content.json";
+
+      box.appendChild(
+        stepEl
+      );
+
+      box.classList.remove(
+        "content-changing"
+      );
+
+    },180);
+
+  }
+
+
+  /*
+    किसी automatic card के लिए
+    matching remote item ढूँढें।
+  */
+  function getRemoteItemForCategory(
+    key,
+    index
+  ){
+
+    if(!remoteContent.length){
+      return null;
+    }
+
+    const matching=
+      remoteContent.filter(
+        item=>
+          matchesCategory(
+            item,
+            key
+          )
+      );
+
+    /*
+      पहले matching category लें।
+      अगर matching category नहीं मिले,
+      तो general remote content लें।
+    */
+    const pool=
+      matching.length
+        ? matching
+        : remoteContent;
+
+    const position=
+      (
+        remoteRenderStep+
+        index
+      )%pool.length;
+
+    return pool[position];
+
+  }
+
+
+  /*
+    LIVE Automatic Content cards renderer.
+  */
+  function renderRemoteAutomaticContent(){
+
+    const keys=[
+      "knowledge",
+      "bhakti",
+      "bhajan",
+      "blog",
+      "ai"
+    ];
+
+    keys.forEach(
+      (key,index)=>{
+
+        const item=
+          getRemoteItemForCategory(
+            key,
+            index
+          );
+
+        if(!item){
+          return;
+        }
+
+        const titleEl=
+          $("auto"+
+            key.charAt(0).toUpperCase()+
+            key.slice(1)+
+            "Title"
+          );
+
+        const textEl=
+          $("auto"+
+            key.charAt(0).toUpperCase()+
+            key.slice(1)+
+            "Text"
+          );
+
+        const stepEl=
+          $("auto"+
+            key.charAt(0).toUpperCase()+
+            key.slice(1)+
+            "Step"
+          );
+
+        const card=
+          document.querySelector(
+            '[data-auto-category="'+
+            key+
+            '"]'
+          );
+
+        const title=
+          safeText(
+            item.title ||
+            item.category ||
+            "Automatic Content"
+          );
+
+        const text=
+          getItemText(item);
+
+        if(card){
+
+          card.classList.add(
+            "content-changing"
+          );
+
+        }
+
+        setTimeout(()=>{
+
+          if(titleEl){
+
+            titleEl.textContent=
+              title;
+
+          }
+
+          if(textEl){
+
+            textEl.textContent=
+              text;
+
+          }
+
+          if(stepEl){
+
+            stepEl.textContent=
+              "🔄 Live Automatic • Step "+
+              (remoteRenderStep+1);
+
+          }
+
+          if(card){
+
+            card.classList.remove(
+              "content-changing"
+            );
+
+          }
+
+        },180+index*60);
+
+      }
+    );
+
+    remoteRenderStep++;
+
+  }
+
+
+  /*
+    Existing functions को wrap करें।
+    JSON available है तो LIVE content,
+    वरना OLD local content।
+  */
+  renderDaily=function(){
+
+    if(remoteContentLoaded){
+
+      renderRemoteDaily();
+
+    }else{
+
+      localRenderDaily();
+
+    }
+
+  };
+
+
+  renderAutomaticContent=function(){
+
+    if(remoteContentLoaded){
+
+      renderRemoteAutomaticContent();
+
+    }else{
+
+      localRenderAutomaticContent();
+
+    }
+
+  };
+
+
+  /*
+    हर 10 मिनट में GitHub JSON दोबारा check करें।
+    इससे GitHub Action द्वारा नया content आने के बाद
+    website पुराने cache पर अटकी नहीं रहेगी।
+  */
+  remoteContentTimer=
+    setInterval(
+      ()=>{
+        loadRemoteContent();
+      },
+      10*60*1000
+    );
+
+
+  /*
+    Initial live content load.
+  */
+  loadRemoteContent();
+
+
+  /*
+    Debug/status के लिए global status।
+  */
+  window.GAMEZONE_REMOTE_CONTENT={
+    reload:loadRemoteContent,
+    status:()=>{
+      return (
+        window.GAMEZONE_REMOTE_CONTENT_STATUS ||
+        {
+          loaded:false,
+          count:0
+        }
+      );
+    }
+  };
+
+})();
 </script>
 
 </body>
