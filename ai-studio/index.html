@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="GAMEZONE ARENA AI Creator Studio — अपना Face, Voice और Video style चुनें."
+    content="GAMEZONE ARENA AI Creator Studio — अपनी Photo, Character, Scene, Voice और Video को अपनी पसंद के अनुसार बनाएं."
   >
 
   <meta name="theme-color" content="#070A13">
@@ -20,56 +20,111 @@
 
   <main class="creator-app">
 
-    <!-- HEADER -->
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
     <header class="creator-header">
-      <a href="../index.html" class="back-button">← GAMEZONE</a>
+
+      <a href="../index.html" class="back-button">
+        ← GAMEZONE
+      </a>
 
       <div class="brand-area">
-        <div class="brand-icon">🎨</div>
+
+        <div class="brand-icon">
+          🎨
+        </div>
 
         <div>
           <h1>AI CREATOR STUDIO</h1>
-          <p>अपना Face • अपनी Voice • अपना Video</p>
+
+          <p>
+            अपनी Photo • Character • Scene • Voice • Video
+          </p>
         </div>
+
       </div>
+
     </header>
 
 
-    <!-- WELCOME -->
+    <!-- =====================================================
+         WELCOME
+    ====================================================== -->
+
     <section class="creator-card welcome-card">
 
-      <div class="welcome-icon">✨</div>
+      <div class="welcome-icon">
+        ✨
+      </div>
 
-      <h2>अपना AI Character बनाइए</h2>
+      <h2>
+        अपना AI Creation बनाइए
+      </h2>
 
       <p>
-        अपनी Photo चुनें, Face Style और Voice Style चुनें
-        और अपना Creative Video तैयार करें।
+        अपनी Photo डालें और बताएं कि आपको Photo कैसी चाहिए,
+        कहाँ चाहिए, Video में क्या होना चाहिए और किस तरह की
+        Voice चाहिए।
+      </p>
+
+      <p>
+        <strong>
+          Photo + Character + Location + Action + Voice + Dialogue
+        </strong>
       </p>
 
     </section>
 
 
-    <!-- PHOTO -->
+    <!-- =====================================================
+         1. PHOTO
+    ====================================================== -->
+
     <section class="creator-card">
 
       <div class="section-title">
+
         <span>📷</span>
+
         <div>
           <h2>1. अपनी Photo चुनें</h2>
-          <p>अपनी Photo Upload करें</p>
+
+          <p>
+            Gallery से अपनी Photo Upload करें
+          </p>
         </div>
+
       </div>
 
-      <label for="photoInput" class="upload-box">
 
-        <div id="photoPreview" class="photo-preview">
-          <div class="upload-icon">📸</div>
-          <strong>Photo Upload करें</strong>
-          <span>Gallery से अपनी Photo चुनें</span>
+      <label
+        for="photoInput"
+        class="upload-box"
+      >
+
+        <div
+          id="photoPreview"
+          class="photo-preview"
+        >
+
+          <div class="upload-icon">
+            📸
+          </div>
+
+          <strong>
+            Photo Upload करें
+          </strong>
+
+          <span>
+            Gallery से अपनी Photo चुनें
+          </span>
+
         </div>
 
       </label>
+
 
       <input
         type="file"
@@ -81,77 +136,373 @@
     </section>
 
 
-    <!-- FACE STYLE -->
+    <!-- =====================================================
+         2. CHARACTER / PHOTO STYLE
+    ====================================================== -->
+
     <section class="creator-card">
 
       <div class="section-title">
+
         <span>🎭</span>
+
         <div>
-          <h2>2. Face Style चुनें</h2>
-          <p>आपको कौन-सा Look पसंद है?</p>
+          <h2>
+            2. Photo को क्या बनाना है?
+          </h2>
+
+          <p>
+            Character / Look चुनें
+          </p>
         </div>
+
       </div>
 
-      <div class="style-grid" id="faceStyles">
 
-        <button class="style-option active" data-face="original">
-          <span class="style-emoji">👤</span>
-          <strong>Original</strong>
-          <small>Original Face</small>
+      <div
+        class="style-grid"
+        id="faceStyles"
+      >
+
+        <button
+          type="button"
+          class="style-option active"
+          data-face="original"
+        >
+          <span class="style-emoji">
+            👤
+          </span>
+
+          <strong>
+            Original
+          </strong>
+
+          <small>
+            Original Face
+          </small>
         </button>
 
-        <button class="style-option" data-face="cartoon">
-          <span class="style-emoji">🎨</span>
-          <strong>Cartoon</strong>
-          <small>2D Cartoon</small>
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="baby"
+        >
+          <span class="style-emoji">
+            👶
+          </span>
+
+          <strong>
+            Baby
+          </strong>
+
+          <small>
+            Baby Look
+          </small>
         </button>
 
-        <button class="style-option" data-face="3d">
-          <span class="style-emoji">🧸</span>
-          <strong>3D Cartoon</strong>
-          <small>3D Look</small>
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="young"
+        >
+          <span class="style-emoji">
+            🧑
+          </span>
+
+          <strong>
+            Young
+          </strong>
+
+          <small>
+            Young Look
+          </small>
         </button>
 
-        <button class="style-option" data-face="anime">
-          <span class="style-emoji">🎌</span>
-          <strong>Anime</strong>
-          <small>Anime Style</small>
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="old"
+        >
+          <span class="style-emoji">
+            👴
+          </span>
+
+          <strong>
+            Old
+          </strong>
+
+          <small>
+            Older Look
+          </small>
         </button>
 
-        <button class="style-option" data-face="comic">
-          <span class="style-emoji">📚</span>
-          <strong>Comic</strong>
-          <small>Comic Style</small>
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="cartoon"
+        >
+          <span class="style-emoji">
+            🎨
+          </span>
+
+          <strong>
+            Cartoon
+          </strong>
+
+          <small>
+            2D Cartoon
+          </small>
         </button>
 
-        <button class="style-option" data-face="gaming">
-          <span class="style-emoji">🎮</span>
-          <strong>Gaming</strong>
-          <small>Gaming Avatar</small>
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="3d"
+        >
+          <span class="style-emoji">
+            🧸
+          </span>
+
+          <strong>
+            3D Cartoon
+          </strong>
+
+          <small>
+            3D Look
+          </small>
         </button>
 
-        <button class="style-option" data-face="superhero">
-          <span class="style-emoji">🦸</span>
-          <strong>Superhero</strong>
-          <small>Hero Look</small>
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="anime"
+        >
+          <span class="style-emoji">
+            🎌
+          </span>
+
+          <strong>
+            Anime
+          </strong>
+
+          <small>
+            Anime Style
+          </small>
         </button>
 
-        <button class="style-option" data-face="funny">
-          <span class="style-emoji">🤪</span>
-          <strong>Funny</strong>
-          <small>Funny Cartoon</small>
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="comic"
+        >
+          <span class="style-emoji">
+            📚
+          </span>
+
+          <strong>
+            Comic
+          </strong>
+
+          <small>
+            Comic Style
+          </small>
         </button>
 
-        <button class="style-option" data-face="fantasy">
-          <span class="style-emoji">🧙</span>
-          <strong>Fantasy</strong>
-          <small>Fantasy Look</small>
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="superhero"
+        >
+          <span class="style-emoji">
+            🦸
+          </span>
+
+          <strong>
+            Superhero
+          </strong>
+
+          <small>
+            Hero Look
+          </small>
         </button>
 
-        <button class="style-option" data-face="robot">
-          <span class="style-emoji">🤖</span>
-          <strong>AI Robot</strong>
-          <small>Future Look</small>
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="royal"
+        >
+          <span class="style-emoji">
+            👑
+          </span>
+
+          <strong>
+            Royal
+          </strong>
+
+          <small>
+            Royal Look
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="gaming"
+        >
+          <span class="style-emoji">
+            🎮
+          </span>
+
+          <strong>
+            Gaming
+          </strong>
+
+          <small>
+            Gaming Avatar
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="robot"
+        >
+          <span class="style-emoji">
+            🤖
+          </span>
+
+          <strong>
+            AI Robot
+          </strong>
+
+          <small>
+            Future Look
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="cat"
+        >
+          <span class="style-emoji">
+            🐱
+          </span>
+
+          <strong>
+            Cat
+          </strong>
+
+          <small>
+            Cat Character
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="dog"
+        >
+          <span class="style-emoji">
+            🐶
+          </span>
+
+          <strong>
+            Dog
+          </strong>
+
+          <small>
+            Dog Character
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="parrot"
+        >
+          <span class="style-emoji">
+            🦜
+          </span>
+
+          <strong>
+            Parrot
+          </strong>
+
+          <small>
+            Parrot Character
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="monkey"
+        >
+          <span class="style-emoji">
+            🐒
+          </span>
+
+          <strong>
+            Monkey
+          </strong>
+
+          <small>
+            Monkey Character
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="fantasy"
+        >
+          <span class="style-emoji">
+            🧙
+          </span>
+
+          <strong>
+            Fantasy
+          </strong>
+
+          <small>
+            Fantasy Character
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-face="custom"
+        >
+          <span class="style-emoji">
+            ✨
+          </span>
+
+          <strong>
+            Custom
+          </strong>
+
+          <small>
+            अपना Character
+          </small>
         </button>
 
       </div>
@@ -159,143 +510,1135 @@
     </section>
 
 
-    <!-- VOICE STYLE -->
+    <!-- =====================================================
+         3. EXACT CHARACTER INSTRUCTION
+    ====================================================== -->
+
     <section class="creator-card">
 
       <div class="section-title">
-        <span>🎙️</span>
-        <div>
-          <h2>3. Voice Style चुनें</h2>
-          <p>अपनी पसंद की आवाज़ चुनें</p>
-        </div>
-      </div>
 
-      <div class="style-grid" id="voiceStyles">
-
-        <button class="style-option active" data-voice="original">
-          <span class="style-emoji">🎤</span>
-          <strong>Original</strong>
-          <small>अपनी Voice</small>
-        </button>
-
-        <button class="style-option" data-voice="cartoon">
-          <span class="style-emoji">🧒</span>
-          <strong>Cartoon</strong>
-          <small>Cartoon Voice</small>
-        </button>
-
-        <button class="style-option" data-voice="robot">
-          <span class="style-emoji">🤖</span>
-          <strong>Robot</strong>
-          <small>Robot Voice</small>
-        </button>
-
-        <button class="style-option" data-voice="deep">
-          <span class="style-emoji">🦾</span>
-          <strong>Deep</strong>
-          <small>Deep Voice</small>
-        </button>
-
-        <button class="style-option" data-voice="young">
-          <span class="style-emoji">👦</span>
-          <strong>Young</strong>
-          <small>Young Voice</small>
-        </button>
-
-        <button class="style-option" data-voice="old">
-          <span class="style-emoji">👴</span>
-          <strong>Old</strong>
-          <small>Old Voice</small>
-        </button>
-
-        <button class="style-option" data-voice="funny">
-          <span class="style-emoji">😂</span>
-          <strong>Funny</strong>
-          <small>Funny Voice</small>
-        </button>
-
-        <button class="style-option" data-voice="cinematic">
-          <span class="style-emoji">🎬</span>
-          <strong>Cinematic</strong>
-          <small>Cinematic Voice</small>
-        </button>
-
-        <button class="style-option" data-voice="monster">
-          <span class="style-emoji">👻</span>
-          <strong>Monster</strong>
-          <small>Monster Voice</small>
-        </button>
-
-        <button class="style-option" data-voice="radio">
-          <span class="style-emoji">📻</span>
-          <strong>Announcer</strong>
-          <small>Radio Voice</small>
-        </button>
-
-        <button class="style-option" data-voice="gaming">
-          <span class="style-emoji">🎮</span>
-          <strong>Gaming</strong>
-          <small>Gaming Voice</small>
-        </button>
-
-        <button class="style-option" data-voice="character">
-          <span class="style-emoji">🎭</span>
-          <strong>Character</strong>
-          <small>Character Voice</small>
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- SCRIPT -->
-    <section class="creator-card">
-
-      <div class="section-title">
         <span>✍️</span>
+
         <div>
-          <h2>4. क्या बोलना है?</h2>
-          <p>अपना Text / Dialogue लिखें</p>
+          <h2>
+            3. Character बिल्कुल कैसा चाहिए?
+          </h2>
+
+          <p>
+            अपनी इच्छा के अनुसार पूरा Look लिखें
+          </p>
         </div>
+
       </div>
+
+
+      <textarea
+        id="characterPrompt"
+        class="script-input"
+        rows="5"
+        maxlength="1500"
+        placeholder="उदाहरण:
+
+मेरी Photo का चेहरा और पहचान बनी रहे।
+मुझे black suit और white shirt में दिखाएं।
+बाल stylish हों।
+चेहरा natural और realistic रहे।
+पूरा Look premium और cinematic हो।"
+      ></textarea>
+
+
+      <div class="character-help">
+
+        💡 यहाँ आप कपड़े, बाल, चेहरा, उम्र,
+        character और पूरा appearance लिख सकते हैं।
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         4. LOCATION / BACKGROUND / SCENE
+    ====================================================== -->
+
+    <section class="creator-card">
+
+      <div class="section-title">
+
+        <span>🌄</span>
+
+        <div>
+          <h2>
+            4. Photo / Video कहाँ होना चाहिए?
+          </h2>
+
+          <p>
+            Location और Background चुनें या खुद लिखें
+          </p>
+        </div>
+
+      </div>
+
+
+      <textarea
+        id="scenePrompt"
+        class="script-input"
+        rows="5"
+        maxlength="2000"
+        placeholder="उदाहरण:
+
+मुझे बर्फ से ढके ऊँचे पहाड़ों के बीच खड़ा दिखाएं।
+चारों तरफ बर्फ हो।
+पीछे सुंदर mountain landscape हो।
+सुबह की soft sunlight हो।
+पूरा scene realistic और cinematic हो।"
+      ></textarea>
+
+
+      <div class="scene-grid">
+
+        <button
+          type="button"
+          class="scene-option"
+          data-scene="बर्फ से ढके ऊँचे पहाड़ों के बीच सुंदर cinematic location, चारों तरफ snow और पीछे mountain landscape"
+        >
+          🏔️
+          <strong>
+            बर्फीले पहाड़
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-scene="रंग-बिरंगे फूलों से भरे सुंदर garden में cinematic scene"
+        >
+          🌸
+          <strong>
+            फूलों का Garden
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-scene="सुंदर समुद्र के किनारे beach पर sunset का cinematic scene"
+        >
+          🏖️
+          <strong>
+            Beach
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-scene="हरे-भरे जंगल के बीच natural cinematic environment"
+        >
+          🌳
+          <strong>
+            Jungle
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-scene="आधुनिक बड़े शहर की चमकदार सड़क पर cinematic night scene"
+        >
+          🌆
+          <strong>
+            City
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-scene="शानदार royal palace के अंदर premium cinematic environment"
+        >
+          🏰
+          <strong>
+            Palace
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-scene="अंतरिक्ष में पृथ्वी के पास futuristic cinematic environment"
+        >
+          🚀
+          <strong>
+            Space
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-scene="आसमान में बादलों के बीच cinematic flying environment"
+        >
+          ☁️
+          <strong>
+            Sky
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-scene="luxury car के साथ सुंदर पहाड़ी सड़क पर cinematic travel scene"
+        >
+          🚗
+          <strong>
+            Car Ride
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-scene="luxury perfume advertisement जैसा premium studio environment, elegant lighting और luxury product setup"
+        >
+          🌹
+          <strong>
+            Perfume Ad
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-scene="सुंदर भारतीय गांव, खेत और प्राकृतिक वातावरण के बीच cinematic scene"
+        >
+          🌾
+          <strong>
+            Village
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-scene="मेरे custom instructions के अनुसार location और background"
+        >
+          ✨
+          <strong>
+            Custom
+          </strong>
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         5. VIDEO ACTION
+    ====================================================== -->
+
+    <section class="creator-card">
+
+      <div class="section-title">
+
+        <span>🎬</span>
+
+        <div>
+          <h2>
+            5. Video में क्या होना चाहिए?
+          </h2>
+
+          <p>
+            Movement, Action और Camera Motion लिखें
+          </p>
+        </div>
+
+      </div>
+
+
+      <textarea
+        id="videoPrompt"
+        class="script-input"
+        rows="7"
+        maxlength="2500"
+        placeholder="उदाहरण:
+
+मैं पहाड़ों के बीच धीरे-धीरे चल रहा हूँ।
+कैमरा सामने से मेरी तरफ smooth cinematic movement करे।
+हवा से मेरे कपड़े और बाल हल्के हिलें।
+पीछे बर्फ गिरती हुई दिखाई दे।
+मेरा चेहरा natural रहे।
+Video realistic और cinematic हो।"
+      ></textarea>
+
+
+      <div class="scene-grid">
+
+        <button
+          type="button"
+          class="scene-option"
+          data-video-action="व्यक्ति धीरे-धीरे camera की तरफ चलता है, smooth cinematic camera movement"
+        >
+          🚶
+          <strong>
+            Walking
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-video-action="व्यक्ति luxury car में बैठकर सुंदर सड़क पर travel करता है, cinematic tracking shot"
+        >
+          🚗
+          <strong>
+            Car Ride
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-video-action="camera धीरे-धीरे व्यक्ति के चारों तरफ घूमता है, smooth cinematic orbit"
+        >
+          🎥
+          <strong>
+            Camera Orbit
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-video-action="हवा में कपड़े और बाल natural तरीके से movement करते हैं, cinematic slow motion"
+        >
+          💨
+          <strong>
+            Wind
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-video-action="व्यक्ति camera की तरफ देखकर natural तरीके से बोलता है और facial expression करता है"
+        >
+          🗣️
+          <strong>
+            Talking
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-video-action="cinematic advertisement style product presentation, smooth camera movement और premium lighting"
+        >
+          📺
+          <strong>
+            Advertisement
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-video-action="dynamic action movement, cinematic camera motion और energetic scene"
+        >
+          ⚡
+          <strong>
+            Action
+          </strong>
+        </button>
+
+
+        <button
+          type="button"
+          class="scene-option"
+          data-video-action="मेरे द्वारा लिखे गए custom video instructions के अनुसार movement और camera action"
+        >
+          ✨
+          <strong>
+            Custom
+          </strong>
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         6. VIDEO STYLE
+    ====================================================== -->
+
+    <section class="creator-card">
+
+      <div class="section-title">
+
+        <span>🎥</span>
+
+        <div>
+          <h2>
+            6. Video Style
+          </h2>
+
+          <p>
+            Video किस तरह का दिखना चाहिए?
+          </p>
+        </div>
+
+      </div>
+
+
+      <div
+        class="style-grid"
+        id="videoStyles"
+      >
+
+        <button
+          type="button"
+          class="style-option active"
+          data-video-style="realistic"
+        >
+          <span class="style-emoji">
+            🎥
+          </span>
+
+          <strong>
+            Realistic
+          </strong>
+
+          <small>
+            Realistic Video
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-video-style="cinematic"
+        >
+          <span class="style-emoji">
+            🎬
+          </span>
+
+          <strong>
+            Cinematic
+          </strong>
+
+          <small>
+            Film Look
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-video-style="advertisement"
+        >
+          <span class="style-emoji">
+            📺
+          </span>
+
+          <strong>
+            Advertisement
+          </strong>
+
+          <small>
+            Premium Ad
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-video-style="travel"
+        >
+          <span class="style-emoji">
+            🧳
+          </span>
+
+          <strong>
+            Travel
+          </strong>
+
+          <small>
+            Travel Video
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-video-style="music"
+        >
+          <span class="style-emoji">
+            🎵
+          </span>
+
+          <strong>
+            Music Video
+          </strong>
+
+          <small>
+            Music Style
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-video-style="action"
+        >
+          <span class="style-emoji">
+            ⚡
+          </span>
+
+          <strong>
+            Action
+          </strong>
+
+          <small>
+            Action Style
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-video-style="funny"
+        >
+          <span class="style-emoji">
+            😂
+          </span>
+
+          <strong>
+            Funny
+          </strong>
+
+          <small>
+            Funny Video
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-video-style="fantasy"
+        >
+          <span class="style-emoji">
+            🪄
+          </span>
+
+          <strong>
+            Fantasy
+          </strong>
+
+          <small>
+            Fantasy Video
+          </small>
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         7. VOICE STYLE
+    ====================================================== -->
+
+    <section class="creator-card">
+
+      <div class="section-title">
+
+        <span>🎙️</span>
+
+        <div>
+          <h2>
+            7. किस तरह की Voice चाहिए?
+          </h2>
+
+          <p>
+            Voice का Style चुनें
+          </p>
+        </div>
+
+      </div>
+
+
+      <div
+        class="style-grid"
+        id="voiceStyles"
+      >
+
+        <button
+          type="button"
+          class="style-option active"
+          data-voice="original"
+        >
+          <span class="style-emoji">
+            🎤
+          </span>
+
+          <strong>
+            Original
+          </strong>
+
+          <small>
+            Original Voice
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-voice="child"
+        >
+          <span class="style-emoji">
+            👶
+          </span>
+
+          <strong>
+            Child
+          </strong>
+
+          <small>
+            Child Voice
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-voice="cartoon"
+        >
+          <span class="style-emoji">
+            🧒
+          </span>
+
+          <strong>
+            Cartoon
+          </strong>
+
+          <small>
+            Cartoon Voice
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-voice="young"
+        >
+          <span class="style-emoji">
+            👦
+          </span>
+
+          <strong>
+            Young
+          </strong>
+
+          <small>
+            Young Voice
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-voice="old"
+        >
+          <span class="style-emoji">
+            👴
+          </span>
+
+          <strong>
+            Old
+          </strong>
+
+          <small>
+            Old Voice
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-voice="deep"
+        >
+          <span class="style-emoji">
+            🦾
+          </span>
+
+          <strong>
+            Deep
+          </strong>
+
+          <small>
+            Deep Voice
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-voice="robot"
+        >
+          <span class="style-emoji">
+            🤖
+          </span>
+
+          <strong>
+            Robot
+          </strong>
+
+          <small>
+            Robot Voice
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-voice="monster"
+        >
+          <span class="style-emoji">
+            👻
+          </span>
+
+          <strong>
+            Monster
+          </strong>
+
+          <small>
+            Monster Voice
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-voice="funny"
+        >
+          <span class="style-emoji">
+            😂
+          </span>
+
+          <strong>
+            Funny
+          </strong>
+
+          <small>
+            Funny Voice
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-voice="cinematic"
+        >
+          <span class="style-emoji">
+            🎬
+          </span>
+
+          <strong>
+            Cinematic
+          </strong>
+
+          <small>
+            Cinematic Voice
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-voice="radio"
+        >
+          <span class="style-emoji">
+            📻
+          </span>
+
+          <strong>
+            Announcer
+          </strong>
+
+          <small>
+            Radio Voice
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-voice="gaming"
+        >
+          <span class="style-emoji">
+            🎮
+          </span>
+
+          <strong>
+            Gaming
+          </strong>
+
+          <small>
+            Gaming Voice
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-voice="character"
+        >
+          <span class="style-emoji">
+            🎭
+          </span>
+
+          <strong>
+            Character
+          </strong>
+
+          <small>
+            Character Voice
+          </small>
+        </button>
+
+
+        <button
+          type="button"
+          class="style-option"
+          data-voice="custom"
+        >
+          <span class="style-emoji">
+            ✨
+          </span>
+
+          <strong>
+            Custom
+          </strong>
+
+          <small>
+            अपनी Voice Style
+          </small>
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         8. EXACT VOICE INSTRUCTION
+    ====================================================== -->
+
+    <section class="creator-card">
+
+      <div class="section-title">
+
+        <span>🗣️</span>
+
+        <div>
+          <h2>
+            8. Voice बिल्कुल कैसी चाहिए?
+          </h2>
+
+          <p>
+            Voice की age, tone, emotion और बोलने का तरीका लिखें
+          </p>
+        </div>
+
+      </div>
+
+
+      <textarea
+        id="voicePrompt"
+        class="script-input"
+        rows="5"
+        maxlength="1200"
+        placeholder="उदाहरण:
+
+आवाज एक युवा पुरुष की हो।
+आवाज साफ, energetic और friendly हो।
+थोड़ी cinematic feeling हो।
+Dialogue natural emotion के साथ बोला जाए।"
+      ></textarea>
+
+
+      <div class="character-help">
+
+        💡 उदाहरण:
+        Deep male voice, happy voice, angry voice,
+        energetic voice, soft voice, funny voice आदि लिख सकते हैं।
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         9. LANGUAGE
+    ====================================================== -->
+
+    <section class="creator-card">
+
+      <div class="section-title">
+
+        <span>🌐</span>
+
+        <div>
+          <h2>
+            9. Voice / Dialogue की Language
+          </h2>
+
+          <p>
+            किस भाषा में बोलना है?
+          </p>
+        </div>
+
+      </div>
+
+
+      <select
+        id="languageSelect"
+        class="script-input"
+      >
+
+        <option value="hi-IN">
+          🇮🇳 Hindi
+        </option>
+
+        <option value="hi-en">
+          🇮🇳 Hinglish
+        </option>
+
+        <option value="en-US">
+          🇺🇸 English
+        </option>
+
+        <option value="en-GB">
+          🇬🇧 British English
+        </option>
+
+        <option value="bn-IN">
+          🇮🇳 Bengali
+        </option>
+
+        <option value="pa-IN">
+          🇮🇳 Punjabi
+        </option>
+
+        <option value="mr-IN">
+          🇮🇳 Marathi
+        </option>
+
+        <option value="gu-IN">
+          🇮🇳 Gujarati
+        </option>
+
+        <option value="custom">
+          ✨ Custom
+        </option>
+
+      </select>
+
+    </section>
+
+
+    <!-- =====================================================
+         10. DIALOGUE
+    ====================================================== -->
+
+    <section class="creator-card">
+
+      <div class="section-title">
+
+        <span>💬</span>
+
+        <div>
+          <h2>
+            10. क्या बोलना है?
+          </h2>
+
+          <p>
+            अपना Dialogue / Script लिखें
+          </p>
+        </div>
+
+      </div>
+
 
       <textarea
         id="scriptText"
         class="script-input"
-        rows="6"
-        maxlength="1000"
-        placeholder="उदाहरण: नमस्ते दोस्तों! GAMEZONE ARENA में आपका स्वागत है..."
+        rows="7"
+        maxlength="3000"
+        placeholder="उदाहरण:
+
+नमस्ते दोस्तों!
+आज मैं आपको पहाड़ों की एक बहुत खूबसूरत जगह दिखाने आया हूँ।
+अगर आपको यह वीडियो पसंद आए तो GAMEZONE ARENA को जरूर देखें।"
       ></textarea>
 
+
       <div class="character-count">
-        <span id="characterCount">0</span>/1000
+
+        <span id="characterCount">
+          0
+        </span>
+
+        /3000
+
       </div>
 
     </section>
 
 
-    <!-- SELECTED STYLE -->
+    <!-- =====================================================
+         11. ADVANCED INSTRUCTIONS
+    ====================================================== -->
+
+    <section class="creator-card">
+
+      <div class="section-title">
+
+        <span>🧠</span>
+
+        <div>
+          <h2>
+            11. कोई और खास Instruction
+          </h2>
+
+          <p>
+            जो चीज ऊपर नहीं लिखी, वह यहाँ लिखें
+          </p>
+        </div>
+
+      </div>
+
+
+      <textarea
+        id="advancedPrompt"
+        class="script-input"
+        rows="6"
+        maxlength="2500"
+        placeholder="उदाहरण:
+
+चेहरा original photo जैसा ही रहे।
+चेहरे में distortion न हो।
+हाथ और उंगलियां natural रहें।
+Background साफ और realistic हो।
+Lighting cinematic हो।
+Video smooth हो।
+अनावश्यक लोग दिखाई न दें।
+पूरी video premium quality में हो।"
+      ></textarea>
+
+    </section>
+
+
+    <!-- =====================================================
+         12. SELECTED STYLE / CURRENT SETTINGS
+    ====================================================== -->
+
     <section class="creator-card selected-card">
 
       <div class="section-title">
+
         <span>🎯</span>
+
         <div>
-          <h2>आपकी Selection</h2>
-          <p>Face और Voice अलग-अलग चुन सकते हैं</p>
+          <h2>
+            आपकी Selection
+          </h2>
+
+          <p>
+            आपकी चुनी हुई settings यहाँ दिखाई देंगी
+          </p>
         </div>
+
       </div>
+
 
       <div class="selection-row">
 
         <div class="selection-item">
-          <span>🎭 Face</span>
-          <strong id="selectedFace">Original</strong>
+
+          <span>
+            🎭 Character
+          </span>
+
+          <strong id="selectedFace">
+            Original
+          </strong>
+
         </div>
 
+
         <div class="selection-item">
-          <span>🎙️ Voice</span>
-          <strong id="selectedVoice">Original</strong>
+
+          <span>
+            🎙️ Voice
+          </span>
+
+          <strong id="selectedVoice">
+            Original
+          </strong>
+
+        </div>
+
+
+        <div class="selection-item">
+
+          <span>
+            🎥 Video
+          </span>
+
+          <strong id="selectedVideoStyle">
+            Realistic
+          </strong>
+
         </div>
 
       </div>
@@ -303,41 +1646,220 @@
     </section>
 
 
-    <!-- CREATOR ACTIONS -->
+    <!-- =====================================================
+         13. AI CREATION SUMMARY
+    ====================================================== -->
+
+    <section
+      id="creationSummary"
+      class="creator-card selected-card"
+    >
+
+      <div class="section-title">
+
+        <span>📋</span>
+
+        <div>
+          <h2>
+            AI Creation Request
+          </h2>
+
+          <p>
+            Generate करने से पहले पूरी request
+          </p>
+        </div>
+
+      </div>
+
+
+      <div id="summaryContent">
+
+        <div class="selection-item">
+
+          <span>
+            📷 Photo
+          </span>
+
+          <strong id="summaryPhoto">
+            अभी Photo नहीं चुनी
+          </strong>
+
+        </div>
+
+
+        <div class="selection-item">
+
+          <span>
+            🎭 Character
+          </span>
+
+          <strong id="summaryCharacter">
+            Original
+          </strong>
+
+        </div>
+
+
+        <div class="selection-item">
+
+          <span>
+            🌄 Scene
+          </span>
+
+          <strong id="summaryScene">
+            Custom
+          </strong>
+
+        </div>
+
+
+        <div class="selection-item">
+
+          <span>
+            🎬 Video
+          </span>
+
+          <strong id="summaryVideo">
+            Custom
+          </strong>
+
+        </div>
+
+
+        <div class="selection-item">
+
+          <span>
+            🎙️ Voice
+          </span>
+
+          <strong id="summaryVoice">
+            Original
+          </strong>
+
+        </div>
+
+
+        <div class="selection-item">
+
+          <span>
+            🌐 Language
+          </span>
+
+          <strong id="summaryLanguage">
+            Hindi
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         14. CREATOR ACTIONS
+    ====================================================== -->
+
     <section class="creator-card action-card">
 
-      <button id="previewBtn" class="primary-button">
+      <button
+        id="previewBtn"
+        type="button"
+        class="primary-button"
+      >
         ▶️ Preview
       </button>
 
-      <button id="createVideoBtn" class="secondary-button">
-        🎬 Create Video
-      </button>
 
-      <button id="saveBtn" class="secondary-button">
-        💾 Save
+      <button
+        id="createVideoBtn"
+        type="button"
+        class="secondary-button"
+      >
+        🎬 Create AI Video
       </button>
 
     </section>
 
 
-    <!-- PREVIEW -->
-    <section id="previewSection" class="creator-card preview-card">
+    <!-- =====================================================
+         15. STATUS
+    ====================================================== -->
+
+    <section
+      id="creatorStatus"
+      class="creator-card"
+      aria-live="polite"
+    >
 
       <div class="section-title">
+
+        <span>⚙️</span>
+
+        <div>
+
+          <h2>
+            Status
+          </h2>
+
+          <p id="statusText">
+            अपनी Photo और instructions दें।
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         16. PREVIEW
+    ====================================================== -->
+
+    <section
+      id="previewSection"
+      class="creator-card preview-card"
+    >
+
+      <div class="section-title">
+
         <span>👁️</span>
+
         <div>
-          <h2>Preview</h2>
-          <p>आपका Creator Preview</p>
+
+          <h2>
+            Preview
+          </h2>
+
+          <p>
+            आपकी Creation का Preview
+          </p>
+
         </div>
+
       </div>
 
-      <div id="creatorPreview" class="creator-preview">
+
+      <div
+        id="creatorPreview"
+        class="creator-preview"
+      >
 
         <div class="preview-placeholder">
-          <div>🎨</div>
-          <strong>Preview यहाँ दिखाई देगा</strong>
-          <span>Photo और Style चुनकर Preview दबाएँ</span>
+
+          <div>
+            🎨
+          </div>
+
+          <strong>
+            Preview यहाँ दिखाई देगा
+          </strong>
+
+          <span>
+            Photo और Settings चुनकर Preview दबाएँ
+          </span>
+
         </div>
 
       </div>
@@ -345,49 +1867,166 @@
     </section>
 
 
-    <!-- VIDEO RESULT -->
-    <section id="videoSection" class="creator-card video-card">
+    <!-- =====================================================
+         17. VIDEO RESULT
+    ====================================================== -->
+
+    <section
+      id="videoSection"
+      class="creator-card video-card"
+    >
 
       <div class="section-title">
+
         <span>🎥</span>
+
         <div>
-          <h2>Your Video</h2>
-          <p>आपका बनाया हुआ Creative Video</p>
+
+          <h2>
+            Your AI Video
+          </h2>
+
+          <p>
+            आपका बनाया हुआ Video
+          </p>
+
         </div>
+
       </div>
 
-      <div id="videoResult" class="video-result">
+
+      <div
+        id="videoResult"
+        class="video-result"
+      >
 
         <div class="preview-placeholder">
-          <div>🎬</div>
-          <strong>Video अभी तैयार नहीं है</strong>
-          <span>Create Video दबाकर शुरू करें</span>
+
+          <div>
+            🎬
+          </div>
+
+          <strong>
+            Video अभी तैयार नहीं है
+          </strong>
+
+          <span>
+            Create AI Video दबाकर शुरू करें
+          </span>
+
         </div>
+
+      </div>
+
+
+      <!-- Future script.js will activate these -->
+
+      <div
+        id="videoActions"
+        class="video-actions"
+      >
+
+        <button
+          type="button"
+          id="saveBtn"
+          class="secondary-button"
+          disabled
+        >
+          💾 Save Video
+        </button>
+
+
+        <button
+          type="button"
+          id="shareBtn"
+          class="secondary-button"
+          disabled
+        >
+          📤 Share Video
+        </button>
+
+
+        <button
+          type="button"
+          id="downloadBtn"
+          class="secondary-button"
+          disabled
+        >
+          ⬇️ Download Video
+        </button>
 
       </div>
 
     </section>
 
 
-    <!-- INFO -->
+    <!-- =====================================================
+         18. TEMPORARY MEDIA
+    ====================================================== -->
+
     <section class="creator-info">
 
-      <h3>💡 AI Creator Studio</h3>
+      <h3>
+        🔒 Temporary Media
+      </h3>
 
       <p>
-        अपनी Photo, Face Style और Voice Style को अपनी पसंद के
-        अनुसार चुनकर अलग-अलग Creative combinations बनाएँ।
+        AI Creation के लिए आपकी media processing के दौरान
+        temporary रूप से इस्तेमाल होगी। हमारा लक्ष्य generated
+        media को अनावश्यक permanent storage में न रखना है।
       </p>
 
       <p class="small-note">
-        ⚠️ केवल अपनी Photo और अपनी Voice या उचित अनुमति वाली
+        ⚠️ केवल अपनी Photo, अपनी Voice या उचित अनुमति वाली
         सामग्री का उपयोग करें।
+      </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         19. HOW IT WILL WORK
+         अभी केवल information — functionality बाद में script.js
+    ====================================================== -->
+
+    <section class="creator-info">
+
+      <h3>
+        🧩 AI Creation कैसे तैयार होगी?
+      </h3>
+
+      <p>
+        📷 आपकी Photo
+        →
+        🎭 Character / Look
+        →
+        🌄 Location / Scene
+        →
+        🎬 Video Action
+        →
+        🎙️ Voice
+        →
+        💬 Dialogue
+        →
+        🎥 Final AI Video
+      </p>
+
+      <p class="small-note">
+        अभी यह पूरा form तैयार किया गया है।
+        अगला चरण इन सभी fields को वास्तविक AI backend
+        से जोड़ना होगा।
       </p>
 
     </section>
 
   </main>
 
+
+  <!-- =====================================================
+       IMPORTANT:
+       script.js अभी वही पुराना रहेगा।
+       अभी इसमें कोई नया JavaScript नहीं जोड़ा गया है।
+  ====================================================== -->
 
   <script src="./script.js"></script>
 
