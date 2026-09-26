@@ -1,4 +1,4 @@
-const CACHE_NAME = "gamezone-arena-v1";
+const CACHE_NAME = "gamezone-arena-v2";
 
 const APP_FILES = [
   "./",
