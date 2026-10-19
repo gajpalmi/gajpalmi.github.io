@@ -2,6 +2,222 @@
   {
     "type": "item",
     "category": "Bhakti",
+    "title": "मन की शांति और सच्ची आराधना का मार्ग",
+    "content": "जीवन की भागदौड़ में आंतरिक शांति पाना ही सबसे बड़ी साधना है। जब मनुष्य अपने कर्मों को पूरी निष्ठा और सकारात्मकता के साथ करता है, तो वही सच्ची ईश्वर भक्ति बन जाती है। मन को शांत रखकर दूसरों के प्रति दया भाव रखना ही अध्यात्म का मूल सार है।",
+    "keywords": [
+      "भक्ति",
+      "शांति",
+      "अध्यात्म",
+      "सकारात्मकता"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-19T12:06:33.575Z"
+  },
+  {
+    "type": "item",
+    "category": "Bhajan",
+    "title": "हे प्रभु मेरे मन को उजाला दे",
+    "content": "हे प्रभु मेरे मन को उजाला दे, राह दिखा दे मुझको दया का। हर पल तेरा सिमरन मैं गाऊँ, ज्ञान का दीपक मन में जलाऊँ। सुख और दुःख में डगमग न होऊँ, तेरा नाम ही अपने होठों पे लाऊँ।",
+    "keywords": [
+      "भजन",
+      "प्रभु",
+      "प्रार्थना",
+      "गीत"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-19T12:06:33.575Z"
+  },
+  {
+    "type": "item",
+    "category": "Kirtan",
+    "title": "मिलकर गाओ हरि गुण गाथा",
+    "content": "आओ सब मिलकर गाएं हरि गुण गाथा, सत्संग से ही मिटती है मन की व्यथा। ताल बजाओ, सुर मिलाओ, प्रभु के चरणों में चित्त लगाओ। प्रेम भाव से जो कीर्तन गाए, उसके जीवन में आनंद छा जाए।",
+    "keywords": [
+      "कीर्तन",
+      "सत्संग",
+      "भक्ति संगीत",
+      "आनंद"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-19T12:06:33.575Z"
+  },
+  {
+    "type": "item",
+    "category": "Shayari",
+    "title": "वक्त की चाल और उम्मीद",
+    "content": "फिसलती रेत सा वक्त निकल जाता है हाथ से, पर उम्मीद का दिया जलता है हर एक साथ से। जो राहें कठिन थीं कभी सफर के दरमियान, अब वही पहचान बन गई है हमारी बात से।",
+    "keywords": [
+      "शायरी",
+      "वक्त",
+      "उम्मीद",
+      "जीवन"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-19T12:06:33.575Z"
+  },
+  {
+    "type": "item",
+    "category": "Dialogues",
+    "title": "मेहनत और सफलता का संवाद",
+    "content": "किस्मत के भरोसे बैठने वालों को सिर्फ उतना ही मिलता है, जितना मेहनत करने वाले छोड़ देते हैं। असली जीत उसी की होती है जो हर असफलता के बाद भी मैदान छोड़कर नहीं भागता।",
+    "keywords": [
+      "संवाद",
+      "मेहनत",
+      "सफलता",
+      "प्रेरणा"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-19T12:06:33.575Z"
+  },
+  {
+    "type": "item",
+    "category": "Knowledge",
+    "title": "दैनिक जीवन में समय प्रबंधन के उपाय",
+    "content": "समय प्रबंधन किसी भी व्यक्ति की व्यक्तिगत और व्यावसायिक सफलता की कुंजी है। अपने दिन की शुरुआत करने से पहले जरूरी कार्यों की एक सूची बनाएं और उन्हें प्राथमिकता के आधार पर हल करें। इससे न केवल तनाव कम होता है, बल्कि उत्पादकता भी बढ़ती है।",
+    "keywords": [
+      "ज्ञान",
+      "समय प्रबंधन",
+      "सफलता",
+      "उत्पादकता"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-19T12:06:33.575Z"
+  },
+  {
+    "type": "item",
+    "category": "Blogs",
+    "title": "डिजिटल युग में मानसिक संतुलन कैसे बनाए रखें",
+    "content": "आज की डिजिटल दुनिया में स्मार्टफोन और सोशल मीडिया हमारी जिंदगी का अहम हिस्सा बन गए हैं। हालांकि, जरूरत से ज्यादा स्क्रीन टाइम मानसिक थकान और तनाव का कारण बन सकता है। डिजिटल डिटॉक्स अपनाना और प्रकृति के बीच कुछ वक्त बिताना मानसिक स्वास्थ्य के लिए बेहद फायदेमंद हो सकता है।",
+    "keywords": [
+      "ब्लॉग",
+      "मानसिक स्वास्थ्य",
+      "डिजिटल डिटॉक्स",
+      "जीवनशैली"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-19T12:06:33.575Z"
+  },
+  {
+    "type": "item",
+    "category": "AI",
+    "title": "दैनिक कार्यों में एआई का व्यावहारिक उपयोग",
+    "content": "आर्टिफिशियल इंटेलिजेंस (AI) आज हमारे रोजमर्रा के कामों को आसान बनाने में मदद कर रहा है। ईमेल के ड्राफ्ट तैयार करने से लेकर भाषा अनुवाद और डेटा व्यवस्थित करने तक, एआई टूल्स समय की बचत करते हैं। हालांकि, इनकी सटीकता की जांच करना हमेशा आवश्यक होता है।",
+    "keywords": [
+      "एआई",
+      "तकनीक",
+      "उपयोग",
+      "उत्पादकता"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-19T12:06:33.575Z"
+  },
+  {
+    "type": "item",
+    "category": "Jokes",
+    "title": "पढ़ाई और मस्ती के मजेदार चुटकुले",
+    "content": "टीचर: राहुल, अगर तुम्हारे पास 10 चॉकलेट हैं और तुमने उनमें से 5 अपने दोस्त को दे दीं, तो तुम्हारे पास क्या बचेगा? राहुल: सर, मेरे पास मेरा दोस्त और उसकी पक्की दोस्ती बचेगी, चॉकलेट तो खत्म हो जाएंगी!",
+    "keywords": [
+      "चुटकुले",
+      "हास्य",
+      "मस्ती",
+      "जोक्स"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-19T12:06:33.575Z"
+  },
+  {
+    "type": "item",
+    "category": "Gaming",
+    "title": "गेमिंग के दौरान आंखों की देखभाल के उपाय",
+    "content": "लंबे समय तक वीडियो गेम खेलने से आंखों पर जोर पड़ सकता है। इससे बचने के लिए हर 45 मिनट के बाद स्क्रीन से नजर हटाएं और कुछ सेकंड के लिए दूर देखें। इसके अलावा स्क्रीन की ब्राइटनेस को कमरे के वातावरण के अनुसार सेट रखें और पर्याप्त पानी पिएं।",
+    "keywords": [
+      "गेमिंग",
+      "स्वास्थ्य",
+      "सुझाव",
+      "आंखों की देखभाल"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-19T12:06:33.575Z"
+  },
+  {
+    "type": "item",
+    "category": "Vlogs",
+    "title": "वीकेंड मॉर्निंग रूटीन व्लॉग आइडिया",
+    "content": "अपने व्लॉग की शुरुआत एक शांत सुबह के दृश्य से करें। कॉफी बनाने की प्रक्रिया, हल्की स्ट्रेचिंग या योग सेशन को दिखाएं। इसके बाद दिनभर की छोटी-छोटी गतिविधियों और पौधों की देखभाल जैसे विषयों को जोड़कर एक आकर्षक वीडियो स्क्रिप्ट तैयार करें।",
+    "keywords": [
+      "व्लॉग",
+      "रूटीन",
+      "आईडिया",
+      "वीडियो स्क्रिप्ट"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-19T12:06:33.575Z"
+  },
+  {
+    "type": "item",
+    "category": "News",
+    "title": "BCCI ने अजीत अगरकर के रिप्लेसमेंट का किया एलान, प्रज्ञान ओझा बने नए चीफ सिलेक्टर",
+    "content": "भारतीय क्रिकेट कंट्रोल बोर्ड (BCCI) ने अजीत अगरकर के रिप्लेसमेंट का एलान कर दिया है। पूर्व खिलाड़ी प्रज्ञान ओझा को नया चीफ सिलेक्टर नियुक्त किया गया है, जबकि रमेश पोवार की भी सिलेक्शन पैनल में एंट्री हुई है।",
+    "keywords": [
+      "समाचार",
+      "बीसीसीआई",
+      "प्रज्ञान ओझा",
+      "क्रिकेट"
+    ],
+    "sourceNote": "Summary based on supplied news source; verify before relying on it.",
+    "sourceTitle": "BCCI ने किया अजीत अगरकर के रिप्लेसमेंट का एलान, 312 मैच खेलने वाला बना नया सेलेक्टर - Jagran",
+    "sourcePublisher": "Jagran",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxOd1BRR0E3dGNCUXBLZWEwSjFFb1VSN1dnb0YyeHNsNDlNdTVMVnhvbmtVZml5NndfSi1VQ0J0MzQyTU5kYlRfazdfUzBEM180cE9PbXU3TU1KVnM3OGdicTJrU0xoOFZVLUFwU0R2Xzg3UFFTM2R4MjEzRnJqYkUtcWo4VXJGTHhpYWF2NTRXVmZtVEZfZTNZRURXZElRdmtadXBIbUhUSElHZExOQkxIZTRzNUNOMXRwWjZIZlFWSGFZWE8ybU9FYkxKQjhBQlAxaHM3YmNjSTZfcDg?oc=5",
+    "sourceDate": "2026-10-19T10:50:00.000Z",
+    "generatedAt": "2026-10-19T12:06:33.575Z"
+  },
+  {
+    "type": "item",
+    "category": "Bhakti",
     "title": "मन की शांति और सच्ची आराधना",
     "content": "सच्ची भक्ति किसी दिखावे की मोहताज नहीं होती। जब मन शांत हो और विचारों में शुद्धता हो, तो हर पल ईश्वर की आराधना के समान बन जाता है। अपने कर्तव्यों का पूरी ईमानदारी से पालन करना ही सबसे बड़ी पूजा है।",
     "keywords": [
@@ -1832,24 +2048,6 @@
   },
   {
     "type": "item",
-    "category": "Knowledge",
-    "title": "दैनिक जीवन में समय प्रबंधन के उपाय",
-    "content": "समय किसी के लिए नहीं रुकता। अपने दिन की शुरुआत एक योजना के साथ करें। सबसे महत्वपूर्ण कार्यों को पहले पूरा करें और सोशल मीडिया पर अनावश्यक समय बर्बाद करने से बचें। छोटे-छोटे ब्रेक लेने से उत्पादकता बढ़ती है।",
-    "keywords": [
-      "सामान्य ज्ञान",
-      "समय प्रबंधन",
-      "उत्पादकता",
-      "उपयोगी जानकारी"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-16T10:41:17.994Z"
-  },
-  {
-    "type": "item",
     "category": "AI",
     "title": "कृत्रिम बुद्धिमत्ता और हमारी कार्यशैली",
     "content": "आर्टिफिशियल इंटेलिजेंस (AI) हमारे काम करने के तरीके को तेजी से बदल रहा है। यह दोहराव वाले कामों को आसान बनाता है और नए रचनात्मक अवसर पैदा करता है। हालांकि, इंसानी समझ, संवेदना और निर्णय लेने की क्षमता का कोई विकल्प नहीं हो सकता।",
@@ -1894,24 +2092,6 @@
       "गेमिंग टिप्स",
       "वीडियो गेम्स",
       "स्वास्थ्य"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-16T10:41:17.994Z"
-  },
-  {
-    "type": "item",
-    "category": "Vlogs",
-    "title": "वीकेंड मॉर्निंग रूटीन व्लॉग आइडिया",
-    "content": "अपने अगले हिंदी व्लॉग के लिए एक शांत और सुंदर वीकेंड मॉर्निंग रूटीन शूट करें। सुबह की चाय से शुरुआत करें, बालकनी के पौधों को पानी दें, और दिनभर की अपनी छोटी-छोटी गतिविधियों को कैमरे में कैद करें। दर्शकों को प्रामाणिक और शांत माहौल बहुत पसंद आता है।",
-    "keywords": [
-      "व्लॉग",
-      "व्लॉग आइडिया",
-      "यूट्यूब",
-      "कंटेंट क्रिएशन"
     ],
     "sourceNote": "Original AI-generated content",
     "sourceTitle": "",
@@ -2272,24 +2452,6 @@
       "मानसिक स्वास्थ्य",
       "डिजिटल डिटॉक्स",
       "जीवनशैली"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-15T10:51:07.127Z"
-  },
-  {
-    "type": "item",
-    "category": "AI",
-    "title": "दैनिक कार्यों में एआई का व्यावहारिक उपयोग",
-    "content": "आर्टिफिशियल इंटेलिजेंस अब केवल शोध तक सीमित नहीं है, बल्कि यह हमारे रोजमर्रा के कामों को आसान बना रहा है। ईमेल का ड्राफ्ट तैयार करने से लेकर भाषा अनुवाद और कोडिंग में मदद तक, एआई टूल्स का सही उपयोग आपकी उत्पादकता को बढ़ा सकता है। हालांकि, परिणामों की सटीकता की जांच करना हमेशा जरूरी होता है।",
-    "keywords": [
-      "एआई",
-      "तकनीक",
-      "उत्पादकता",
-      "उपयोग"
     ],
     "sourceNote": "Original AI-generated content",
     "sourceTitle": "",
