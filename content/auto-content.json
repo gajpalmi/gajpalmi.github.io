@@ -2,6 +2,222 @@
   {
     "type": "item",
     "category": "Bhakti",
+    "title": "मन की शांति और सच्ची आराधना",
+    "content": "जीवन की भागदौड़ में मन को शांत रखना ही सबसे बड़ी साधना है। जब हम ईश्वर का स्मरण करते हैं, तो हमारे भीतर सकारात्मक ऊर्जा का संचार होता है। हर सुबह की शुरुआत सकारात्मक विचारों और प्रभु के प्रति कृतज्ञता के साथ करनी चाहिए, जिससे पूरा दिन अच्छा बीते।",
+    "keywords": [
+      "भक्ति",
+      "मन की शांति",
+      "ईश्वर स्मरण",
+      "सकारात्मक ऊर्जा"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-24T15:22:55.361Z"
+  },
+  {
+    "type": "item",
+    "category": "Bhajan",
+    "title": "चलो बुलावा आया है मन मंदिर में",
+    "content": "निसदिन गाऊं तेरा गुणगान, हे मेरे प्रभु कृपा निधान। तेरे चरणों में बीते मेरी ये सारी रैना, तुझको ही देखे मेरी ये दोनों नैना। तू ही खेवैया तू ही मेरी पतवार, तेरी दया से पार हो जाए संसार।",
+    "keywords": [
+      "भजन",
+      "प्रभु गुणगान",
+      "कृपा निधान",
+      "भक्ति संगीत"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-24T15:22:55.361Z"
+  },
+  {
+    "type": "item",
+    "category": "Kirtan",
+    "title": "मिलकर गाएं कीर्तन का पावन गान",
+    "content": "आओ मिलकर गाएं सब मिलकर कीर्तन का गान, सुध बुध खोकर जप लें हम सब प्यारे भगवान का नाम। ताल की धुन और मंजीरे की झंकार से गूंज उठे सारा संसार, भक्ति के इस रस में भीग जाए हर एक इंसान।",
+    "keywords": [
+      "कीर्तन",
+      "भगवान का नाम",
+      "भक्ति रस",
+      "संगीत साधना"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-24T15:22:55.361Z"
+  },
+  {
+    "type": "item",
+    "category": "Shayari",
+    "title": "वक्त और अपने",
+    "content": "ख्वाहिशों के समंदर में गोता लगाने से बेहतर है, संतोष के छोटे से आशियाने में सुकून से जिया जाए। वक्त बदलता है तो अपने भी बदल जाते हैं, पर सच्ची मेहनत कभी साथ नहीं छोड़ती।",
+    "keywords": [
+      "शायरी",
+      "वक्त",
+      "सुकून",
+      "जिंदगी"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-24T15:22:55.361Z"
+  },
+  {
+    "type": "item",
+    "category": "Dialogues",
+    "title": "संघर्ष का सफर",
+    "content": "फौलादी इरादे और मजबूत हौसले ही इंसान को उसकी मंजिल तक पहुंचाते हैं। रास्ते में मुश्किलें कितनी भी आएं, अगर कदम थके नहीं तो जीत पक्की है।",
+    "keywords": [
+      "संवाद",
+      "संघर्ष",
+      "हौसला",
+      "मंजिल"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-24T15:22:55.361Z"
+  },
+  {
+    "type": "item",
+    "category": "Knowledge",
+    "title": "समय प्रबंधन के आसान और असरदार तरीके",
+    "content": "दैनिक जीवन में समय का सही उपयोग करने से तनाव कम होता है और उत्पादकता बढ़ती है। अपने दिनभर के कामों की एक सूची (To-Do List) बनाएं, जरूरी कार्यों को पहले पूरा करें और सोशल मीडिया पर जरूरत से ज्यादा समय बिताने से बचें।",
+    "keywords": [
+      "सामान्य ज्ञान",
+      "समय प्रबंधन",
+      "उत्पादकता",
+      "तनाव मुक्ति"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-24T15:22:55.361Z"
+  },
+  {
+    "type": "item",
+    "category": "Blogs",
+    "title": "दैनिक जीवन में डिजिटल डिटॉक्स की जरूरत",
+    "content": "आज के समय में हम सभी हर वक्त स्मार्टफोन और कंप्यूटर स्क्रीन से चिपके रहते हैं। इससे न केवल आंखों पर असर पड़ता है बल्कि मानसिक शांति भी भंग होती है। हफ्ते में कम से कम एक बार कुछ घंटों के लिए डिजिटल उपकरणों से दूरी बनाना, यानी डिजिटल डिटॉक्स करना मानसिक स्वास्थ्य के लिए बेहद फायदेमंद है।",
+    "keywords": [
+      "ब्लॉग",
+      "डिजिटल डिटॉक्स",
+      "मानसिक स्वास्थ्य",
+      "स्क्रीन टाइम"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-24T15:22:55.361Z"
+  },
+  {
+    "type": "item",
+    "category": "AI",
+    "title": "आर्टिफिशियल इंटेलिजेंस और हमारी कार्यशैली",
+    "content": "AI आज के समय में हमारे काम करने के तरीके को तेजी से बदल रहा है। यह जटिल डेटा का विश्लेषण करने और रोजमर्रा के कार्यों को स्वचालित करने में मदद करता है। हालांकि, इंसानी रचनात्मकता और भावनात्मक बुद्धिमत्ता का कोई विकल्प नहीं है, इसलिए AI को एक सहायक उपकरण के रूप में देखना चाहिए।",
+    "keywords": [
+      "एआई",
+      "आर्टिफिशियल इंटेलिजेंस",
+      "तकनीक",
+      "कार्यशैली"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-24T15:22:55.361Z"
+  },
+  {
+    "type": "item",
+    "category": "Jokes",
+    "title": "हंसते-हंसते कट जाए रस्ते",
+    "content": "टीचर: बच्चों, बताओ जीरो की खोज किसने की थी?\nपप्पू: सर, जब मैंने गणित का होमवर्क नहीं किया, तो मास्टर जी ने मुझे कॉपी में जीरो दिया... वहीं से जीरो की असली शुरुआत हुई थी!\nटीचर बेहोश।",
+    "keywords": [
+      "चुटकुले",
+      "हंसी मजाक",
+      "कॉमेडी",
+      "फन"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-24T15:22:55.361Z"
+  },
+  {
+    "type": "item",
+    "category": "Gaming",
+    "title": "मोबाइल गेमिंग के दौरान आंखों की सुरक्षा कैसे करें",
+    "content": "लंबी गेमिंग सेशन के दौरान स्क्रीन की चमक (Brightness) को अपने कमरे के माहौल के अनुसार सेट रखें। हर 20 मिनट के बाद स्क्रीन से नजरें हटाकर किसी दूर की वस्तु को देखें और पलकें झपकाते रहें ताकि आंखें ड्राई न हों।",
+    "keywords": [
+      "गेमिंग",
+      "आंखों की सुरक्षा",
+      "गेमिंग टिप्स",
+      "स्क्रीन टाइम"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-24T15:22:55.361Z"
+  },
+  {
+    "type": "item",
+    "category": "Vlogs",
+    "title": "वीकेंड मॉर्निंग रूटीन व्लॉग आइडिया",
+    "content": "अपने व्लॉग की शुरुआत सुबह की चाय और खिड़की से आते सूरज की रोशनी के साथ करें। इसके बाद अपनी सुबह की वॉक, ब्रेकफास्ट की रेसिपी और दिनभर की छोटी-मोटी गतिविधियों को कैमरे में कैद करें। दर्शकों को नेचुरल और शांत माहौल देखना बहुत पसंद आता है।",
+    "keywords": [
+      "व्लॉग",
+      "वीकेंड रूटीन",
+      "व्लॉगिंग आइडिया",
+      "वीडियो स्क्रिप्ट"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-24T15:22:55.361Z"
+  },
+  {
+    "type": "item",
+    "category": "News",
+    "title": "बंगाल की खाड़ी से उठ रहा तूफान, IMD ने जारी किया अलर्ट",
+    "content": "बंगाल की खाड़ी से उठ रहे तूफान को लेकर भारत मौसम विज्ञान विभाग (IMD) ने अलर्ट जारी किया है। इसके प्रभाव से कई राज्यों में मौसम में बदलाव की संभावना जताई गई है।",
+    "keywords": [
+      "समाचार",
+      "मौसम",
+      "आईएमडी",
+      "तूफान"
+    ],
+    "sourceNote": "Summary based on supplied news source; verify before relying on it.",
+    "sourceTitle": "बंगाल की खाड़ी से उठ रहा तूफान, कहां-कहां मचेगी तबाही, IMD ने जारी किया अलर्ट - ABP News",
+    "sourcePublisher": "ABP News",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNaHNqYWxOeHZDbG5IRGhFMGk4SW50a2dsd2tpQUJDTVZSZkMxdlBhY0czdVQ4a2R5RXdFTVMwZXg5Y2V1QWZXMVN1cUhIY3BvNlNhV2I0dXVHS05NSU40cWdrZThSRnkwRlRXelM1X2JKeEVYWElVcmhJWkp0d0tRb3dGOU8yRnl4SERFZHY4SDZuOTFHU2tQblVLbEJnN3B4ZjZvOWNwNk90a1Y5bm41Q3hFQWItRDJ3NGRqTkN4dnFFa1ZPNy1kQ0pB0gHPAUFVX3lxTE5UbVJjbjlZZnRVWUVQbmx6S0NCa3pmRG5tR25SYTczSnRqZ2UyR1pGaEc0dlFaOEZqd3JaZEdIVnVJU19OZnVBU2oyWlJKWUpPcUJYMjlXZzFHd2N0NTBHZHltbjZ5ZXNzUHFiN09uVlJlTzEydTlZeHV2bDdONV9Vd0ttS3lMZXZ2Sk5aa2N0ZWRzRDRfTFFuQ2ZGc3ZPeVBlLVZpSFpkeklWR2NZdHF4M2MxTmdDelZVVkVXajRrbnhxNHA4STBrRFN5YTh3SQ?oc=5",
+    "sourceDate": "2026-10-24T07:36:51.000Z",
+    "generatedAt": "2026-10-24T15:22:55.361Z"
+  },
+  {
+    "type": "item",
+    "category": "Bhakti",
     "title": "मन की शांति का मार्ग",
     "content": "सच्ची शांति किसी बाहरी स्थान या परिस्थिति में नहीं, बल्कि हमारे अपने भीतर होती है। जब हम अपनी सोच को सकारात्मक बनाते हैं और रोजाना कुछ समय ध्यान में बिताते हैं, तो जीवन की उलझनें स्वतः कम होने लगती हैं। ईश्वर पर अटूट विश्वास और कर्मठता ही जीवन को सही दिशा देते हैं।",
     "keywords": [
@@ -217,25 +433,6 @@
   },
   {
     "type": "item",
-    "category": "Bhakti",
-    "title": "मन की शांति और सच्ची आराधना",
-    "content": "जीवन की भागदौड़ में मन को शांत रखना ही सबसे बड़ी साधना है। जब हम ईश्वर का स्मरण करते हैं, तो हमारे भीतर सकारात्मक ऊर्जा का संचार होता है। सच्चे मन से किया गया ध्यान और प्रार्थना आत्मा को बल देती है और हर परिस्थिति में धैर्य बनाए रखने की प्रेरणा देती है।",
-    "keywords": [
-      "भक्ति",
-      "शांति",
-      "आराधना",
-      "सकारात्मकता",
-      "GAMEZONE ARENA"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-24T03:14:40.799Z"
-  },
-  {
-    "type": "item",
     "category": "Bhajan",
     "title": "हे प्रभु मेरे मन को मंदिर बना लो",
     "content": "हे प्रभु मेरे मन को मंदिर बना लो, अपने चरणों की छाया में मुझको बिठा लो। जीवन की नैया डगमग डोले, तुम ही आकर पतवार संभालो। हर पल तेरा नाम पुकारूँ, ऐसी मुझको शक्ति दे दो।",
@@ -377,25 +574,6 @@
       "गेमिंग टिप्स",
       "रिमोट प्ले",
       "ई-स्पोर्ट्स",
-      "GAMEZONE ARENA"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-24T03:14:40.799Z"
-  },
-  {
-    "type": "item",
-    "category": "Vlogs",
-    "title": "वीकेंड मॉर्निंग रूटीन व्लॉग आइडिया",
-    "content": "अपने नए YouTube व्लॉग की शुरुआत एक शांत सुबह के दृश्य से करें। कैमरे पर अपने वीकेंड के नाश्ते की रेसिपी दिखाएं, अपने पौधों को पानी दें और दिनभर की अपनी छोटी-छोटी गतिविधियों को कैमरे में कैद करें। दर्शकों को प्राकृतिक और सहज जीवनशैली दिखाना सबसे ज्यादा पसंद आता है।",
-    "keywords": [
-      "व्लॉग",
-      "वीकेंड रूटीन",
-      "वीडियो आइडिया",
-      "यूट्यूब",
       "GAMEZONE ARENA"
     ],
     "sourceNote": "Original AI-generated content",
@@ -994,25 +1172,6 @@
   },
   {
     "type": "item",
-    "category": "Shayari",
-    "title": "वक्त और अपने",
-    "content": "वक्त की रेत से फिसलते चले गए, हम अपनी ही तलाश में निकलते चले गए।\nतनातनी भरी इस दुनिया की भीड़ में, कुछ अपने बहुत पीछे छूटते चले गए।\nन गिला है किसी से न कोई शिकवा है, बस खुद को बेहतर बनाने का इरादा पक्का है।",
-    "keywords": [
-      "शायरी",
-      "वक्त",
-      "ज़िंदगी",
-      "प्रेरणा",
-      "GAMEZONE ARENA"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-23T03:20:48.778Z"
-  },
-  {
-    "type": "item",
     "category": "Dialogues",
     "title": "संवाद: हौसले की उड़ान",
     "content": "\"हार और जीत के बीच सिर्फ एक ही फासला होता है—तुम्हारा खुद पर भरोसा। मैदान में उतरने से पहले अगर मन हार गया, तो हथियार उठाने का कोई मतलब नहीं। खड़े हो जाओ, अपनी ताकत पहचानो और फिर देखो कि रास्ते खुद-ब-खुद कैसे बनते हैं।\"",
@@ -1040,25 +1199,6 @@
       "समय प्रबंधन",
       "उत्पादकता",
       "दैनिक जीवन",
-      "GAMEZONE ARENA"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-23T03:20:48.778Z"
-  },
-  {
-    "type": "item",
-    "category": "Blogs",
-    "title": "दैनिक जीवन में डिजिटल डिटॉक्स की जरूरत",
-    "content": "आज के दौर में स्मार्टफोन और लैपटॉप हमारी जिंदगी का अहम हिस्सा बन चुके हैं। सुबह की पहली नजर से लेकर रात की आखिरी नींद तक स्क्रीन पर समय बिताना आम बात हो गई है। लेकिन इसके कई दुष्परिणाम भी सामने आ रहे हैं, जैसे आंखों की कमजोरी, अनिद्रा और मानसिक तनाव। ऐसे में 'डिजिटल डिटॉक्स' यानी कुछ घंटों या एक दिन के लिए तकनीक से पूरी तरह दूरी बनाना बेहद फायदेमंद हो सकता है। इस दौरान आप किताब पढ़ सकते हैं, प्रकृति के करीब जा सकते हैं या अपनों के साथ गुणवत्तापूर्ण समय बिता सकते हैं। यह न सिर्फ मानसिक ताजगी देता है बल्कि रिश्तों में गर्माहट भी लाता है।",
-    "keywords": [
-      "ब्लॉग",
-      "डिजिटल डिटॉक्स",
-      "मानसिक स्वास्थ्य",
-      "जीवनशैली",
       "GAMEZONE ARENA"
     ],
     "sourceNote": "Original AI-generated content",
@@ -3681,24 +3821,6 @@
   },
   {
     "type": "item",
-    "category": "Gaming",
-    "title": "मोबाइल गेमिंग के दौरान आंखों की सुरक्षा कैसे करें",
-    "content": "लंबे समय तक मोबाइल या कंसोल पर गेमिंग करने से आंखों पर अतिरिक्त जोर पड़ता है। इससे बचने के लिए हर 45 से 50 मिनट की गेमिंग के बाद 5 से 10 मिनट का ब्रेक लें और दूर किसी वस्तु को देखें। स्क्रीन की चमक (Brightness) को अपने कमरे के वातावरण के अनुसार समायोजित करें और नीली रोशनी (Blue Light) को कम करने वाले फिल्टर का उपयोग करें।",
-    "keywords": [
-      "गेमिंग",
-      "टिप्स",
-      "आंखों की सुरक्षा",
-      "मोबाइल गेम"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-17T20:05:47.789Z"
-  },
-  {
-    "type": "item",
     "category": "Vlogs",
     "title": "वीकेंड मॉर्निंग रूटीन व्लॉग: रूपरेखा और स्क्रिप्ट आइडिया",
     "content": "व्लॉग की शुरुआत एक शांत सुबह के शॉट से करें जहां खिड़की से हल्की धूप आ रही हो। कैमरा ऑन करके दर्शकों का अभिवादन करें और बताएं कि आज का दिन बिना किसी हड़बड़ी के शांति से बिताने का प्लान है। इसके बाद अपनी पसंदीदा चाय या कॉफी बनाने का मोंटाज दिखाएं। वीडियो के मध्य भाग में पौधों की देखभाल या हल्की स्ट्रेचिंग एक्सरसाइज को शामिल करें। अंत में दर्शकों से उनके वीकेंड प्लान के बारे में कमेंट सेक्शन में पूछें।",
@@ -5395,145 +5517,5 @@
     "sourceUrl": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOdXQ1b3FsSmxxckxLbkVvOWZrNWN1ZlUzN1RObVd0ZVpELTAxZW9TenVfRGhhVFZicXZsY1B5SUtHVUh0TTk2ZXRfWnZKVTZqQmw5QmUwRXVPUWliSkFTVGc5SGVDbUVURHk5TDdzVGVVcVJnWHRFaDMtUjFrcEtoajl4VHRNcktiNVlsZUstcE9ybVlIVDJQR2EwZXJkTHRaUHViS2RlbVAtRUZuRG9Lak0ySktFcmZ3Y0JIeHBMTHM5SWV2NkZwckJzTDZrTEstWHVQazUtTHM0M1JIM1piM1V30gHnAUFVX3lxTE9ibUFVbjJfYXFET0tEZGtBTzBpbENkQnU5cDJsU3lzR3VzdmVQdk4xb3dMVTFPaW1YNEhjZm4zMnNtNXpYNFhuYUdlY0dNNVc3SGtRSHNfdVZFbmhkYUdDWWZGdHVPbk85eVpnZUxuN1lXOHh6ZHQyRGNrVVRyMHdNYjlIVGZvZ0xKR3AySGJkVWZxUEF4aUtPaFFjeGo0VGpRXzdpR1REU1YydGNpUldad2xyZF9KZ0lqQUhmc0pkdmItSGNqaUdwcTFPeEpBbmpTc052Q1Q0c19HZ2hQNEt6S2I0UTh6TQ?oc=5",
     "sourceDate": "Wed, 14 Oct 2026 04:12:38 GMT",
     "generatedAt": "2026-10-14T04:50:50.957Z"
-  },
-  {
-    "type": "news",
-    "title": "यूपी विधानसभा चुनाव से पहले वोटर लिस्ट सुधार का मौका, 17 और 24 अक्टूबर को लगेंगे विशेष कैंप",
-    "category": "उत्तर प्रदेश",
-    "content": "उत्तर प्रदेश में आगामी विधानसभा चुनाव की तैयारियों के मद्देनजर निर्वाचन आयोग ने मतदाताओं के लिए एक महत्वपूर्ण अवसर प्रदान किया है। जिन नागरिकों का नाम वोटर लिस्ट से कट गया है या जो अपना नाम नया जुड़वाना चाहते हैं, उनके लिए विशेष अभियान चलाया जा रहा है। इसके तहत राज्य में आगामी 17 अक्टूबर और 24 अक्टूबर को विशेष कैंप आयोजित किए जाएंगे। इन कैंपों के माध्यम से मतदाता सूची में संशोधन, नाम जोड़ने और पते के सत्यापन का कार्य किया जाएगा। हाल ही में राज्य में दो करोड़ से अधिक वोटरों की जांच से जुड़ी प्रक्रिया की चर्चा भी रही है, जिससे चुनाव प्रक्रिया को पूरी तरह पारदर्शी बनाया जा सके। जिला प्रशासन के अधिकारियों को निर्देश दिए गए हैं कि वे इन कैंपों के प्रचार-प्रसार पर विशेष ध्यान दें ताकि अधिक से अधिक लोग इसका लाभ उठा सकें। इसका संदर्भ पारदर्शी और निष्पक्ष चुनावी प्रणाली से है। अंततः, यह अभियान लोकतंत्र के महापर्व में हर पात्र नागरिक की भागीदारी सुनिश्चित करने में मददगार साबित होगा।",
-    "keywords": [
-      "वोटर लिस्ट यूपी",
-      "वोटर आईडी कैंप",
-      "उत्तर प्रदेश चुनाव",
-      "Election Commission"
-    ],
-    "seoTitle": "यूपी विधानसभा चुनाव से पहले वोटर लिस्ट में नाम जुड़वाने का मौका, 17 और 24 को लगेंगे कैंप",
-    "metaDescription": "यूपी में वोटर लिस्ट में नाम जुड़वाने या सुधारने के लिए 17 और 24 अक्टूबर को विशेष कैंप लगेंगे। जानिए पूरी जानकारी।",
-    "sourceNote": "Topic reference from Google News headlines and descriptions",
-    "sourceTitle": "यूपी विधानसभा चुनाव से पहले वोटर लिस्ट में नाम जुड़वाने का मौका, 17 और 24 को लगेंगे विशेष कैंप - Hindustan",
-    "sourcePublisher": "Hindustan",
-    "sourceUrl": "https://news.google.com/rss/articles/CBMijAJBVV95cUxQNmNJTEQ5TGhvNzBRSEhwSW9TTW9Idko3S1ozdmxfWW9GaWc3Y1dfc1RHVWpqQ3pDTVB2ODlCaFNJLV9NdFI0c3BWWTl2WnBOQmV5MG4tZHIyVXppS2hvdllqMmhaRGtSX1JlZmszaVVoWTN3cXRZTEV1RmhSNnlhaDNWQkJUN1d4ME10ZktYZk1KQm9TWm05ZF9OXzltS3NLYUo4aThhUFJxa1lxTVVJNXlkcDRNWkZDdmRweUtDRmNEcWlrdmU2STZ3Mkd1TWdmd0VrRTZnWWwzSVdJcnVoUnlsRlhoTlViTkhsQWIyemtCSWlyZnExZGMycVgybjgxb2ZjaGxYX3BnQUNG0gGSAkFVX3lxTE40Tk0wT0JkWlhGZ3ZWMHVyZGhKZ01NV1VsaGYxZ21rTEVMSU0tUHZZZFh6Wmc5OVE4QWNqYklYeEhhQkJ5VDNfZU1WLVAtNk40Q0lfVFhiSThhYklZZ1A2T1pfYXo4UEdiNUVjUjFTMllsaE9PRm1oVGo3ajhKX05id1lGdWFFRDdtYWJaWHdZLVNyYnE3ZENsZ2VRb19uSF9vZklkbXRyQkNrZkdFVU54ZU05SlRmN0NZSUJzdGFuek9DbW9ZVTZoTU1KT1dsUFptQ2EwejA0YWVjbnZ5S0c5dmRIVkt1cVlSUTlVck45Y1gtVU1LWnh1Y0FkTkVUTlJpUXFYOHNCTWZmVkxnWDlEb1E?oc=5",
-    "sourceDate": "Wed, 14 Oct 2026 02:00:44 GMT",
-    "generatedAt": "2026-10-14T04:50:50.957Z"
-  },
-  {
-    "type": "news",
-    "title": "युवराज सिंह बने दिल्ली कैपिटल्स के असिस्टेंट और बैटिंग कोच, पहली बार संभालेंगे कोचिंग की बड़ी जिम्मेदारी",
-    "category": "क्रिकेट",
-    "content": "भारतीय क्रिकेट टीम के पूर्व दिग्गज ऑलराउंडर युवराज सिंह ने कोचिंग की दुनिया में एक नई पारी की शुरुआत की है। उन्हें आईपीएल फ्रेंचाइजी दिल्ली कैपिटल्स (Delhi Capitals) का नया असिस्टेंट और बैटिंग कोच नियुक्त किया गया है। यह पहला मौका है जब युवराज सिंह किसी बड़ी क्रिकेट टीम में आधिकारिक रूप से कोचिंग की जिम्मेदारी संभालेंगे। उनके इस पद पर आने से युवा बल्लेबाजों को उनकी आक्रामक और मैच जिताऊ तकनीकों से सीखने का बड़ा अवसर मिलेगा। इस नियुक्ति के बाद से क्रिकेट गलियारों में उनकी सैलरी और रणनीतिक भूमिका को लेकर काफी चर्चा हो रही है। खेल प्रेमियों में इस बात को लेकर खासा उत्साह है कि अंतरराष्ट्रीय क्रिकेट में छक्कों की बरसात करने वाले 'युवी पाजी' अब खिलाड़ियों को निखारेंगे। इसका संदर्भ आईपीएल फ्रेंचाइजी द्वारा अनुभवी खिलाड़ियों को कोचिंग स्टाफ में शामिल करने की आधुनिक प्रवृत्ति से है। अंततः, युवराज का यह नया सफर उनके प्रशंसकों के लिए बेहद रोमांचक होने वाला है और दिल्ली टीम के प्रदर्शन में इसके सकारात्मक परिणाम देखने को मिल सकते हैं।",
-    "keywords": [
-      "युवराज सिंह",
-      "दिल्ली कैपिटल्स",
-      "IPL coaching",
-      "Yuvraj Singh DC"
-    ],
-    "seoTitle": "दिल्ली कैपिटल्स के असिस्टेंट और बैटिंग कोच बने युवराज सिंह, संभालेंगे नई जिम्मेदारी",
-    "metaDescription": "पूर्व भारतीय ऑलराउंडर युवराज सिंह दिल्ली कैपिटल्स के नए असिस्टेंट और बैटिंग कोच बन गए हैं। जानिए पूरी खबर।",
-    "sourceNote": "Topic reference from Google News headlines and descriptions",
-    "sourceTitle": "दिल्ली कैपिटल्स के असिस्टेंट और बैटिंग कोच बने युवराज सिंह: पहली बार संभालेंगे कोचिंग की जिम्मेदारी; 2015 म... - Dainik Bhaskar",
-    "sourcePublisher": "Dainik Bhaskar",
-    "sourceUrl": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOT2R2N1gtNVJMT3J3bVJkMUFaM195X2RzeG1ycndmMHB0dXZwb1dfMDRCTVdtRlpJZmExdDNqa28zV3VmbURONi1nZm9DbjJacDBBN01GUjh6WXp4UEFDVXlHVzh6dHJqRzNMTDFNc3RiYmMyQXR6ZXhsNnRKd2ctdmxjNXRkSl9La1c3MnQwYWpUNjBBVTl1S2JjcDBjOW9MUkxBRGpDREw1NVdGbWxkSk5UNGJDUUsyT0tmM25Zc0FvZkpV0gHKAUFVX3lxTE9fTVNHZXJZRlFzcVlPdThZNGJ0b1VuVmkxRjBmckJIV0sxOGVtVU1MbGhxVDdsZ1NNQzRlUkJQTDQwQnhQakdSQW1fd3R6cGdzbTVSdVBNWV9ONTlqWTg5MGt5WDhtWDNTcmN6MHhGRXNvdXlpQm04RFJWWHZmdEY1dDJIdWx1eWc0YUhoMGtfRWtYOTJ6LUl4OEdJanVjUlRUQ2U1bzl6c2Rtd1daT1FfY0liOVhHbTdKanp2UDBmZzZvWmd5YjhBLVE?oc=5",
-    "sourceDate": "Tue, 13 Oct 2026 13:32:33 GMT",
-    "generatedAt": "2026-10-14T04:50:50.957Z"
-  },
-  {
-    "type": "joke",
-    "title": "पप्पू और इंटरव्यू",
-    "category": "मनोरंजन",
-    "content": "इंटरव्यूअर: आपने अपने रिज्यूमे में लिखा है कि आप किसी भी परिस्थिति में जल्दी से ढल जाते हैं, इसका कोई उदाहरण दीजिए?\nपप्पू: जी सर! कल ही की बात है, घर में मम्मी ने करेले की सब्जी बनाई थी, और मैंने चुपचाप उसे बिना किसी शिकायत के खा लिया, जबकि मुझे कड़वी चीजें बिल्कुल पसंद नहीं हैं!\nइंटरव्यूअर बेहोश!",
-    "keywords": [
-      "फनी जोक्स",
-      "पप्पू जोक्स",
-      "हिंदी चुटकुले",
-      "comedy"
-    ],
-    "seoTitle": "मजेदार जोक्स:प्पू और इंटरव्यू का यह फनी चुटकुला पढ़कर हंसी नहीं रोक पाएंगे",
-    "metaDescription": "पढ़िए एक बेहद मजेदार हिंदी जोक जो आपके चेहरे पर मुस्कान ले आएगा। गेमजोन एरिना पर रोजाना पढ़ें नए और अनोखे चुटकुले।",
-    "sourceNote": "Original content",
-    "sourceTitle": "",
-    "sourcePublisher": "",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-14T04:50:50.957Z"
-  },
-  {
-    "type": "shayari",
-    "title": "फिजाओं की बात",
-    "category": "शायरी",
-    "content": "फिजाओं में आज भी तेरी खुशबू का पहरा है,\nदिल के हर कोने में बस तेरा ही चेहरा है।\nमाना कि फासले बहुत हैं दरमियान हमारे,\nपर रूह से रूह का रिश्ता आज भी गहरा है।",
-    "keywords": [
-      "हिंदी शायरी",
-      "रोमांटिक शायरी",
-      "Pyar Shayari",
-      "shayari collection"
-    ],
-    "seoTitle": "बेहतरीन हिंदी शायरी: दिल को छू लेने वाली रोमांटिक लाइन्स",
-    "metaDescription": "पढ़िए खूबसूरत और मौलिक हिंदी शायरी जो आपके जज्बातों को बयां करे। गेमजोन एरिना पर बेहतरीन शायरियों का संग्रह।",
-    "sourceNote": "Original content",
-    "sourceTitle": "",
-    "sourcePublisher": "",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-14T04:50:50.958Z"
-  },
-  {
-    "type": "motivation",
-    "title": "सफलता की राह",
-    "category": "प्रेरणा",
-    "content": "मुश्किलें रास्ते रोक सकती हैं, लेकिन हौसला कभी नहीं। जो इंसान गिरकर संभलना सीख जाता है, सफलता उसी के कदम चूमती है। अपनी मेहनत पर भरोसा रखिए, क्योंकि आज की गई कड़ी मेहनत कल की शानदार पहचान बनती है।",
-    "keywords": [
-      "मोटिवेशनल कोट्स",
-      "सफलता के सूत्र",
-      "प्रेरणादायक विचार",
-      "Inspiration"
-    ],
-    "seoTitle": "प्रेरणादायक विचार: असफलता से घबराएं नहीं, सफलता खुद चलकर आएगी",
-    "metaDescription": "पढ़िए बेहतरीन मोटिवेशनल थॉट जो आपको जीवन में आगे बढ़ने की प्रेरणा देगा। गेमजोन एरिना पर पाएं रोजाना नई प्रेरणा।",
-    "sourceNote": "Original content",
-    "sourceTitle": "",
-    "sourcePublisher": "",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-14T04:50:50.958Z"
-  },
-  {
-    "type": "bhakti",
-    "title": "नवरात्रि विशेष वंदना",
-    "category": "भक्ति",
-    "content": "या देवी सर्वभू‍तेषु शक्ति-रूपेण संस्थिता। नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः॥ माँ दुर्गा की आराधना का यह पवित्र पर्व सभी के जीवन में सुख, शांति और समृद्धि लेकर आए। माता रानी सभी के घरों में खुशियों के दीप जलाएं और हर संकट से रक्षा करें। जय माता दी!",
-    "keywords": [
-      "नवरात्रि",
-      "माता रानी",
-      "भक्ति संदेश",
-      "Durga Puja"
-    ],
-    "seoTitle": "नवरात्रि वंदना: माँ दुर्गा की कृपा से जीवन में आएं सुख और समृद्धि",
-    "metaDescription": "पढ़िए नवरात्रि विशेष भक्ति संदेश और माता रानी की वंदना। गेमजोन एरिना पर पाएं धार्मिक और आध्यात्मिक सामग्री।",
-    "sourceNote": "Original content",
-    "sourceTitle": "",
-    "sourcePublisher": "",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-14T04:50:50.958Z"
-  },
-  {
-    "type": "how-to",
-    "title": "स्मार्टफोन की बैटरी लाइफ बढ़ाने के आसान टिप्स",
-    "category": "मोबाइल टिप्स",
-    "content": "अगर आपके स्मार्टफोन की बैटरी भी बहुत जल्दी खत्म हो जाती है, तो इन आसान स्टेप्स को फॉलो करें:\n1. स्क्रीन की ब्राइटनेस को ऑटोमैटिक मोड पर रखें या जरूरत के अनुसार कम रखें।\n2. बैकग्राउंड में चल रहे अनचाहे ऐप्स (Background Apps) को बंद कर दें।\n3. ब्लूटूथ, जीपीएस और वाई-फाई का इस्तेमाल न होने पर इन्हें ऑफ रखें।\n4. फोन में डार्क मोड (Dark Mode) का इस्तेमाल करें, इससे बैटरी की खपत कम होती है।\nइन छोटी-छोटी बातों का ध्यान रखकर आप अपने फोन का बैटरी बैकअप काफी हद तक बढ़ा सकते हैं।",
-    "keywords": [
-      "बैटरी कैसे बचाएं",
-      "मोबाइल टिप्स",
-      "Battery saver tips",
-      "Android tips"
-    ],
-    "seoTitle": "स्मार्टफोन बैटरी कैसे बचाएं? जानिए आसान और असरदार टिप्स",
-    "metaDescription": "फोन की बैटरी जल्दी खत्म हो जाती है? अपनाएं ये आसान स्टेप-by-स्टेप टिप्स और बैटरी लाइफ बढ़ाएं।",
-    "sourceNote": "Original content",
-    "sourceTitle": "",
-    "sourcePublisher": "",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-14T04:50:50.958Z"
   }
 ]
