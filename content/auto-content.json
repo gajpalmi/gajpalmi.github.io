@@ -2,6 +2,223 @@
   {
     "type": "item",
     "category": "Bhakti",
+    "title": "सच्ची भक्ति और आंतरिक शांति",
+    "content": "भक्ति केवल बाहरी अनुष्ठानों का नाम नहीं है, बल्कि यह मन की वह स्थिति है जहाँ व्यक्ति हर परिस्थिति में शांत और संतुलित रहता है। ईश्वर के प्रति समर्पण मनुष्य को अहंकार से मुक्त करता है और जीवन में सकारात्मकता का संचार करता है। प्रतिदिन कुछ समय एकांत में बिताकर ध्यान करने से मानसिक शांति प्राप्त होती है और हम अपने कर्तव्यों का निर्वाह अधिक जिम्मेदारी के साथ कर पाते हैं।",
+    "keywords": [
+      "भक्ति",
+      "आंतरिक शांति",
+      "समर्पण",
+      "ध्यान"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-30T21:55:48.661Z"
+  },
+  {
+    "type": "item",
+    "category": "Bhajan",
+    "title": "मन मंदिर में ज्योत जगा",
+    "content": "हे प्रभु मेरे मन मंदिर में ज्ञान की ज्योत जगा दे,\nअंधकार मिटाकर जीवन को प्रकाश से सजा दे।\nतेरी कृपा हो तो हर कठिन डगर आसान हो जाए,\nहर पल तेरा सिमरन करते हुए यह जीवन कट जाए।\nदया की ऐसी फुहार बरसा दे मेरे दाता,\nतुही मेरा रक्षक और तुही मेरा भाग्यविधाता।",
+    "keywords": [
+      "भजन",
+      "प्रभु सिमरन",
+      "ज्ञान की ज्योत",
+      "भक्ति गीत"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-30T21:55:48.661Z"
+  },
+  {
+    "type": "item",
+    "category": "Kirtan",
+    "title": "मिलकर गाएं कीर्तन प्यारे",
+    "content": "आइए मिलकर बैठें और प्रभु के गुणों का गान करें। कीर्तन वह माध्यम है जो हमारे भीतर की नकारात्मकता को दूर करके आनंद की लहर पैदा करता है। जब सब मिलकर सुर में सुर मिलाते हैं, तो वातावरण पवित्र और ऊर्जावान हो जाता है। यह संकीर्तन हमारे मन को जोड़ता है और हमें एक नई ऊर्जा प्रदान करता है।",
+    "keywords": [
+      "कीर्तन",
+      "संकीर्तन",
+      "भक्ति गान",
+      "ऊर्जा"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-30T21:55:48.661Z"
+  },
+  {
+    "type": "item",
+    "category": "Shayari",
+    "title": "वक्त और इंसान",
+    "content": "वक़्त की रफ्तार से जो चलना सीख जाते हैं,\nवो मुश्किलों के समंदर से भी निकल जाते हैं।\nख्वाबों के परिंदों को उड़ान तो दो यारो,\nमंजिल खुद-ब-खुद कदमों में आ जाती है।",
+    "keywords": [
+      "शायरी",
+      "वक़्त",
+      "मंजिल",
+      "प्रेरणा"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-30T21:55:48.661Z"
+  },
+  {
+    "type": "item",
+    "category": "Dialogues",
+    "title": "सफलता का संवाद",
+    "content": "मेहनत कभी खामोश नहीं बैठती, वो शोर मचाने के लिए सही वक्त का इंतजार करती है। जब इरादे मजबूत हों, तो रास्ते खुद-ब-खुद बन जाते हैं।",
+    "keywords": [
+      "संवाद",
+      "डायलॉग",
+      "मेहनत",
+      "सफलता"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-30T21:55:48.661Z"
+  },
+  {
+    "type": "item",
+    "category": "Knowledge",
+    "title": "दैनिक जीवन में समय प्रबंधन के उपाय",
+    "content": "समय प्रबंधन किसी भी व्यक्ति के जीवन में सफलता की कुंजी है। अपने दिन की शुरुआत करने से पहले कार्यों की एक सूची (To-Do List) बनाएं और उनकी प्राथमिकता तय करें। महत्वपूर्ण और जरूरी कामों को पहले पूरा करें। बीच-बीच में छोटे विश्राम लेना भी आवश्यक है ताकि मानसिक थकान से बचा जा सके और कार्यक्षमता बनी रहे।",
+    "keywords": [
+      "सामान्य ज्ञान",
+      "समय प्रबंधन",
+      "उत्पादकता",
+      "दैनिक जीवन"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-30T21:55:48.661Z"
+  },
+  {
+    "type": "item",
+    "category": "Blogs",
+    "title": "डिजिटल युग में मानसिक स्वास्थ्य का ध्यान",
+    "content": "आज के डिजिटल युग में हम तकनीक से जुड़े तो हैं, लेकिन अपनों और खुद से दूर होते जा रहे हैं। स्क्रीन टाइम बढ़ने से मानसिक थकान, तनाव और अनिद्रा जैसी समस्याएं आम हो गई हैं। इसलिए यह जरूरी है कि हम डिजिटल डिटॉक्स का अभ्यास करें। दिन में कुछ समय बिना स्क्रीन के बिताएं, प्रकृति के करीब जाएं और परिवार के साथ गुणवत्तापूर्ण समय बिताएं ताकि मानसिक संतुलन बना रहे।",
+    "keywords": [
+      "ब्लॉग",
+      "मानसिक स्वास्थ्य",
+      "डिजिटल डिटॉक्स",
+      "तनाव प्रबंधन"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-30T21:55:48.661Z"
+  },
+  {
+    "type": "item",
+    "category": "AI",
+    "title": "कृत्रिम बुद्धिमत्ता और हमारी कार्यशैली",
+    "content": "आर्टिफिशियल इंटेलिजेंस (AI) आज के समय में हमारे काम करने के तरीके को तेजी से बदल रहा है। यह दोहराव वाले कार्यों को स्वचालित करके हमारी उत्पादकता को बढ़ाता है। हालांकि, यह मानव रचनात्मकता और निर्णय लेने की क्षमता का विकल्प नहीं है। AI का सही उपयोग करके हम अपने कौशल को निखार सकते हैं और नए अवसरों की खोज कर सकते हैं।",
+    "keywords": [
+      "AI",
+      "आर्टिफिशियल इंटेलिजेंस",
+      "तकनीक",
+      "उत्पादकता"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-30T21:55:48.661Z"
+  },
+  {
+    "type": "item",
+    "category": "Jokes",
+    "title": "हास्य और विनोद",
+    "content": "संतोष: यार, आजकल मैं बहुत रचनात्मक हो गया हूँ।\nविकास: अच्छा, ऐसा क्या कर दिया तूने?\nसंतोष: कल मैंने सोते-सोते ही एक नया सपना देख डाला, वो भी रंगीन!\nविकास: भाई, सपने तो सभी रंगीन देखते हैं।\nसंतोष: पर मेरा वाला सपना 4K अल्ट्रा एचडी था!",
+    "keywords": [
+      "चुम्बक",
+      "हास्य",
+      "जोक्स",
+      "मजेदार चुटकुले"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-30T21:55:48.661Z"
+  },
+  {
+    "type": "item",
+    "category": "Gaming",
+    "title": "गेमिंग के दौरान फोकस बनाए रखने के तरीके",
+    "content": "किसी भी स्ट्रैटेजी गेम या पहेली को खेलते समय मानसिक एकाग्रता बहुत जरूरी होती है। लंबे समय तक खेलने से आँखों पर जोर पड़ सकता है और ध्यान भटक सकता है। इसलिए हर 45 मिनट के बाद छोटा ब्रेक लें, पानी पिएं और आँखों को आराम दें। गेमिंग के दौरान रणनीति बनाना और धैर्य रखना आपको बेहतर परिणाम दे सकता है।",
+    "keywords": [
+      "गेमिंग",
+      "फोकस",
+      "गेमिंग टिप्स",
+      "एकाग्रता"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-30T21:55:48.661Z"
+  },
+  {
+    "type": "item",
+    "category": "Vlogs",
+    "title": "वीकेंड व्लॉग बनाने की बेहतरीन रूपरेखा",
+    "content": "एक आकर्षक वीकेंड व्लॉग बनाने के लिए कहानी कहने का तरीका (Storytelling) मजबूत होना चाहिए। अपने व्लॉग की शुरुआत एक दिलचस्प हुक (Hook) से करें, जैसे वीकेंड की कोई अनोखी झलक। इसके बाद अपनी गतिविधियों को छोटे-छोटे दृश्यों में दिखाएं। अंत में दर्शकों से उनकी राय पूछें ताकि एंगेजमेंट बढ़ सके। स्पष्ट ऑडियो और स्थिर फुटेज व्लॉग की गुणवत्ता को और बेहतर बनाते हैं।",
+    "keywords": [
+      "व्लॉग",
+      "यूट्यूब व्लॉग",
+      "वीडियो निर्माण",
+      "कंटेंट आइडिया"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-10-30T21:55:48.661Z"
+  },
+  {
+    "type": "item",
+    "category": "News",
+    "title": "ISRO लॉन्च करने जा रहा अगली पीढ़ी का NVS-03 सैटेलाइट",
+    "content": "भारतीय अंतरिक्ष अनुसंधान संगठन (ISRO) अंतरिक्ष में एक और बड़ी छलांग लगाते हुए अगली पीढ़ी का नेविगेशन सैटेलाइट NVS-03 लॉन्च करने की तैयारी में है। इस स्वदेशी परमाणु घड़ी से युक्त उपग्रह के माध्यम से विदेशी जीपीएस पर निर्भरता कम होगी और यह सुरक्षा बलों को सटीक लोकेशन की जानकारी देने में मदद करेगा।",
+    "keywords": [
+      "ISRO",
+      "NVS-03",
+      "अंतरिक्ष",
+      "सैटेलाइट",
+      "भारत"
+    ],
+    "sourceNote": "Summary based on supplied news source; verify before relying on it.",
+    "sourceTitle": "अंतरिक्ष में बड़ी छलांग, ISRO लॉन्च करने जा रहा अगली पीढ़ी का NVS-03 सैटेलाइट - Hindustan",
+    "sourcePublisher": "Hindustan",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiggJBVV95cUxPTHkyZGtjb0dGMFQ2azJzektKM09xYWhkQVFxZDIyZ3NqVWZMYjlIczh5UVQtRUJTUm0xSmpaamFpV0xnS2NFLXBBb3VVOU9FWEc1QkxXZlpaTmtwSXo3U2xqLTJ0Yzc2aFRPQjM3Z2xuZWRuaE1yQnNGTFN1bXVMQlFhb2gtdC14SHNaRG9laXpBOWRxN052b2JOSHNRUkNuYTF4NUJldWtqWFVFd3JqMHVPcTctdnVMS2IyUHkzbENrMmJsSGJwdzBXTFhuY1VuRHlvdHg2Q0ZreE8tLWNaUXpDR2pkWnhCWVJaSi04RVV3TGZOaFFnZURhQW83OW1vU1HSAYcCQVVfeXFMTm92ZUZoOXc0dEFnVE1meWFteGkzWHBNR3liTEFrb1RqWW9KR0o5eUxsZi01c0p6NERoX0V6NlRaYTRuWjZRQ0xkQ21NS1BSZnhMTC1vRG5vX3BaWUZ6S0dXUlJJWDI5RjBieXJQdzhxWlhFaTVRbkZ6bU5HVGllRXQyeHBOdWZJQzVfZDZMb0d5QkNZMXRUQmZjRzBCVG9Pd3VVcFZaa29DekdMSURuTGcyYVNrNElUMU1faXhqbkpVVWFmN0c5S1p4ZUVTR3hRTzJBTTFrbHV3T0daT3VPVG43bnY0dkRuLUY0UERfSm9pdVRVMVYwLWZ0eTczRXZBa1pPX3ZvYkk?oc=5",
+    "sourceDate": "2026-10-30T17:32:11.000Z",
+    "generatedAt": "2026-10-30T21:55:48.661Z"
+  },
+  {
+    "type": "item",
+    "category": "Bhakti",
     "title": "सच्ची शांति का मार्ग",
     "content": "जीवन की भागदौड़ में मन को शांत रखना सबसे बड़ी साधना है। जब हम अपनी अपेक्षाओं को थोड़ा कम करते हैं और वर्तमान पल में जीना सीखते हैं, तो ईश्वर की उपस्थिति का अनुभव अपने आप होने लगता है। आंतरिक शांति ही सबसे बड़ी भक्ति है।",
     "keywords": [
@@ -81,24 +298,6 @@
       "मेहनत",
       "किस्मत",
       "डायलॉग"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-30T12:07:23.385Z"
-  },
-  {
-    "type": "item",
-    "category": "Knowledge",
-    "title": "दैनिक जीवन में समय प्रबंधन के उपाय",
-    "content": "समय प्रबंधन किसी भी कार्य में सफलता की कुंजी है। अपने दिन की शुरुआत एक छोटी सी सूची बनाकर करें, जिसमें सबसे जरूरी कार्यों को पहले स्थान पर रखें। बीच-बीच में थोड़ा विश्राम करने से कार्यक्षमता बनी रहती है और तनाव कम होता है।",
-    "keywords": [
-      "ज्ञान",
-      "समय प्रबंधन",
-      "उत्पादकता",
-      "सामान्य ज्ञान"
     ],
     "sourceNote": "Original AI-generated content",
     "sourceTitle": "",
@@ -440,24 +639,6 @@
       "कीर्तन",
       "भक्ति गीत",
       "नाम सिमरन",
-      "GAMEZONE ARENA"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-29T12:17:00.549Z"
-  },
-  {
-    "type": "item",
-    "category": "Shayari",
-    "title": "वक्त और इंसान",
-    "content": "वक़्त की रफ़्तार से जो चलना सीख गए,\nमुश्किलों के समंदर में भी संभलना सीख गए।\nख्वाहिशों के पीछे भागने से बेहतर है,\nछोटे-छोटे लम्हों में ही ढलना सीख गए।",
-    "keywords": [
-      "शायरी",
-      "हिंदी शायरी",
-      "प्रेरणा",
       "GAMEZONE ARENA"
     ],
     "sourceNote": "Original AI-generated content",
@@ -1918,25 +2099,6 @@
   },
   {
     "type": "item",
-    "category": "Kirtan",
-    "title": "मिलकर गाएं कीर्तन प्यारे",
-    "content": "मिलकर सब गाएं कीर्तन प्यारे, गूंजे स्वर जग में सारे। सुर से सुर जो मिल जाए तो, बंधन सारे टूट जाएं। हरि नाम की महिमा न्यारी, पावन करे दुनिया सारी। भाव से जो कोई गाए, मनवांछित फल वो पाए।",
-    "keywords": [
-      "कीर्तन",
-      "भक्ति संगीत",
-      "हरि नाम",
-      "संगीत",
-      "GAMEZONE ARENA"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-26T22:17:18.391Z"
-  },
-  {
-    "type": "item",
     "category": "Shayari",
     "title": "वक्त और उड़ान",
     "content": "वक्त की रफ्तार से जो चलना सीख गए, मंजिलों के रास्ते वो पाना सीख गए। हवाओं के रुख मोड़ने का हुनर रखो, परिंदों की तरह यूं ही जीना सीख गए।",
@@ -2865,25 +3027,6 @@
       "संकीर्तन",
       "भक्ति रस",
       "ताल",
-      "GAMEZONE ARENA"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-25T03:10:00.564Z"
-  },
-  {
-    "type": "item",
-    "category": "Dialogues",
-    "title": "सफलता का संवाद",
-    "content": "\"किस्मत के भरोसे बैठने वाले अक्सर पीछे रह जाते हैं, दोस्त। असली विजेता वही है जो गिरकर उठना जानता है और अपनी मेहनत से लकीरें खुद खींचता है।\"",
-    "keywords": [
-      "संवाद",
-      "डायलॉग",
-      "मेहनत",
-      "विजेता",
       "GAMEZONE ARENA"
     ],
     "sourceNote": "Original AI-generated content",
@@ -4237,24 +4380,6 @@
   },
   {
     "type": "item",
-    "category": "AI",
-    "title": "कृत्रिम बुद्धिमत्ता और हमारी कार्यशैली",
-    "content": "आर्टिफिशियल इंटेलिजेंस (AI) आज हमारे जीवन का एक महत्वपूर्ण हिस्सा बन चुका है। यह जटिल डेटा को प्रोसेस करने और रचनात्मक कार्यों में इंसानों की मदद करता है। हालांकि, AI का उपयोग केवल एक सहायक के रूप में किया जाना चाहिए, न कि मानवीय सोच और निर्णय लेने की क्षमता के विकल्प के रूप में।",
-    "keywords": [
-      "एआई",
-      "आर्टिफिशियल इंटेलिजेंस",
-      "तकनीक",
-      "भविष्य"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-22T11:08:56.736Z"
-  },
-  {
-    "type": "item",
     "category": "Gaming",
     "title": "गेमिंग के दौरान आंखों की सुरक्षा कैसे करें",
     "content": "लंबे समय तक स्क्रीन के सामने बैठकर गेमिंग करने से आंखों में थकान और सूखापन हो सकता है। इससे बचने के लिए हर 20 मिनट बाद स्क्रीन से नजर हटाएं और 20 फीट दूर किसी वस्तु को 20 सेकंड के लिए देखें (20-20-20 नियम)। इसके अलावा, कमरे में पर्याप्त रोशनी रखें और स्क्रीन की चमक को अपने आसपास के वातावरण के अनुसार समायोजित करें।",
@@ -5387,131 +5512,5 @@
     "sourceUrl": "",
     "sourceDate": "",
     "generatedAt": "2026-10-19T12:06:33.575Z"
-  },
-  {
-    "type": "item",
-    "category": "Gaming",
-    "title": "गेमिंग के दौरान आंखों की देखभाल के उपाय",
-    "content": "लंबे समय तक वीडियो गेम खेलने से आंखों पर जोर पड़ सकता है। इससे बचने के लिए हर 45 मिनट के बाद स्क्रीन से नजर हटाएं और कुछ सेकंड के लिए दूर देखें। इसके अलावा स्क्रीन की ब्राइटनेस को कमरे के वातावरण के अनुसार सेट रखें और पर्याप्त पानी पिएं।",
-    "keywords": [
-      "गेमिंग",
-      "स्वास्थ्य",
-      "सुझाव",
-      "आंखों की देखभाल"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-19T12:06:33.575Z"
-  },
-  {
-    "type": "item",
-    "category": "News",
-    "title": "BCCI ने अजीत अगरकर के रिप्लेसमेंट का किया एलान, प्रज्ञान ओझा बने नए चीफ सिलेक्टर",
-    "content": "भारतीय क्रिकेट कंट्रोल बोर्ड (BCCI) ने अजीत अगरकर के रिप्लेसमेंट का एलान कर दिया है। पूर्व खिलाड़ी प्रज्ञान ओझा को नया चीफ सिलेक्टर नियुक्त किया गया है, जबकि रमेश पोवार की भी सिलेक्शन पैनल में एंट्री हुई है।",
-    "keywords": [
-      "समाचार",
-      "बीसीसीआई",
-      "प्रज्ञान ओझा",
-      "क्रिकेट"
-    ],
-    "sourceNote": "Summary based on supplied news source; verify before relying on it.",
-    "sourceTitle": "BCCI ने किया अजीत अगरकर के रिप्लेसमेंट का एलान, 312 मैच खेलने वाला बना नया सेलेक्टर - Jagran",
-    "sourcePublisher": "Jagran",
-    "sourceUrl": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxOd1BRR0E3dGNCUXBLZWEwSjFFb1VSN1dnb0YyeHNsNDlNdTVMVnhvbmtVZml5NndfSi1VQ0J0MzQyTU5kYlRfazdfUzBEM180cE9PbXU3TU1KVnM3OGdicTJrU0xoOFZVLUFwU0R2Xzg3UFFTM2R4MjEzRnJqYkUtcWo4VXJGTHhpYWF2NTRXVmZtVEZfZTNZRURXZElRdmtadXBIbUhUSElHZExOQkxIZTRzNUNOMXRwWjZIZlFWSGFZWE8ybU9FYkxKQjhBQlAxaHM3YmNjSTZfcDg?oc=5",
-    "sourceDate": "2026-10-19T10:50:00.000Z",
-    "generatedAt": "2026-10-19T12:06:33.575Z"
-  },
-  {
-    "type": "item",
-    "category": "Bhajan",
-    "title": "चल मन उस धाम",
-    "content": "चल मन उस निर्मल धाम, जहाँ गूँजे प्रभु का नाम।\nमोह-माया को त्याग के, ले ले प्यारे भगवान का नाम।\nसुख-दुःख तो धूप-छाँव हैं, जीवन का यह नियम महान,\nजो समझे इस मर्म को, वही पाए जीवन का ज्ञान।",
-    "keywords": [
-      "भजन",
-      "प्रभु नाम",
-      "मन",
-      "अध्यात्म"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-19T03:13:10.108Z"
-  },
-  {
-    "type": "item",
-    "category": "Jokes",
-    "title": "पढ़ाई और हंसी",
-    "content": "टीचर: बताओ बच्चों, अगर सूरज न निकले तो क्या होगा?\nपप्पू: सर, फिर तो रात को ही धूप का चश्मा पहनना पड़ेगा!\nटीचर हैरान, क्लास में हंसी गूँज उठी।",
-    "keywords": [
-      "चुटकुले",
-      "हास्य",
-      "मजेदार जोक्स",
-      "पप्पू"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-19T03:13:10.108Z"
-  },
-  {
-    "type": "item",
-    "category": "Gaming",
-    "title": "गेमिंग में बेहतर प्रदर्शन के लिए जरूरी बातें",
-    "content": "किसी भी ऑनलाइन या कैजुअल गेम में बेहतर खेलने के लिए लगातार अभ्यास और धैर्य जरूरी है। गेम के दौरान स्क्रीन से हर 45 मिनट पर ब्रेक लें ताकि आँखें स्वस्थ रहें और रिफ्लेक्स अच्छे बने रहें।",
-    "keywords": [
-      "गेमिंग",
-      "गेमिंग टिप्स",
-      "खिलाड़ी",
-      "सुरक्षा"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-19T03:13:10.108Z"
-  },
-  {
-    "type": "item",
-    "category": "Vlogs",
-    "title": "एक सफल हिंदी व्लॉग की रूपरेखा",
-    "content": "व्लॉगिंग शुरू करते समय विषय का चुनाव स्पष्ट रखें। शुरुआत में अपने शहर की किसी शांत जगह या अपनी दिनचर्या से जुड़ा एक छोटा वीडियो बनाएं। दर्शकों से जुड़ने के लिए सरल भाषा और साफ आवाज का होना बहुत जरूरी है।",
-    "keywords": [
-      "व्लॉग",
-      "वीडियो निर्माण",
-      "क्रिएटर टिप्स",
-      "यूट्यूब"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-19T03:13:10.108Z"
-  },
-  {
-    "type": "item",
-    "category": "News",
-    "title": "रूस को छूट देने के मामले में मार्को रुबियो का बयान",
-    "content": "रूस को दी गई छूट और अंतरराष्ट्रीय परिस्थितियों को लेकर मार्को रुबियो ने अपनी बात रखी है। इस नीतिगत निर्णय और वैश्विक व्यापार से जुड़े विभिन्न पहलुओं पर चर्चा की जा रही है।",
-    "keywords": [
-      "समाचार",
-      "रूस",
-      "अंतरराष्ट्रीय",
-      "मार्को रुबियो"
-    ],
-    "sourceNote": "Summary based on supplied news source; verify before relying on it.",
-    "sourceTitle": "रूस को इसलिए छूट दी ताकि भारत..., अब क्या बोले मार्को रुबियो - ABP News",
-    "sourcePublisher": "ABP News",
-    "sourceUrl": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQX2dsd1Y0TktWN3Nqcjc0MUtCRkV5WEJJYjlRTm0xUGxFU0RuTXVoX0d5cXA2ZlVGeWRiR2RnM1RrOWFheTg0bGFLVnhQYkVibGZmLVhJQ1VQT0ZkaW9kZDZpUktnQ25MQ0hQS3d5QW9aZE5CQ0k1bFN6Q3dwZG5xWmd2M1IwWjRNQ25yQ3B5LVJzeVJvbzV0MW5LMmFBSEtvWE5vQlRXYU1TdnhILU8xSDd30gG3AUFVX3lxTE5XbGRqWGFPenVrTWU4Z1Nlcjc2WmY1WVBPZDViV3hxVlVfNWxZZkNId3dzLXd2QmJoQVZ1SW1lM2pwSDdkVF9vUkZ2dG5TY3ZQT2R1WkhwT2N3SkJ0QnRRRzB4aDhvT3NjVUVTU0pINEdDVmlqeVRxM25uVTF6d1NJOEhzMlpzbnVsNENtR2V1dDVPdVlBOXZsX0JSRUlKLURIeWRyTFVxYUs1b0tBbjNPYjd6OXZ1Zw?oc=5",
-    "sourceDate": "2026-10-19T01:24:43.000Z",
-    "generatedAt": "2026-10-19T03:13:10.108Z"
   }
 ]
