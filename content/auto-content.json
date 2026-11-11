@@ -2,6 +2,234 @@
   {
     "type": "item",
     "category": "Bhakti",
+    "title": "मन की शांति का सच्चा मार्ग",
+    "content": "सच्ची भक्ति वह है जो मनुष्य के अंतःकरण को शांत और निर्मल बना दे। जब हम अपने अहंकार को त्यागकर ईश्वर के प्रति समर्पण का भाव रखते हैं, तो जीवन की कठिन परिस्थितियां भी सरल प्रतीत होने लगती हैं। नियमित रूप से ध्यान और प्रार्थना करने से मानसिक एकाग्रता बढ़ती है और सकारात्मक ऊर्जा का संचार होता है।",
+    "keywords": [
+      "भक्ति",
+      "मन की शांति",
+      "सकारात्मक ऊर्जा",
+      "ईश्वर",
+      "समर्पण"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-11T13:32:30.299Z"
+  },
+  {
+    "type": "item",
+    "category": "Bhajan",
+    "title": "मेरे जीवन के पथ पर प्रभु",
+    "content": "मेरे जीवन के पथ पर प्रभु, तेरा ही साया रहे। अंधेरों भरी इस दुनिया में, तेरा ज्ञान जगाया रहे। जब-जब डगमगाए कदम मेरे, तू ही थाम लेना हाथ। हर पल हर लम्हा बस, तेरा ही हो साथ।",
+    "keywords": [
+      "भजन",
+      "प्रभु",
+      "जीवन पथ",
+      "आस्था",
+      "प्रार्थना"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-11T13:32:30.299Z"
+  },
+  {
+    "type": "item",
+    "category": "Kirtan",
+    "title": "मिलकर गाओ हरि गुणगान",
+    "content": "आओ मिलकर गाएं सब हरि का गुणगान, सुधि-बुधि खोकर पा लें हरि का ध्यान। ताल से ताल मिले और मन हो जाए मगन, पावन हो जाए ये जीवन और कण-कण। नाम जपने से सारे कष्ट मिट जाते हैं, भक्तों के सारे संकट टल जाते हैं।",
+    "keywords": [
+      "कीर्तन",
+      "हरि गुणगान",
+      "भक्ति संगीत",
+      "नाम जाप",
+      "भक्त"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-11T13:32:30.299Z"
+  },
+  {
+    "type": "item",
+    "category": "Shayari",
+    "title": "वक़्त और इंसान की पहचान",
+    "content": "वक़्त की रफ्तार ने सिखाई है ये बात, अंधेरे में तो अपनी ही परछाईं छोड़ जाती है साथ। सफर लंबा सही पर हौसला रखना बुलंद, मुश्किलें कितनी भी हों, कभी न होना मंद।",
+    "keywords": [
+      "शायरी",
+      "वक़्त",
+      "हौसला",
+      "जिंदगी",
+      "संघर्ष"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-11T13:32:30.299Z"
+  },
+  {
+    "type": "item",
+    "category": "Dialogues",
+    "title": "सफलता का असली मोल",
+    "content": "\"सफलता वो पुरस्कार नहीं है जो बाजार में बिक जाए, यह तो वह पसीना है जो मेहनत की भट्ठी में तपकर हीरा बनता है। हारने से डरना मत, क्योंकि असली खिलाड़ी वही है जो मैदान छोड़कर नहीं, बल्कि मैदान जीतकर लौटता है।\"",
+    "keywords": [
+      "संवाद",
+      "डायलॉग",
+      "सफलता",
+      "मेहनत",
+      "प्रेरणा"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-11T13:32:30.299Z"
+  },
+  {
+    "type": "item",
+    "category": "Knowledge",
+    "title": "दैनिक जीवन में जल संरक्षण के उपाय",
+    "content": "जल ही जीवन है और इसका संरक्षण हमारी सबसे बड़ी जिम्मेदारी है। ब्रश करते समय नल बंद रखना, लीक होने वाले नलों की समय पर मरम्मत करवाना, और वर्षा जल संचयन (Rainwater Harvesting) अपनाना कुछ ऐसे सरल उपाय हैं जिनसे हम प्रतिदिन सैकड़ों लीटर पानी बचा सकते हैं। छोटी-छोटी आदतें भविष्य के लिए बड़ा बदलाव ला सकती हैं।",
+    "keywords": [
+      "सामान्य ज्ञान",
+      "जल संरक्षण",
+      "पर्यावरण",
+      "उपयोगी जानकारी",
+      "बचत"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-11T13:32:30.299Z"
+  },
+  {
+    "type": "item",
+    "category": "Blogs",
+    "title": "डिजिटल युग में समय प्रबंधन की कला",
+    "content": "आज के डिजिटल दौर में स्मार्टफोन और सोशल मीडिया हमारे दिन का अधिकांश समय ले लेते हैं। उत्पादकता बढ़ाने के लिए यह आवश्यक है कि हम अपने समय का सही प्रबंधन करें। 'पोमोडोरो तकनीक' जैसे तरीकों को अपनाकर, जिसमें 25 मिनट काम और 5 मिनट का विश्राम होता है, हम अपने काम पर बेहतर ध्यान केंद्रित कर सकते हैं और मानसिक थकान से भी बच सकते हैं।",
+    "keywords": [
+      "ब्लॉग",
+      "समय प्रबंधन",
+      "उत्पादकता",
+      "डिजिटल युग",
+      "पोमोडोरो"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-11T13:32:30.299Z"
+  },
+  {
+    "type": "item",
+    "category": "AI",
+    "title": "दैनिक कार्यों में कृत्रिम बुद्धिमत्ता (AI) का सही उपयोग",
+    "content": "आर्टिफिशियल इंटेलिजेंस (AI) आज हमारे जीवन का एक महत्वपूर्ण हिस्सा बन गया है। इसका उपयोग ई-मेल का ड्राफ्ट तैयार करने, भाषा सीखने, और जटिल डेटा को सरल रूप में समझने के लिए किया जा सकता है। हालांकि, AI उपकरणों पर पूरी तरह आंख मूंदकर भरोसा करने के बजाय इसके द्वारा दिए गए परिणामों की सटीकता की जांच करना हमेशा बुद्धिमानी होती है।",
+    "keywords": [
+      "एआई",
+      "कृत्रिम बुद्धिमत्ता",
+      "तकनीक",
+      "उपयोग",
+      "उत्पादकता"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-11T13:32:30.299Z"
+  },
+  {
+    "type": "item",
+    "category": "Jokes",
+    "title": "दो दोस्तों की मजेदार बातचीत",
+    "content": "संतोष: यार, मैंने कल रात एक नया सपना देखा कि मैं अमेरिका का राष्ट्रपति बन गया हूँ!\nरमेश: अरे वाह! फिर तूने क्या किया?\nसंतोष: क्या करता, नींद खुल गई और मैंने तुरंत अपने घर की खिड़की बंद कर दी कि कहीं ठंड न लग जाए!",
+    "keywords": [
+      "चुटीले चुटकुले",
+      "हंसी",
+      "कॉमेडी",
+      "मजेदार",
+      "हास्य"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-11T13:32:30.299Z"
+  },
+  {
+    "type": "item",
+    "category": "Gaming",
+    "title": "मोबाइल गेमिंग में रिफ्लेक्स और स्ट्रैटेजी का महत्व",
+    "content": "किसी भी ऑनलाइन मल्टीप्लेयर या एक्शन गेम में बेहतर प्रदर्शन के लिए केवल तेज हाथ ही नहीं, बल्कि सही रणनीति की भी आवश्यकता होती है। गेम खेलते समय अपनी स्क्रीन ब्राइटनेस को संतुलित रखें, नेटवर्क कनेक्शन स्थिर रखें और हर मैच के बाद अपनी गलतियों का विश्लेषण करें। इससे आपकी गेमिंग स्किल्स में धीरे-धीरे सुधार होता है।",
+    "keywords": [
+      "गेमिंग",
+      "टिप्स",
+      "स्ट्रैटेजी",
+      "रिफ्लेक्स",
+      "मोबाइल गेम"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-11T13:32:30.299Z"
+  },
+  {
+    "type": "item",
+    "category": "Vlogs",
+    "title": "वीकेंड मॉर्निंग व्लॉग के लिए बेहतरीन आइडिया",
+    "content": "यदि आप अपने चैनल के लिए एक शांत और आकर्षक मॉर्निंग व्लॉग शूट करना चाहते हैं, तो सुबह की ताज़ी हवा और अपने शहर के किसी शांत पार्क से शुरुआत करें। वीडियो में अपनी सुबह की दिनचर्या, नाश्ते की तैयारी और अपने किसी एक शौक (जैसे पौधे लगाना या पढ़ना) को शामिल करें। दर्शकों को प्राकृतिक और सुकून भरे दृश्य देखना बहुत पसंद आता है।",
+    "keywords": [
+      "व्लॉग",
+      "वीडियो आइडिया",
+      "कंटेंट क्रिएशन",
+      "मॉर्निंग रूटीन",
+      "यूट्यूब"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-11T13:32:30.299Z"
+  },
+  {
+    "type": "item",
+    "category": "News",
+    "title": "जम्मू-कश्मीर: कुलगाम में CRPF कैंप पर आतंकी हमला, 3 जवान घायल",
+    "content": "जम्मू-कश्मीर के कुलगाम में सीआरपीएफ (CRPF) कैंप पर आतंकी हमला हुआ है, जिसमें 3 जवान घायल हो गए हैं। घटना का सीसीटीवी फुटेज भी सामने आया है, जिसके अनुसार बाइक सवार हमलावरों ने चेकपॉइंट के पास अंधाधुंध फायरिंग की।",
+    "keywords": [
+      "जम्मू-कश्मीर",
+      "कुलगाम",
+      "CRPF",
+      "आतंकी हमला",
+      "समाचार"
+    ],
+    "sourceNote": "Summary based on supplied news source; verify before relying on it.",
+    "sourceTitle": "जम्मू-कश्मीर से बड़ी खबर, कुलगाम में CRPF कैंप पर आतंकी हमला, 3 जवान घायल, CCTV फुटेज आया सामने - India TV Hindi",
+    "sourcePublisher": "India TV Hindi",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPbGNpZEZZUnprX2NjZFVEVHJLY0pUeHNxaFgtcEtHVFkzWnd4NjM1SkJ2WnJEVFVOc3IwbEU5cVJnSmJ1dG1lc2tGb21hajA4WEdJSl85WDZtRlpXVENtWkxCNnN3ZGhyZXYzSVh3cUhKMFBJNG5GZnVnbzZFczJiOU91aTItcXFTbUxRdGtXRDZsbTJKUXdhbVB0SklUTm1OTDRVUzdIRWZVRkxjeE82d3hpcW5DaEpuN0lv?oc=5",
+    "sourceDate": "2026-11-11T09:18:51.000Z",
+    "generatedAt": "2026-11-11T13:32:30.299Z"
+  },
+  {
+    "type": "item",
+    "category": "Bhakti",
     "title": "सच्ची आस्तिकता और आंतरिक शांति",
     "content": "जीवन की भागदौड़ में अक्सर हम खुद को अकेला महसूस करते हैं। सच्ची भक्ति केवल मंदिर जाने या पूजा करने तक सीमित नहीं है, बल्कि अपने भीतर करुणा, सहनशीलता और शांति का विकास करना ही असली अध्यात्म है। जब मन में किसी के प्रति द्वेष न हो और हर परिस्थिति में सकारात्मक दृष्टिकोण बना रहे, तभी ईश्वर की सच्ची उपस्थिति का अनुभव होता है। अपने हर कर्म को निष्काम भाव से करना और दूसरों की भलाई सोचना ही सबसे बड़ी पूजा है।",
     "keywords": [
@@ -273,24 +501,6 @@
       "भक्ति संगीत",
       "समूह गान",
       "ईश्वर वंदना"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-11-10T01:10:32.563Z"
-  },
-  {
-    "type": "item",
-    "category": "Shayari",
-    "title": "वक्त और इंसान की पहचान",
-    "content": "वक्त के साथ रंग बदलते हैं लोग यहाँ, पर अपनी असलियत कभी नहीं छुपती। जो अंधेरे में भी साथ निभाए, वही सच्ची रोशनी की पहचान होती है।",
-    "keywords": [
-      "शायरी",
-      "हिंदी शायरी",
-      "वक्त और इंसान",
-      "भावनाएं"
     ],
     "sourceNote": "Original AI-generated content",
     "sourceTitle": "",
@@ -1976,24 +2186,6 @@
   },
   {
     "type": "item",
-    "category": "Bhakti",
-    "title": "मन की शांति का सच्चा मार्ग",
-    "content": "जीवन की भागदौड़ में अक्सर हम अपने भीतर के शांत कोने को भूल जाते हैं। ईश्वर की आराधना केवल पूजा-पाठ तक सीमित नहीं है, बल्कि यह अपने मन को स्थिर करने और आत्मचिंतन करने का एक माध्यम है। जब हम अपनी चिंताओं को उस अदृश्य शक्ति पर छोड़ देते हैं, तो मन में एक हल्कापन और गहरा संतोष महसूस होता है। आज कुछ पल निकालकर मौन में बैठें और अपने श्वासों पर ध्यान केंद्रित करें, यही सच्ची भक्ति है।",
-    "keywords": [
-      "भक्ति",
-      "मन की शांति",
-      "आध्यात्मिक",
-      "ईश्वर"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-11-06T13:44:05.158Z"
-  },
-  {
-    "type": "item",
     "category": "Bhajan",
     "title": "जागो रे मन मूरत तेरी",
     "content": "जागो रे मन मूरत तेरी, दीपक जल उठा द्वार पे।\nसुधि ले लो अब सांवरिया, बैठा हूँ मैं आस के मार पे।\n\nचंचल मन ये मेरा डोले, सूरज की किरणें कुछ बोले,\nनाम तेरा मैं रटता जाऊं, जीवन नैया पार लगा जा रे।\n\nचरणों की धूल जो मिल जाए, तकदीर मेरी भी जग जाए,\nतुझसे ही है मेरी हर साँस, चरणों में मुझको बसा जा रे।",
@@ -3578,24 +3770,6 @@
   },
   {
     "type": "item",
-    "category": "AI",
-    "title": "दैनिक कार्यों में कृत्रिम बुद्धिमत्ता (AI) का सही उपयोग",
-    "content": "AI आज हमारे जीवन का एक अहम हिस्सा बन गया है। इसकी मदद से हम ईमेल ड्राफ्ट करने, भाषा सीखने और जटिल डेटा को सरल बनाने जैसे काम तेजी से कर सकते हैं। हालांकि, इसका उपयोग करते समय अपनी गोपनीयता का ध्यान रखना और परिणामों की सटीकता की जांच करना हमेशा आवश्यक है।",
-    "keywords": [
-      "एआई",
-      "आर्टिफिशियल इंटेलिजेंस",
-      "तकनीक",
-      "उपयोग"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-11-01T04:20:45.481Z"
-  },
-  {
-    "type": "item",
     "category": "Vlogs",
     "title": "सप्ताह के अंत की शांत यात्रा का व्लॉग कैसे बनाएं",
     "content": "यदि आप वीकेंड पर किसी शांत जगह जा रहे हैं, तो अपने व्लॉग की शुरुआत यात्रा के शुरुआती सफर और मौसम के वर्णन से करें। स्थानीय खान-पान, वहां के लोगों से बातचीत और अपने निजी अनुभवों को कैमरे पर साझा करें। वीडियो का अंत एक सुंदर सूर्यास्त या शांत दृश्य के साथ करें ताकि दर्शकों को सुकून का अहसास हो।",
@@ -4737,24 +4911,6 @@
   },
   {
     "type": "item",
-    "category": "Kirtan",
-    "title": "मिलकर गाओ हरि गुणगान",
-    "content": "आइए मिलकर गाएं हरि का गुणगान, जिससे सुधर जाए अपना यह जहान। ताल से ताल मिलाओ रे भाई, प्रेम की अलख जगाओ रे भाई। सतनाम का जो सिमरन करता, उसके सारे कटते बंधन।",
-    "keywords": [
-      "कीर्तन",
-      "हरि गुणगान",
-      "भक्ति संगीत",
-      "समूह गान"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-28T12:05:59.143Z"
-  },
-  {
-    "type": "item",
     "category": "Dialogues",
     "title": "सफलता का सफर",
     "content": "किस्मत के भरोसे बैठने वाले अक्सर पीछे रह जाते हैं, क्योंकि इतिहास वही रचते हैं जो अपनी मेहनत की लकीरों पर भरोसा करते हैं। रास्ता कठिन हो सकता है, पर मंजिल का मजा तभी है जब सफर खुद तय किया हो।",
@@ -5295,24 +5451,6 @@
   },
   {
     "type": "item",
-    "category": "Knowledge",
-    "title": "दैनिक जीवन में जल संरक्षण के उपाय",
-    "content": "जल ही जीवन है और इसे बचाना हम सबकी जिम्मेदारी है। नल को खुला न छोड़ें, पौधों में सुबह या शाम के समय पानी दें ताकि वाष्पीकरण कम हो, और वर्षा जल संचयन (Rainwater Harvesting) जैसी तकनीकों का अपने घरों में उपयोग करें। छोटी-छोटी आदतें बड़ा बदलाव ला सकती हैं।",
-    "keywords": [
-      "ज्ञान",
-      "जल संरक्षण",
-      "पर्यावरण",
-      "GAMEZONE ARENA"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-27T03:40:36.835Z"
-  },
-  {
-    "type": "item",
     "category": "Jokes",
     "title": "पढ़ाई और कंप्यूटर",
     "content": "पिताजी (बेटे से): बेटा, तुम कंप्यूटर पर घंटों क्या करते रहते हो?\nबेटा: पापा, मैं अपनी नॉलेज बढ़ा रहा हूँ।\nपिताजी: अच्छा! ज़रा बताना, कल रात से तुम्हारी कौन सी नॉलेज बढ़ी है?\nबेटा: यही पापा, कि कंप्यूटर की बैटरी बहुत जल्दी खत्म हो जाती है!",
@@ -5346,138 +5484,5 @@
     "sourceUrl": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9sR2o3TVJEX1FTTk5GYTdreG9yZWEyVnpNWHJfNjh1SXVNREh5YkRYbjFzSHo3WXZEUzJzbVl4M1paQ2FSWEFLakhuZXV3UUFLenlmLWFZNA?oc=5",
     "sourceDate": "2026-10-27T01:20:43.000Z",
     "generatedAt": "2026-10-27T03:40:36.835Z"
-  },
-  {
-    "type": "item",
-    "category": "Jokes",
-    "title": "पार्क में बातचीत",
-    "content": "संतोष: यार, मैंने एक नया कुत्ता पाला है, उसका नाम मैंने 'गूगल' रखा है।\nमित्र: गूगल क्यों? अजीब नाम है!\nसंतोष: क्योंकि मेरे पूछते ही वो सब कुछ ढूंढ कर ले आता है, बस फर्क इतना है कि इंटरनेट की जगह वो मेरे जूते ढूंढता है!",
-    "keywords": [
-      "चुटकुले",
-      "हंसी",
-      "कॉमेडी",
-      "परिवार",
-      "GAMEZONE ARENA"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-26T22:17:18.391Z"
-  },
-  {
-    "type": "item",
-    "category": "Vlogs",
-    "title": "सप्ताह के अंत में होम ऑर्गनाइजेशन व्लॉग की रूपरेखा",
-    "content": "अपने अगले हिंदी व्लॉग के लिए 'वीकेंड होम ऑर्गनाइजेशन' का विषय चुनें। वीडियो की शुरुआत अपने कमरे की वर्तमान स्थिति दिखाने से करें। इसके बाद अलमारी व्यवस्थित करने, पुरानी बेकार चीजों को अलग करने और अपने कार्यस्थल को साफ करने की प्रक्रिया को टाइम-लैप्स में दिखाएं। अंत में अपने व्यवस्थित कमरे का फाइनल लुक साझा करते हुए दर्शकों से उनके सुझाव कमेंट में मांगें।",
-    "keywords": [
-      "व्लॉग",
-      "वीडियो आइडिया",
-      "होम ऑर्गनाइजेशन",
-      "क्रिएटर",
-      "GAMEZONE ARENA"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-26T22:17:18.391Z"
-  },
-  {
-    "type": "item",
-    "category": "News",
-    "title": "गुवाहाटी के होटल में गोलीबारी की घटना में 5 लोगों की मौत",
-    "content": "असम के गुवाहाटी स्थित एक होटल में हुई गोलीबारी की घटना में 5 लोगों की मौत हो गई है। पुलिस के अनुसार आरोपी ने होटल किराए पर ले रखा था और होटल मालिकों के साथ उसका विवाद चल रहा था। घटना की सूचना मिलने के बाद पुलिस मौके पर पहुंचकर स्थिति की जांच कर रही है और विवाद के कारणों का पता लगा रही है।",
-    "keywords": [
-      "गुवाहाटी",
-      "शूटआउट",
-      "होटल विवाद",
-      "समाचार",
-      "असम"
-    ],
-    "sourceNote": "Summary based on supplied news source; verify before relying on it.",
-    "sourceTitle": "गुवाहाटी के होटल में शूटआउट, 5 की मौत: आरोपी ने किराए पर ले रखी थी होटल, मालिकों से चल रहा था विवाद - Dainik Bhaskar",
-    "sourcePublisher": "Dainik Bhaskar",
-    "sourceUrl": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOQ01hWmphcGhfLXlheFpiYVRpUXk3MkZvb0E0aEVyQm1sWDdzTFBKdUpWLXp1ZFNxQmhkcHRKXy1lTXhZQkd0ZkYxelIxZ2xQU0FwUGJkZzNBdHNVcDQ5ZWpNOE5WMUkybEdkalpBZE1qeXVlOEZjd2QtSi1BVlp4eVBiaTBkQmJXZnhmNldOaTJneUQ1SFZQVmNnYzY3MUNKbFhRQ2phRnZWWjFWdGxQR2l30gG3AUFVX3lxTE9tdHkyY2E2OWh0TG1YWmFDYTdJcnl5TUlUek03bGxhVzM0SFl6MTF2VmpublBqUXRHYm5OMTBEbGdKbWJhQURlaG9LTEJwd0pNNEdXbUpzY2hUVlJYRnJnSkE0OU1TX3g3NUlsM0M5enEzMnllckVyUU1nYk9mLXh6bmRrc0JabXFSQXZKRVpBRXFLeHlLejZOb1VkajRBUWV4dmg0QkYxZHFCblJxSkRvMkZxQVYxQQ?oc=5",
-    "sourceDate": "2026-10-26T16:51:06.000Z",
-    "generatedAt": "2026-10-26T22:17:18.391Z"
-  },
-  {
-    "type": "item",
-    "category": "Bhajan",
-    "title": "हे प्रभु सुधि लीजै हमारी",
-    "content": "हे प्रभु सुधि लीजै हमारी, चरणों में जीवन बीते। राह तुम्हारी तकत-तकत दिन, मन के सब भ्रम जीते। कृपा तुम्हारी जो मिल जाए, काँटे भी बन जाएं फूल। भक्ति तेरी गाते-गाते, जाएं हम तो सब कुछ भूल।",
-    "keywords": [
-      "भजन",
-      "प्रभु प्रार्थना",
-      "भक्ति गीत",
-      "ईश्वर वंदना",
-      "आध्यात्मिक संगीत"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-26T12:14:45.643Z"
-  },
-  {
-    "type": "item",
-    "category": "Kirtan",
-    "title": "मिलकर गाओ नाम मुरारी",
-    "content": "आइए मिलकर सब गाएं, सुमधुर कीर्तन की बहार। मन का कोना-कोना चमके, गूंजे जयकारा बार-बार। ताल मिलाओ स्वर के साथ, प्रभु का नाम है सबसे प्यारा। इस भवसागर से तरने का, यही एक साधन हमारा।",
-    "keywords": [
-      "कीर्तन",
-      "भक्ति गान",
-      "मुरारी",
-      "सामूहिक गायन",
-      "भक्ति रस"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-26T12:14:45.643Z"
-  },
-  {
-    "type": "item",
-    "category": "Shayari",
-    "title": "सफर और उम्मीद की बातें",
-    "content": "वक्त की आंधियों में भी हौसला रखना सीखो, अंधेरों के बाद ही नया सवेरा आता है। मंजिल उन्हीं को मिलती है जिनके सपनों में जान होती है, पंखों से कुछ नहीं होता, हौसलों से उड़ान होती है।",
-    "keywords": [
-      "शायरी",
-      "हिंदी शायरी",
-      "प्रेरणा",
-      "हौसला",
-      "सफर"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-26T12:14:45.643Z"
-  },
-  {
-    "type": "item",
-    "category": "Dialogues",
-    "title": "मेहनत और तकदीर का संवाद",
-    "content": "पहला पात्र: 'तकदीर के भरोसे बैठने वाले अक्सर हाथ मलते रह जाते हैं।' दूसरा पात्र: 'बिल्कुल, तकदीर लकीरें बदलती नहीं, लकीरों को पार करने का दम तो हमारी मेहनत ही दिखाती है।'",
-    "keywords": [
-      "संवाद",
-      "डायलॉग",
-      "मेहनत",
-      "तकदीर",
-      "प्रेरणादायक बातचीत"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-10-26T12:14:45.643Z"
   }
 ]
