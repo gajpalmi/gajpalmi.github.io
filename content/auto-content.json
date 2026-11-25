@@ -2,6 +2,204 @@
   {
     "type": "item",
     "category": "Bhakti",
+    "title": "सच्ची शांति का मार्ग",
+    "content": "जीवन की भागदौड़ में आंतरिक शांति पाना ही सबसे बड़ी साधना है। जब मन शांत होता है, तो हर कार्य सहजता से पूर्ण होता है और सकारात्मक ऊर्जा का संचार होता है। अपने भीतर झांककर आत्ममंथन करना और हर परिस्थिति में धैर्य बनाए रखना ही सच्ची भक्ति का रूप है।",
+    "keywords": [
+      "भक्ति",
+      "शांति",
+      "सकारात्मकता",
+      "आध्यात्मिक"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-25T01:54:28.005Z"
+  },
+  {
+    "type": "item",
+    "category": "Bhajan",
+    "title": "मन के मंदिर में दीया जलाओ",
+    "content": "मन के मंदिर में दीया जलाओ, प्रेम का प्रकाश फैलाओ। हर पल प्रभु का सिमरन करो, दुःख के बादल दूर भगाओ। जीवन नैया पार लगेगी, श्रद्धा का तू दीप जगाओ। प्रेम भाव से शीश झुकाकर, अपना हर दिन सुंदर बनाओ।",
+    "keywords": [
+      "भजन",
+      "गीत",
+      "प्रभु स्मरण",
+      "भक्ति संगीत"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-25T01:54:28.133Z"
+  },
+  {
+    "type": "item",
+    "category": "Kirtan",
+    "title": "मिलकर गाओ गुणगान",
+    "content": "आइए मिलकर गाएं प्रभु के गुण, जिससे पावन हो जाएं तन और मन। ताल से ताल मिले तो सजे महफिल, भक्ति भाव से जुड़े हर एक दिल। नाम जपने से मिलती है राहत, हर मुश्किल आसान हो जाए राहत।",
+    "keywords": [
+      "कीर्तन",
+      "गुणगान",
+      "भक्ति भाव",
+      "संगीत"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-25T01:54:28.133Z"
+  },
+  {
+    "type": "item",
+    "category": "Shayari",
+    "title": "वक्त और मुकाम",
+    "content": "मंजिल उन्हीं को मिलती है जिनके सपनों में जान होती है, पंखों से कुछ नहीं होता, हौसलों से उड़ान होती है। वक्त बदलता है हर पल एक नया सवेरा लेकर, बस खुद पर भरोसा रख हर मुश्किल को पार कर।",
+    "keywords": [
+      "शायरी",
+      "हौसला",
+      "सफलता",
+      "प्रेरणा"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-25T01:54:28.133Z"
+  },
+  {
+    "type": "item",
+    "category": "Dialogues",
+    "title": "संवाद: मेहनत और किस्मत",
+    "content": "पहला पात्र: किस्मत के भरोसे बैठने वाले अक्सर हाथ मलते रह जाते हैं। दूसरा पात्र: बिल्कुल, किस्मत तो बस मौका देती है, असली खेल तो मेहनत का ही होता है।",
+    "keywords": [
+      "संवाद",
+      "डायलॉग",
+      "मेहनत",
+      "जीवन मूल्य"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-25T01:54:28.133Z"
+  },
+  {
+    "type": "item",
+    "category": "Knowledge",
+    "title": "समय प्रबंधन के सामान्य नियम",
+    "content": "दैनिक जीवन में समय का सही उपयोग करने के लिए प्राथमिकताएं तय करना जरूरी है। सबसे महत्वपूर्ण कार्यों को पहले सूची में रखें और छोटे-छोटे अंतराल में विश्राम करें। इससे कार्यक्षमता बढ़ती है और तनाव कम होता है।",
+    "keywords": [
+      "ज्ञान",
+      "समय प्रबंधन",
+      "उत्पादकता",
+      "जीवन शैली"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-25T01:54:28.133Z"
+  },
+  {
+    "type": "item",
+    "category": "Blogs",
+    "title": "डिजिटल युग में पठन की आदत",
+    "content": "आज की भागदौड़ भरी जिंदगी में किताबें पढ़ने की आदत कम होती जा रही है। स्क्रीन टाइम बढ़ने के कारण लोग लंबे लेख पढ़ने से कतराते हैं। हालांकि, किताबें पढ़ने से न केवल ज्ञान बढ़ता है, बल्कि ध्यान केंद्रित करने की क्षमता भी मजबूत होती है। प्रतिदिन कम से कम पंद्रह मिनट पढ़ने का अभ्यास अवश्य करना चाहिए।",
+    "keywords": [
+      "ब्लॉग",
+      "पठन",
+      "पुस्तकें",
+      "डिजिटल युग"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-25T01:54:28.133Z"
+  },
+  {
+    "type": "item",
+    "category": "AI",
+    "title": "दैनिक कार्यों में एआई का उपयोग",
+    "content": "आर्टिफिशियल इंटेलिजेंस या एआई अब हमारे रोजमर्रा के कामों को आसान बनाने में मदद कर रहा है। चाहे ईमेल का मसौदा तैयार करना हो, भाषा अनुवाद करना हो या नोट्स व्यवस्थित करना हो, एआई टूल्स समय बचाने में सहायक सिद्ध हो रहे हैं। हालांकि इनका उपयोग करते समय तथ्यात्मक सटीकता की जांच करना हमेशा आवश्यक होता है।",
+    "keywords": [
+      "एआई",
+      "तकनीक",
+      "उत्पादकता",
+      "आर्टिफिशियल इंटेलिजेंस"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-25T01:54:28.133Z"
+  },
+  {
+    "type": "item",
+    "category": "Jokes",
+    "title": "मजेदार बातचीत",
+    "content": "बेटा: पापा, कल स्कूल में टीचर ने मुझसे एक सवाल पूछा और मुझे उसका जवाब नहीं आया। पिता: कौन सा सवाल था बेटा? बेटा: यही कि कल स्कूल क्यों नहीं आए थे? पिता मुस्कुराए और बोले: सही तो पूछा था बेटा!",
+    "keywords": [
+      "चुटकुलें",
+      "हास्य",
+      "मजेदार",
+      "परिवार"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-25T01:54:28.133Z"
+  },
+  {
+    "type": "item",
+    "category": "Gaming",
+    "title": "गेमिंग में रणनीतिक सोच का महत्व",
+    "content": "चाहे कोई भी स्ट्रैटेजी गेम हो या बोर्ड गेम, उसमें सफल होने के लिए त्वरित निर्णय लेने और योजना बनाने की आवश्यकता होती है। केवल जल्दबाजी करने से हार की संभावना बढ़ जाती है। चाल चलने से पहले विरोधियों की संभावित रणनीतियों का आकलन करना हमेशा फायदेमंद रहता है।",
+    "keywords": [
+      "गेमिंग",
+      "रणनीति",
+      "सुझाव",
+      "खेल"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-25T01:54:28.133Z"
+  },
+  {
+    "type": "item",
+    "category": "Vlogs",
+    "title": "व्लॉग आइडिया: स्थानीय बाजार की सैर",
+    "content": "अपने शहर के पारंपरिक और पुराने बाजारों की खोजबीन पर आधारित एक व्लॉग बनाएं। इसमें स्थानीय खान-पान, हस्तशिल्प और वहां के दुकानदारों की कहानियों को शामिल करें। वीडियो की शुरुआत एक आकर्षक परिचय से करें और दर्शकों को बाजार की अनूठी संस्कृति से रूबरू कराएं।",
+    "keywords": [
+      "व्लॉग",
+      "वीडियो आइडिया",
+      "स्थान",
+      "कंटेंट क्रिएशन"
+    ],
+    "sourceNote": "Original AI-generated content",
+    "sourceTitle": "",
+    "sourcePublisher": "GAMEZONE ARENA",
+    "sourceUrl": "",
+    "sourceDate": "",
+    "generatedAt": "2026-11-25T01:54:28.133Z"
+  },
+  {
+    "type": "item",
+    "category": "Bhakti",
     "title": "मन की शांति का सच्चा मार्ग",
     "content": "सच्ची भक्ति वह है जो मनुष्य के अंतःकरण को शांत और निर्मल बना दे। जब हम अपनी चिंताओं को ईश्वर के चरणों में समर्पित कर देते हैं, तो जीवन का बोझ हल्का हो जाता है। नियमित ध्यान और प्रार्थना से मन में सकारात्मक ऊर्जा का संचार होता है, जो हर कठिनाई का सामना करने की शक्ति देती है।",
     "keywords": [
@@ -632,24 +830,6 @@
     "sourceUrl": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNTDNrUmdCbGtZRmVWNTlEdldZOHFJb1FQdUZOemhETjJiaWIxUHhLYnVqZHFoRkxiWWtxaEtqem96aWZlQ1NzQVVKcnVtZGNiV2JIVlFPQjBsUFlZNzZCNlhtTXpZM3F3VkdPcjkwdTZQZHBFNGZ0RGxYSXBiWjhuaVBLTUs2XzJCY1UybzVFd3RwWUtQNm4zVUxnbk9UdHlVVlp6RnVkOFpzWHlqeWlMMA?oc=5",
     "sourceDate": "2026-11-22T16:00:00.000Z",
     "generatedAt": "2026-11-22T23:13:27.048Z"
-  },
-  {
-    "type": "item",
-    "category": "Bhajan",
-    "title": "मन के मंदिर में दीया जलाओ",
-    "content": "मन के मंदिर में दीया जलाओ रे भाई, प्रेम का दीप जगाओ रे भाई। अंधकार जीवन का मिट जाएगा, प्रभु का स्मरण सुख पाएगा। झूठ कपट को दूर भगाओ, सच्चाई का मार्ग अपनाओ। पल-पल नाम उसी का गाओ, जीवन को सार्थक बनाओ।",
-    "keywords": [
-      "भजन",
-      "भक्ति गीत",
-      "ईश्वर स्मरण",
-      "जीवन संगीत"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-11-22T05:00:41.296Z"
   },
   {
     "type": "item",
@@ -2417,24 +2597,6 @@
     "sourceUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOZ2FsaFl2MVdlQVNiQ3BuNTlaTlRMc3FQTzdYOEtuS0U5WGF0bWo2MFRuNlNjSkVaUHZKY0FBSGNycWNSTHBEdTdkRk5OeE1JdHFOMEVDYkNOcUpxZXhJSVd2eVhEdjRrMExpZGVpam9nOW9aaDR2U0lyUm1NVG9vLUpnLWN2ZEJvVzQ2NjgzRkE5RXJCOFBabmV6MDlFOFBBcWNsWEljNHBCcWlDV1RsY2MtdzNRMlZBcnJfd3d1dWY4Yk9LRHhz0gHMAUFVX3lxTE45bjBvRC1WQndadWhDUUZxOTZUaElRRVhYaHhRX2N6elBoU3YwRGJ3Z2N3cXhxMUljZ0VQc0ZwWGlMT1o3RXF1eWkyTVpBa2tWblo3cGVmbHBMNGhtWC1ELU9fa2VpWlNPbW9FUEN6WVpnZzNDUmlTMU9TYTBoNW5teVdFUXZwQzlrVzJ4MmtBdGhHcDZWNklBM3ctb2h3S0IwY1BId0JYMEIwdUUzcVAyd3Z2LVFxMWtRc0pGSC1pTVN1LTFGOGk3amdoWQ?oc=5",
     "sourceDate": "2026-11-15T13:18:36.000Z",
     "generatedAt": "2026-11-15T13:25:41.693Z"
-  },
-  {
-    "type": "item",
-    "category": "Bhakti",
-    "title": "सच्ची शांति का मार्ग",
-    "content": "मन की शांति किसी बाहरी वस्तु या परिस्थिति में नहीं, बल्कि हमारे अपने भीतर वास करती है। जब हम वर्तमान क्षण में जीना सीख जाते हैं और हर परिस्थिति को स्वीकार करना शुरू करते हैं, तब अनावश्यक चिंताएं स्वतः समाप्त होने लगती हैं। ईश्वर का स्मरण और सत्कर्म ही जीवन को एक नई दिशा देते हैं।",
-    "keywords": [
-      "भक्ति",
-      "शांति",
-      "आध्यात्मिक",
-      "सकारात्मकता"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-11-14T12:57:00.903Z"
   },
   {
     "type": "item",
@@ -4617,25 +4779,6 @@
   },
   {
     "type": "item",
-    "category": "Shayari",
-    "title": "वक्त और मुकाम",
-    "content": "फिजाओं ने बदला है जब से मिजाज, हमने भी सीख लिया है संभलना। वक्त चाहे कितना भी मुश्किल हो, हौसला नहीं छोड़ा हमने बदलना।",
-    "keywords": [
-      "शायरी",
-      "हिंदी शायरी",
-      "हौसला",
-      "वक्त",
-      "GAMEZONE ARENA"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-11-08T04:24:20.323Z"
-  },
-  {
-    "type": "item",
     "category": "Dialogues",
     "title": "फैसलों की महत्ता",
     "content": "जिंदगी हमें रोज एक नया विकल्प देती है, और हमारे छोटे-छोटे फैसले ही तय करते हैं कि कल हमारा भविष्य कैसा होगा। डर को पीछे छोड़िए और सही निर्णय लेने की हिम्मत रखिए।",
@@ -4727,24 +4870,6 @@
     "sourceUrl": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQWkVVd0hfQnFXMUlYa0UtQVk3S3YtYnNCR3pKam1ueXRJeWc0enlybzZqN0VRV3Q5YnVDMWlmdVY1bVBXdUtZN1Q0THd1aFJBVlZhN0paemJKSFBrVXhPOTd1dEM2azJ6M0hmZjdFaGpiN3hlNzQ5aExPSDAyU1J1TVhFWDJGd0JJQ1YxOU9iWFd4RWI4SHlUS2JadkZMeG9xLURwdGw4UDdCWnViSHFoT2d6cFk?oc=5",
     "sourceDate": "2026-11-08T00:44:00.000Z",
     "generatedAt": "2026-11-08T04:24:20.323Z"
-  },
-  {
-    "type": "item",
-    "category": "Kirtan",
-    "title": "मिलकर गाओ गुणगान",
-    "content": "आओ मिलकर गाएं सब मिलकर, प्रभु का प्यारा नाम।\nस्मरण करने से मिट जाते, जीवन के सब काम।\n\nताली बजाओ और सुर में गाओ, गूंजे चारों धाम।\nभक्ति भाव से जो भी ध्यावे, पावे वह विश्राम।\n\nसुख और दुख तो आते-जाते, प्रभु नाम आधार।\nकीर्तन से ही मिलती मन को, सच्ची शीतलता अपार।",
-    "keywords": [
-      "कीर्तन",
-      "भक्ति गान",
-      "समूह गान",
-      "ईश्वर स्मरण"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-11-07T21:26:05.609Z"
   },
   {
     "type": "item",
@@ -5382,132 +5507,5 @@
     "sourceUrl": "",
     "sourceDate": "",
     "generatedAt": "2026-11-04T13:46:01.594Z"
-  },
-  {
-    "type": "item",
-    "category": "Dialogues",
-    "title": "सपनों की उड़ान और मेहनत",
-    "content": "किस्मत के भरोसे बैठने वाले सिर्फ इंतजार करते रह जाते हैं, और मेहनत करने वाले अपनी किस्मत की लकीरें खुद लिख देते हैं।",
-    "keywords": [
-      "संवाद",
-      "डायलॉग",
-      "मेहनत",
-      "प्रेरणादायक"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-11-04T13:46:01.594Z"
-  },
-  {
-    "type": "item",
-    "category": "Knowledge",
-    "title": "जल संरक्षण और इसके उपाय",
-    "content": "पृथ्वी पर पीने योग्य पानी की मात्रा बहुत सीमित है। इसलिए जल संरक्षण आज के समय की सबसे बड़ी आवश्यकता बन गया है। दैनिक जीवन में छोटी-छोटी आदतें अपनाकर, जैसे नल को खुला न छोड़ना, वर्षा जल संचयन (Rainwater Harvesting) करना और लीक होते पाइपों की समय पर मरम्मत करवाना, हम पानी की भारी बर्बादी को रोक सकते हैं।",
-    "keywords": [
-      "सामान्य ज्ञान",
-      "जल संरक्षण",
-      "पर्यावरण",
-      "उपयोगी जानकारी"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-11-04T13:46:01.594Z"
-  },
-  {
-    "type": "item",
-    "category": "AI",
-    "title": "आर्टिफिशियल इंटेलिजेंस: सीमाएं और जिम्मेदारियां",
-    "content": "आर्टिफिशियल इंटेलिजेंस (AI) आज लगभग हर क्षेत्र में तेजी से आगे बढ़ रहा है। यह जटिल डेटा को प्रोसेस करने और कार्यों को आसान बनाने में बहुत मददगार है। हालांकि, यह याद रखना महत्वपूर्ण है कि AI एक उपकरण मात्र है। इसके उपयोग में पारदर्शिता, डेटा की गोपनीयता और नैतिक मूल्यों का ध्यान रखना बेहद आवश्यक है ताकि इसका सकारात्मक प्रभाव बना रहे।",
-    "keywords": [
-      "आर्टिफिशियल इंटेलिजेंस",
-      "एआई",
-      "तकनीक",
-      "नैतिकता"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-11-04T13:46:01.594Z"
-  },
-  {
-    "type": "item",
-    "category": "Jokes",
-    "title": "परीक्षा और विद्यार्थी",
-    "content": "शिक्षक (छात्र से): बताओ, अगर तुम्हें इतिहास का कोई पन्ना याद न हो, तो परीक्षा में क्या करोगे?\nछात्र: गुरु जी, हम उस पन्ने पर लिख आएंगे कि यह पन्ना तकनीकी खराबी के कारण उपलब्ध नहीं है!\nशिक्षक बेहोश।",
-    "keywords": [
-      "चुटकूले",
-      "हास्य",
-      "कॉमेडी",
-      "फनी जोक्स"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-11-04T13:46:01.594Z"
-  },
-  {
-    "type": "item",
-    "category": "Gaming",
-    "title": "मोबाइल गेमिंग में आंखों की सुरक्षा के उपाय",
-    "content": "लंबे समय तक मोबाइल पर गेमिंग करने से आंखों पर काफी जोर पड़ता है। इससे बचने के लिए हर 30 मिनट के बाद स्क्रीन से नजरें हटाकर कुछ देर दूर देखें (20-20-20 नियम)। इसके अलावा, रात में खेलते समय हमेशा नाइट मोड या ब्लू लाइट फिल्टर का उपयोग करें और गेमिंग सेशन के बीच में पर्याप्त विश्राम लें।",
-    "keywords": [
-      "गेमिंग टिप्स",
-      "मोबाइल गेमिंग",
-      "आंखों की सुरक्षा",
-      "सुझाव"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-11-04T13:46:01.594Z"
-  },
-  {
-    "type": "item",
-    "category": "News",
-    "title": "भारत समेत इन 4 देशों के जहाजों को स्ट्रेट ऑफ होर्मुज से गुजरने की छूट, ईरान ने लिया बड़ा फैसला - India TV Hindi",
-    "content": "ईरान ने दुनिया में तेल संकट के बीच भारत समेत चार देशों के जहाजों को स्ट्रेट ऑफ होर्मुज से आवाजाही की विशेष अनुमति दी है।",
-    "keywords": [
-      "समाचार",
-      "ईरान",
-      "भारत",
-      "स्ट्रेट ऑफ होर्मुज"
-    ],
-    "sourceNote": "Summary based on supplied news source; verify before relying on it.",
-    "sourceTitle": "भारत समेत इन 4 देशों के जहाजों को स्ट्रेट ऑफ होर्मुज से गुजरने की छूट, ईरान ने लिया बड़ा फैसला - India TV Hindi",
-    "sourcePublisher": "India TV Hindi",
-    "sourceUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPWGxWUDhYeFVGM1RyNVNSTGxKMHNpN2RCNFBydkNqbFJKeWpiNEhvWDFvNk40UVVVMjNQeW8zSWxjR0pwV1U1M1FxOWdTa0NfNTBzdDlZUVVIMTdIVGlYVm9vaUJic2NuQ3YyYzloSDI1NDZ6b3p4YjExQ0pzR0VFZF8ybFlYLU81a0pXMjRRSUZYY3gwMnpPeXg0d1ExaF9GV01TbUhZWUVyQnMzNDdQMjQxdjhkMDV5d2RrSTRwRmZaNU4wSnVV?oc=5",
-    "sourceDate": "2026-11-04T11:13:36.000Z",
-    "generatedAt": "2026-11-04T13:46:01.594Z"
-  },
-  {
-    "type": "item",
-    "category": "Bhajan",
-    "title": "चचारे मन हरि चरणन चित्लाय",
-    "content": "जाग सके तो जाग ले प्यारे, बीती जात रैन सारी।\nसुमर ले उस प्रभु का नाम, जो है सबका पालनहारी।\nमाया के इस झूठे मेले में, काहे को मन को उलझाए।\nसच्चा साथी वही है तेरा, जो संकट में साथ निभाए।\nहरि के चरणों में जो झुकेगा, उसका जीवन तर जाएगा।\nप्रेम का दीपक जलाकर मन में, अंधियारा मिट जाएगा।",
-    "keywords": [
-      "भजन",
-      "भक्ति",
-      "प्रभु स्मरण",
-      "जीवन संगीत",
-      "आध्यात्म"
-    ],
-    "sourceNote": "Original AI-generated content",
-    "sourceTitle": "",
-    "sourcePublisher": "GAMEZONE ARENA",
-    "sourceUrl": "",
-    "sourceDate": "",
-    "generatedAt": "2026-11-04T04:48:34.867Z"
   }
 ]
